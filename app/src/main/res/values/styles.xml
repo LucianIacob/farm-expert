@@ -1,3 +1,12 @@
+<!--
+  ~ Developed by Lucian Iacob.
+  ~ Cluj-Napoca, 2019.
+  ~ Project: FarmExpert
+  ~ Email: contact@lucianiacob.com
+  ~ Last modified 3/9/19 9:49 PM.
+  ~ Copyright (c) Lucian Iacob. All rights reserved.
+  -->
+
 <resources>
 
     <!-- Base application theme. -->
@@ -6,6 +15,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBarCustom">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">#FFFFFF</item>
     </style>
 
 </resources>

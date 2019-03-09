@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Developed by Lucian Iacob.
+  ~ Cluj-Napoca, 2019.
+  ~ Project: FarmExpert
+  ~ Email: contact@lucianiacob.com
+  ~ Last modified 3/9/19 9:51 PM.
+  ~ Copyright (c) Lucian Iacob. All rights reserved.
+  -->
+
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="splash_theme">#FFFFFF</color>
+    <color name="sea_green">#2E8B57</color>
+
 </resources>

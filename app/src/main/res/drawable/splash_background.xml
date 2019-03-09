@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Developed by Lucian Iacob.
+  ~ Cluj-Napoca, 2019.
+  ~ Project: FarmExpert
+  ~ Email: contact@lucianiacob.com
+  ~ Last modified 3/9/19 10:09 PM.
+  ~ Copyright (c) Lucian Iacob. All rights reserved.
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@color/splash_theme"/>
+
+</layer-list>

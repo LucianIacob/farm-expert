@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Developed by Lucian Iacob.
+  ~ Cluj-Napoca, 2019.
+  ~ Project: FarmExpert
+  ~ Email: contact@lucianiacob.com
+  ~ Last modified 3/9/19 10:07 PM.
+  ~ Copyright (c) Lucian Iacob. All rights reserved.
+  -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools" package="com.farmexpert.android">
 
@@ -12,11 +21,18 @@
             tools:ignore="GoogleAppIndexingWarning"
             android:fullBackupContent="true">
 
-        <activity android:name=".MainActivity">
+        <activity
+                android:name=".activities.SplashActivity"
+                android:theme="@style/AppTheme.NoActionBarCustom">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.VIEW"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity android:name=".MainActivity">
         </activity>
 
     </application>

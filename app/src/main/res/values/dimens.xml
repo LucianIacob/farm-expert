@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Developed by Lucian Iacob.
+  ~ Cluj-Napoca, 2019.
+  ~ Project: FarmExpert
+  ~ Email: contact@lucianiacob.com
+  ~ Last modified 3/9/19 9:53 PM.
+  ~ Copyright (c) Lucian Iacob. All rights reserved.
+  -->
+
+<resources>
+
+    <dimen name="tiny_margin">5dp</dimen>
+    <dimen name="small_margin">10dp</dimen>
+    <dimen name="medium_margin">15dp</dimen>
+    <dimen name="large_margin">20dp</dimen>
+    <dimen name="xl_margin">25dp</dimen>
+    <dimen name="xxl_margin">30dp</dimen>
+    <dimen name="xxxl_margin">35dp</dimen>
+
+    <dimen name="tiny_text">5sp</dimen>
+    <dimen name="small_text">10sp</dimen>
+    <dimen name="medium_text">15sp</dimen>
+    <dimen name="large_text">20sp</dimen>
+    <dimen name="xl_text">25sp</dimen>
+
+</resources>
