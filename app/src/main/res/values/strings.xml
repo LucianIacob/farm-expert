@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Farm Expert</string>
-    <string name="sign_in">SIGN IN</string>
+    <string name="login">Login</string>
     <string name="auth_welcome">Log in with your Farm Expert account or register in order to start using the app
     </string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="auth_unknown_error">An unknown error has occurred</string>
 </resources>
