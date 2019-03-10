@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/10/19 2:46 PM.
+ * Last modified 3/10/19 3:32 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -59,7 +59,7 @@ class AuthenticationActivity : Activity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
             if (resultCode == Activity.RESULT_OK) {
-                startActivity<MainActivity>()
+                startActivity<FarmSelectorActivity>()
                 finish()
             } else {
                 val response = IdpResponse.fromResultIntent(data)

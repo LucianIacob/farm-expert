@@ -29,6 +29,11 @@
                 android:name=".activities.AuthenticationActivity"
                 android:theme="@style/AppTheme.NoActionbar"/>
 
+        <activity android:name=".activities.FarmSelectorActivity"
+                  android:theme="@style/AppTheme.NoActionbar"
+                  android:windowSoftInputMode="adjustPan"
+                  android:label="Select Farm"/>
+
         <activity android:name=".activities.MainActivity"/>
 
     </application>
