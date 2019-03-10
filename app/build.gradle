@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/9/19 9:54 PM.
+ * Last modified 3/10/19 1:53 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -40,4 +40,8 @@ dependencies {
     implementation 'com.airbnb.android:lottie:2.8.0'
     implementation 'org.jetbrains.anko:anko-commons:0.10.5'
     implementation 'org.jetbrains.anko:anko-coroutines:0.10.5'
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
+    implementation 'com.google.firebase:firebase-core:16.0.7'
 }
+
+apply plugin: 'com.google.gms.google-services'

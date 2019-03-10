@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "334662227793",
+    "firebase_url": "https://farmexpert-6ac42.firebaseio.com",
+    "project_id": "farmexpert-6ac42",
+    "storage_bucket": "farmexpert-6ac42.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334662227793:android:ec8e46c1158f09e4",
+        "android_client_info": {
+          "package_name": "com.farmexpert.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "334662227793-55ubu3634gksi7aua8e2d0vgc5ltevdn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.farmexpert.android",
+            "certificate_hash": "2d95ca35083a15ecc2a6899922fde96b0c6402b0"
+          }
+        },
+        {
+          "client_id": "334662227793-nq5a025iqtt0hc3hheao0khqfqpttegr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcSFNx699ikxepP-eSrQGxiQRU_pVZIVw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "334662227793-nq5a025iqtt0hc3hheao0khqfqpttegr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
