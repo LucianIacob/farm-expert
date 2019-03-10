@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/9/19 10:09 PM.
+ * Last modified 3/10/19 1:50 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -12,8 +12,8 @@ package com.farmexpert.android.activities
 import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
-import com.farmexpert.android.MainActivity
 import com.farmexpert.android.R
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.startActivity
 
 /**
@@ -40,7 +40,11 @@ class SplashActivity : Activity() {
 
     private fun gotoNextScreenAfterDelay() {
         mHandler.postDelayed({
-            startActivity<MainActivity>()
+            if (FirebaseAuth.getInstance().currentUser != null) {
+                startActivity<MainActivity>()
+            } else {
+                startActivity<AuthenticationActivity>()
+            }
 
             finish()
         }, SPLASH_LENGTH)

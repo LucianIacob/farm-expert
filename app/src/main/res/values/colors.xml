@@ -15,5 +15,6 @@
 
     <color name="splash_theme">#FFFFFF</color>
     <color name="sea_green">#2E8B57</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>
