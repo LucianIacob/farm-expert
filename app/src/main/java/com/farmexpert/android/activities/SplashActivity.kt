@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/10/19 3:54 PM.
+ * Last modified 3/12/19 10:42 AM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -57,7 +57,7 @@ class SplashActivity : Activity() {
 
     private fun userHasActiveFarm(): Boolean {
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        return prefs.getBoolean(FarmSelectorActivity.KEY_FARM_SELECTED, false)
+        return prefs.getString(FarmSelectorActivity.KEY_CURRENT_FARM_ID, null) != null
     }
 
     override fun onPause() {

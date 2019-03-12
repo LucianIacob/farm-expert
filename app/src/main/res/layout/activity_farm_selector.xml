@@ -26,57 +26,118 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
-            android:layout_weight="1"
-            android:layout_marginTop="@dimen/xxl_margin"
+    <ProgressBar
+            android:id="@+id/loadingProgressBar"
             android:layout_width="match_parent"
-            android:orientation="vertical"
+            android:layout_marginTop="-6dp"
+            android:visibility="invisible"
+            android:indeterminate="true"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_height="wrap_content"/>
+
+    <ScrollView
+            android:layout_weight="5"
             android:layout_marginStart="@dimen/xxl_margin"
             android:layout_marginEnd="@dimen/xxl_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_width="match_parent"
             android:layout_height="0dp">
 
-        <TextView
-                android:text="Create a new farm"
-                android:fontFamily="@font/telegroteskscreen_medium"
-                android:textSize="@dimen/large_text"
-                android:textColor="@color/black"
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/large_margin"
+                android:orientation="vertical"
                 android:layout_height="wrap_content">
 
-            <EditText
+            <TextView
+                    android:text="@string/create_farm_guideline"
+                    android:fontFamily="@font/telegroteskscreen_medium"
+                    android:textSize="@dimen/large_text"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:importantForAutofill="no"
-                    tools:targetApi="o"
-                    android:maxLines="1"
-                    android:hint="Farm name"
-                    android:inputType="text"
-                    tools:ignore="LabelFor"/>
+                    android:layout_height="wrap_content"/>
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/tiny_margin"
+                    android:id="@+id/farmNameHolder"
+                    android:layout_height="wrap_content">
 
-        <Button
-                android:id="@+id/createFarmButton"
-                android:background="@drawable/ic_button_primary"
-                android:fontFamily="@font/telegroteskscreen_medium"
-                android:textAllCaps="false"
-                android:layout_marginTop="@dimen/large_margin"
-                android:text="Create"
-                android:textColor="@color/white"
-                android:textSize="@dimen/large_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <EditText
+                        android:id="@+id/farmName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        tools:targetApi="o"
+                        android:maxLines="1"
+                        android:hint="@string/hint_farm_name"
+                        android:inputType="text"
+                        tools:ignore="LabelFor"/>
 
-    </LinearLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/tiny_margin"
+                    android:id="@+id/accessCodeHolder"
+                    android:layout_height="wrap_content">
+
+                <EditText
+                        android:id="@+id/accessCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        tools:targetApi="o"
+                        android:maxLength="6"
+                        android:maxLines="1"
+                        android:hint="@string/hint_access_code_4_6_digits"
+                        android:inputType="numberPassword"
+                        tools:ignore="LabelFor"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                    android:id="@+id/createFarmButton"
+                    android:background="@drawable/ic_button_primary"
+                    android:fontFamily="@font/cabin_semibold"
+                    android:textAllCaps="false"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:text="@string/create_new_farm"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/large_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:text="@string/or"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/medium_text"
+                    android:fontFamily="@font/josefin_sans_semibold"
+                    android:layout_height="wrap_content"/>
+
+            <Button
+                    android:id="@+id/joinFarmButton"
+                    android:background="@drawable/ic_button_secondary"
+                    android:fontFamily="@font/cabin_semibold"
+                    android:textAllCaps="false"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:text="@string/join_existing_farm"
+                    android:textColor="@color/sea_green"
+                    android:textSize="@dimen/large_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <LinearLayout
+            android:id="@+id/farmListContainer"
             android:layout_width="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="3"
+            android:visibility="gone"
             android:layout_marginBottom="@dimen/xxl_margin"
             android:orientation="vertical"
             android:layout_marginStart="@dimen/xxl_margin"
@@ -85,7 +146,7 @@
             android:layout_height="0dp">
 
         <TextView
-                android:text="Or, select an already created farm:"
+                android:text="@string/or_select_one_of_your_previous_farms"
                 android:layout_width="match_parent"
                 android:textColor="@color/black"
                 android:textSize="@dimen/large_text"
@@ -93,11 +154,11 @@
                 android:layout_height="wrap_content"/>
 
         <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/subscribedFarms"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/large_margin"
+                android:layout_marginTop="@dimen/medium_margin"
                 android:layout_height="match_parent"/>
 
     </LinearLayout>
-
 
 </LinearLayout>
