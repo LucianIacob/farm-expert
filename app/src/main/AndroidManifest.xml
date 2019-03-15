@@ -37,6 +37,9 @@
 
         <activity android:name=".activities.MainActivity"/>
 
+        <activity android:name=".activities.ConfigurationActivity"
+                  android:theme="@style/AppTheme.NoActionbar"/>
+
     </application>
 
 </manifest>

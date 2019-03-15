@@ -3,25 +3,27 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/12/19 10:24 AM.
+ * Last modified 3/15/19 1:13 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
 package com.farmexpert.android.activities
 
+import android.content.Context
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.FarmSelectorAdapter
 import com.farmexpert.android.model.Farm
 import com.farmexpert.android.utils.FirestorePath
+import com.farmexpert.android.utils.hidden
+import com.farmexpert.android.utils.invisible
+import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -29,9 +31,12 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_farm_selector.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.error
+import org.jetbrains.anko.longToast
 import org.jetbrains.anko.startActivity
 
-class FarmSelectorActivity : AppCompatActivity() {
+class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
 
     companion object {
         const val KEY_CURRENT_FARM_ID = "com.farmexpert.android.FarmID"
@@ -61,7 +66,7 @@ class FarmSelectorActivity : AppCompatActivity() {
 
         val adapter = object : FarmSelectorAdapter(options, { farm -> farmClicked(farm) }) {
             override fun onDataChanged() {
-                farmListContainer.visibility = if (itemCount != 0) View.VISIBLE else View.GONE
+                if (itemCount != 0) farmListContainer.visible() else farmListContainer.hidden()
             }
         }
 
@@ -70,7 +75,11 @@ class FarmSelectorActivity : AppCompatActivity() {
     }
 
     private fun farmClicked(farm: Farm) {
-        farm.id?.let { storeFarmId(it) }
+        farm.id?.let {
+            storeFarmDetails(farm)
+            storeFarmId(it)
+            openMainActivity()
+        }
     }
 
     override fun onStart() {
@@ -86,19 +95,19 @@ class FarmSelectorActivity : AppCompatActivity() {
         val accessCode = accessCode.text.toString()
 
         if (validInputs(farmName, accessCode)) {
-            val farm = Farm(currentUser.uid, farmName, accessCode, arrayListOf(currentUser.uid))
+            val farm = Farm(currentUser.uid, farmName, accessCode, users = arrayListOf(currentUser.uid))
 
-            loadingProgressBar.visibility = View.VISIBLE
+            loadingProgressBar.visible()
             checkNameAlreadyExists(farmName,
                 { exists ->
                     if (exists) {
-                        loadingProgressBar.visibility = View.INVISIBLE
+                        loadingProgressBar.invisible()
                         displayDialog("Farm name already exists", "Change name")
                     } else saveFarm(farm)
                 },
                 { ex ->
-                    loadingProgressBar.visibility = View.INVISIBLE
-                    Toast.makeText(this, ex.message, Toast.LENGTH_LONG).show()
+                    loadingProgressBar.invisible()
+                    ex.message?.let { longToast(it) }
                 })
         }
     }
@@ -123,12 +132,13 @@ class FarmSelectorActivity : AppCompatActivity() {
         firestore.collection(FirestorePath.Collections.FARMS)
             .add(farm)
             .addOnSuccessListener { documentReference ->
-                loadingProgressBar.visibility = View.INVISIBLE
+                loadingProgressBar.invisible()
                 storeFarmId(documentReference.id)
+                openFarmConfigurationsActivity()
             }
             .addOnFailureListener { e ->
-                loadingProgressBar.visibility = View.INVISIBLE
-                Log.w("FarmSelector", "Error adding document", e)
+                loadingProgressBar.invisible()
+                error { e }
             }
     }
 
@@ -166,13 +176,14 @@ class FarmSelectorActivity : AppCompatActivity() {
         val accessCode = accessCode.text.toString()
 
         if (validInputs(farmName, accessCode)) {
-            loadingProgressBar.visibility = View.VISIBLE
+            loadingProgressBar.visible()
             checkFarmExists(farmName, accessCode,
-                { exists, farmId ->
+                { exists, farm ->
                     if (exists) {
-                        updateFarm(farmId!!)
+                        storeFarmDetails(farm!!)
+                        updateFarm(farm)
                     } else {
-                        loadingProgressBar.visibility = View.INVISIBLE
+                        loadingProgressBar.invisible()
                         displayDialog(
                             "Farm '$farmName' does not exists or the access code is incorrect",
                             "Review inputs"
@@ -180,37 +191,62 @@ class FarmSelectorActivity : AppCompatActivity() {
                     }
                 },
                 { ex ->
-                    loadingProgressBar.visibility = View.INVISIBLE
+                    loadingProgressBar.invisible()
                     Toast.makeText(this, ex.message, Toast.LENGTH_LONG).show()
                 })
         }
     }
 
-    private fun updateFarm(farmId: String) {
+    private fun storeFarmDetails(farm: Farm) {
+        val prefs = getSharedPreferences(ConfigurationActivity.FARM_TIMELINE_PREFS, Context.MODE_PRIVATE)
+        prefs.edit {
+            putInt(getString(R.string.pref_heating_start_key), farm.heatingStartsAt)
+            putInt(getString(R.string.pref_heating_end_key), farm.heatingEndsAt)
+            putInt(getString(R.string.pref_gestation_key), farm.gestationControl)
+            putInt(getString(R.string.pref_physiological_control_key), farm.physiologicalControl)
+            putInt(getString(R.string.pref_disinfection_key), farm.disinfectionBeforeBirth)
+            putInt(getString(R.string.pref_vaccin1_before_birth_key), farm.vaccin1BeforeBirth)
+            putInt(getString(R.string.pref_vaccin2_before_birth_key), farm.vaccin2BeforeBirth)
+            putInt(getString(R.string.pref_vaccin3_before_birth_key), farm.vaccin3BeforeBirth)
+            putInt(getString(R.string.pref_vaccin_after_birth_key), farm.vaccin3BeforeBirth)
+            putInt(getString(R.string.pref_gestation_length_key), farm.gestationLength)
+        }
+    }
+
+    private fun updateFarm(farm: Farm) {
         firestore.collection(FirestorePath.Collections.FARMS)
-            .document(farmId)
+            .document(farm.id!!)
             .update(FirestorePath.Farm.USERS, FieldValue.arrayUnion(currentUser.uid))
             .addOnSuccessListener {
-                loadingProgressBar.visibility = View.INVISIBLE
-                storeFarmId(farmId)
+                loadingProgressBar.invisible()
+                storeFarmId(farm.id!!)
+                openMainActivity()
             }
-            .addOnFailureListener {
-                loadingProgressBar.visibility = View.INVISIBLE
-                Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+            .addOnFailureListener { ex ->
+                loadingProgressBar.invisible()
+                ex.message?.let { longToast(it) }
             }
     }
 
     private fun storeFarmId(farmId: String) {
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         prefs.edit { putString(KEY_CURRENT_FARM_ID, farmId) }
+    }
+
+    private fun openMainActivity() {
         startActivity<MainActivity>()
+        finish()
+    }
+
+    private fun openFarmConfigurationsActivity() {
+        startActivity<ConfigurationActivity>()
         finish()
     }
 
     private fun checkFarmExists(
         farmName: String,
         accessCode: String,
-        listener: (Boolean, String?) -> Unit,
+        listener: (Boolean, Farm?) -> Unit,
         failure: (Exception) -> Unit
     ) {
         firestore.collection(FirestorePath.Collections.FARMS)
@@ -220,7 +256,8 @@ class FarmSelectorActivity : AppCompatActivity() {
             .addOnSuccessListener { snapshots ->
                 if (!snapshots.isEmpty) {
                     val document = snapshots.documents[0]
-                    listener(true, document.id)
+                    val farm = document.toObject(Farm::class.java).also { it?.id = document.id }
+                    listener(true, farm)
                 } else {
                     listener(false, null)
                 }

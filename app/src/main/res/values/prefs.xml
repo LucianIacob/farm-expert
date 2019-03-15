@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="pref_heating_start_key">heatingStart</string>
+    <string name="pref_heating_end_key">heatingEnd</string>
+    <string name="pref_gestation_key">gestationControl</string>
+    <string name="pref_physiological_control_key">physiologicalControl</string>
+    <string name="pref_disinfection_key">beforeBirthDisinfection</string>
+    <string name="pref_vaccin_after_birth_key">afterBirthVaccin</string>
+    <string name="pref_vaccin1_before_birth_key">beforeBirthVaccin1</string>
+    <string name="pref_vaccin2_before_birth_key">beforeBirthVaccin2</string>
+    <string name="pref_vaccin3_before_birth_key">beforeBirthVaccin3</string>
+    <string name="pref_gestation_length_key">gestationPeriod</string>
+
+    <string name="pref_heating_start_title">Starting day of the heat cycle of a female</string>
+    <string name="pref_heating_end_title">Ending day of the heat cycle of a female</string>
+    <string name="pref_gestation_title">Day for gestation control</string>
+    <string name="pref_physiological_control_title">Physiological status control after gave birth</string>
+    <string name="pref_disinfection_title">Disinfestation before giving birth</string>
+    <string name="pref_after_birth_vaccin_title">Vaccine after giving birth</string>
+    <string name="pref_before_birth_vaccin1_title">First vaccine before estimated birth</string>
+    <string name="pref_before_birth_vaccin2_title">Second vaccine before estimated birth</string>
+    <string name="pref_before_birth_vaccin3_title">Third vaccine before estimated birth</string>
+    <string name="pref_gestation_length_title">Gestation period length</string>
+
+</resources>

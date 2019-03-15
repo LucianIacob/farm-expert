@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidElementNotAllowed -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.farmexpert.android.preference.NumberPickerPreference
+            android:defaultValue="20"
+            android:key="@string/pref_heating_start_key"
+            android:title="@string/pref_heating_start_title"/>
+
+    <com.farmexpert.android.preference.NumberPickerPreference
+            android:defaultValue="22"
+            android:key="@string/pref_heating_end_key"
+            android:title="@string/pref_heating_end_title"/>
+
+    <com.farmexpert.android.preference.NumberPickerPreference
+            android:defaultValue="60"
+            android:key="@string/pref_gestation_key"
+            android:title="@string/pref_gestation_title"/>
+
+    <com.farmexpert.android.preference.NumberPickerPreference
+            android:defaultValue="30"
+            android:key="@string/pref_physiological_control_key"
+            android:title="@string/pref_physiological_control_title"/>
+
+    <com.farmexpert.android.preference.NumberPickerPreference
+            android:defaultValue="60"
+            android:key="@string/pref_disinfection_key"
+            android:title="@string/pref_disinfection_title"/>
+
+    <com.farmexpert.android.preference.NumberPickerPreference
+            android:defaultValue="60"
+            android:key="@string/pref_vaccin_after_birth_key"
+            android:title="@string/pref_after_birth_vaccin_title"/>
+
+    <com.farmexpert.android.preference.NumberPickerPreference
+            android:defaultValue="45"
+            android:key="@string/pref_vaccin1_before_birth_key"
+            android:title="@string/pref_before_birth_vaccin1_title"/>
+
+    <com.farmexpert.android.preference.NumberPickerPreference
+            android:defaultValue="20"
+            android:key="@string/pref_vaccin2_before_birth_key"
+            android:title="@string/pref_before_birth_vaccin2_title"/>
+
+    <com.farmexpert.android.preference.NumberPickerPreference
+            android:defaultValue="15"
+            android:key="@string/pref_vaccin3_before_birth_key"
+            android:title="@string/pref_before_birth_vaccin3_title"/>
+
+    <com.farmexpert.android.preference.NumberPickerPreference
+            android:defaultValue="285"
+            android:key="@string/pref_gestation_length_key"
+            android:title="@string/pref_gestation_length_title"/>
+
+</PreferenceScreen>

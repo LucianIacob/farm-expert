@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/10/19 3:32 PM.
+ * Last modified 3/15/19 10:47 AM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -39,6 +39,7 @@ class AuthenticationActivity : Activity() {
 
     private fun startSignIn() {
         val intent = AuthUI.getInstance().createSignInIntentBuilder()
+            .setTheme(R.style.AppTheme)
             .setIsSmartLockEnabled(true, true)
             .setAlwaysShowSignInMethodScreen(true)
             .setTosAndPrivacyPolicyUrls("https://www.lucianiacob.com", "https://www.lucianiacob.com")
@@ -69,7 +70,7 @@ class AuthenticationActivity : Activity() {
                 }
 
                 if (response?.error?.errorCode == ErrorCodes.UNKNOWN_ERROR) {
-                    showMessage(R.string.auth_unknown_error)
+                    showMessage(R.string.unknown_error)
                     return
                 }
             }
