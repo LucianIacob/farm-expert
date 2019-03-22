@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@id/dashboardFragment">
+
+    <fragment
+            android:id="@+id/dashboardFragment"
+            android:name="com.farmexpert.android.fragments.DashboardFragment"
+            android:label="@string/dashboard"
+            tools:layout="@layout/fragment_dashboard">
+
+        <!--<action-->
+        <!--android:id="@+id/action_dashboardFragment_to_efectivAnimaleFragment"-->
+        <!--app:destination="@id/efectivAnimaleFragment"-->
+        <!--app:enterAnim="@anim/slide_in_right"-->
+        <!--app:exitAnim="@anim/slide_out_left"-->
+        <!--app:popEnterAnim="@anim/slide_in_left"-->
+        <!--app:popExitAnim="@anim/slide_out_right"/>-->
+        <!--<action-->
+        <!--android:id="@+id/action_dashboardFragment_to_graficFatariFragment"-->
+        <!--app:destination="@id/graficFatariFragment"-->
+        <!--app:enterAnim="@anim/slide_in_right"-->
+        <!--app:exitAnim="@anim/slide_out_left"-->
+        <!--app:popEnterAnim="@anim/slide_in_left"-->
+        <!--app:popExitAnim="@anim/slide_out_right"/>-->
+        <!--<action-->
+        <!--android:id="@+id/action_dashboardFragment_to_graficMontaFragment"-->
+        <!--app:destination="@id/graficMontaFragment"-->
+        <!--app:enterAnim="@anim/slide_in_right"-->
+        <!--app:exitAnim="@anim/slide_out_left"-->
+        <!--app:popEnterAnim="@anim/slide_in_left"-->
+        <!--app:popExitAnim="@anim/slide_out_right"/>-->
+        <!--<action-->
+        <!--android:id="@+id/action_dashboardFragment_to_graficDeparazitariFragment"-->
+        <!--app:destination="@id/graficDeparazitariFragment"-->
+        <!--app:enterAnim="@anim/slide_in_right"-->
+        <!--app:exitAnim="@anim/slide_out_left"-->
+        <!--app:popEnterAnim="@anim/slide_in_left"-->
+        <!--app:popExitAnim="@anim/slide_out_right"/>-->
+        <!--<action-->
+        <!--android:id="@+id/action_dashboardFragment_to_graficVitaminizariFragment"-->
+        <!--app:destination="@id/graficVitaminizariFragment"-->
+        <!--app:enterAnim="@anim/slide_in_right"-->
+        <!--app:exitAnim="@anim/slide_out_left"-->
+        <!--app:popEnterAnim="@anim/slide_in_left"-->
+        <!--app:popExitAnim="@anim/slide_out_right"/>-->
+        <!--<action-->
+        <!--android:id="@+id/action_dashboardFragment_to_graficVaccinariFragment"-->
+        <!--app:destination="@id/graficVaccinariFragment"-->
+        <!--app:enterAnim="@anim/slide_in_right"-->
+        <!--app:exitAnim="@anim/slide_out_left"-->
+        <!--app:popEnterAnim="@anim/slide_in_left"-->
+        <!--app:popExitAnim="@anim/slide_out_right"/>-->
+        <!--<action-->
+        <!--android:id="@+id/action_dashboardFragment_to_graficPedichiuriFragment"-->
+        <!--app:destination="@id/graficPedichiuriFragment"-->
+        <!--app:enterAnim="@anim/slide_in_right"-->
+        <!--app:exitAnim="@anim/slide_out_left"-->
+        <!--app:popEnterAnim="@anim/slide_in_left"-->
+        <!--app:popExitAnim="@anim/slide_out_right"/>-->
+        <!--<action-->
+        <!--android:id="@+id/action_dashboardFragment_to_graficTratamenteFragment"-->
+        <!--app:destination="@id/graficTratamenteFragment"-->
+        <!--app:enterAnim="@anim/slide_in_right"-->
+        <!--app:exitAnim="@anim/slide_out_left"-->
+        <!--app:popEnterAnim="@anim/slide_in_left"-->
+        <!--app:popExitAnim="@anim/slide_out_right"/>-->
+    </fragment>
+
+    <!--<fragment-->
+    <!--android:id="@+id/efectivAnimaleFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.master.EfectivAnimaleFragment"-->
+    <!--android:label="@string/dashboard_efectiv_animale"-->
+    <!--tools:layout="@layout/fragment_efectiv_animale"/>-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/graficFatariFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.master.GraficFatariFragment"-->
+    <!--android:label="@string/dashboard_grafic_fatari"-->
+    <!--tools:layout="@layout/fragment_grafic_fatari"/>-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/graficMontaFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.master.GraficMontaFragment"-->
+    <!--android:label="@string/dashboard_grafic_monta"-->
+    <!--tools:layout="@layout/fragment_grafic_monta"/>-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/graficDeparazitariFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.master.GraficDeparazitariFragment"-->
+    <!--android:label="@string/dashboard_grafic_deparazitari"-->
+    <!--tools:layout="@layout/fragment_grafic_animal_actions"/>-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/graficVitaminizariFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.master.GraficVitaminizariFragment"-->
+    <!--android:label="@string/dashboard_grafic_vitaminizari"-->
+    <!--tools:layout="@layout/fragment_grafic_animal_actions"/>-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/graficVaccinariFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.master.GraficVaccinariFragment"-->
+    <!--android:label="@string/dashboard_grafic_vaccinari"-->
+    <!--tools:layout="@layout/fragment_grafic_animal_actions"/>-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/graficPedichiuriFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.master.GraficPedichiuriFragment"-->
+    <!--android:label="@string/dashboard_grafic_pedichiuri"-->
+    <!--tools:layout="@layout/fragment_grafic_animal_actions"/>-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/graficTratamenteFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.master.GraficTratamenteFragment"-->
+    <!--android:label="@string/dashboard_grafic_tratamente"-->
+    <!--tools:layout="@layout/fragment_grafic_animal_actions"/>-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/animalDetailFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.detail.AnimalDetailFragment"-->
+    <!--tools:layout="@layout/fragment_animal" />-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/fatariDetailFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.detail.FatariDetailFragment"-->
+    <!--tools:layout="@layout/fragment_detail_monte_fatari" />-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/montaDetailFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.detail.MontaDetailFragment"-->
+    <!--tools:layout="@layout/fragment_detail_monte_fatari" />-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/deparazitariDetailFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.detail.DeparazitariDetailFragment"-->
+    <!--tools:layout="@layout/fragment_efectiv_animale_detail" />-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/vitaminizariDetailFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.detail.VitaminizariDetailFragment"-->
+    <!--tools:layout="@layout/fragment_efectiv_animale_detail" />-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/vaccinariDetailFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.detail.VaccinariDetailFragment"-->
+    <!--tools:layout="@layout/fragment_efectiv_animale_detail" />-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/pedichiuriDetailFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.detail.PedichiuriDetailFragment"-->
+    <!--tools:layout="@layout/fragment_efectiv_animale_detail" />-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/tratamenteDetailFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.detail.TratamenteDetailFragment"-->
+    <!--tools:layout="@layout/fragment_efectiv_animale_detail" />-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/plannerFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.PlannerFragment"-->
+    <!--android:label="@string/planner"-->
+    <!--tools:layout="@layout/fragment_planner" />-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/statisticsFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.StatisticsFragment"-->
+    <!--android:label="@string/nav_statistics"-->
+    <!--tools:layout="@layout/fragment_statistics" />-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/recoveryFragment"-->
+    <!--android:name="com.fermavatamanu.android.fragments.RecoveryFragment"-->
+    <!--android:label="@string/recuperare_date"-->
+    <!--tools:layout="@layout/fragment_recovery" />-->
+
+    <!--<action-->
+    <!--android:id="@+id/action_global_animalDetailFragment"-->
+    <!--app:destination="@id/animalDetailFragment"-->
+    <!--app:enterAnim="@anim/slide_in_right"-->
+    <!--app:exitAnim="@anim/slide_out_left"-->
+    <!--app:popEnterAnim="@anim/slide_in_left"-->
+    <!--app:popExitAnim="@anim/slide_out_right" />-->
+
+    <!--<action-->
+    <!--android:id="@+id/action_global_fatariDetailFragment"-->
+    <!--app:destination="@id/fatariDetailFragment"-->
+    <!--app:enterAnim="@anim/slide_in_right"-->
+    <!--app:exitAnim="@anim/slide_out_left"-->
+    <!--app:popEnterAnim="@anim/slide_in_left"-->
+    <!--app:popExitAnim="@anim/slide_out_right" />-->
+
+    <!--<action-->
+    <!--android:id="@+id/action_global_montaDetailFragment"-->
+    <!--app:destination="@id/montaDetailFragment"-->
+    <!--app:enterAnim="@anim/slide_in_right"-->
+    <!--app:exitAnim="@anim/slide_out_left"-->
+    <!--app:popEnterAnim="@anim/slide_in_left"-->
+    <!--app:popExitAnim="@anim/slide_out_right" />-->
+
+    <!--<action-->
+    <!--android:id="@+id/action_global_deparazitariDetailFragment"-->
+    <!--app:destination="@id/deparazitariDetailFragment"-->
+    <!--app:enterAnim="@anim/slide_in_right"-->
+    <!--app:exitAnim="@anim/slide_out_left"-->
+    <!--app:popEnterAnim="@anim/slide_in_left"-->
+    <!--app:popExitAnim="@anim/slide_out_right" />-->
+
+    <!--<action-->
+    <!--android:id="@+id/action_global_vitaminizariDetailFragment"-->
+    <!--app:destination="@id/vitaminizariDetailFragment"-->
+    <!--app:enterAnim="@anim/slide_in_right"-->
+    <!--app:exitAnim="@anim/slide_out_left"-->
+    <!--app:popEnterAnim="@anim/slide_in_left"-->
+    <!--app:popExitAnim="@anim/slide_out_right" />-->
+
+    <!--<action-->
+    <!--android:id="@+id/action_global_vaccinariDetailFragment"-->
+    <!--app:destination="@id/vaccinariDetailFragment"-->
+    <!--app:enterAnim="@anim/slide_in_right"-->
+    <!--app:exitAnim="@anim/slide_out_left"-->
+    <!--app:popEnterAnim="@anim/slide_in_left"-->
+    <!--app:popExitAnim="@anim/slide_out_right" />-->
+
+    <!--<action-->
+    <!--android:id="@+id/action_global_pedichiuriDetailFragment"-->
+    <!--app:destination="@id/pedichiuriDetailFragment"-->
+    <!--app:enterAnim="@anim/slide_in_right"-->
+    <!--app:exitAnim="@anim/slide_out_left"-->
+    <!--app:popEnterAnim="@anim/slide_in_left"-->
+    <!--app:popExitAnim="@anim/slide_out_right" />-->
+
+    <!--<action-->
+    <!--android:id="@+id/action_global_tratamenteDetailFragment"-->
+    <!--app:destination="@id/tratamenteDetailFragment"-->
+    <!--app:enterAnim="@anim/slide_in_right"-->
+    <!--app:exitAnim="@anim/slide_out_left"-->
+    <!--app:popEnterAnim="@anim/slide_in_left"-->
+    <!--app:popExitAnim="@anim/slide_out_right" />-->
+
+</navigation>

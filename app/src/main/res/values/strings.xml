@@ -18,10 +18,24 @@
 
     <string name="configuration_activity_title">Farm configurations</string>
     <string name="finish_action">Finish</string>
+    <string name="view">View</string>
+    <string name="settings">Settings</string>
+    <string name="nav_statistics">Statistics</string>
+    <string name="planner">Planner</string>
+    <string name="dashboard">Dashboard</string>
 
     <plurals name="days">
         <item quantity="one">1 day</item>
         <item quantity="other">%d days</item>
     </plurals>
+
+    <string name="dashboard_efectiv_animale">Headcount</string>
+    <string name="dashboard_grafic_fatari">Births</string>
+    <string name="dashboard_grafic_monta">Breedings</string>
+    <string name="dashboard_grafic_deparazitari">Disinfections</string>
+    <string name="dashboard_grafic_vitaminizari">Vitaminations</string>
+    <string name="dashboard_grafic_vaccinari">Vaccinations</string>
+    <string name="dashboard_grafic_pedichiuri">Pedicures</string>
+    <string name="dashboard_grafic_tratamente">Treatments</string>
 
 </resources>

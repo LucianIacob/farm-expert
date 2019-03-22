@@ -37,7 +37,8 @@
                   android:screenOrientation="portrait"
                   android:label="Select Farm"/>
 
-        <activity android:name=".activities.MainActivity"/>
+        <activity android:name=".activities.MainActivity"
+                  android:theme="@style/AppTheme.NoActionbar"/>
 
         <activity android:name=".activities.ConfigurationActivity"
                   android:theme="@style/AppTheme.NoActionbar"/>
