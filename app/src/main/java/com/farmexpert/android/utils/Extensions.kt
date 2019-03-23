@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/21/19 4:01 PM.
+ * Last modified 3/22/19 6:51 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -41,3 +41,13 @@ fun View.invisible() {
 fun View.hidden() {
     visibility = View.GONE
 }
+
+fun Date.getShort(): String {
+    val format = "dd.MM.yyyy"
+    val simpleDateFormat = SimpleDateFormat(format, Locale.getDefault())
+    return simpleDateFormat.format(this)
+}
+
+fun Calendar.year() = this.get(Calendar.YEAR)
+fun Calendar.month() = this.get(Calendar.MONTH)
+fun Calendar.day() = this.get(Calendar.DAY_OF_MONTH)

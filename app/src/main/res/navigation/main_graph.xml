@@ -11,111 +11,94 @@
             android:label="@string/dashboard"
             tools:layout="@layout/fragment_dashboard">
 
-        <!--<action-->
-        <!--android:id="@+id/action_dashboardFragment_to_efectivAnimaleFragment"-->
-        <!--app:destination="@id/efectivAnimaleFragment"-->
-        <!--app:enterAnim="@anim/slide_in_right"-->
-        <!--app:exitAnim="@anim/slide_out_left"-->
-        <!--app:popEnterAnim="@anim/slide_in_left"-->
-        <!--app:popExitAnim="@anim/slide_out_right"/>-->
-        <!--<action-->
-        <!--android:id="@+id/action_dashboardFragment_to_graficFatariFragment"-->
-        <!--app:destination="@id/graficFatariFragment"-->
-        <!--app:enterAnim="@anim/slide_in_right"-->
-        <!--app:exitAnim="@anim/slide_out_left"-->
-        <!--app:popEnterAnim="@anim/slide_in_left"-->
-        <!--app:popExitAnim="@anim/slide_out_right"/>-->
-        <!--<action-->
-        <!--android:id="@+id/action_dashboardFragment_to_graficMontaFragment"-->
-        <!--app:destination="@id/graficMontaFragment"-->
-        <!--app:enterAnim="@anim/slide_in_right"-->
-        <!--app:exitAnim="@anim/slide_out_left"-->
-        <!--app:popEnterAnim="@anim/slide_in_left"-->
-        <!--app:popExitAnim="@anim/slide_out_right"/>-->
-        <!--<action-->
-        <!--android:id="@+id/action_dashboardFragment_to_graficDeparazitariFragment"-->
-        <!--app:destination="@id/graficDeparazitariFragment"-->
-        <!--app:enterAnim="@anim/slide_in_right"-->
-        <!--app:exitAnim="@anim/slide_out_left"-->
-        <!--app:popEnterAnim="@anim/slide_in_left"-->
-        <!--app:popExitAnim="@anim/slide_out_right"/>-->
-        <!--<action-->
-        <!--android:id="@+id/action_dashboardFragment_to_graficVitaminizariFragment"-->
-        <!--app:destination="@id/graficVitaminizariFragment"-->
-        <!--app:enterAnim="@anim/slide_in_right"-->
-        <!--app:exitAnim="@anim/slide_out_left"-->
-        <!--app:popEnterAnim="@anim/slide_in_left"-->
-        <!--app:popExitAnim="@anim/slide_out_right"/>-->
-        <!--<action-->
-        <!--android:id="@+id/action_dashboardFragment_to_graficVaccinariFragment"-->
-        <!--app:destination="@id/graficVaccinariFragment"-->
-        <!--app:enterAnim="@anim/slide_in_right"-->
-        <!--app:exitAnim="@anim/slide_out_left"-->
-        <!--app:popEnterAnim="@anim/slide_in_left"-->
-        <!--app:popExitAnim="@anim/slide_out_right"/>-->
-        <!--<action-->
-        <!--android:id="@+id/action_dashboardFragment_to_graficPedichiuriFragment"-->
-        <!--app:destination="@id/graficPedichiuriFragment"-->
-        <!--app:enterAnim="@anim/slide_in_right"-->
-        <!--app:exitAnim="@anim/slide_out_left"-->
-        <!--app:popEnterAnim="@anim/slide_in_left"-->
-        <!--app:popExitAnim="@anim/slide_out_right"/>-->
-        <!--<action-->
-        <!--android:id="@+id/action_dashboardFragment_to_graficTratamenteFragment"-->
-        <!--app:destination="@id/graficTratamenteFragment"-->
-        <!--app:enterAnim="@anim/slide_in_right"-->
-        <!--app:exitAnim="@anim/slide_out_left"-->
-        <!--app:popEnterAnim="@anim/slide_in_left"-->
-        <!--app:popExitAnim="@anim/slide_out_right"/>-->
+        <action android:id="@+id/action_dashboardFragment_to_animalMasterFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:destination="@id/animalMasterFragment"/>
+
+        <action android:id="@+id/action_dashboardFragment_to_birthsGraphFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:destination="@id/birthsGraphFragment"/>
+
+        <action android:id="@+id/action_dashboardFragment_to_breedingsGraphFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:destination="@id/breedingsGraphFragment"/>
+
+        <action android:id="@+id/action_dashboardFragment_to_disinfectionsGraphFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:destination="@id/disinfectionsGraphFragment"/>
+
+        <action android:id="@+id/action_dashboardFragment_to_vitaminisationsGraphFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:destination="@id/vitaminisationsGraphFragment"/>
+
+        <action android:id="@+id/action_dashboardFragment_to_vaccinationsGraphFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:destination="@id/vaccinationsGraphFragment"/>
+
+        <action android:id="@+id/action_dashboardFragment_to_pedicuresGraphFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:destination="@id/pedicuresGraphFragment"/>
+
+        <action android:id="@+id/action_dashboardFragment_to_treatmentsGraphFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:destination="@id/treatmentsGraphFragment"/>
     </fragment>
 
-    <!--<fragment-->
-    <!--android:id="@+id/efectivAnimaleFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.master.EfectivAnimaleFragment"-->
-    <!--android:label="@string/dashboard_efectiv_animale"-->
-    <!--tools:layout="@layout/fragment_efectiv_animale"/>-->
+    <fragment android:id="@+id/animalMasterFragment"
+              android:name="com.farmexpert.android.fragments.AnimalMasterFragment"
+              android:label="@string/dashboard_headcount"/>
 
-    <!--<fragment-->
-    <!--android:id="@+id/graficFatariFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.master.GraficFatariFragment"-->
-    <!--android:label="@string/dashboard_grafic_fatari"-->
-    <!--tools:layout="@layout/fragment_grafic_fatari"/>-->
+    <fragment android:id="@+id/birthsGraphFragment"
+              android:name="com.farmexpert.android.fragments.BirthsGraphFragment"
+              android:label="@string/dashboard_graph_births"/>
 
-    <!--<fragment-->
-    <!--android:id="@+id/graficMontaFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.master.GraficMontaFragment"-->
-    <!--android:label="@string/dashboard_grafic_monta"-->
-    <!--tools:layout="@layout/fragment_grafic_monta"/>-->
+    <fragment android:id="@+id/breedingsGraphFragment"
+              android:name="com.farmexpert.android.fragments.BreedingsGraphFragment"
+              android:label="@string/dashboard_graph_breedings"/>
 
-    <!--<fragment-->
-    <!--android:id="@+id/graficDeparazitariFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.master.GraficDeparazitariFragment"-->
-    <!--android:label="@string/dashboard_grafic_deparazitari"-->
-    <!--tools:layout="@layout/fragment_grafic_animal_actions"/>-->
+    <fragment android:id="@+id/disinfectionsGraphFragment"
+              android:name="com.farmexpert.android.fragments.DisinfectionsGraphFragment"
+              android:label="@string/dashboard_graph_disinfections"/>
 
-    <!--<fragment-->
-    <!--android:id="@+id/graficVitaminizariFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.master.GraficVitaminizariFragment"-->
-    <!--android:label="@string/dashboard_grafic_vitaminizari"-->
-    <!--tools:layout="@layout/fragment_grafic_animal_actions"/>-->
+    <fragment android:id="@+id/vitaminisationsGraphFragment"
+              android:name="com.farmexpert.android.fragments.VitaminisationsGraphFragment"
+              android:label="@string/dashboard_graph_vitaminisations"/>
 
-    <!--<fragment-->
-    <!--android:id="@+id/graficVaccinariFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.master.GraficVaccinariFragment"-->
-    <!--android:label="@string/dashboard_grafic_vaccinari"-->
-    <!--tools:layout="@layout/fragment_grafic_animal_actions"/>-->
+    <fragment android:id="@+id/vaccinationsGraphFragment"
+              android:name="com.farmexpert.android.fragments.VaccinationsGraphFragment"
+              android:label="@string/dashboard_graph_vaccinations"/>
 
-    <!--<fragment-->
-    <!--android:id="@+id/graficPedichiuriFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.master.GraficPedichiuriFragment"-->
-    <!--android:label="@string/dashboard_grafic_pedichiuri"-->
-    <!--tools:layout="@layout/fragment_grafic_animal_actions"/>-->
+    <fragment android:id="@+id/pedicuresGraphFragment"
+              android:name="com.farmexpert.android.fragments.PedicuresGraphFragment"
+              android:label="@string/dashboard_graph_pedicures"/>
 
-    <!--<fragment-->
-    <!--android:id="@+id/graficTratamenteFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.master.GraficTratamenteFragment"-->
-    <!--android:label="@string/dashboard_grafic_tratamente"-->
-    <!--tools:layout="@layout/fragment_grafic_animal_actions"/>-->
+    <fragment android:id="@+id/treatmentsGraphFragment"
+              android:name="com.farmexpert.android.fragments.TreatmentsGraphFragment"
+              android:label="@string/dashboard_graph_treatments"/>
 
     <!--<fragment-->
     <!--android:id="@+id/animalDetailFragment"-->

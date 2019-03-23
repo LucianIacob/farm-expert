@@ -8,18 +8,16 @@
         android:layout_height="match_parent"
         tools:openDrawer="start">
 
-    <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F1F1F1"
-            android:orientation="vertical">
+            android:background="#F1F1F1">
 
         <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/barLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
                 android:theme="@style/AppTheme.AppBarOverlay">
 
             <androidx.appcompat.widget.Toolbar
@@ -34,17 +32,26 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:app="http://schemas.android.com/apk/res-auto"
-                  xmlns:tools="http://schemas.android.com/tools"
-                  android:id="@+id/nav_host_fragment"
-                  android:name="androidx.navigation.fragment.NavHostFragment"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  app:defaultNavHost="true"
-                  app:navGraph="@navigation/main_graph"/>
+        <ProgressBar
+                android:id="@+id/loadingView"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:layout_constraintTop_toBottomOf="@id/barLayout"
+                android:visibility="gone"/>
 
-    </LinearLayout>
+        <fragment
+                android:id="@+id/nav_host_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                app:defaultNavHost="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/barLayout"
+                app:navGraph="@navigation/main_graph"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"

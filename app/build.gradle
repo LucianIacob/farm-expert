@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/22/19 9:35 AM.
+ * Last modified 3/23/19 7:10 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -54,8 +54,9 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
     implementation 'com.firebaseui:firebase-ui-firestore:4.3.1'
     implementation 'com.google.firebase:firebase-core:16.0.8'
-    implementation 'org.jetbrains.anko:anko-commons:0.10.8'
-    implementation 'org.jetbrains.anko:anko-coroutines:0.10.8'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'org.jetbrains.anko:anko:0.10.8'
+    implementation 'org.jetbrains.anko:anko-design:0.10.8'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
         transitive = true

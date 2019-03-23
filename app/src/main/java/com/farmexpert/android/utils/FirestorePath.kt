@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/15/19 9:22 AM.
+ * Last modified 3/23/19 7:10 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -13,6 +13,7 @@ object FirestorePath {
 
     object Collections {
         const val FARMS = "farms"
+        const val ANIMALS = "animals"
     }
 
     object Farm {
@@ -31,6 +32,15 @@ object FirestorePath {
         const val GESTATION_LENGTH = "gestationLength"
         const val CREATION_DATE = "createdOn"
         const val USERS = "users"
+    }
+
+    object Animal {
+        const val RACE = "race"
+        const val DATE_OF_BIRTH = "dateOfBirth"
+        const val GENRE = "genre"
+        const val FATHER_ID = "fatherId"
+        const val MOTHER_ID = "motherId"
+        const val CREATED_BY = "createdBy"
     }
 
 }

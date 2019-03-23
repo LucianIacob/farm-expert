@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/21/19 4:57 PM.
+ * Last modified 3/23/19 7:00 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -13,6 +13,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import com.crashlytics.android.answers.Answers
 import com.crashlytics.android.answers.ContentViewEvent
 import com.farmexpert.android.R
@@ -24,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_dashboard.*
  * Created by Lucian Iacob.
  * Cluj-Napoca, February 19, 2018.
  */
-class DashboardFragment : androidx.fragment.app.Fragment() {
+class DashboardFragment : Fragment() {
 
     companion object {
         val TAG: String = DashboardFragment::class.java.simpleName
@@ -53,7 +55,7 @@ class DashboardFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun onItemClick(dashboardItem: DashboardItem) {
-//        NavHostFragment.findNavController(this).navigate(dashboardItem.actionDestination)
+        NavHostFragment.findNavController(this).navigate(dashboardItem.actionDestination)
         Answers.getInstance().logContentView(ContentViewEvent().putContentName(dashboardItem.name))
     }
 }

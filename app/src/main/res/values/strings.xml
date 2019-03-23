@@ -29,13 +29,37 @@
         <item quantity="other">%d days</item>
     </plurals>
 
-    <string name="dashboard_efectiv_animale">Headcount</string>
-    <string name="dashboard_grafic_fatari">Births</string>
-    <string name="dashboard_grafic_monta">Breedings</string>
-    <string name="dashboard_grafic_deparazitari">Disinfections</string>
-    <string name="dashboard_grafic_vitaminizari">Vitaminations</string>
-    <string name="dashboard_grafic_vaccinari">Vaccinations</string>
-    <string name="dashboard_grafic_pedichiuri">Pedicures</string>
-    <string name="dashboard_grafic_tratamente">Treatments</string>
+    <string name="dashboard_headcount">Headcount</string>
+    <string name="dashboard_graph_births">Births</string>
+    <string name="dashboard_graph_breedings">Breedings</string>
+    <string name="dashboard_graph_disinfections">Disinfections</string>
+    <string name="dashboard_graph_vitaminisations">Vitaminations</string>
+    <string name="dashboard_graph_vaccinations">Vaccinations</string>
+    <string name="dashboard_graph_pedicures">Pedicures</string>
+    <string name="dashboard_graph_treatments">Treatments</string>
+    <string name="animal_id">ID</string>
+    <string name="genre">Genre</string>
+    <string name="race">Race</string>
+    <string name="father_id">Father ID</string>
+    <string name="mother_id">Mother ID</string>
+    <string name="add_animal_title">Add animal</string>
+    <string name="dialog_add_positive_btn">Add</string>
+    <string name="dialog_add_negative_btn">Cancel</string>
+    <string name="err_adding_animal">Error adding animal</string>
+    <string name="err_adding_animal_message">Invalid ID number. The animal was not saved.</string>
+    <string name="err_adding_animal_constraint">Error adding animal. Another animal with the same ID was found.</string>
+    <string name="empty_list">No items in the list</string>
+    <string name="item_added">Item successfully added</string>
+    <string name="item_deleted">Item successfully deleted</string>
+    <string name="lorem_ipsum">Lorem ipsum</string>
+    <string name="date_of_birth">Date of birth:</string>
+    <string name="delete_animal">Delete animal?</string>
+    <string name="headcount_title">Headcount, %d animals</string>
+
+    <string-array name="genre_types">
+        <item>Unknown</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 
 </resources>

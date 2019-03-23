@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/21/19 4:13 PM.
+ * Last modified 3/22/19 3:24 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -18,17 +18,49 @@ import com.farmexpert.android.R
 
 enum class DashboardItem(
     val iconId: Int,
-    val titleId: Int/*,
-                         val actionDestination: Int*/
+    val titleId: Int,
+    val actionDestination: Int
 ) {
 
-    HEADCOUNT(R.drawable.dashboard_headcount, R.string.dashboard_efectiv_animale),
-    BIRTHS_GRAPH(R.drawable.dashboard_births_graph, R.string.dashboard_grafic_fatari),
-    BREEDING_GRAPH(R.drawable.dashboard_breedings_graph, R.string.dashboard_grafic_monta),
-    DISINFECTION_GRAPH(R.drawable.dashboard_disinfections_graph, R.string.dashboard_grafic_deparazitari),
-    VITAMINISATION_GRAPH(R.drawable.dashboard_vitaminisation_graph, R.string.dashboard_grafic_vitaminizari),
-    VACCINATION_GRAPH(R.drawable.dashboard_vaccination_graph, R.string.dashboard_grafic_vaccinari),
-    PEDICURES_GRAPH(R.drawable.dashboard_pedicures_graph, R.string.dashboard_grafic_pedichiuri),
-    TREATMENTS_GRAPH(R.drawable.dashboard_treatments_graph, R.string.dashboard_grafic_tratamente)
+    HEADCOUNT(
+        R.drawable.dashboard_headcount,
+        R.string.dashboard_headcount,
+        R.id.action_dashboardFragment_to_animalMasterFragment
+    ),
+    BIRTHS_GRAPH(
+        R.drawable.dashboard_births_graph,
+        R.string.dashboard_graph_births,
+        R.id.action_dashboardFragment_to_birthsGraphFragment
+    ),
+    BREEDING_GRAPH(
+        R.drawable.dashboard_breedings_graph,
+        R.string.dashboard_graph_breedings,
+        R.id.action_dashboardFragment_to_breedingsGraphFragment
+    ),
+    DISINFECTION_GRAPH(
+        R.drawable.dashboard_disinfections_graph,
+        R.string.dashboard_graph_disinfections,
+        R.id.action_dashboardFragment_to_disinfectionsGraphFragment
+    ),
+    VITAMINISATION_GRAPH(
+        R.drawable.dashboard_vitaminisation_graph,
+        R.string.dashboard_graph_vitaminisations,
+        R.id.action_dashboardFragment_to_vitaminisationsGraphFragment
+    ),
+    VACCINATION_GRAPH(
+        R.drawable.dashboard_vaccination_graph,
+        R.string.dashboard_graph_vaccinations,
+        R.id.action_dashboardFragment_to_vaccinationsGraphFragment
+    ),
+    PEDICURES_GRAPH(
+        R.drawable.dashboard_pedicures_graph,
+        R.string.dashboard_graph_pedicures,
+        R.id.action_dashboardFragment_to_pedicuresGraphFragment
+    ),
+    TREATMENTS_GRAPH(
+        R.drawable.dashboard_treatments_graph,
+        R.string.dashboard_graph_treatments,
+        R.id.action_dashboardFragment_to_treatmentsGraphFragment
+    )
 
 }

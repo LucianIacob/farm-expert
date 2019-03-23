@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/15/19 1:13 PM.
+ * Last modified 3/23/19 6:48 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -40,6 +40,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
 
     companion object {
         const val KEY_CURRENT_FARM_ID = "com.farmexpert.android.FarmID"
+        const val KEY_CURRENT_FARM_NAME = "com.farmexpert.android.FarmName"
     }
 
     private lateinit var firestore: FirebaseFirestore
@@ -77,7 +78,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
     private fun farmClicked(farm: Farm) {
         farm.id?.let {
             storeFarmDetails(farm)
-            storeFarmId(it)
+            storeFarmId(it, farm.name)
             openMainActivity()
         }
     }
@@ -133,7 +134,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             .add(farm)
             .addOnSuccessListener { documentReference ->
                 loadingProgressBar.invisible()
-                storeFarmId(documentReference.id)
+                storeFarmId(documentReference.id, farm.name)
                 openFarmConfigurationsActivity()
             }
             .addOnFailureListener { e ->
@@ -219,7 +220,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             .update(FirestorePath.Farm.USERS, FieldValue.arrayUnion(currentUser.uid))
             .addOnSuccessListener {
                 loadingProgressBar.invisible()
-                storeFarmId(farm.id!!)
+                storeFarmId(farm.id!!, farm.name)
                 openMainActivity()
             }
             .addOnFailureListener { ex ->
@@ -228,9 +229,12 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             }
     }
 
-    private fun storeFarmId(farmId: String) {
+    private fun storeFarmId(farmId: String, name: String) {
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        prefs.edit { putString(KEY_CURRENT_FARM_ID, farmId) }
+        prefs.edit {
+            putString(KEY_CURRENT_FARM_ID, farmId)
+            putString(KEY_CURRENT_FARM_NAME, name)
+        }
     }
 
     private fun openMainActivity() {
