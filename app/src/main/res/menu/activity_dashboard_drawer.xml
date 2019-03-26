@@ -5,20 +5,20 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                        android:id="@+id/dashboardFragment"
-                        android:checkable="false"
-                        android:icon="@drawable/ic_dashboard_black_24dp"
-                        android:title="@string/dashboard"/>
+                    android:id="@+id/dashboardFragment"
+                    android:checkable="false"
+                    android:icon="@drawable/ic_dashboard_black_24dp"
+                    android:title="@string/dashboard" />
                 <item
-                        android:id="@+id/plannerFragment"
-                        android:checkable="false"
-                        android:icon="@drawable/ic_event_note_black_24dp"
-                        android:title="@string/planner"/>
+                    android:id="@+id/plannerFragment"
+                    android:checkable="false"
+                    android:icon="@drawable/ic_event_note_black_24dp"
+                    android:title="@string/planner" />
                 <item
-                        android:id="@+id/statisticsFragment"
-                        android:checkable="false"
-                        android:icon="@drawable/ic_assessment_black_24dp"
-                        android:title="@string/nav_statistics"/>
+                    android:id="@+id/statisticsFragment"
+                    android:checkable="false"
+                    android:icon="@drawable/ic_assessment_black_24dp"
+                    android:title="@string/nav_statistics" />
             </group>
         </menu>
     </item>
@@ -27,10 +27,10 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                        android:id="@+id/recoveryFragment"
-                        android:checkable="false"
-                        android:icon="@drawable/ic_settings_backup_restore_black_24dp"
-                        android:title="Test"/>
+                    android:id="@+id/recoveryFragment"
+                    android:checkable="false"
+                    android:icon="@drawable/ic_settings_backup_restore_black_24dp"
+                    android:title="Test" />
             </group>
         </menu>
     </item>

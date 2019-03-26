@@ -1,73 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:background="@color/white"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="bottom"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <View
-            android:id="@+id/developer_mode"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+        android:id="@+id/developer_mode"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-            android:id="@+id/userIcon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="@dimen/large_margin"
-            android:layout_marginStart="@dimen/medium_margin"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:src="@drawable/ic_person_rounded"
-            android:contentDescription="@null"/>
+        android:id="@+id/userIcon"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_person_rounded"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-            android:id="@+id/farmName"
-            app:layout_constraintTop_toBottomOf="@id/userIcon"
-            android:layout_width="match_parent"
-            android:fontFamily="@font/new_telegroteskscreen_regular"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/large_text"
-            android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginStart="@dimen/medium_margin"
-            android:layout_height="wrap_content"/>
+        android:id="@+id/farmName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:fontFamily="@font/new_telegroteskscreen_regular"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/large_text"
+        app:layout_constraintTop_toBottomOf="@id/userIcon" />
 
     <TextView
-            android:id="@+id/userName"
-            android:layout_marginTop="@dimen/tiny_margin"
-            android:layout_marginStart="@dimen/medium_margin"
-            app:layout_constraintBottom_toTopOf="@id/userEmail"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_18"
-            app:layout_constraintTop_toBottomOf="@id/farmName"
-            android:layout_marginEnd="@dimen/large_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        android:id="@+id/userName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/tiny_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_18"
+        app:layout_constraintBottom_toTopOf="@id/userEmail"
+        app:layout_constraintTop_toBottomOf="@id/farmName" />
 
     <TextView
-            android:id="@+id/userEmail"
-            android:textSize="@dimen/text_18"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_marginStart="@dimen/medium_margin"
-            android:fontFamily="@font/telegroteskscreen_medium"
-            app:layout_constraintTop_toBottomOf="@id/userName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        android:id="@+id/userEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:fontFamily="@font/telegroteskscreen_medium"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/text_18"
+        app:layout_constraintTop_toBottomOf="@id/userName" />
 
     <View
-            android:layout_marginTop="@dimen/medium_margin"
-            android:background="@color/colorPrimaryDark"
-            android:alpha="0.7"
-            app:layout_constraintTop_toBottomOf="@id/userEmail"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:alpha="0.7"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintTop_toBottomOf="@id/userEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

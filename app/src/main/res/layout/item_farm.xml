@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="3dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="3dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_margin="8dp"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:layout_width="match_parent"
-                  android:id="@+id/farmName"
-                  app:layout_constraintTop_toTopOf="parent"
-                  android:text="@string/app_name"
-                  android:textSize="@dimen/large_text"
-                  android:textColor="@color/black"
-                  android:fontFamily="@font/josefin_sans_semibold"
-                  android:layout_height="wrap_content"/>
+            android:id="@+id/farmName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/josefin_sans_semibold"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/large_text"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView android:layout_width="match_parent"
-                  android:fontFamily="@font/roboto"
-                  android:id="@+id/createdAt"
-                  android:textSize="@dimen/medium_text"
-                  app:layout_constraintTop_toBottomOf="@id/farmName"
-                  android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/createdAt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:textSize="@dimen/medium_text"
+            app:layout_constraintTop_toBottomOf="@id/farmName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

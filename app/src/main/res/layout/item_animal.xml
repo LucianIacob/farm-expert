@@ -1,70 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/item_dashboard_root"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="@dimen/default_radius"
-        app:cardElevation="@dimen/default_elevation"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_dashboard_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="@dimen/default_radius"
+    app:cardElevation="@dimen/default_elevation"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
 
         <ImageView
-                android:id="@+id/cowIcon"
-                android:src="@drawable/ic_cow"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:contentDescription="@null"/>
+            android:id="@+id/cowIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_cow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-                android:id="@+id/itemAnimalId"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/josefin_sans"
-                android:text="@string/lorem_ipsum"
-                android:layout_marginStart="@dimen/large_margin"
-                android:textColor="@android:color/black"
-                app:layout_constraintLeft_toRightOf="@id/cowIcon"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textSize="26sp"/>
+            android:id="@+id/itemAnimalId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_margin"
+            android:fontFamily="@font/josefin_sans"
+            android:text="@string/lorem_ipsum"
+            android:textColor="@android:color/black"
+            android:textSize="26sp"
+            app:layout_constraintLeft_toRightOf="@id/cowIcon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-                android:id="@+id/dateOfBirthHeader"
-                app:layout_constraintLeft_toRightOf="@id/cowIcon"
-                android:layout_width="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/itemAnimalId"
-                android:layout_marginTop="@dimen/tiny_margin"
-                android:fontFamily="@font/roboto"
-                android:textSize="@dimen/medium_text"
-                android:text="@string/date_of_birth"
-                android:layout_marginStart="@dimen/large_margin"
-                android:layout_height="wrap_content"/>
+            android:id="@+id/dateOfBirthHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_marginTop="@dimen/tiny_margin"
+            android:fontFamily="@font/roboto"
+            android:text="@string/date_of_birth"
+            android:textSize="@dimen/medium_text"
+            app:layout_constraintLeft_toRightOf="@id/cowIcon"
+            app:layout_constraintTop_toBottomOf="@id/itemAnimalId" />
 
         <TextView
-                android:id="@+id/itemAnimalDate"
-                android:text="@string/lorem_ipsum"
-                android:textSize="@dimen/medium_text"
-                android:textColor="@color/sea_green"
-                android:fontFamily="@font/telegroteskscreen_medium"
-                app:layout_constraintTop_toTopOf="@id/dateOfBirthHeader"
-                app:layout_constraintBottom_toBottomOf="@id/dateOfBirthHeader"
-                app:layout_constraintLeft_toRightOf="@id/dateOfBirthHeader"
-                android:layout_width="0dp"
-                android:layout_marginStart="@dimen/tiny_margin"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_height="wrap_content"/>
+            android:id="@+id/itemAnimalDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tiny_margin"
+            android:fontFamily="@font/telegroteskscreen_medium"
+            android:text="@string/lorem_ipsum"
+            android:textColor="@color/sea_green"
+            android:textSize="@dimen/medium_text"
+            app:layout_constraintBottom_toBottomOf="@id/dateOfBirthHeader"
+            app:layout_constraintLeft_toRightOf="@id/dateOfBirthHeader"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dateOfBirthHeader" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
