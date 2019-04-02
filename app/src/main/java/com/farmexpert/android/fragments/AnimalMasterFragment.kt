@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/23/19 7:10 PM.
+ * Last modified 4/6/19 10:57 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -16,7 +16,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.farmexpert.android.NavGraphDirections
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.AnimalsAdapter
 import com.farmexpert.android.dialogs.AddAnimalDialogFragment
@@ -36,7 +38,6 @@ import kotlinx.android.synthetic.main.fragment_animal_master.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.support.v4.alert
-import org.jetbrains.anko.support.v4.longToast
 import java.util.*
 
 /**
@@ -45,9 +46,16 @@ import java.util.*
 class AnimalMasterFragment : BaseFragment(), AnkoLogger {
 
     private lateinit var animalsCollections: CollectionReference
+
     private lateinit var currentUser: FirebaseUser
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    private lateinit var adapter: AnimalsAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_animal_master, container, false)
     }
 
@@ -61,34 +69,42 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
         initAnimalList()
     }
 
+    override fun onViewReady() {
+        super.onViewReady()
+        adapter.readyForListening()
+    }
+
     private fun initAnimalList() {
         loadingShow()
         val options = FirestoreRecyclerOptions.Builder<Animal>()
             .setQuery(animalsCollections) { it.toObject(Animal::class.java)!!.apply { id = it.id } }
-            .setLifecycleOwner(this)
             .build()
 
-        val adapter =
-            object : AnimalsAdapter(options, { animal -> animalClick(animal) }, { animal -> animalLongClick(animal) }) {
-                override fun onDataChanged() {
-                    loadingHide()
-                    val title = if (itemCount != 0) {
-                        emptyView.hidden()
-                        getString(R.string.headcount_title, itemCount)
-                    } else {
-                        emptyView.visible()
-                        getString(R.string.dashboard_headcount)
-                    }
-                    (activity as? AppCompatActivity)?.supportActionBar?.title = title
+        adapter = object : AnimalsAdapter(
+            options,
+            { animal -> animalClick(animal) },
+            { animal -> animalLongClick(animal) }) {
+            override fun onDataChanged() {
+                loadingHide()
+                (activity as? AppCompatActivity)?.supportActionBar?.title = if (itemCount != 0) {
+                    emptyView.hidden()
+                    getString(R.string.headcount_title, itemCount)
+                } else {
+                    emptyView.visible()
+                    getString(R.string.dashboard_headcount)
                 }
             }
+        }
 
         headcountRecyclerView.layoutManager = LinearLayoutManager(activity)
         headcountRecyclerView.adapter = adapter
     }
 
     private fun animalClick(animal: Animal) {
-        longToast(animal.id!!)
+        animal.id?.let {
+            val direction = NavGraphDirections.actionGlobalAnimalDetailFragment(it)
+            NavHostFragment.findNavController(this).navigate(direction)
+        }
     }
 
     private fun animalLongClick(animal: Animal) {
@@ -100,10 +116,16 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
                     .delete()
                     .addOnCompleteListener {
                         loadingHide()
-                        if (it.isSuccessful) rootLayout.snackbar(R.string.item_deleted) else alert(it.exception?.message!!)
+                        if (it.isSuccessful) rootLayout.snackbar(R.string.item_deleted)
+                        else alert(it.exception?.message!!)
                     }
             }
         }.show()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        adapter.startListening()
     }
 
     override fun onResume() {
@@ -141,7 +163,8 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
         }
 
         loadingShow()
-        val animal = Animal(race, Timestamp(dateOfBirth), genre, fatherId, motherId, currentUser.uid)
+        val animal =
+            Animal(race, Timestamp(dateOfBirth), genre, fatherId, motherId, currentUser.uid)
 
         animalsCollections.document(id!!)
             .set(animal)
@@ -163,6 +186,11 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
     override fun onPause() {
         super.onPause()
         addAnimalBtn.setOnClickListener(null)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        adapter.stopListening()
     }
 
     companion object {

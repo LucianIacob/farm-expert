@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Developed by Lucian Iacob.
+  ~ Cluj-Napoca, 2019.
+  ~ Project: FarmExpert
+  ~ Email: contact@lucianiacob.com
+  ~ Last modified 4/2/19 7:33 PM.
+  ~ Copyright (c) Lucian Iacob. All rights reserved.
+  -->
+
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -115,6 +123,25 @@
         android:id="@+id/treatmentsGraphFragment"
         android:name="com.farmexpert.android.fragments.TreatmentsGraphFragment"
         android:label="@string/dashboard_graph_treatments" />
+
+    <fragment
+        android:id="@+id/animalDetailFragment"
+        android:name="com.farmexpert.android.fragments.AnimalDetailFragment"
+        android:label="Animal Detail">
+
+        <argument
+            android:name="id"
+            app:argType="string" />
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_animalDetailFragment"
+        app:destination="@id/animalDetailFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
 
     <!--<fragment-->
     <!--android:id="@+id/animalDetailFragment"-->

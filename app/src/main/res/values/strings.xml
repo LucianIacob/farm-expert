@@ -52,9 +52,13 @@
     <string name="item_added">Item successfully added</string>
     <string name="item_deleted">Item successfully deleted</string>
     <string name="lorem_ipsum">Lorem ipsum</string>
-    <string name="date_of_birth">Date of birth:</string>
+    <string name="date_of_birth">Date of birth</string>
     <string name="delete_animal">Delete animal?</string>
     <string name="headcount_title">Headcount, %d animals</string>
+    <string name="father_father_id">Father-Father ID</string>
+    <string name="father_mother_id">Father-Mother ID</string>
+    <string name="mother_father_id">Mother-Father ID</string>
+    <string name="mother_mother_id">Mother-Mother ID</string>
 
     <string-array name="genre_types">
         <item>Unknown</item>

@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/23/19 11:26 AM.
+ * Last modified 4/6/19 10:57 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -24,6 +24,8 @@ open class AnimalsAdapter(
 ) :
     FirestoreRecyclerAdapter<Animal, AnimalHolder>(options) {
 
+    private var shouldListen: Boolean = false
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_animal, parent, false)
         return AnimalHolder(view)
@@ -35,6 +37,17 @@ open class AnimalsAdapter(
         animalHolder.itemView.setOnLongClickListener {
             longClick(animal)
             true
+        }
+    }
+
+    fun readyForListening() {
+        shouldListen = true
+        startListening()
+    }
+
+    override fun startListening() {
+        if (shouldListen) {
+            super.startListening()
         }
     }
 
