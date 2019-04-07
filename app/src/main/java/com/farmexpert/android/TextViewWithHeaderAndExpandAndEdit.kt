@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/6/19 7:37 PM.
+ * Last modified 4/7/19 10:12 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -52,8 +52,12 @@ class TextViewWithHeaderAndExpandAndEdit(context: Context, attributes: Attribute
         text_with_header_value.text = value
     }
 
-    fun setExpandListener(listener: OnClickListener) {
-        text_with_header_expand.setOnClickListener(listener)
+    fun setExpandListener(viewToExpand: View) {
+        text_with_header_expand.setOnClickListener {
+            viewToExpand.visibility = if (isExpanded) GONE else VISIBLE
+            setExpandIcon(if (isExpanded) R.drawable.baseline_expand_more_black_24 else R.drawable.baseline_expand_less_black_24)
+            isExpanded = !isExpanded
+        }
     }
 
     fun setExpandIcon(@DrawableRes resId: Int) {

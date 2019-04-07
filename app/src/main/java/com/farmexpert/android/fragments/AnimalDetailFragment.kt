@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/6/19 7:37 PM.
+ * Last modified 4/7/19 10:12 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -12,8 +12,6 @@ package com.farmexpert.android.fragments
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.farmexpert.android.R
@@ -38,18 +36,8 @@ class AnimalDetailFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         animalId.text = args.id
-        fatherIdView.setExpandListener(View.OnClickListener {
-            val isExpanded = fatherIdView.isExpanded
-            fatherParentsContainer.visibility = if (isExpanded) GONE else VISIBLE
-            fatherIdView.setExpandIcon(if (isExpanded) R.drawable.baseline_expand_more_black_24 else R.drawable.baseline_expand_less_black_24)
-            fatherIdView.isExpanded = !isExpanded
-        })
-        motherIdView.setExpandListener(View.OnClickListener {
-            val isExpanded = motherIdView.isExpanded
-            motherParentsContainer.visibility = if (isExpanded) GONE else VISIBLE
-            motherIdView.setExpandIcon(if (isExpanded) R.drawable.baseline_expand_more_black_24 else R.drawable.baseline_expand_less_black_24)
-            motherIdView.isExpanded = !isExpanded
-        })
+        fatherIdView.setExpandListener(viewToExpand = fatherParentsContainer)
+        motherIdView.setExpandListener(viewToExpand = motherParentsContainer)
     }
 
     override fun onViewReady() {
