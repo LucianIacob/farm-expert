@@ -130,7 +130,7 @@
         android:label="Animal Details">
 
         <argument
-            android:name="id"
+            android:name="animalId"
             app:argType="string" />
 
     </fragment>
@@ -143,45 +143,138 @@
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right" />
 
-    <!--<fragment-->
-    <!--android:id="@+id/animalDetailFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.detail.AnimalDetailFragment"-->
-    <!--tools:layout="@layout/fragment_animal" />-->
+    <fragment
+        android:id="@+id/birthsDetailFragment"
+        android:name="com.farmexpert.android.fragments.BirthsDetailFragment"
+        android:label="Births">
 
-    <!--<fragment-->
-    <!--android:id="@+id/fatariDetailFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.detail.FatariDetailFragment"-->
-    <!--tools:layout="@layout/fragment_detail_monte_fatari" />-->
+        <argument
+            android:name="animalId"
+            app:argType="string" />
 
-    <!--<fragment-->
-    <!--android:id="@+id/montaDetailFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.detail.MontaDetailFragment"-->
-    <!--tools:layout="@layout/fragment_detail_monte_fatari" />-->
+    </fragment>
 
-    <!--<fragment-->
-    <!--android:id="@+id/deparazitariDetailFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.detail.DeparazitariDetailFragment"-->
-    <!--tools:layout="@layout/fragment_efectiv_animale_detail" />-->
+    <action
+        android:id="@+id/action_global_birthsDetailFragment"
+        app:destination="@id/birthsDetailFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
 
-    <!--<fragment-->
-    <!--android:id="@+id/vitaminizariDetailFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.detail.VitaminizariDetailFragment"-->
-    <!--tools:layout="@layout/fragment_efectiv_animale_detail" />-->
+    <fragment
+        android:id="@+id/breedingsDetailFragment"
+        android:name="com.farmexpert.android.fragments.BreedingsDetailFragment"
+        android:label="Breedings">
 
-    <!--<fragment-->
-    <!--android:id="@+id/vaccinariDetailFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.detail.VaccinariDetailFragment"-->
-    <!--tools:layout="@layout/fragment_efectiv_animale_detail" />-->
+        <argument
+            android:name="animalId"
+            app:argType="string" />
 
-    <!--<fragment-->
-    <!--android:id="@+id/pedichiuriDetailFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.detail.PedichiuriDetailFragment"-->
-    <!--tools:layout="@layout/fragment_efectiv_animale_detail" />-->
+    </fragment>
 
-    <!--<fragment-->
-    <!--android:id="@+id/tratamenteDetailFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.detail.TratamenteDetailFragment"-->
-    <!--tools:layout="@layout/fragment_efectiv_animale_detail" />-->
+    <action
+        android:id="@+id/action_global_breedingsDetailFragment"
+        app:destination="@id/breedingsDetailFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <fragment
+        android:id="@+id/disinfectionsDetailFragment"
+        android:name="com.farmexpert.android.fragments.DisinfectionsDetailFragment"
+        android:label="Disinfections">
+
+        <argument
+            android:name="animalId"
+            app:argType="string" />
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_disinfectionsDetailFragment"
+        app:destination="@id/disinfectionsDetailFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <fragment
+        android:id="@+id/pedicuresDetailFragment"
+        android:name="com.farmexpert.android.fragments.PedicuresDetailFragment"
+        android:label="Pedicures">
+
+        <argument
+            android:name="animalId"
+            app:argType="string" />
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_pedicuresDetailFragment"
+        app:destination="@id/pedicuresDetailFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <fragment
+        android:id="@+id/treatmentsDetailFragment"
+        android:name="com.farmexpert.android.fragments.TreatmentsDetailFragment"
+        android:label="Treatments">
+
+        <argument
+            android:name="animalId"
+            app:argType="string" />
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_treatmentsDetailFragment"
+        app:destination="@id/treatmentsDetailFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <fragment
+        android:id="@+id/vaccinationsDetailFragment"
+        android:name="com.farmexpert.android.fragments.VaccinationsDetailFragment"
+        android:label="Vaccinations">
+
+        <argument
+            android:name="animalId"
+            app:argType="string" />
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_vaccinationsDetailFragment"
+        app:destination="@id/vaccinationsDetailFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <fragment
+        android:id="@+id/vitaminizationsDetailFragment"
+        android:name="com.farmexpert.android.fragments.VitaminizationsDetailFragment"
+        android:label="Vitaminizations">
+
+        <argument
+            android:name="animalId"
+            app:argType="string" />
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_vitaminizationsDetailFragment"
+        app:destination="@id/vitaminizationsDetailFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
 
     <!--<fragment-->
     <!--android:id="@+id/plannerFragment"-->
@@ -200,69 +293,5 @@
     <!--android:name="com.fermavatamanu.android.fragments.RecoveryFragment"-->
     <!--android:label="@string/recuperare_date"-->
     <!--tools:layout="@layout/fragment_recovery" />-->
-
-    <!--<action-->
-    <!--android:id="@+id/action_global_animalDetailFragment"-->
-    <!--app:destination="@id/animalDetailFragment"-->
-    <!--app:enterAnim="@anim/slide_in_right"-->
-    <!--app:exitAnim="@anim/slide_out_left"-->
-    <!--app:popEnterAnim="@anim/slide_in_left"-->
-    <!--app:popExitAnim="@anim/slide_out_right" />-->
-
-    <!--<action-->
-    <!--android:id="@+id/action_global_fatariDetailFragment"-->
-    <!--app:destination="@id/fatariDetailFragment"-->
-    <!--app:enterAnim="@anim/slide_in_right"-->
-    <!--app:exitAnim="@anim/slide_out_left"-->
-    <!--app:popEnterAnim="@anim/slide_in_left"-->
-    <!--app:popExitAnim="@anim/slide_out_right" />-->
-
-    <!--<action-->
-    <!--android:id="@+id/action_global_montaDetailFragment"-->
-    <!--app:destination="@id/montaDetailFragment"-->
-    <!--app:enterAnim="@anim/slide_in_right"-->
-    <!--app:exitAnim="@anim/slide_out_left"-->
-    <!--app:popEnterAnim="@anim/slide_in_left"-->
-    <!--app:popExitAnim="@anim/slide_out_right" />-->
-
-    <!--<action-->
-    <!--android:id="@+id/action_global_deparazitariDetailFragment"-->
-    <!--app:destination="@id/deparazitariDetailFragment"-->
-    <!--app:enterAnim="@anim/slide_in_right"-->
-    <!--app:exitAnim="@anim/slide_out_left"-->
-    <!--app:popEnterAnim="@anim/slide_in_left"-->
-    <!--app:popExitAnim="@anim/slide_out_right" />-->
-
-    <!--<action-->
-    <!--android:id="@+id/action_global_vitaminizariDetailFragment"-->
-    <!--app:destination="@id/vitaminizariDetailFragment"-->
-    <!--app:enterAnim="@anim/slide_in_right"-->
-    <!--app:exitAnim="@anim/slide_out_left"-->
-    <!--app:popEnterAnim="@anim/slide_in_left"-->
-    <!--app:popExitAnim="@anim/slide_out_right" />-->
-
-    <!--<action-->
-    <!--android:id="@+id/action_global_vaccinariDetailFragment"-->
-    <!--app:destination="@id/vaccinariDetailFragment"-->
-    <!--app:enterAnim="@anim/slide_in_right"-->
-    <!--app:exitAnim="@anim/slide_out_left"-->
-    <!--app:popEnterAnim="@anim/slide_in_left"-->
-    <!--app:popExitAnim="@anim/slide_out_right" />-->
-
-    <!--<action-->
-    <!--android:id="@+id/action_global_pedichiuriDetailFragment"-->
-    <!--app:destination="@id/pedichiuriDetailFragment"-->
-    <!--app:enterAnim="@anim/slide_in_right"-->
-    <!--app:exitAnim="@anim/slide_out_left"-->
-    <!--app:popEnterAnim="@anim/slide_in_left"-->
-    <!--app:popExitAnim="@anim/slide_out_right" />-->
-
-    <!--<action-->
-    <!--android:id="@+id/action_global_tratamenteDetailFragment"-->
-    <!--app:destination="@id/tratamenteDetailFragment"-->
-    <!--app:enterAnim="@anim/slide_in_right"-->
-    <!--app:exitAnim="@anim/slide_out_left"-->
-    <!--app:popEnterAnim="@anim/slide_in_left"-->
-    <!--app:popExitAnim="@anim/slide_out_right" />-->
 
 </navigation>

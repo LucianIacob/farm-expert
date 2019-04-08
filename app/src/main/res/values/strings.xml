@@ -33,7 +33,7 @@
     <string name="dashboard_graph_births">Births</string>
     <string name="dashboard_graph_breedings">Breedings</string>
     <string name="dashboard_graph_disinfections">Disinfections</string>
-    <string name="dashboard_graph_vitaminisations">Vitaminations</string>
+    <string name="dashboard_graph_vitaminisations">Vitaminizations</string>
     <string name="dashboard_graph_vaccinations">Vaccinations</string>
     <string name="dashboard_graph_pedicures">Pedicures</string>
     <string name="dashboard_graph_treatments">Treatments</string>

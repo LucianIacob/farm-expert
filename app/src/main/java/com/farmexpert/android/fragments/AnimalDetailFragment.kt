@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/8/19 1:42 PM.
+ * Last modified 4/8/19 7:59 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -15,7 +15,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
+import com.farmexpert.android.NavGraphDirections
 import com.farmexpert.android.R
 import com.farmexpert.android.TextViewWithHeaderAndExpandAndEdit
 import com.farmexpert.android.model.Animal
@@ -23,6 +26,7 @@ import com.farmexpert.android.utils.*
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 import kotlinx.android.synthetic.main.fragment_animal_detail.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.snackbar
@@ -44,7 +48,7 @@ class AnimalDetailFragment : BaseFragment() {
             .collection(FirestorePath.Collections.FARMS)
             .document(farmId)
             .collection(FirestorePath.Collections.ANIMALS)
-            .document(args.id)
+            .document(args.animalId)
     }
 
     override fun onCreateView(
@@ -56,7 +60,7 @@ class AnimalDetailFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        animalId.text = args.id
+        animalId.text = args.animalId
         fatherIdView.setExpandListener(viewToExpand = fatherParentsContainer)
         motherIdView.setExpandListener(viewToExpand = motherParentsContainer)
         raceView.setEditListener(View.OnClickListener { editRace() })
@@ -72,7 +76,7 @@ class AnimalDetailFragment : BaseFragment() {
 
     override fun onViewReady() {
         loadingShow()
-        animalRef.get()
+        animalRef.get(Source.CACHE) // todo not whether Source.CACHE should go in production
             .addOnFailureListener { toast(R.string.unknown_error) }
             .addOnSuccessListener { populateUi(it.toObject(Animal::class.java)) }
             .addOnCompleteListener { loadingHide() }
@@ -91,6 +95,46 @@ class AnimalDetailFragment : BaseFragment() {
             motherFatherIdView.setValue(it.motherFatherId)
             motherMotherIdView.setValue(it.motherMotherId)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        goToBirths.setOnClickListener {
+            navigateWithDirections(NavGraphDirections.actionGlobalBirthsDetailFragment(args.animalId))
+        }
+        goToBreedings.setOnClickListener {
+            navigateWithDirections(NavGraphDirections.actionGlobalBreedingsDetailFragment(args.animalId))
+        }
+        goToDisinfections.setOnClickListener {
+            navigateWithDirections(NavGraphDirections.actionGlobalDisinfectionsDetailFragment(args.animalId))
+        }
+        goToPedicures.setOnClickListener {
+            navigateWithDirections(NavGraphDirections.actionGlobalPedicuresDetailFragment(args.animalId))
+        }
+        goToTreatments.setOnClickListener {
+            navigateWithDirections(NavGraphDirections.actionGlobalTreatmentsDetailFragment(args.animalId))
+        }
+        goToVaccinations.setOnClickListener {
+            navigateWithDirections(NavGraphDirections.actionGlobalVaccinationsDetailFragment(args.animalId))
+        }
+        goToVitaminizations.setOnClickListener {
+            navigateWithDirections(NavGraphDirections.actionGlobalVitaminizationsDetailFragment(args.animalId))
+        }
+    }
+
+    private fun navigateWithDirections(navDirections: NavDirections) {
+        NavHostFragment.findNavController(this).navigate(navDirections)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        goToBirths.setOnClickListener(null)
+        goToBreedings.setOnClickListener(null)
+        goToDisinfections.setOnClickListener(null)
+        goToPedicures.setOnClickListener(null)
+        goToTreatments.setOnClickListener(null)
+        goToVaccinations.setOnClickListener(null)
+        goToVitaminizations.setOnClickListener(null)
     }
 
     private fun editMotherMother() {
