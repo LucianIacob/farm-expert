@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/7/19 10:12 PM.
+ * Last modified 4/8/19 1:42 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -60,8 +60,12 @@ class TextViewWithHeaderAndExpandAndEdit(context: Context, attributes: Attribute
         }
     }
 
-    fun setExpandIcon(@DrawableRes resId: Int) {
+    private fun setExpandIcon(@DrawableRes resId: Int) {
         text_with_header_expand.setImageResource(resId)
+    }
+
+    fun setEditListener(listener: OnClickListener) {
+        text_with_header_edit.setOnClickListener(listener)
     }
 
 }

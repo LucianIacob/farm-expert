@@ -38,7 +38,7 @@
     <string name="dashboard_graph_pedicures">Pedicures</string>
     <string name="dashboard_graph_treatments">Treatments</string>
     <string name="animal_id">ID</string>
-    <string name="genre">Genre</string>
+    <string name="gender">Gender</string>
     <string name="race">Race</string>
     <string name="father_id">Father ID</string>
     <string name="mother_id">Mother ID</string>
@@ -59,8 +59,9 @@
     <string name="father_mother_id">Father-Mother ID</string>
     <string name="mother_father_id">Mother-Father ID</string>
     <string name="mother_mother_id">Mother-Mother ID</string>
+    <string name="err_updating_animal">An error occurred updating the field</string>
 
-    <string-array name="genre_types">
+    <string-array name="gender_types">
         <item>Unknown</item>
         <item>Male</item>
         <item>Female</item>

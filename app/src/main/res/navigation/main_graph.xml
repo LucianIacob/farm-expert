@@ -127,7 +127,7 @@
     <fragment
         android:id="@+id/animalDetailFragment"
         android:name="com.farmexpert.android.fragments.AnimalDetailFragment"
-        android:label="Animal Detail">
+        android:label="Animal Details">
 
         <argument
             android:name="id"

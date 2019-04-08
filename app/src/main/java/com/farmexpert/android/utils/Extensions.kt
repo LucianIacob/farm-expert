@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/22/19 6:51 PM.
+ * Last modified 4/8/19 1:42 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import com.farmexpert.android.model.Animal
 import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
@@ -51,3 +52,7 @@ fun Date.getShort(): String {
 fun Calendar.year() = this.get(Calendar.YEAR)
 fun Calendar.month() = this.get(Calendar.MONTH)
 fun Calendar.day() = this.get(Calendar.DAY_OF_MONTH)
+
+fun Animal.yearOfBirth(): Int = Calendar.getInstance().apply { time = dateOfBirth.toDate() }.year()
+fun Animal.monthOfBirth() = Calendar.getInstance().apply { time = dateOfBirth.toDate() }.month()
+fun Animal.dayOfBirth() = Calendar.getInstance().apply { time = dateOfBirth.toDate() }.day()

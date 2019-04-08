@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/22/19 6:56 PM.
+ * Last modified 4/8/19 1:42 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -33,7 +33,7 @@ class AddAnimalDialogFragment : DialogFragment() {
         val TAG: String = AddAnimalDialogFragment::class.java.simpleName
         const val ADD_DIALOG_ID = "add_dialog_id"
         const val ADD_DIALOG_DATE = "add_dialog_date"
-        const val ADD_DIALOG_GENRE = "add_dialog_genre"
+        const val ADD_DIALOG_GENDER = "add_dialog_gender"
         const val ADD_DIALOG_RACE = "add_dialog_race"
         const val ADD_DIALOG_FATHER = "add_dialog_father"
         const val ADD_DIALOG_MOTHER = "add_dialog_mother"
@@ -42,10 +42,11 @@ class AddAnimalDialogFragment : DialogFragment() {
     private lateinit var mSetDate: Date
     private lateinit var mView: View
 
-    private val mDatePickerListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-        mSetDate = AppUtils.getTime(year, month, dayOfMonth)
-        setupDate()
-    }
+    private val mDatePickerListener =
+        DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+            mSetDate = AppUtils.getTime(year, month, dayOfMonth)
+            setupDate()
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,8 +56,8 @@ class AddAnimalDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         mView = View.inflate(activity, R.layout.dialog_add_animal, null)
         mView.dialogDate.setOnClickListener { onChangeDateClick() }
-        mView.dialogGenreSpinner.adapter =
-            AppUtils.getSpinnerAdapter(activity!!, resources.getStringArray(R.array.genre_types))
+        mView.dialogGenderSpinner.adapter =
+            AppUtils.getSpinnerAdapter(activity!!, resources.getStringArray(R.array.gender_types))
 
         setupDate()
         return AlertDialog.Builder(activity!!)
@@ -77,12 +78,12 @@ class AddAnimalDialogFragment : DialogFragment() {
     }
 
     private fun addAnimal() {
-        val matricol = mView.dialogId.text.toString()
+        val id = mView.dialogId.text.toString()
         val intent = Intent()
         val bundle = Bundle()
-        bundle.putString(ADD_DIALOG_ID, matricol)
+        bundle.putString(ADD_DIALOG_ID, id)
         bundle.putLong(ADD_DIALOG_DATE, mSetDate.time)
-        bundle.putString(ADD_DIALOG_GENRE, mView.dialogGenreSpinner.selectedItem.toString())
+        bundle.putString(ADD_DIALOG_GENDER, mView.dialogGenderSpinner.selectedItem.toString())
         bundle.putString(ADD_DIALOG_RACE, mView.dialogRace.text.toString())
         bundle.putString(ADD_DIALOG_FATHER, mView.dialogFather.text.toString())
         bundle.putString(ADD_DIALOG_MOTHER, mView.dialogMother.text.toString())

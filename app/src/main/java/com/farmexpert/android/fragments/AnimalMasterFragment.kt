@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/6/19 10:57 PM.
+ * Last modified 4/8/19 1:42 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -33,7 +33,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
 import kotlinx.android.synthetic.main.fragment_animal_master.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.snackbar
@@ -152,7 +151,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
     private fun insertAnimal(extras: Bundle) {
         val id = extras.getString(AddAnimalDialogFragment.ADD_DIALOG_ID)
         val dateOfBirth = Date(extras.getLong(AddAnimalDialogFragment.ADD_DIALOG_DATE))
-        val genre = extras.getString(AddAnimalDialogFragment.ADD_DIALOG_GENRE, "")
+        val gender = extras.getString(AddAnimalDialogFragment.ADD_DIALOG_GENDER, "")
         val race = extras.getString(AddAnimalDialogFragment.ADD_DIALOG_RACE, "")
         val fatherId = extras.getString(AddAnimalDialogFragment.ADD_DIALOG_FATHER, "")
         val motherId = extras.getString(AddAnimalDialogFragment.ADD_DIALOG_MOTHER, "")
@@ -163,24 +162,32 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
         }
 
         loadingShow()
-        val animal =
-            Animal(race, Timestamp(dateOfBirth), genre, fatherId, motherId, currentUser.uid)
+        val animal = Animal(
+            race = race,
+            dateOfBirth = Timestamp(dateOfBirth),
+            gender = gender,
+            fatherId = fatherId,
+            motherId = motherId,
+            createdBy = currentUser.uid
+        )
 
         animalsCollections.document(id!!)
-            .set(animal)
-            .addOnSuccessListener {
-                rootLayout.snackbar(R.string.item_added)
-                loadingHide()
-            }
-            .addOnFailureListener { exception ->
-                loadingHide()
-                (exception as? FirebaseFirestoreException)?.let {
-                    if (it.code == FirebaseFirestoreException.Code.PERMISSION_DENIED) {
-                        alert(R.string.err_adding_animal_constraint) { okButton { } }.show()
-                    }
+            .get()
+            .addOnSuccessListener { snapshot ->
+                if (snapshot.exists()) {
+                    alert(R.string.err_adding_animal_constraint) { okButton { } }.show()
+                } else {
+                    animalsCollections.document(id)
+                        .set(animal)
+                        .addOnSuccessListener { rootLayout.snackbar(R.string.item_added) }
+                        .addOnFailureListener {
+                            alert(R.string.err_adding_animal) { okButton { } }.show()
+                            error { it }
+                        }
                 }
-                error { exception }
             }
+            .addOnFailureListener { alert(R.string.err_adding_animal) { okButton { } }.show() }
+            .addOnCompleteListener { loadingHide() }
     }
 
     override fun onPause() {
