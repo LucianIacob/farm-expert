@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/8/19 7:59 PM.
+ * Last modified 4/9/19 9:30 AM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -20,9 +20,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import com.farmexpert.android.NavGraphDirections
 import com.farmexpert.android.R
-import com.farmexpert.android.TextViewWithHeaderAndExpandAndEdit
 import com.farmexpert.android.model.Animal
 import com.farmexpert.android.utils.*
+import com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -97,8 +97,8 @@ class AnimalDetailFragment : BaseFragment() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         goToBirths.setOnClickListener {
             navigateWithDirections(NavGraphDirections.actionGlobalBirthsDetailFragment(args.animalId))
         }

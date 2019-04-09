@@ -31,28 +31,28 @@
             android:textColor="@color/black"
             android:textSize="@dimen/large_text" />
 
-        <com.farmexpert.android.TextViewWithHeaderAndExpandAndEdit
+        <com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
             android:id="@+id/raceView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_margin"
             app:header="@string/race" />
 
-        <com.farmexpert.android.TextViewWithHeaderAndExpandAndEdit
+        <com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
             android:id="@+id/dateOfBirthView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
             app:header="@string/date_of_birth" />
 
-        <com.farmexpert.android.TextViewWithHeaderAndExpandAndEdit
+        <com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
             android:id="@+id/genderView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
             app:header="@string/gender" />
 
-        <com.farmexpert.android.TextViewWithHeaderAndExpandAndEdit
+        <com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
             android:id="@+id/fatherIdView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <com.farmexpert.android.TextViewWithHeaderAndExpandAndEdit
+            <com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
                 android:id="@+id/fatherFatherIdView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                 android:layout_marginTop="@dimen/small_margin"
                 app:header="@string/father_father_id" />
 
-            <com.farmexpert.android.TextViewWithHeaderAndExpandAndEdit
+            <com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
                 android:id="@+id/fatherMotherIdView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
 
         </LinearLayout>
 
-        <com.farmexpert.android.TextViewWithHeaderAndExpandAndEdit
+        <com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
             android:id="@+id/motherIdView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <com.farmexpert.android.TextViewWithHeaderAndExpandAndEdit
+            <com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
                 android:id="@+id/motherFatherIdView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                 android:layout_marginTop="@dimen/small_margin"
                 app:header="@string/mother_father_id" />
 
-            <com.farmexpert.android.TextViewWithHeaderAndExpandAndEdit
+            <com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
                 android:id="@+id/motherMotherIdView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

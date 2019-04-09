@@ -3,11 +3,11 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/8/19 1:42 PM.
+ * Last modified 4/9/19 9:30 AM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
-package com.farmexpert.android
+package com.farmexpert.android.views
 
 import android.content.Context
 import android.util.AttributeSet
@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
+import com.farmexpert.android.R
 import kotlinx.android.synthetic.main.layout_text_view_with_header.view.*
 
 class TextViewWithHeaderAndExpandAndEdit(context: Context, attributes: AttributeSet) :
