@@ -51,6 +51,7 @@
     <string name="empty_list">No items in the list</string>
     <string name="item_added">Item successfully added</string>
     <string name="item_deleted">Item successfully deleted</string>
+    <string name="empty_text" />
     <string name="lorem_ipsum">Lorem ipsum</string>
     <string name="date_of_birth">Date of birth</string>
     <string name="delete_animal">Delete animal?</string>
@@ -60,11 +61,40 @@
     <string name="mother_father_id">Mother-Father ID</string>
     <string name="mother_mother_id">Mother-Mother ID</string>
     <string name="err_updating_animal">An error occurred updating the field</string>
+    <string name="add_birth_title">Add birth</string>
+    <string name="calf_id">Calf ID Number</string>
+    <string name="add_record_note">Note:</string>
+    <string name="maleInputHint">Male ID / Name</string>
+    <string name="details">Details</string>
+    <string name="err_validating_calf">Could not validate calf ID</string>
+    <string name="error_inexistent_farm_id">An error occurred. Farm ID could not be read.</string>
+    <string name="err_adding_record">An error occurred adding a new item. Please try again later.</string>
+    <string name="gender_unknown">Unknown</string>
+    <string name="err_adding_animal_from_birth">Error creating a new animal for this birth</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="add_vitaminization_title">Add vitaminization</string>
 
     <string-array name="gender_types">
         <item>Unknown</item>
         <item>Male</item>
         <item>Female</item>
     </string-array>
+
+    <string-array name="breeding_notes">
+        <item>1 - Medium heat with problems</item>
+        <item>2 - Medium heat without problems</item>
+        <item>3 - Clear heat with time problems</item>
+        <item>4 - Clear heat with health problems</item>
+        <item>5 - Normal heat</item>
+    </string-array>
+
+    <string-array name="birth_notes">
+        <item>1 - Retentions, postpartum paraplegia</item>
+        <item>2 - Medical assisted</item>
+        <item>3 - Farmer assisted + technician</item>
+        <item>4 - No problems</item>
+    </string-array>
+
 
 </resources>

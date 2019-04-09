@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/6/19 10:57 PM.
+ * Last modified 4/9/19 9:25 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -14,17 +14,13 @@ import android.view.ViewGroup
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.AnimalHolder
 import com.farmexpert.android.model.Animal
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
 open class AnimalsAdapter(
     options: FirestoreRecyclerOptions<Animal>,
     private val listener: (Animal) -> Unit,
     private val longClick: (Animal) -> Unit
-) :
-    FirestoreRecyclerAdapter<Animal, AnimalHolder>(options) {
-
-    private var shouldListen: Boolean = false
+) : BaseFirestoreRecyclerAdapter<Animal, AnimalHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_animal, parent, false)
@@ -37,17 +33,6 @@ open class AnimalsAdapter(
         animalHolder.itemView.setOnLongClickListener {
             longClick(animal)
             true
-        }
-    }
-
-    fun readyForListening() {
-        shouldListen = true
-        startListening()
-    }
-
-    override fun startListening() {
-        if (shouldListen) {
-            super.startListening()
         }
     }
 

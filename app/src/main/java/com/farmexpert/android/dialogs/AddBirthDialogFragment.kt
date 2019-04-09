@@ -18,46 +18,38 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.AppUtils
-import kotlinx.android.synthetic.main.dialog_add_animal.view.*
+import kotlinx.android.synthetic.main.dialog_add_birth.view.*
 
 /**
  * Created by Lucian Iacob.
- * Cluj-Napoca, 05 January, 2018.
+ * Cluj-Napoca, 08 January, 2018.
  */
 
-class AddAnimalDialogFragment : BaseAddRecordDialogFragment() {
-
-    companion object {
-        val TAG: String = AddAnimalDialogFragment::class.java.simpleName
-    }
+class AddBirthDialogFragment : BaseAddRecordDialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        mView = View.inflate(activity, R.layout.dialog_add_animal, null)
+        mView = View.inflate(activity, R.layout.dialog_add_birth, null)
         mView.dialogDate.setOnClickListener { onChangeDateClick() }
-        mView.dialogGenderSpinner.adapter =
-            AppUtils.getSpinnerAdapter(activity!!, resources.getStringArray(R.array.gender_types))
+        mView.dialogNote.adapter =
+            AppUtils.getSpinnerAdapter(activity!!, resources.getStringArray(R.array.birth_notes))
 
         setupDate()
         return AlertDialog.Builder(activity!!)
             .setView(mView)
-            .setTitle(R.string.add_animal_title)
-            .setPositiveButton(R.string.dialog_add_positive_btn) { _, _ -> addAnimal() }
+            .setTitle(R.string.add_birth_title)
+            .setPositiveButton(R.string.dialog_add_positive_btn) { _, _ -> addRecord() }
             .setNegativeButton(R.string.dialog_add_negative_btn, null)
-            .create().also { it.setCanceledOnTouchOutside(false) }
+            .create().apply { setCanceledOnTouchOutside(false) }
     }
 
     override fun getDateView(): TextView = mView.dialogDate
 
-    private fun addAnimal() {
-        val id = mView.dialogId.text.toString()
+    private fun addRecord() {
         val intent = Intent()
         val bundle = Bundle()
-        bundle.putString(ADD_DIALOG_ANIMAL, id)
         bundle.putLong(ADD_DIALOG_DATE, mSetDate.time)
-        bundle.putString(ADD_DIALOG_GENDER, mView.dialogGenderSpinner.selectedItem.toString())
-        bundle.putString(ADD_DIALOG_RACE, mView.dialogRace.text.toString())
-        bundle.putString(ADD_DIALOG_FATHER, mView.dialogFather.text.toString())
-        bundle.putString(ADD_DIALOG_MOTHER, mView.dialogMother.text.toString())
+        bundle.putString(ADD_DIALOG_CALF, mView.calfId.text.toString())
+        bundle.putString(ADD_DIALOG_NOTE, mView.dialogNote.selectedItem.toString())
         intent.putExtras(bundle)
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
     }

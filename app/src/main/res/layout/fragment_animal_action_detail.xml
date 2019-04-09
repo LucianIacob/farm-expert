@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
+        android:text="@string/empty_list"
         android:textAlignment="center"
         android:visibility="visible" />
 

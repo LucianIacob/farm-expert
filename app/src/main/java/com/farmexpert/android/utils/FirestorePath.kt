@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/8/19 1:42 PM.
+ * Last modified 4/9/19 9:25 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -14,6 +14,13 @@ object FirestorePath {
     object Collections {
         const val FARMS = "farms"
         const val ANIMALS = "animals"
+        const val BIRTHS = "births"
+        const val BREEDINGS = "breedings"
+        const val DISINFECTIONS = "disinfections"
+        const val PEDICURES = "pedicures"
+        const val TREATMENTS = "treatments"
+        const val VACCINATIONS = "vaccinations"
+        const val VITAMINIZATIONS = "vitaminizations"
     }
 
     object Farm {
@@ -25,10 +32,10 @@ object FirestorePath {
         const val GESTATION_CONTROL = "gestationControl"
         const val PHYSIOLOGICAL_CONTROL = "physiologicalControl"
         const val DISINFECTION_BEFORE_BIRTH = "disinfectionBeforeBirth"
-        const val FIRST_VACCIN = "vaccin1BeforeBirth"
-        const val SECOND_VACCIN = "vaccin2BeforeBirth"
-        const val THIRD_VACCIN = "vaccin3BeforeBirth"
-        const val VACCIN_AFTER_BIRTH = "vaccinAfterBirth"
+        const val FIRST_VACCINE = "vaccin1BeforeBirth"
+        const val SECOND_VACCINE = "vaccin2BeforeBirth"
+        const val THIRD_VACCINE = "vaccin3BeforeBirth"
+        const val VACCINE_AFTER_BIRTH = "vaccinAfterBirth"
         const val GESTATION_LENGTH = "gestationLength"
         const val CREATION_DATE = "createdOn"
         const val USERS = "users"
@@ -47,4 +54,18 @@ object FirestorePath {
         const val CREATED_BY = "createdBy"
     }
 
+    object Birth {
+        const val CALF = "calfId"
+        const val DATE_OF_BIRTH = "dateOfBirth"
+        const val MOTHER_ID = "motherId"
+        const val NOTE = "note"
+        const val CREATED_BY = "createdBy"
+    }
+
+    object AnimalAction {
+        const val ANIMAL_ID = "animalId"
+        const val ACTION_DATE = "actionDate"
+        const val DETAILS = "details"
+        const val CREATED_BY = "createdBy"
+    }
 }

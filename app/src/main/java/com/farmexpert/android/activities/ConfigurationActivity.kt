@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/15/19 1:01 PM.
+ * Last modified 4/9/19 9:25 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -86,19 +86,19 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
                     getString(R.string.pref_disinfection_key),
                     ConfigPickerUtils.getDefaultValue(getString(R.string.pref_disinfection_key), resources)
                 ),
-                FirestorePath.Farm.FIRST_VACCIN, sharedPrefs.getInt(
+                FirestorePath.Farm.FIRST_VACCINE, sharedPrefs.getInt(
                     getString(R.string.pref_vaccin1_before_birth_key),
                     ConfigPickerUtils.getDefaultValue(getString(R.string.pref_vaccin1_before_birth_key), resources)
                 ),
-                FirestorePath.Farm.SECOND_VACCIN, sharedPrefs.getInt(
+                FirestorePath.Farm.SECOND_VACCINE, sharedPrefs.getInt(
                     getString(R.string.pref_vaccin2_before_birth_key),
                     ConfigPickerUtils.getDefaultValue(getString(R.string.pref_vaccin2_before_birth_key), resources)
                 ),
-                FirestorePath.Farm.THIRD_VACCIN, sharedPrefs.getInt(
+                FirestorePath.Farm.THIRD_VACCINE, sharedPrefs.getInt(
                     getString(R.string.pref_vaccin3_before_birth_key),
                     ConfigPickerUtils.getDefaultValue(getString(R.string.pref_vaccin3_before_birth_key), resources)
                 ),
-                FirestorePath.Farm.VACCIN_AFTER_BIRTH, sharedPrefs.getInt(
+                FirestorePath.Farm.VACCINE_AFTER_BIRTH, sharedPrefs.getInt(
                     getString(R.string.pref_vaccin_after_birth_key),
                     ConfigPickerUtils.getDefaultValue(getString(R.string.pref_vaccin_after_birth_key), resources)
                 ),

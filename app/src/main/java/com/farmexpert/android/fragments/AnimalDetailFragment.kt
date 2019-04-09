@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/9/19 9:30 AM.
+ * Last modified 4/9/19 9:25 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -25,7 +25,6 @@ import com.farmexpert.android.utils.*
 import com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 import kotlinx.android.synthetic.main.fragment_animal_detail.*
 import org.jetbrains.anko.*
@@ -44,9 +43,7 @@ class AnimalDetailFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        animalRef = FirebaseFirestore.getInstance()
-            .collection(FirestorePath.Collections.FARMS)
-            .document(farmId)
+        animalRef = farmReference
             .collection(FirestorePath.Collections.ANIMALS)
             .document(args.animalId)
     }

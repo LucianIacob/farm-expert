@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/8/19 7:59 PM.
+ * Last modified 4/9/19 9:25 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -22,6 +22,7 @@ import com.farmexpert.android.NavGraphDirections
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.AnimalsAdapter
 import com.farmexpert.android.dialogs.AddAnimalDialogFragment
+import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
 import com.farmexpert.android.model.Animal
 import com.farmexpert.android.utils.FarmValidator
 import com.farmexpert.android.utils.FirestorePath
@@ -29,10 +30,7 @@ import com.farmexpert.android.utils.hidden
 import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.Timestamp
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_animal_master.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.snackbar
@@ -46,8 +44,6 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
 
     private lateinit var animalsCollections: CollectionReference
 
-    private lateinit var currentUser: FirebaseUser
-
     private lateinit var adapter: AnimalsAdapter
 
     override fun onCreateView(
@@ -60,11 +56,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        animalsCollections = FirebaseFirestore.getInstance()
-            .collection(FirestorePath.Collections.FARMS)
-            .document(farmId)
-            .collection(FirestorePath.Collections.ANIMALS)
-        currentUser = FirebaseAuth.getInstance().currentUser!!
+        animalsCollections = farmReference.collection(FirestorePath.Collections.ANIMALS)
         initAnimalList()
     }
 
@@ -149,12 +141,12 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
     }
 
     private fun insertAnimal(extras: Bundle) {
-        val id = extras.getString(AddAnimalDialogFragment.ADD_DIALOG_ID)
-        val dateOfBirth = Date(extras.getLong(AddAnimalDialogFragment.ADD_DIALOG_DATE))
-        val gender = extras.getString(AddAnimalDialogFragment.ADD_DIALOG_GENDER, "")
-        val race = extras.getString(AddAnimalDialogFragment.ADD_DIALOG_RACE, "")
-        val fatherId = extras.getString(AddAnimalDialogFragment.ADD_DIALOG_FATHER, "")
-        val motherId = extras.getString(AddAnimalDialogFragment.ADD_DIALOG_MOTHER, "")
+        val id = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_ANIMAL)
+        val dateOfBirth = Date(extras.getLong(BaseAddRecordDialogFragment.ADD_DIALOG_DATE))
+        val gender = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_GENDER, "")
+        val race = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_RACE, "")
+        val fatherId = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_FATHER, "")
+        val motherId = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_MOTHER, "")
 
         if (!FarmValidator.isValidMatricol(id)) {
             alert(R.string.err_adding_animal_message) { yesButton { } }.show()
@@ -168,7 +160,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
             gender = gender,
             fatherId = fatherId,
             motherId = motherId,
-            createdBy = currentUser.uid
+            createdBy = currentUser?.uid
         )
 
         animalsCollections.document(id!!)
