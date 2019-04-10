@@ -80,6 +80,8 @@
     <string name="add_disinfection_title">Add disinfection</string>
     <string name="add_pedicure_title">Add pedicure</string>
     <string name="estimated_birth">Estimated birth:</string>
+    <string name="delete_confirmation_request">Are you sure you want to delete this item?</string>
+    <string name="err_deleting_item">An error occurred trying to delete the item</string>
 
     <string-array name="gender_types">
         <item>Unknown</item>

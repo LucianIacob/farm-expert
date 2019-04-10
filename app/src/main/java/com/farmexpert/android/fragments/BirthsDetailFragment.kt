@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:16 PM.
+ * Last modified 4/10/19 9:53 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -101,10 +101,6 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
         return BirthViewHolder(view,
             { birthToUpdate -> showUpdateDialog(birthToUpdate) },
             { birthToDelete -> showDeleteDialog(birthToDelete) })
-    }
-
-    private fun showDeleteDialog(birthToDelete: Birth) {
-
     }
 
     private fun showUpdateDialog(birthToUpdate: Birth) {

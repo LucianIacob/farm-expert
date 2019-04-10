@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:16 PM.
+ * Last modified 4/10/19 9:53 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -34,10 +34,6 @@ abstract class BaseAnimalActionDetailFragment :
         return AnimalActionHolder(view,
             { animalActionToUpdate -> showUpdateDialog(animalActionToUpdate) },
             { animalActionToDelete -> showDeleteDialog(animalActionToDelete) })
-    }
-
-    private fun showDeleteDialog(animalActionToDelete: AnimalAction) {
-
     }
 
     private fun showUpdateDialog(animalActionToUpdate: AnimalAction) {

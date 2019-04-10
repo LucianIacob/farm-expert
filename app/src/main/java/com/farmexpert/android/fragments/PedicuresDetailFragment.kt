@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:16 PM.
+ * Last modified 4/10/19 9:53 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -45,10 +45,6 @@ class PedicuresDetailFragment : BaseDetailFragment<AnimalAction, PedicureViewHol
         return PedicureViewHolder(view,
             { pedicureToUpdate -> showUpdateDialog(pedicureToUpdate) },
             { pedicureToDelete -> showDeleteDialog(pedicureToDelete) })
-    }
-
-    private fun showDeleteDialog(pedicureToDelete: AnimalAction) {
-
     }
 
     private fun showUpdateDialog(pedicureToUpdate: AnimalAction) {

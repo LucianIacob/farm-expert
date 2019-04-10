@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:18 AM.
+ * Last modified 4/10/19 9:53 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -29,6 +29,8 @@ import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_animal_action_detail.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.error
+import org.jetbrains.anko.noButton
+import org.jetbrains.anko.okButton
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.yesButton
 
@@ -93,6 +95,23 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
     abstract fun getCollectionReference(): CollectionReference
 
     open fun addDependentData(entity: Any) {}
+
+    fun showDeleteDialog(entity: ModelClass) {
+        alert(message = R.string.delete_confirmation_request) {
+            yesButton { deleteEntity(entity) }
+            noButton { }
+        }.show()
+    }
+
+    private fun deleteEntity(entity: ModelClass) {
+        loadingShow()
+        entity.id?.let {
+            getCollectionReference().document(it)
+                .delete()
+                .addOnFailureListener { alert(message = R.string.err_deleting_item) { okButton { } }.show() }
+                .addOnCompleteListener { loadingHide() }
+        }
+    }
 
     open fun validateEntity(entity: Any, listener: (Boolean) -> Unit) = listener(true)
 

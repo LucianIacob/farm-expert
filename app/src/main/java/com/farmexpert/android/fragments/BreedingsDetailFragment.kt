@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:16 PM.
+ * Last modified 4/10/19 9:53 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -44,10 +44,6 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
         return BreedingViewHolder(view,
             { breedingToUpdate -> showUpdateDialog(breedingToUpdate) },
             { breedingToDelete -> showDeleteDialog(breedingToDelete) })
-    }
-
-    private fun showDeleteDialog(breedingToDelete: Breeding) {
-
     }
 
     private fun showUpdateDialog(breedingToUpdate: Breeding) {
