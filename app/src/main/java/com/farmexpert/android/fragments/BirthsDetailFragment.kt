@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/9/19 9:25 PM.
+ * Last modified 4/10/19 9:18 AM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -21,6 +21,7 @@ import com.farmexpert.android.model.Birth
 import com.farmexpert.android.utils.FirestorePath
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
 import org.jetbrains.anko.okButton
 import org.jetbrains.anko.support.v4.alert
@@ -35,8 +36,9 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthHolder>() {
 
     override fun getAnimalId() = args.animalId
 
-    override fun getTitleAndHolderLayout() =
-        Pair(getString(R.string.dashboard_graph_births), R.layout.item_birth)
+    override fun getTitleAndHolderLayout(): Pair<String, Int> {
+        return Pair(getString(R.string.dashboard_graph_births), R.layout.item_birth)
+    }
 
     override fun getAddRecordDialog() = AddBirthDialogFragment()
 
@@ -69,8 +71,9 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthHolder>() {
             }
     }
 
-    override fun getCollectionReference() =
-        farmReference.collection(FirestorePath.Collections.BIRTHS)
+    override fun getCollectionReference(): CollectionReference {
+        return farmReference.collection(FirestorePath.Collections.BIRTHS)
+    }
 
     override fun getQuery(): Query {
         return getCollectionReference().whereEqualTo(FirestorePath.Birth.MOTHER_ID, getAnimalId())

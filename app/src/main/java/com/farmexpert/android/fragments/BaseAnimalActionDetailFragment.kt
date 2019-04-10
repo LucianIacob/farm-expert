@@ -11,10 +11,10 @@ package com.farmexpert.android.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.navArgs
-import com.farmexpert.android.R
-import com.farmexpert.android.adapter.holder.PedicureViewHolder
-import com.farmexpert.android.dialogs.AddPedicureDialogFragment
+import androidx.core.os.bundleOf
+import com.farmexpert.android.adapter.holder.AnimalActionHolder
+import com.farmexpert.android.dialogs.AddAnimalActionDialogFragment
+import com.farmexpert.android.dialogs.AddAnimalActionDialogFragment.Companion.ADD_DIALOG_TITLE
 import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
 import com.farmexpert.android.model.AnimalAction
 import com.farmexpert.android.utils.FirestorePath
@@ -23,30 +23,14 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.Query
 import java.util.*
 
-class PedicuresDetailFragment : BaseDetailFragment<AnimalAction, PedicureViewHolder>() {
+abstract class BaseAnimalActionDetailFragment :
+    BaseDetailFragment<AnimalAction, AnimalActionHolder>() {
 
     override val snapshotParser: SnapshotParser<AnimalAction> = SnapshotParser {
         it.toObject(AnimalAction::class.java)!!.apply { id = it.id }
     }
 
-    override fun createHolder(view: View) = PedicureViewHolder(view)
-
-    override fun getTitleAndHolderLayout(): Pair<String, Int> =
-        Pair(getString(R.string.dashboard_graph_pedicures), R.layout.item_animal_action)
-
-    private val args: PedicuresDetailFragmentArgs by navArgs()
-
-    override fun getAnimalId() = args.animalId
-
-    override fun getAddRecordDialog() = AddPedicureDialogFragment()
-
-    override fun getCollectionReference() =
-        farmReference.collection(FirestorePath.Collections.PEDICURES)
-
-    override fun getQuery(): Query {
-        return getCollectionReference()
-            .whereEqualTo(FirestorePath.AnimalAction.ANIMAL_ID, getAnimalId())
-    }
+    override fun createHolder(view: View): AnimalActionHolder = AnimalActionHolder(view)
 
     override fun constructEntityFromBundle(bundle: Bundle): Any {
         val details = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_DETAILS, "")
@@ -60,4 +44,14 @@ class PedicuresDetailFragment : BaseDetailFragment<AnimalAction, PedicureViewHol
         )
     }
 
+    override fun getAddRecordDialog() = AddAnimalActionDialogFragment().apply {
+        arguments = bundleOf(ADD_DIALOG_TITLE to getAddDialogTitle())
+    }
+
+    override fun getQuery(): Query {
+        return getCollectionReference()
+            .whereEqualTo(FirestorePath.AnimalAction.ANIMAL_ID, getAnimalId())
+    }
+
+    abstract fun getAddDialogTitle(): Int
 }

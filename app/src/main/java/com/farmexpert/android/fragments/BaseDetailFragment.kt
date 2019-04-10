@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/9/19 9:25 PM.
+ * Last modified 4/10/19 9:18 AM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -65,9 +65,9 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
             override fun onDataChanged() {
                 loadingHide()
                 if (itemCount != 0) {
-                    placeholderText.hidden()
+                    placeholderText?.hidden()
                 } else {
-                    placeholderText.visible()
+                    placeholderText?.visible()
                 }
             }
         }
@@ -75,9 +75,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
         actionsRecycler.adapter = adapter
     }
 
-    open fun getQuery(): Query {
-        return getCollectionReference()
-    }
+    abstract fun getQuery(): Query
 
     override fun onViewReady() {
         super.onViewReady()
@@ -91,6 +89,16 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
     abstract fun getTitleAndHolderLayout(): Pair<String, Int>
 
     abstract fun getAnimalId(): String
+
+    abstract fun getCollectionReference(): CollectionReference
+
+    open fun addDependentData(entity: Any) {}
+
+    open fun validateEntity(entity: Any, listener: (Boolean) -> Unit) = listener(true)
+
+    abstract fun constructEntityFromBundle(bundle: Bundle): Any
+
+    abstract fun getAddRecordDialog(): DialogFragment
 
     override fun onStart() {
         super.onStart()
@@ -111,8 +119,6 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
             }
         }
     }
-
-    abstract fun getAddRecordDialog(): DialogFragment
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode != Activity.RESULT_OK || data?.extras == null) return
@@ -141,17 +147,6 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
                 addDependentData(entity)
             }
         }
-    }
-
-    abstract fun getCollectionReference(): CollectionReference
-
-    open fun addDependentData(entity: Any) {}
-
-    open fun validateEntity(entity: Any, listener: (Boolean) -> Unit) = listener(true)
-
-    // todo make it abstract
-    open fun constructEntityFromBundle(bundle: Bundle): Any {
-        return Object()
     }
 
     override fun onStop() {

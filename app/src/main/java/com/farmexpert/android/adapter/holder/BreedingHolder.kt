@@ -10,17 +10,18 @@
 package com.farmexpert.android.adapter.holder
 
 import android.view.View
-import com.farmexpert.android.model.Birth
+import com.farmexpert.android.model.Breeding
 import com.farmexpert.android.utils.asDisplayable
-import kotlinx.android.synthetic.main.item_birth.view.*
+import kotlinx.android.synthetic.main.item_breeding.view.*
 
-class BirthHolder(itemView: View) : BaseDetailHolder<Birth>(itemView) {
+class BreedingHolder(itemView: View) : BaseDetailHolder<Breeding>(itemView) {
 
-    override fun bind(entity: Birth) {
+    override fun bind(entity: Breeding) {
         with(itemView) {
-            birthDate.text = entity.dateOfBirth.asDisplayable()
+            date.text = entity.actionDate.asDisplayable()
             note.text = entity.note
-            calfId.text = entity.calfId
+            male.text = entity.male
+            estimatedBirth.text = entity.birthExpectedAt.asDisplayable()
         }
     }
 

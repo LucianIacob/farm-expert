@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/9/19 9:25 PM.
+ * Last modified 4/10/19 9:18 AM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -15,9 +15,9 @@ import com.google.firebase.firestore.PropertyName
 import java.util.*
 
 data class Farm(
-    @PropertyName(FirestorePath.Farm.OWNER) val owner: String?,
-    @PropertyName(FirestorePath.Farm.NAME) val name: String,
-    @PropertyName(FirestorePath.Farm.ACCESS_CODE) val accessCode: String,
+    @PropertyName(FirestorePath.Farm.OWNER) val owner: String? = "",
+    @PropertyName(FirestorePath.Farm.NAME) val name: String = "",
+    @PropertyName(FirestorePath.Farm.ACCESS_CODE) val accessCode: String = "",
     @PropertyName(FirestorePath.Farm.HEATING_START) val heatingStartsAt: Int = 20,
     @PropertyName(FirestorePath.Farm.HEATING_END) val heatingEndsAt: Int = 22,
     @PropertyName(FirestorePath.Farm.GESTATION_CONTROL) val gestationControl: Int = 60,
@@ -28,16 +28,6 @@ data class Farm(
     @PropertyName(FirestorePath.Farm.THIRD_VACCINE) val vaccin3BeforeBirth: Int = 15,
     @PropertyName(FirestorePath.Farm.VACCINE_AFTER_BIRTH) val vaccinAfterBirth: Int = 60,
     @PropertyName(FirestorePath.Farm.GESTATION_LENGTH) val gestationLength: Int = 285,
-    @PropertyName(FirestorePath.Farm.USERS) val users: ArrayList<String?>,
-    @PropertyName(FirestorePath.Farm.CREATION_DATE) val createdOn: Timestamp = Timestamp(Date())
-) : BaseEntity() {
-
-    @Suppress("unused") // used by Firestore
-    constructor() : this(
-        "",
-        "",
-        "",
-        users = arrayListOf(),
-        createdOn = Timestamp(Date())
-    )
-}
+    @PropertyName(FirestorePath.Farm.USERS) val users: ArrayList<String?> = arrayListOf(),
+    @PropertyName(FirestorePath.Farm.CREATION_DATE) val createdOn: Timestamp = Timestamp.now()
+) : BaseEntity()

@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/21/19 4:01 PM.
+ * Last modified 4/10/19 9:18 AM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.item_dashboard.view.*
 class DashboardItemHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
     fun bind(item: DashboardItem, listener: (DashboardItem) -> Unit) = with(itemView) {
-
         item_dashboard_icon.setImageDrawable(ContextCompat.getDrawable(context, item.iconId))
         item_dashboard_title.text = context.getString(item.titleId)
 

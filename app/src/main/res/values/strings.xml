@@ -74,6 +74,12 @@
     <string name="update">Update</string>
     <string name="delete">Delete</string>
     <string name="add_vitaminization_title">Add vitaminization</string>
+    <string name="add_breeding_title">Add breeding</string>
+    <string name="add_vaccination_title">Add vaccination</string>
+    <string name="add_treatment_title">Add treatment</string>
+    <string name="add_disinfection_title">Add disinfection</string>
+    <string name="add_pedicure_title">Add pedicure</string>
+    <string name="estimated_birth">Estimated birth:</string>
 
     <string-array name="gender_types">
         <item>Unknown</item>

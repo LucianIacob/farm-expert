@@ -14,12 +14,12 @@ import com.farmexpert.android.model.AnimalAction
 import com.farmexpert.android.utils.asDisplayable
 import kotlinx.android.synthetic.main.item_animal_action.view.*
 
-class AnimalActionHolder(itemView: View) : BaseDetailHolder<AnimalAction>(itemView) {
+class PedicureViewHolder(itemView: View) : BaseDetailHolder<AnimalAction>(itemView) {
 
     override fun bind(entity: AnimalAction) {
         with(itemView) {
+            item_animal_action_detail.text = entity.details.drop(8)
             item_animal_action_date.text = entity.actionDate.asDisplayable()
-            item_animal_action_detail.text = entity.details
         }
     }
 

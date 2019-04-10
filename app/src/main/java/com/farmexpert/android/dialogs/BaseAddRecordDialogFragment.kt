@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/9/19 9:25 PM.
+ * Last modified 4/10/19 9:18 AM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -59,5 +59,6 @@ abstract class BaseAddRecordDialogFragment : DialogFragment() {
         const val ADD_DIALOG_FATHER = "com.farmexpert.android.FatherId"
         const val ADD_DIALOG_MOTHER = "com.farmexpert.android.MotherId"
         const val ADD_DIALOG_DETAILS = "com.farmexpert.android.Details"
+        const val ADD_DIALOG_MALE = "com.farmexpert.android.Male"
     }
 }
