@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:18 AM.
+ * Last modified 4/10/19 9:16 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -29,8 +29,6 @@ class PedicuresDetailFragment : BaseDetailFragment<AnimalAction, PedicureViewHol
         it.toObject(AnimalAction::class.java)!!.apply { id = it.id }
     }
 
-    override fun createHolder(view: View) = PedicureViewHolder(view)
-
     override fun getTitleAndHolderLayout(): Pair<String, Int> =
         Pair(getString(R.string.dashboard_graph_pedicures), R.layout.item_animal_action)
 
@@ -42,6 +40,20 @@ class PedicuresDetailFragment : BaseDetailFragment<AnimalAction, PedicureViewHol
 
     override fun getCollectionReference() =
         farmReference.collection(FirestorePath.Collections.PEDICURES)
+
+    override fun createHolder(view: View): PedicureViewHolder {
+        return PedicureViewHolder(view,
+            { pedicureToUpdate -> showUpdateDialog(pedicureToUpdate) },
+            { pedicureToDelete -> showDeleteDialog(pedicureToDelete) })
+    }
+
+    private fun showDeleteDialog(pedicureToDelete: AnimalAction) {
+
+    }
+
+    private fun showUpdateDialog(pedicureToUpdate: AnimalAction) {
+
+    }
 
     override fun getQuery(): Query {
         return getCollectionReference()

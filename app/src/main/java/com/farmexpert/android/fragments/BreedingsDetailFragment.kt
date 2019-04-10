@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:18 AM.
+ * Last modified 4/10/19 9:16 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -13,7 +13,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.farmexpert.android.R
-import com.farmexpert.android.adapter.holder.BreedingHolder
+import com.farmexpert.android.adapter.holder.BreedingViewHolder
 import com.farmexpert.android.dialogs.AddBreedingDialogFragment
 import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
 import com.farmexpert.android.model.Breeding
@@ -25,7 +25,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
 import java.util.*
 
-class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingHolder>() {
+class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>() {
 
     private val args: BreedingsDetailFragmentArgs by navArgs()
 
@@ -33,14 +33,26 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingHolder>() {
         it.toObject(Breeding::class.java)!!.apply { id = it.id }
     }
 
-    override fun createHolder(view: View) = BreedingHolder(view)
-
     override fun getAnimalId() = args.animalId
 
     override fun getTitleAndHolderLayout(): Pair<String, Int> =
         Pair(getString(R.string.dashboard_graph_breedings), R.layout.item_breeding)
 
     override fun getAddRecordDialog() = AddBreedingDialogFragment()
+
+    override fun createHolder(view: View): BreedingViewHolder {
+        return BreedingViewHolder(view,
+            { breedingToUpdate -> showUpdateDialog(breedingToUpdate) },
+            { breedingToDelete -> showDeleteDialog(breedingToDelete) })
+    }
+
+    private fun showDeleteDialog(breedingToDelete: Breeding) {
+
+    }
+
+    private fun showUpdateDialog(breedingToUpdate: Breeding) {
+
+    }
 
     override fun getCollectionReference(): CollectionReference {
         return farmReference.collection(FirestorePath.Collections.BREEDINGS)

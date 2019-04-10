@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:18 AM.
+ * Last modified 4/10/19 9:16 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -30,7 +30,19 @@ abstract class BaseAnimalActionDetailFragment :
         it.toObject(AnimalAction::class.java)!!.apply { id = it.id }
     }
 
-    override fun createHolder(view: View): AnimalActionHolder = AnimalActionHolder(view)
+    override fun createHolder(view: View): AnimalActionHolder {
+        return AnimalActionHolder(view,
+            { animalActionToUpdate -> showUpdateDialog(animalActionToUpdate) },
+            { animalActionToDelete -> showDeleteDialog(animalActionToDelete) })
+    }
+
+    private fun showDeleteDialog(animalActionToDelete: AnimalAction) {
+
+    }
+
+    private fun showUpdateDialog(animalActionToUpdate: AnimalAction) {
+
+    }
 
     override fun constructEntityFromBundle(bundle: Bundle): Any {
         val details = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_DETAILS, "")

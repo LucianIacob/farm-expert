@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:18 AM.
+ * Last modified 4/10/19 9:16 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -13,7 +13,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.farmexpert.android.R
-import com.farmexpert.android.adapter.holder.BirthHolder
+import com.farmexpert.android.adapter.holder.BirthViewHolder
 import com.farmexpert.android.dialogs.AddBirthDialogFragment
 import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
 import com.farmexpert.android.model.Animal
@@ -27,7 +27,7 @@ import org.jetbrains.anko.okButton
 import org.jetbrains.anko.support.v4.alert
 import java.util.*
 
-class BirthsDetailFragment : BaseDetailFragment<Birth, BirthHolder>() {
+class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
 
     private val args: BirthsDetailFragmentArgs by navArgs()
 
@@ -97,5 +97,17 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthHolder>() {
         }
     }
 
-    override fun createHolder(view: View) = BirthHolder(view)
+    override fun createHolder(view: View): BirthViewHolder {
+        return BirthViewHolder(view,
+            { birthToUpdate -> showUpdateDialog(birthToUpdate) },
+            { birthToDelete -> showDeleteDialog(birthToDelete) })
+    }
+
+    private fun showDeleteDialog(birthToDelete: Birth) {
+
+    }
+
+    private fun showUpdateDialog(birthToUpdate: Birth) {
+
+    }
 }

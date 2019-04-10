@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:18 AM.
+ * Last modified 4/10/19 9:16 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -14,12 +14,18 @@ import com.farmexpert.android.model.AnimalAction
 import com.farmexpert.android.utils.asDisplayable
 import kotlinx.android.synthetic.main.item_animal_action.view.*
 
-class AnimalActionHolder(itemView: View) : BaseDetailHolder<AnimalAction>(itemView) {
+class AnimalActionHolder(
+    itemView: View,
+    updateListener: (AnimalAction) -> Unit,
+    deleteListener: (AnimalAction) -> Unit
+) : BaseDetailHolder<AnimalAction>(itemView, updateListener, deleteListener) {
 
     override fun bind(entity: AnimalAction) {
         with(itemView) {
             item_animal_action_date.text = entity.actionDate.asDisplayable()
             item_animal_action_detail.text = entity.details
+            item_animal_action_update.setOnClickListener { updateListener(entity) }
+            item_animal_action_delete.setOnClickListener { deleteListener(entity) }
         }
     }
 
