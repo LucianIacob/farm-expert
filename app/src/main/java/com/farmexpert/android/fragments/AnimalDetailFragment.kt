@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/9/19 9:25 PM.
+ * Last modified 4/11/19 8:37 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -11,9 +11,7 @@ package com.farmexpert.android.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.annotation.StringRes
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
@@ -21,6 +19,7 @@ import androidx.navigation.fragment.navArgs
 import com.farmexpert.android.NavGraphDirections
 import com.farmexpert.android.R
 import com.farmexpert.android.model.Animal
+import com.farmexpert.android.transactions.DeleteAnimalTransaction
 import com.farmexpert.android.utils.*
 import com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
 import com.google.firebase.Timestamp
@@ -43,9 +42,46 @@ class AnimalDetailFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         animalRef = farmReference
             .collection(FirestorePath.Collections.ANIMALS)
             .document(args.animalId)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.delete_animal_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_delete -> displayDeleteDialog()
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun displayDeleteDialog(): Boolean {
+        alert(
+            title = getString(R.string.delete_animal),
+            message = getString(R.string.delete_animal_message, args.animalId)
+        ) {
+            noButton { }
+            yesButton { deleteAnimalConfirmed() }
+        }.show()
+
+        return true
+    }
+
+    private fun deleteAnimalConfirmed() {
+        loadingShow()
+        DeleteAnimalTransaction(farmReference,
+            { rootLayout.snackbar(R.string.item_deleted) },
+            { exception -> error { exception } },
+            {
+                loadingHide()
+                NavHostFragment.findNavController(this@AnimalDetailFragment)
+                    .navigateUp()
+            }).execute(args.animalId)
     }
 
     override fun onCreateView(

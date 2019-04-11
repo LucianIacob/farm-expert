@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/9/19 9:25 PM.
+ * Last modified 4/11/19 8:37 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -24,6 +24,7 @@ import com.farmexpert.android.adapter.AnimalsAdapter
 import com.farmexpert.android.dialogs.AddAnimalDialogFragment
 import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
 import com.farmexpert.android.model.Animal
+import com.farmexpert.android.transactions.DeleteAnimalTransaction
 import com.farmexpert.android.utils.FarmValidator
 import com.farmexpert.android.utils.FirestorePath
 import com.farmexpert.android.utils.hidden
@@ -99,17 +100,17 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
     }
 
     private fun animalLongClick(animal: Animal) {
-        alert(animal.id!!, getString(R.string.delete_animal)) {
+        alert(
+            title = getString(R.string.delete_animal),
+            message = getString(R.string.delete_animal_message, animal.id!!)
+        ) {
             noButton { }
             yesButton {
                 loadingShow()
-                animalsCollections.document(animal.id!!)
-                    .delete()
-                    .addOnCompleteListener {
-                        loadingHide()
-                        if (it.isSuccessful) rootLayout.snackbar(R.string.item_deleted)
-                        else alert(it.exception?.message!!)
-                    }
+                DeleteAnimalTransaction(farmReference,
+                    { rootLayout.snackbar(R.string.item_deleted) },
+                    { exception -> error { exception } },
+                    { loadingHide() }).execute(animal.id!!)
             }
         }.show()
     }
