@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/11/19 8:37 PM.
+ * Last modified 4/13/19 9:05 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -142,14 +142,14 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
     }
 
     private fun insertAnimal(extras: Bundle) {
-        val id = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_ANIMAL)
+        val id = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_ANIMAL, "")
         val dateOfBirth = Date(extras.getLong(BaseAddRecordDialogFragment.ADD_DIALOG_DATE))
         val gender = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_GENDER, "")
         val race = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_RACE, "")
         val fatherId = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_FATHER, "")
         val motherId = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_MOTHER, "")
 
-        if (!FarmValidator.isValidMatricol(id)) {
+        if (!FarmValidator.isValidAnimalId(id)) {
             alert(R.string.err_adding_animal_message) { yesButton { } }.show()
             return
         }

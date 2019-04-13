@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/9/19 9:25 PM.
+ * Last modified 4/13/19 9:05 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -43,7 +43,7 @@ class AddAnimalActionDialogFragment : BaseAddRecordDialogFragment() {
             .setView(mView)
             .setTitle(titleId)
             .setPositiveButton(R.string.dialog_add_positive_btn) { _, _ -> addRecord() }
-            .setNegativeButton(R.string.dialog_add_negative_btn, null)
+            .setNegativeButton(R.string.dialog_cancel_btn, null)
             .create().also { it.setCanceledOnTouchOutside(false) }
     }
 

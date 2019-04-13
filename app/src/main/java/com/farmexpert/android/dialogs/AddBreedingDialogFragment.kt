@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:18 AM.
+ * Last modified 4/13/19 9:05 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -28,15 +28,17 @@ class AddBreedingDialogFragment : BaseAddRecordDialogFragment(), TextWatcher {
         mView = View.inflate(activity, R.layout.dialog_add_breeding, null)
         mView.dialogDate.setOnClickListener { onChangeDateClick() }
         mView.maleInput.addTextChangedListener(this)
-        mView.breedingNotes.adapter =
-            AppUtils.getSpinnerAdapter(activity!!, resources.getStringArray(R.array.breeding_notes))
+        AppUtils.configureSpinner(
+            spinner = mView.breedingNotes,
+            elements = resources.getStringArray(R.array.breeding_notes)
+        )
 
         setupDate()
         return AlertDialog.Builder(activity!!)
             .setView(mView)
             .setTitle(R.string.add_breeding_title)
             .setPositiveButton(R.string.dialog_add_positive_btn) { _, _ -> addRecord() }
-            .setNegativeButton(R.string.dialog_add_negative_btn, null)
+            .setNegativeButton(R.string.dialog_cancel_btn, null)
             .create().also { it.setCanceledOnTouchOutside(false) }
     }
 

@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/9/19 9:25 PM.
+ * Last modified 4/13/19 9:05 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -34,15 +34,18 @@ class AddAnimalDialogFragment : BaseAddRecordDialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         mView = View.inflate(activity, R.layout.dialog_add_animal, null)
         mView.dialogDate.setOnClickListener { onChangeDateClick() }
-        mView.dialogGenderSpinner.adapter =
-            AppUtils.getSpinnerAdapter(activity!!, resources.getStringArray(R.array.gender_types))
+        AppUtils.configureSpinner(
+            spinner = mView.dialogGenderSpinner,
+            elements = resources.getStringArray(R.array.gender_types),
+            selectedElement = getString(R.string.gender_unknown)
+        )
 
         setupDate()
         return AlertDialog.Builder(activity!!)
             .setView(mView)
             .setTitle(R.string.add_animal_title)
             .setPositiveButton(R.string.dialog_add_positive_btn) { _, _ -> addAnimal() }
-            .setNegativeButton(R.string.dialog_add_negative_btn, null)
+            .setNegativeButton(R.string.dialog_cancel_btn, null)
             .create().also { it.setCanceledOnTouchOutside(false) }
     }
 

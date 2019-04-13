@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/22/19 7:02 PM.
+ * Last modified 4/13/19 9:05 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -18,7 +18,7 @@ class FarmValidator {
 
     companion object {
 
-        fun isValidMatricol(matricol: String?) = !matricol.isNullOrEmpty() && matricol.length >= 4
+        fun isValidAnimalId(id: String) = id.length >= 4
 
     }
 
