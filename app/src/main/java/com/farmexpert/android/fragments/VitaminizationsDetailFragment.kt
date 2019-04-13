@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:18 AM.
+ * Last modified 4/13/19 11:14 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -26,4 +26,6 @@ class VitaminizationsDetailFragment : BaseAnimalActionDetailFragment() {
         farmReference.collection(FirestorePath.Collections.VITAMINIZATIONS)
 
     override fun getAddDialogTitle() = R.string.add_vitaminization_title
+
+    override fun getEditDialogTitle() = R.string.edit_vitaminization_title
 }

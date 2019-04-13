@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 9:17 PM.
+ * Last modified 4/13/19 11:14 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -145,7 +145,8 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
     protected fun showUpdateDialog(entityToUpdate: ModelClass) {
         fragmentManager?.run {
             val editDialog = getEditRecordDialog()
-            editDialog.arguments = entityToUpdate.getEditDialogArgs()
+            editDialog.arguments?.putAll(entityToUpdate.getEditDialogArgs())
+                ?: run { editDialog.arguments = entityToUpdate.getEditDialogArgs() }
             editDialog.setTargetFragment(this@BaseDetailFragment, UPDATE_RECORD_RQ)
             if (findFragmentByTag(editDialog::class.java.simpleName) == null) {
                 editDialog.show(this, editDialog::class.java.simpleName)

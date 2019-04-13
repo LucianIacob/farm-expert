@@ -3,15 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="20dp">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        android:padding="@dimen/medium_margin">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/dialogIdHeader"
@@ -33,10 +32,9 @@
                 android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:maxLength="30"
-                android:minWidth="250dp"
+                android:maxLength="@integer/animal_id_max_length"
                 android:textColor="#000080"
-                android:textSize="22sp"
+                android:textSize="@dimen/large_text"
                 tools:ignore="LabelFor"
                 tools:targetApi="o" />
 
@@ -53,7 +51,7 @@
             android:gravity="center_horizontal"
             android:padding="10dp"
             android:textColor="#000080"
-            android:textSize="22sp"
+            android:textSize="@dimen/large_text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dialogIdHeader" />
@@ -67,7 +65,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/gender"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="@dimen/large_text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dialogDate" />
 
@@ -78,7 +76,7 @@
             android:layout_marginStart="5dp"
             android:entries="@array/gender_types"
             android:fontFamily="@font/telegroteskscreen_medium"
-            android:textSize="22sp"
+            android:textSize="@dimen/large_text"
             app:layout_constraintBottom_toBottomOf="@id/dialogGender"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toEndOf="@id/dialogGender"
@@ -105,10 +103,9 @@
                 android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:maxLength="30"
-                android:minWidth="250dp"
+                android:maxLength="@integer/animal_id_max_length"
                 android:textColor="#000080"
-                android:textSize="22sp"
+                android:textSize="@dimen/large_text"
                 tools:ignore="LabelFor"
                 tools:targetApi="o" />
 
@@ -135,10 +132,9 @@
                 android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:maxLength="30"
-                android:minWidth="250dp"
+                android:maxLength="@integer/animal_id_max_length"
                 android:textColor="#000080"
-                android:textSize="22sp"
+                android:textSize="@dimen/large_text"
                 tools:ignore="LabelFor"
                 tools:targetApi="o" />
 
@@ -164,10 +160,9 @@
                 android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:maxLength="30"
-                android:minWidth="250dp"
+                android:maxLength="@integer/animal_id_max_length"
                 android:textColor="#000080"
-                android:textSize="22sp"
+                android:textSize="@dimen/large_text"
                 tools:ignore="LabelFor"
                 tools:targetApi="o" />
 

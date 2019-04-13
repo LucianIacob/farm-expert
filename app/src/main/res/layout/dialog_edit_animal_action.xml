@@ -13,26 +13,26 @@
         android:padding="@dimen/medium_margin">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/maleInputLayout"
+            android:id="@+id/detailsHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/maleInputHint"
+            android:hint="@string/details"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
-                android:id="@+id/maleInput"
+                android:id="@+id/details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tiny_margin"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:gravity="center"
                 android:importantForAutofill="no"
-                android:inputType="text"
-                android:lines="1"
-                android:maxLength="@integer/animal_id_max_length"
+                android:inputType="textMultiLine"
                 android:textColor="#000080"
                 android:textSize="@dimen/large_text"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="LabelFor"
                 tools:targetApi="o" />
 
@@ -47,36 +47,10 @@
             android:drawableStart="@drawable/ic_date_range_black_24dp"
             android:fontFamily="@font/telegroteskscreen_medium"
             android:gravity="center"
-            android:padding="10dp"
+            android:padding="@dimen/small_margin"
             android:textColor="#000080"
             android:textSize="@dimen/large_text"
-            app:layout_constraintTop_toBottomOf="@id/maleInputLayout" />
-
-        <TextView
-            android:id="@+id/noteHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium_margin"
-            android:fontFamily="@font/roboto"
-            android:text="@string/note"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/large_text"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/actionDate" />
-
-        <Spinner
-            android:id="@+id/notesSpinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:entries="@array/breeding_notes"
-            android:fontFamily="@font/telegroteskscreen_medium"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="@id/noteHeader"
-            app:layout_constraintLeft_toRightOf="@id/noteHeader"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/noteHeader" />
+            app:layout_constraintTop_toBottomOf="@id/detailsHeader" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </ScrollView>

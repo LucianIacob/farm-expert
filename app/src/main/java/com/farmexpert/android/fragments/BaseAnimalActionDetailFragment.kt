@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 9:17 PM.
+ * Last modified 4/13/19 11:14 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -12,11 +12,12 @@ package com.farmexpert.android.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.fragment.app.DialogFragment
 import com.farmexpert.android.adapter.holder.AnimalActionHolder
 import com.farmexpert.android.dialogs.AddAnimalActionDialogFragment
 import com.farmexpert.android.dialogs.AddAnimalActionDialogFragment.Companion.ADD_DIALOG_TITLE
 import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
+import com.farmexpert.android.dialogs.EditAnimalActionDialogFragment
+import com.farmexpert.android.dialogs.EditAnimalActionDialogFragment.Companion.EDIT_DIALOG_TITLE
 import com.farmexpert.android.model.AnimalAction
 import com.farmexpert.android.utils.FirestorePath
 import com.firebase.ui.firestore.SnapshotParser
@@ -53,7 +54,9 @@ abstract class BaseAnimalActionDetailFragment :
         arguments = bundleOf(ADD_DIALOG_TITLE to getAddDialogTitle())
     }
 
-    override fun getEditRecordDialog() = DialogFragment()
+    override fun getEditRecordDialog() = EditAnimalActionDialogFragment().apply {
+        arguments = bundleOf(EDIT_DIALOG_TITLE to getEditDialogTitle())
+    }
 
     override fun getQuery(): Query {
         return getCollectionReference()
@@ -61,4 +64,6 @@ abstract class BaseAnimalActionDetailFragment :
     }
 
     abstract fun getAddDialogTitle(): Int
+
+    abstract fun getEditDialogTitle(): Int
 }

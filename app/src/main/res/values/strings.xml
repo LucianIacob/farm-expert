@@ -87,6 +87,11 @@
     <string name="edit_birth_title">Edit birth</string>
     <string name="edit_breeding_title">Edit breeding</string>
     <string name="edit_pedicure_title">Edit pedicure</string>
+    <string name="edit_animal_action_title">Edit animal action</string>
+    <string name="edit_vitaminization_title">Edit vitaminization</string>
+    <string name="edit_vaccination_title">Edit vaccination</string>
+    <string name="edit_treatment_title">Edit treatment</string>
+    <string name="edit_disinfection_title">Edit disinfection</string>
 
     <string name="default_birth_note">4 - No problems</string>
     <string name="default_breeding_note">5 - Normal heats</string>
