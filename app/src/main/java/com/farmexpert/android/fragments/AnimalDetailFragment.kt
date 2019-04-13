@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/11/19 8:37 PM.
+ * Last modified 4/13/19 10:04 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -118,15 +118,15 @@ class AnimalDetailFragment : BaseFragment() {
     private fun populateUi(animal: Animal?) {
         currentAnimal = animal
         animal?.let {
-            raceView.setValue(it.race)
-            dateOfBirthView.setValue(it.dateOfBirth.toDate().getShort())
-            genderView.setValue(it.gender)
-            fatherIdView.setValue(it.fatherId)
-            fatherFatherIdView.setValue(it.fatherFatherId)
-            fatherMotherIdView.setValue(it.fatherMotherId)
-            motherIdView.setValue(it.motherId)
-            motherFatherIdView.setValue(it.motherFatherId)
-            motherMotherIdView.setValue(it.motherMotherId)
+            raceView?.setValue(it.race)
+            dateOfBirthView?.setValue(it.dateOfBirth.toDate().getShort())
+            genderView?.setValue(it.gender)
+            fatherIdView?.setValue(it.fatherId)
+            fatherFatherIdView?.setValue(it.fatherFatherId)
+            fatherMotherIdView?.setValue(it.fatherMotherId)
+            motherIdView?.setValue(it.motherId)
+            motherFatherIdView?.setValue(it.motherFatherId)
+            motherMotherIdView?.setValue(it.motherMotherId)
         }
     }
 

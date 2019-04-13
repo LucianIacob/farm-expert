@@ -88,6 +88,7 @@
 
     <string name="default_birth_note">4 - No problems</string>
     <string name="default_breeding_note">5 - Normal heats</string>
+    <string name="edit_breeding_title">Edit breeding</string>
 
     <string-array name="gender_types">
         <item>Unknown</item>
