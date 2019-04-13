@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:53 PM.
+ * Last modified 4/13/19 9:17 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -16,6 +16,7 @@ import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.BirthViewHolder
 import com.farmexpert.android.dialogs.AddBirthDialogFragment
 import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
+import com.farmexpert.android.dialogs.EditBirthDialogFragment
 import com.farmexpert.android.model.Animal
 import com.farmexpert.android.model.Birth
 import com.farmexpert.android.utils.FirestorePath
@@ -41,6 +42,8 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
     }
 
     override fun getAddRecordDialog() = AddBirthDialogFragment()
+
+    override fun getEditRecordDialog() = EditBirthDialogFragment()
 
     override val snapshotParser: SnapshotParser<Birth> = SnapshotParser {
         it.toObject(Birth::class.java)!!.apply { id = it.id }
@@ -103,7 +106,4 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
             { birthToDelete -> showDeleteDialog(birthToDelete) })
     }
 
-    private fun showUpdateDialog(birthToUpdate: Birth) {
-
-    }
 }

@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:53 PM.
+ * Last modified 4/13/19 9:17 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -11,6 +11,7 @@ package com.farmexpert.android.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.navArgs
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.BreedingViewHolder
@@ -40,14 +41,12 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
 
     override fun getAddRecordDialog() = AddBreedingDialogFragment()
 
+    override fun getEditRecordDialog() = DialogFragment()
+
     override fun createHolder(view: View): BreedingViewHolder {
         return BreedingViewHolder(view,
             { breedingToUpdate -> showUpdateDialog(breedingToUpdate) },
             { breedingToDelete -> showDeleteDialog(breedingToDelete) })
-    }
-
-    private fun showUpdateDialog(breedingToUpdate: Breeding) {
-
     }
 
     override fun getCollectionReference(): CollectionReference {

@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:53 PM.
+ * Last modified 4/13/19 9:17 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -32,6 +32,7 @@ import org.jetbrains.anko.error
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.okButton
 import org.jetbrains.anko.support.v4.alert
+import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.yesButton
 
 abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDetailHolder<ModelClass>> :
@@ -119,6 +120,8 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
 
     abstract fun getAddRecordDialog(): DialogFragment
 
+    abstract fun getEditRecordDialog(): DialogFragment
+
     override fun onStart() {
         super.onStart()
         adapter.startListening()
@@ -139,6 +142,17 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
         }
     }
 
+    protected fun showUpdateDialog(entityToUpdate: ModelClass) {
+        fragmentManager?.run {
+            val editDialog = getEditRecordDialog()
+            editDialog.arguments = entityToUpdate.getEditDialogArgs()
+            editDialog.setTargetFragment(this@BaseDetailFragment, UPDATE_RECORD_RQ)
+            if (findFragmentByTag(editDialog::class.java.simpleName) == null) {
+                editDialog.show(this, editDialog::class.java.simpleName)
+            }
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode != Activity.RESULT_OK || data?.extras == null) return
         when (requestCode) {
@@ -148,7 +162,9 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
         }
     }
 
-    private fun updateRecord(args: Bundle) {}
+    private fun updateRecord(args: Bundle) {
+        toast(args.size().toString())
+    }
 
     private fun insertRecord(extras: Bundle) {
         loadingShow()

@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:53 PM.
+ * Last modified 4/13/19 9:17 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -12,6 +12,7 @@ package com.farmexpert.android.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.fragment.app.DialogFragment
 import com.farmexpert.android.adapter.holder.AnimalActionHolder
 import com.farmexpert.android.dialogs.AddAnimalActionDialogFragment
 import com.farmexpert.android.dialogs.AddAnimalActionDialogFragment.Companion.ADD_DIALOG_TITLE
@@ -36,10 +37,6 @@ abstract class BaseAnimalActionDetailFragment :
             { animalActionToDelete -> showDeleteDialog(animalActionToDelete) })
     }
 
-    private fun showUpdateDialog(animalActionToUpdate: AnimalAction) {
-
-    }
-
     override fun constructEntityFromBundle(bundle: Bundle): Any {
         val details = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_DETAILS, "")
         val actionDate = Date(bundle.getLong(BaseAddRecordDialogFragment.ADD_DIALOG_DATE))
@@ -55,6 +52,8 @@ abstract class BaseAnimalActionDetailFragment :
     override fun getAddRecordDialog() = AddAnimalActionDialogFragment().apply {
         arguments = bundleOf(ADD_DIALOG_TITLE to getAddDialogTitle())
     }
+
+    override fun getEditRecordDialog() = DialogFragment()
 
     override fun getQuery(): Query {
         return getCollectionReference()
