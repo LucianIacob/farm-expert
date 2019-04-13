@@ -8,12 +8,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:descendantFocusability="beforeDescendants"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:padding="20dp">
+        android:padding="@dimen/large_margin">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/dialog_comment_root"
+            android:id="@+id/detailsHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/details"
@@ -25,6 +26,7 @@
                 android:id="@+id/details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:gravity="center"
                 android:importantForAutofill="no"
@@ -38,7 +40,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/dialogDate"
+            android:id="@+id/actionDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
@@ -46,10 +48,10 @@
             android:drawableStart="@drawable/ic_date_range_black_24dp"
             android:fontFamily="@font/telegroteskscreen_medium"
             android:gravity="center"
-            android:padding="@dimen/small_margin"
+            android:padding="@dimen/medium_margin"
             android:textColor="#000080"
             android:textSize="@dimen/large_text"
-            app:layout_constraintTop_toBottomOf="@id/dialog_comment_root" />
+            app:layout_constraintTop_toBottomOf="@id/detailsHeader" />
 
         <View
             android:id="@+id/middle_separator"
@@ -67,7 +69,7 @@
             android:contentDescription="@null"
             android:src="@drawable/right_nail_default"
             app:layout_constraintRight_toLeftOf="@id/middle_separator"
-            app:layout_constraintTop_toBottomOf="@id/dialogDate" />
+            app:layout_constraintTop_toBottomOf="@id/actionDate" />
 
         <ImageView
             android:id="@+id/left_top_hoof_left_nail"
@@ -78,7 +80,7 @@
             android:contentDescription="@null"
             android:src="@drawable/left_nail_default"
             app:layout_constraintRight_toLeftOf="@id/left_top_hoof_right_nail"
-            app:layout_constraintTop_toBottomOf="@id/dialogDate" />
+            app:layout_constraintTop_toBottomOf="@id/actionDate" />
 
         <ImageView
             android:id="@+id/right_top_left_nail"
@@ -89,7 +91,7 @@
             android:contentDescription="@null"
             android:src="@drawable/left_nail_default"
             app:layout_constraintLeft_toRightOf="@id/middle_separator"
-            app:layout_constraintTop_toBottomOf="@id/dialogDate" />
+            app:layout_constraintTop_toBottomOf="@id/actionDate" />
 
         <ImageView
             android:id="@+id/right_top_right_nail"
@@ -100,7 +102,7 @@
             android:contentDescription="@null"
             android:src="@drawable/right_nail_default"
             app:layout_constraintLeft_toRightOf="@id/right_top_left_nail"
-            app:layout_constraintTop_toBottomOf="@id/dialogDate" />
+            app:layout_constraintTop_toBottomOf="@id/actionDate" />
 
         <View
             android:id="@+id/horizontal_separator"

@@ -30,5 +30,6 @@
     <dimen name="item_dashboard_text_margin">10dp</dimen>
     <dimen name="item_dashboard_card_margin">5dp</dimen>
     <dimen name="item_dashboard_icon_height">70dp</dimen>
+    <dimen name="hoof_width">25dp</dimen>
 
 </resources>

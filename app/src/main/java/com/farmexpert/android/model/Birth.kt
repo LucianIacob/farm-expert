@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 9:17 PM.
+ * Last modified 4/13/19 10:47 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -14,6 +14,7 @@ import androidx.core.os.bundleOf
 import com.farmexpert.android.dialogs.BaseEditRecordDialogFragment
 import com.farmexpert.android.utils.FirestorePath
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.PropertyName
 
 data class Birth(
@@ -24,6 +25,7 @@ data class Birth(
     @PropertyName(FirestorePath.Birth.CREATED_BY) val createdBy: String? = ""
 ) : BaseEntity() {
 
+    @Exclude
     override fun getEditDialogArgs(): Bundle {
         return bundleOf(
             BaseEditRecordDialogFragment.EDIT_DIALOG_DATE to dateOfBirth.toDate().time,

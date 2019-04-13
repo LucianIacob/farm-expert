@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 9:05 PM.
+ * Last modified 4/13/19 10:47 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -11,6 +11,7 @@ package com.farmexpert.android.utils
 
 import android.content.Context
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.Spinner
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.ConfigurationActivity.Companion.FARM_TIMELINE_PREFS
@@ -82,6 +83,26 @@ class AppUtils {
                 NAIL_WITH_PROBLEM
             } else {
                 NAIL_WITHOUT_PROBLEM
+            }
+        }
+
+        fun populateLeftNail(imageView: ImageView?, char: String): Int {
+            return if (char == NAIL_WITH_PROBLEM) {
+                imageView?.setImageResource(R.drawable.left_nail_problem)
+                R.drawable.left_nail_problem
+            } else {
+                imageView?.setImageResource(R.drawable.left_nail_default)
+                R.drawable.left_nail_default
+            }
+        }
+
+        fun populateRightNail(imageView: ImageView?, char: String): Int {
+            return if (char == NAIL_WITH_PROBLEM) {
+                imageView?.setImageResource(R.drawable.right_nail_problem)
+                R.drawable.right_nail_problem
+            } else {
+                imageView?.setImageResource(R.drawable.right_nail_default)
+                R.drawable.right_nail_default
             }
         }
 

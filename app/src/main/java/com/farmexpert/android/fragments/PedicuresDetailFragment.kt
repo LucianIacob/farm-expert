@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 9:17 PM.
+ * Last modified 4/13/19 10:47 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -11,12 +11,12 @@ package com.farmexpert.android.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.navArgs
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.PedicureViewHolder
 import com.farmexpert.android.dialogs.AddPedicureDialogFragment
 import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
+import com.farmexpert.android.dialogs.EditPedicureDialogFragment
 import com.farmexpert.android.model.AnimalAction
 import com.farmexpert.android.utils.FirestorePath
 import com.firebase.ui.firestore.SnapshotParser
@@ -39,7 +39,7 @@ class PedicuresDetailFragment : BaseDetailFragment<AnimalAction, PedicureViewHol
 
     override fun getAddRecordDialog() = AddPedicureDialogFragment()
 
-    override fun getEditRecordDialog() = DialogFragment()
+    override fun getEditRecordDialog() = EditPedicureDialogFragment()
 
     override fun getCollectionReference() =
         farmReference.collection(FirestorePath.Collections.PEDICURES)

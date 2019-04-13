@@ -85,10 +85,11 @@
     <string name="err_deleting_item">An error occurred trying to delete the item</string>
     <string name="dialog_update_btn">Update</string>
     <string name="edit_birth_title">Edit birth</string>
+    <string name="edit_breeding_title">Edit breeding</string>
+    <string name="edit_pedicure_title">Edit pedicure</string>
 
     <string name="default_birth_note">4 - No problems</string>
     <string name="default_breeding_note">5 - Normal heats</string>
-    <string name="edit_breeding_title">Edit breeding</string>
 
     <string-array name="gender_types">
         <item>Unknown</item>
