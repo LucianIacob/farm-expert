@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 10:47 PM.
+ * Last modified 4/15/19 1:08 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -16,6 +16,7 @@ import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.PedicureViewHolder
 import com.farmexpert.android.dialogs.AddPedicureDialogFragment
 import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
+import com.farmexpert.android.dialogs.BaseEditRecordDialogFragment
 import com.farmexpert.android.dialogs.EditPedicureDialogFragment
 import com.farmexpert.android.model.AnimalAction
 import com.farmexpert.android.utils.FirestorePath
@@ -64,6 +65,21 @@ class PedicuresDetailFragment : BaseDetailFragment<AnimalAction, PedicureViewHol
             actionDate = Timestamp(actionDate),
             details = details,
             createdBy = currentUser?.uid
+        )
+    }
+
+    override fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any> {
+        val timestamp = args.getLong(BaseEditRecordDialogFragment.EDIT_DIALOG_DATE)
+        val newActionDate = Timestamp(Date(timestamp))
+
+        val newDetails = args.getString(
+            BaseEditRecordDialogFragment.EDIT_DIALOG_DETAILS,
+            "00000000"
+        )
+
+        return mutableMapOf(
+            FirestorePath.AnimalAction.ACTION_DATE to newActionDate,
+            FirestorePath.AnimalAction.DETAILS to newDetails
         )
     }
 

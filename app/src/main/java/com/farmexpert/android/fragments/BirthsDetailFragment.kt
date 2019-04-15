@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 9:17 PM.
+ * Last modified 4/15/19 1:08 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -16,6 +16,7 @@ import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.BirthViewHolder
 import com.farmexpert.android.dialogs.AddBirthDialogFragment
 import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
+import com.farmexpert.android.dialogs.BaseEditRecordDialogFragment
 import com.farmexpert.android.dialogs.EditBirthDialogFragment
 import com.farmexpert.android.model.Animal
 import com.farmexpert.android.model.Birth
@@ -55,6 +56,21 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
         val note = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_NOTE, "")
 
         return Birth(calfId, Timestamp(dateOfBirth), getAnimalId(), note, currentUser?.uid)
+    }
+
+    override fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any> {
+        val timestamp = args.getLong(BaseEditRecordDialogFragment.EDIT_DIALOG_DATE)
+        val newActionDate = Timestamp(Date(timestamp))
+
+        val newNote = args.getString(
+            BaseEditRecordDialogFragment.EDIT_DIALOG_NOTE,
+            getString(R.string.default_birth_note)
+        )
+
+        return mutableMapOf(
+            FirestorePath.Birth.DATE_OF_BIRTH to newActionDate,
+            FirestorePath.Birth.NOTE to newNote
+        )
     }
 
     override fun validateEntity(entity: Any, listener: (Boolean) -> Unit) {

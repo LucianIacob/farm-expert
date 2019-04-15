@@ -95,6 +95,8 @@
 
     <string name="default_birth_note">4 - No problems</string>
     <string name="default_breeding_note">5 - Normal heats</string>
+    <string name="err_updating_record">An error occurred updating the item. Please try again later.</string>
+    <string name="item_updated">Item successfully updated</string>
 
     <string-array name="gender_types">
         <item>Unknown</item>

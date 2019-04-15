@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 11:14 PM.
+ * Last modified 4/15/19 1:08 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -19,6 +19,7 @@ import androidx.fragment.app.DialogFragment
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.AnimalActionsAdapter
 import com.farmexpert.android.adapter.holder.BaseDetailHolder
+import com.farmexpert.android.dialogs.BaseEditRecordDialogFragment
 import com.farmexpert.android.model.BaseEntity
 import com.farmexpert.android.utils.hidden
 import com.farmexpert.android.utils.visible
@@ -32,7 +33,6 @@ import org.jetbrains.anko.error
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.okButton
 import org.jetbrains.anko.support.v4.alert
-import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.yesButton
 
 abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDetailHolder<ModelClass>> :
@@ -118,6 +118,8 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
 
     abstract fun constructEntityFromBundle(bundle: Bundle): Any
 
+    abstract fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any>
+
     abstract fun getAddRecordDialog(): DialogFragment
 
     abstract fun getEditRecordDialog(): DialogFragment
@@ -164,7 +166,18 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
     }
 
     private fun updateRecord(args: Bundle) {
-        toast(args.size().toString())
+        val documentId = args.getString(BaseEditRecordDialogFragment.EDIT_DIALOG_DOC_ID)
+        documentId?.let {
+            loadingShow()
+            getCollectionReference().document(it)
+                .update(getPairsToUpdateFromBundle(args))
+                .addOnSuccessListener { rootLayout.snackbar(R.string.item_updated) }
+                .addOnFailureListener {
+                    alert(message = R.string.err_updating_record) { okButton {} }.show()
+                    error { it }
+                }
+                .addOnCompleteListener { loadingHide() }
+        }
     }
 
     private fun insertRecord(extras: Bundle) {
@@ -176,7 +189,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
                     .add(entity)
                     .addOnSuccessListener { rootLayout.snackbar(R.string.item_added) }
                     .addOnFailureListener {
-                        alert(message = R.string.err_adding_record) { yesButton {} }.show()
+                        alert(message = R.string.err_adding_record) { okButton {} }.show()
                         error { it }
                     }
                     .addOnCompleteListener { loadingHide() }

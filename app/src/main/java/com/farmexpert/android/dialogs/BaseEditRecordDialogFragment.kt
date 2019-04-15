@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 10:47 PM.
+ * Last modified 4/15/19 1:08 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -27,12 +27,16 @@ import java.util.*
 abstract class BaseEditRecordDialogFragment : DialogFragment() {
 
     private lateinit var mDateView: TextView
+
+    protected var documentId: String? = null
+
     protected lateinit var mView: View
     protected lateinit var mActionDate: Date
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            documentId = it.getString(EDIT_DIALOG_DOC_ID)
             mActionDate = Date(it.getLong(EDIT_DIALOG_DATE))
             extractAdditionalArgs()
         }
@@ -78,6 +82,7 @@ abstract class BaseEditRecordDialogFragment : DialogFragment() {
     abstract fun populateFields()
 
     companion object {
+        const val EDIT_DIALOG_DOC_ID = "com.farmexpert.android.DocumentId"
         const val EDIT_DIALOG_NOTE = "com.farmexpert.android.Note"
         const val EDIT_DIALOG_DATE = "com.farmexpert.android.Date"
         const val EDIT_DIALOG_MALE = "com.farmexpert.android.Male"

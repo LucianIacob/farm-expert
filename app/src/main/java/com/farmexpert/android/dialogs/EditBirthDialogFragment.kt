@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 9:17 PM.
+ * Last modified 4/15/19 1:08 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -46,6 +46,7 @@ class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
 
     override fun sendNewRecord() {
         val args = bundleOf(
+            EDIT_DIALOG_DOC_ID to documentId,
             EDIT_DIALOG_DATE to mActionDate.time,
             EDIT_DIALOG_NOTE to mView.notesSpinner.selectedItem
         )

@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 10:04 PM.
+ * Last modified 4/15/19 1:08 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -16,6 +16,7 @@ import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.BreedingViewHolder
 import com.farmexpert.android.dialogs.AddBreedingDialogFragment
 import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
+import com.farmexpert.android.dialogs.BaseEditRecordDialogFragment
 import com.farmexpert.android.dialogs.EditBreedingDialogFragment
 import com.farmexpert.android.model.Breeding
 import com.farmexpert.android.utils.AppUtils
@@ -71,6 +72,24 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
             note = note,
             birthExpectedAt = Timestamp(expectedBirth),
             createdBy = currentUser?.uid
+        )
+    }
+
+    override fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any> {
+        val timestamp = args.getLong(BaseEditRecordDialogFragment.EDIT_DIALOG_DATE)
+        val newActionDate = Timestamp(Date(timestamp))
+
+        val newNote = args.getString(
+            BaseEditRecordDialogFragment.EDIT_DIALOG_NOTE,
+            getString(R.string.default_breeding_note)
+        )
+
+        val newMale = args.getString(BaseEditRecordDialogFragment.EDIT_DIALOG_MALE, "")
+
+        return mutableMapOf(
+            FirestorePath.Breeding.ACTION_DATE to newActionDate,
+            FirestorePath.Breeding.NOTE to newNote,
+            FirestorePath.Breeding.MALE to newMale
         )
     }
 }

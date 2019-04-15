@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 10:47 PM.
+ * Last modified 4/15/19 1:08 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -77,6 +77,7 @@ class EditPedicureDialogFragment : BaseEditRecordDialogFragment() {
 
     override fun sendNewRecord() {
         val bundle = bundleOf(
+            EDIT_DIALOG_DOC_ID to documentId,
             EDIT_DIALOG_DATE to mActionDate.time,
             EDIT_DIALOG_DETAILS to getEncodedHoofs() + mView.details.text.toString()
         )
