@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:18 AM.
+ * Last modified 4/15/19 12:14 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -13,7 +13,6 @@ import android.content.Context
 import androidx.multidex.MultiDexApplication
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.answers.Answers
-import com.crashlytics.android.core.CrashlyticsCore
 import com.facebook.stetho.Stetho
 import com.farmexpert.android.BuildConfig
 import com.google.firebase.FirebaseApp
@@ -51,8 +50,7 @@ class FarmExpertApplication : MultiDexApplication() {
     }
 
     private fun setupFabric() {
-        val crashlyticsCore = CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build()
-        Fabric.with(this, Crashlytics.Builder().core(crashlyticsCore).build(), Answers())
+        Fabric.with(this, Crashlytics(), Answers())
     }
 
     companion object {
