@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/9/19 9:25 PM.
+ * Last modified 4/18/19 9:35 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -43,7 +43,7 @@ open class BaseFragment : Fragment(), AnkoLogger {
             farmReference = FirebaseFirestore.getInstance()
                 .collection(FirestorePath.Collections.FARMS)
                 .document(farmId)
-        } ?: kotlin.run {
+        } ?: run {
             longToast(R.string.error_inexistent_farm_id)
             NavHostFragment.findNavController(this).popBackStack()
         }

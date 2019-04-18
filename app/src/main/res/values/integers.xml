@@ -4,4 +4,5 @@
     <integer name="dashboard_columns_count">2</integer>
     <integer name="statistics_items_scroll_direction">0</integer>
     <integer name="animal_id_max_length">30</integer>
+    <integer name="grafic_year_count">6</integer>
 </resources>

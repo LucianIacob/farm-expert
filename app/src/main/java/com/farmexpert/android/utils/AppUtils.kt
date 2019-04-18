@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 10:47 PM.
+ * Last modified 4/18/19 9:35 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -106,5 +106,26 @@ class AppUtils {
             }
         }
 
+        fun getStartOfTheYear(selectedYear: String): Timestamp {
+            val calendar = Calendar.getInstance()
+            calendar.set(Calendar.YEAR, selectedYear.toInt())
+            calendar.set(Calendar.MONTH, Calendar.JANUARY)
+            calendar.set(Calendar.DAY_OF_YEAR, 1)
+            calendar.set(Calendar.HOUR_OF_DAY, 0)
+            calendar.set(Calendar.MINUTE, 0)
+
+            return Timestamp(calendar.time)
+        }
+
+        fun getEndOfTheYear(selectedYear: String): Timestamp {
+            val calendar = Calendar.getInstance()
+            calendar.set(Calendar.YEAR, selectedYear.toInt())
+            calendar.set(Calendar.MONTH, Calendar.DECEMBER)
+            calendar.set(Calendar.DAY_OF_MONTH, 31)
+            calendar.set(Calendar.HOUR_OF_DAY, 23)
+            calendar.set(Calendar.MINUTE, 59)
+
+            return Timestamp(calendar.time)
+        }
     }
 }
