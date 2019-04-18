@@ -91,12 +91,12 @@
 
     <fragment
         android:id="@+id/birthsGraphFragment"
-        android:name="com.farmexpert.android.fragments.BirthsGraphFragment"
+        android:name="com.farmexpert.android.fragments.BirthsMasterFragment"
         android:label="@string/dashboard_graph_births" />
 
     <fragment
         android:id="@+id/breedingsGraphFragment"
-        android:name="com.farmexpert.android.fragments.BreedingsGraphFragment"
+        android:name="com.farmexpert.android.fragments.BreedingsMasterFragment"
         android:label="@string/dashboard_graph_breedings" />
 
     <fragment
@@ -106,22 +106,22 @@
 
     <fragment
         android:id="@+id/vitaminisationsGraphFragment"
-        android:name="com.farmexpert.android.fragments.VitaminisationsGraphFragment"
+        android:name="com.farmexpert.android.fragments.VitaminisationsMasterFragment"
         android:label="@string/dashboard_graph_vitaminisations" />
 
     <fragment
         android:id="@+id/vaccinationsGraphFragment"
-        android:name="com.farmexpert.android.fragments.VaccinationsGraphFragment"
+        android:name="com.farmexpert.android.fragments.VaccinationsMasterFragment"
         android:label="@string/dashboard_graph_vaccinations" />
 
     <fragment
         android:id="@+id/pedicuresGraphFragment"
-        android:name="com.farmexpert.android.fragments.PedicuresGraphFragment"
+        android:name="com.farmexpert.android.fragments.PedicuresMasterFragment"
         android:label="@string/dashboard_graph_pedicures" />
 
     <fragment
         android:id="@+id/treatmentsGraphFragment"
-        android:name="com.farmexpert.android.fragments.TreatmentsGraphFragment"
+        android:name="com.farmexpert.android.fragments.TreatmentsMasterFragment"
         android:label="@string/dashboard_graph_treatments" />
 
     <fragment
@@ -183,7 +183,7 @@
 
     <fragment
         android:id="@+id/disinfectionsDetailFragment"
-        android:name="com.farmexpert.android.fragments.DisinfectionsDetailFragment"
+        android:name="com.farmexpert.android.fragments.DisinfectionsMasterFragment"
         android:label="Disinfections">
 
         <argument

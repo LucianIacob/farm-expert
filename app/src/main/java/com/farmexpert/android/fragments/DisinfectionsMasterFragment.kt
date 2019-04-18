@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 11:14 PM.
+ * Last modified 4/18/19 10:14 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -14,7 +14,7 @@ import com.farmexpert.android.R
 import com.farmexpert.android.utils.FirestorePath
 import com.google.firebase.firestore.CollectionReference
 
-class DisinfectionsDetailFragment : BaseAnimalActionDetailFragment() {
+class DisinfectionsMasterFragment : BaseAnimalActionDetailFragment() {
 
     override fun getTitleAndHolderLayout(): Pair<String, Int> =
         Pair(getString(R.string.dashboard_graph_disinfections), R.layout.item_animal_action)

@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/18/19 9:35 PM.
+ * Last modified 4/18/19 10:14 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_graph_master.*
 import java.util.*
 
 
-abstract class GraphBaseFragment<ModelClass : BaseEntity, ModelHolder : BaseMasterHolder<ModelClass>> :
+abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMasterHolder<ModelClass>> :
     BaseFragment() {
 
     private lateinit var adapter: GraphAdapter<ModelClass, ModelHolder>
@@ -107,7 +107,7 @@ abstract class GraphBaseFragment<ModelClass : BaseEntity, ModelHolder : BaseMast
         }
 
         with(graphRecycler) {
-            this.adapter = this@GraphBaseFragment.adapter
+            this.adapter = this@BaseMasterFragment.adapter
             this.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
         adapter.readyForListening()

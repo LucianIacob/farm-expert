@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/graph_header_border">
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_id_graph"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/mother_id"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_id_graph"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/maleInputHint"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_graph_month"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/jan"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_graph_month"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/feb"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_graph_month"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/mar"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_graph_month"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/apr"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_graph_month"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/may"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_graph_month"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/jun"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_graph_month"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/jul"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_graph_month"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/aug"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_graph_month"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/sep"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_graph_month"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/oct"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_graph_month"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/nov"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_graph_month"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/dec"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="@dimen/width_graph_estimated_birth"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="@string/estimated_birth"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+</LinearLayout>
