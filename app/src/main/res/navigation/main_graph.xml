@@ -101,7 +101,7 @@
 
     <fragment
         android:id="@+id/disinfectionsGraphFragment"
-        android:name="com.farmexpert.android.fragments.DisinfectionsGraphFragment"
+        android:name="com.farmexpert.android.fragments.DisinfectionsMasterFragment"
         android:label="@string/dashboard_graph_disinfections" />
 
     <fragment
@@ -183,7 +183,7 @@
 
     <fragment
         android:id="@+id/disinfectionsDetailFragment"
-        android:name="com.farmexpert.android.fragments.DisinfectionsMasterFragment"
+        android:name="com.farmexpert.android.fragments.DisinfectionsDetailFragment"
         android:label="Disinfections">
 
         <argument
