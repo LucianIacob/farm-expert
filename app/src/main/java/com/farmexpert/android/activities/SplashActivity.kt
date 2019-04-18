@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/12/19 10:42 AM.
+ * Last modified 4/18/19 9:50 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -12,7 +12,7 @@ package com.farmexpert.android.activities
 import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import com.farmexpert.android.R
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.startActivity

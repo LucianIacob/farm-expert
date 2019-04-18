@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/9/19 9:25 PM.
+ * Last modified 4/18/19 9:50 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -42,8 +42,8 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return if (item?.itemId == R.id.action_finish) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.action_finish) {
             updateFarmDetails()
             true
         } else {
@@ -68,43 +68,73 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
             .update(
                 FirestorePath.Farm.HEATING_START, sharedPrefs.getInt(
                     getString(R.string.pref_heating_start_key),
-                    ConfigPickerUtils.getDefaultValue(getString(R.string.pref_heating_start_key), resources)
+                    ConfigPickerUtils.getDefaultValue(
+                        getString(R.string.pref_heating_start_key),
+                        resources
+                    )
                 ),
                 FirestorePath.Farm.HEATING_END, sharedPrefs.getInt(
                     getString(R.string.pref_heating_end_key),
-                    ConfigPickerUtils.getDefaultValue(getString(R.string.pref_heating_end_key), resources)
+                    ConfigPickerUtils.getDefaultValue(
+                        getString(R.string.pref_heating_end_key),
+                        resources
+                    )
                 ),
                 FirestorePath.Farm.GESTATION_CONTROL, sharedPrefs.getInt(
                     getString(R.string.pref_gestation_key),
-                    ConfigPickerUtils.getDefaultValue(getString(R.string.pref_gestation_key), resources)
+                    ConfigPickerUtils.getDefaultValue(
+                        getString(R.string.pref_gestation_key),
+                        resources
+                    )
                 ),
                 FirestorePath.Farm.PHYSIOLOGICAL_CONTROL, sharedPrefs.getInt(
                     getString(R.string.pref_physiological_control_key),
-                    ConfigPickerUtils.getDefaultValue(getString(R.string.pref_physiological_control_key), resources)
+                    ConfigPickerUtils.getDefaultValue(
+                        getString(R.string.pref_physiological_control_key),
+                        resources
+                    )
                 ),
                 FirestorePath.Farm.DISINFECTION_BEFORE_BIRTH, sharedPrefs.getInt(
                     getString(R.string.pref_disinfection_key),
-                    ConfigPickerUtils.getDefaultValue(getString(R.string.pref_disinfection_key), resources)
+                    ConfigPickerUtils.getDefaultValue(
+                        getString(R.string.pref_disinfection_key),
+                        resources
+                    )
                 ),
                 FirestorePath.Farm.FIRST_VACCINE, sharedPrefs.getInt(
                     getString(R.string.pref_vaccin1_before_birth_key),
-                    ConfigPickerUtils.getDefaultValue(getString(R.string.pref_vaccin1_before_birth_key), resources)
+                    ConfigPickerUtils.getDefaultValue(
+                        getString(R.string.pref_vaccin1_before_birth_key),
+                        resources
+                    )
                 ),
                 FirestorePath.Farm.SECOND_VACCINE, sharedPrefs.getInt(
                     getString(R.string.pref_vaccin2_before_birth_key),
-                    ConfigPickerUtils.getDefaultValue(getString(R.string.pref_vaccin2_before_birth_key), resources)
+                    ConfigPickerUtils.getDefaultValue(
+                        getString(R.string.pref_vaccin2_before_birth_key),
+                        resources
+                    )
                 ),
                 FirestorePath.Farm.THIRD_VACCINE, sharedPrefs.getInt(
                     getString(R.string.pref_vaccin3_before_birth_key),
-                    ConfigPickerUtils.getDefaultValue(getString(R.string.pref_vaccin3_before_birth_key), resources)
+                    ConfigPickerUtils.getDefaultValue(
+                        getString(R.string.pref_vaccin3_before_birth_key),
+                        resources
+                    )
                 ),
                 FirestorePath.Farm.VACCINE_AFTER_BIRTH, sharedPrefs.getInt(
                     getString(R.string.pref_vaccin_after_birth_key),
-                    ConfigPickerUtils.getDefaultValue(getString(R.string.pref_vaccin_after_birth_key), resources)
+                    ConfigPickerUtils.getDefaultValue(
+                        getString(R.string.pref_vaccin_after_birth_key),
+                        resources
+                    )
                 ),
                 FirestorePath.Farm.GESTATION_LENGTH, sharedPrefs.getInt(
                     getString(R.string.pref_gestation_length_key),
-                    ConfigPickerUtils.getDefaultValue(getString(R.string.pref_gestation_length_key), resources)
+                    ConfigPickerUtils.getDefaultValue(
+                        getString(R.string.pref_gestation_length_key),
+                        resources
+                    )
                 )
             )
             .addOnSuccessListener { startMainActivity() }
