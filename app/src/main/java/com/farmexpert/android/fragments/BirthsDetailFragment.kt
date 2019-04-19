@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/15/19 1:08 PM.
+ * Last modified 4/19/19 9:36 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -95,7 +95,9 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
     }
 
     override fun getQuery(): Query {
-        return getCollectionReference().whereEqualTo(FirestorePath.Birth.MOTHER_ID, getAnimalId())
+        return getCollectionReference()
+            .whereEqualTo(FirestorePath.Birth.MOTHER_ID, getAnimalId())
+            .orderBy(FirestorePath.Birth.DATE_OF_BIRTH, Query.Direction.DESCENDING)
     }
 
     override fun addDependentData(entity: Any) {

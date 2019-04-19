@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/15/19 1:08 PM.
+ * Last modified 4/19/19 9:36 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -54,6 +54,7 @@ class PedicuresDetailFragment : BaseDetailFragment<AnimalAction, PedicureViewHol
     override fun getQuery(): Query {
         return getCollectionReference()
             .whereEqualTo(FirestorePath.AnimalAction.ANIMAL_ID, getAnimalId())
+            .orderBy(FirestorePath.AnimalAction.ACTION_DATE, Query.Direction.DESCENDING)
     }
 
     override fun constructEntityFromBundle(bundle: Bundle): Any {
