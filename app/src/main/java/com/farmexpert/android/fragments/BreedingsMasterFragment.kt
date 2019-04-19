@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/18/19 10:14 PM.
+ * Last modified 4/19/19 9:11 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -14,8 +14,10 @@ import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.GraphBreedingViewHolder
 import com.farmexpert.android.model.Breeding
 import com.farmexpert.android.utils.FirestorePath
+import com.farmexpert.android.utils.GraphDataTransformer
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.QuerySnapshot
 
 /**
  * Created by Lucian Iacob on March 22, 2019.
@@ -37,4 +39,9 @@ class BreedingsMasterFragment : BaseMasterFragment<Breeding, GraphBreedingViewHo
     override fun getHeaderLayoutRes() = R.layout.graph_breedings_header
 
     override fun createHolder(view: View) = GraphBreedingViewHolder(view)
+
+    override fun transformData(documents: QuerySnapshot?): Map<String, List<Breeding>> {
+        return GraphDataTransformer.transformDocumentsForBreedingsGraph(documents)
+    }
+
 }

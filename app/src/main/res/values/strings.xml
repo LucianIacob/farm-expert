@@ -97,6 +97,7 @@
     <string name="default_breeding_note">5 - Normal heats</string>
     <string name="err_updating_record">An error occurred updating the item. Please try again later.</string>
     <string name="item_updated">Item successfully updated</string>
+    <string name="err_retrieving_items">Error while retrieving data. Please try again later.</string>
 
     <!--MONTHS-->
     <string name="jan">JAN</string>

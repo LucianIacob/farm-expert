@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/18/19 9:35 PM.
+ * Last modified 4/19/19 9:11 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -12,14 +12,16 @@ package com.farmexpert.android.adapter.holder
 import android.view.View
 import android.widget.TextView
 import com.farmexpert.android.model.Birth
+import com.farmexpert.android.utils.day
+import com.farmexpert.android.utils.month
 import kotlinx.android.synthetic.main.item_graph_birth.view.*
 import java.util.*
 
 class GraphBirthViewHolder(itemView: View) : BaseMasterHolder<Birth>(itemView) {
 
-    override fun bind(entity: Birth) = with(itemView) {
-        motherCell.text = entity.motherId
-        calfCell.text = entity.calfId
+    override fun bind(key: String, values: List<Birth>) = with(itemView) {
+        motherCell.text = key
+        calfCell.text = values.maxBy { it.dateOfBirth }?.calfId
 
         val graphViews: Map<Int, TextView> = hashMapOf(
             Calendar.JANUARY to janCell,
@@ -36,12 +38,21 @@ class GraphBirthViewHolder(itemView: View) : BaseMasterHolder<Birth>(itemView) {
             Calendar.DECEMBER to decCell
         )
 
-        val dateToDisplay = entity.dateOfBirth.toDate()
-        val calendar = Calendar.getInstance().apply { time = dateToDisplay }
+        graphViews.values.forEach { it.text = "" }
 
-        val monthToPopulate = calendar.get(Calendar.MONTH)
+        values.forEach {
+            val month = it.dateOfBirth.month()
+            val sb = StringBuffer(graphViews.getValue(month).text)
 
-        graphViews[monthToPopulate]?.text = calendar.get(Calendar.DAY_OF_MONTH).toString()
+            with(sb) {
+                if (isNotEmpty()) {
+                    append(System.lineSeparator())
+                }
+                append(it.dateOfBirth.day())
+            }
+
+            graphViews.getValue(month).text = sb.toString()
+        }
     }
 
 }

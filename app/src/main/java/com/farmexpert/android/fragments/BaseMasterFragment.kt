@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/18/19 10:14 PM.
+ * Last modified 4/19/19 9:11 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -19,10 +19,11 @@ import com.farmexpert.android.model.BaseEntity
 import com.farmexpert.android.utils.AppUtils
 import com.farmexpert.android.utils.hidden
 import com.farmexpert.android.utils.visible
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.android.synthetic.main.fragment_graph_master.*
+import org.jetbrains.anko.support.v4.alert
 import java.util.*
 
 
@@ -50,6 +51,12 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
         super.onViewCreated(view, savedInstanceState)
         graphHeader.layoutResource = getHeaderLayoutRes()
         graphHeader.inflate()
+
+        adapter = GraphAdapter(getHolderLayoutRes(), ::createHolder)
+        with(graphRecycler) {
+            this.adapter = this@BaseMasterFragment.adapter
+            this.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -83,35 +90,25 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
         val queryRangeStart = AppUtils.getStartOfTheYear(selectedYear)
         val queryRangeEnd = AppUtils.getEndOfTheYear(selectedYear)
 
-        val query = getCollectionRef()
+        getCollectionRef()
             .whereGreaterThanOrEqualTo(getFilterField(), queryRangeStart)
             .whereLessThanOrEqualTo(getFilterField(), queryRangeEnd)
+            .get()
+            .addOnFailureListener { alert(R.string.err_retrieving_items) { okButton { } } }
+            .addOnSuccessListener { documents ->
+                val adapterData = transformData(documents)
+                adapter.data = adapterData
 
-        val options = FirestoreRecyclerOptions.Builder<ModelClass>()
-            .setQuery(query, snapshotParser)
-            .build()
-
-        adapter = object : GraphAdapter<ModelClass, ModelHolder>(
-            options,
-            getHolderLayoutRes(),
-            ::createHolder
-        ) {
-            override fun onDataChanged() {
-                loadingHide()
-                if (itemCount != 0) {
+                if (adapterData.isNotEmpty()) {
                     empty_list?.hidden()
                 } else {
                     empty_list?.visible()
                 }
             }
-        }
-
-        with(graphRecycler) {
-            this.adapter = this@BaseMasterFragment.adapter
-            this.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
-        }
-        adapter.readyForListening()
+            .addOnCompleteListener { loadingHide() }
     }
+
+    abstract fun transformData(documents: QuerySnapshot?): Map<String, List<ModelClass>>
 
     abstract fun getHolderLayoutRes(): Int
 
@@ -124,18 +121,4 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
     abstract fun getHeaderLayoutRes(): Int
 
     abstract fun createHolder(view: View): ModelHolder
-
-    override fun onStart() {
-        super.onStart()
-        if (::adapter.isInitialized) {
-            adapter.startListening()
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        if (::adapter.isInitialized) {
-            adapter.stopListening()
-        }
-    }
 }

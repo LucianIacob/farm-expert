@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/18/19 9:35 PM.
+ * Last modified 4/19/19 9:11 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -16,6 +16,6 @@ import com.farmexpert.android.model.BaseEntity
 abstract class BaseMasterHolder<ModelClass : BaseEntity>(itemView: View) :
     RecyclerView.ViewHolder(itemView) {
 
-    abstract fun bind(entity: ModelClass)
+    abstract fun bind(key: String, values: List<ModelClass>)
 
 }

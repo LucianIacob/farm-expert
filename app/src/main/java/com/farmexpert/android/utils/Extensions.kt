@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/8/19 1:42 PM.
+ * Last modified 4/19/19 9:11 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -31,6 +31,16 @@ fun Timestamp.asDisplayable(): String {
     return format.format(this.toDate())
 }
 
+fun Timestamp.month(): Int {
+    val date = toDate()
+    return date.month()
+}
+
+fun Timestamp.day(): Int {
+    val date = toDate()
+    return date.day()
+}
+
 fun View.visible() {
     visibility = View.VISIBLE
 }
@@ -54,5 +64,13 @@ fun Calendar.month() = this.get(Calendar.MONTH)
 fun Calendar.day() = this.get(Calendar.DAY_OF_MONTH)
 
 fun Animal.yearOfBirth(): Int = Calendar.getInstance().apply { time = dateOfBirth.toDate() }.year()
-fun Animal.monthOfBirth() = Calendar.getInstance().apply { time = dateOfBirth.toDate() }.month()
-fun Animal.dayOfBirth() = Calendar.getInstance().apply { time = dateOfBirth.toDate() }.day()
+fun Animal.monthOfBirth() = dateOfBirth.toDate().month()
+fun Animal.dayOfBirth() = dateOfBirth.toDate().day()
+
+fun Date.month(): Int {
+    return Calendar.getInstance().apply { time = this@month }.month()
+}
+
+fun Date.day(): Int {
+    return Calendar.getInstance().apply { time = this@day }.day()
+}

@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/18/19 10:37 PM.
+ * Last modified 4/19/19 9:11 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -12,16 +12,18 @@ package com.farmexpert.android.adapter.holder
 import android.view.View
 import android.widget.TextView
 import com.farmexpert.android.model.AnimalAction
+import com.farmexpert.android.utils.day
+import com.farmexpert.android.utils.month
 import kotlinx.android.synthetic.main.item_graph_animal_action.view.*
 import java.util.*
 
 class GraphAnimalActionHolder(val view: View) : BaseMasterHolder<AnimalAction>(view) {
 
-    override fun bind(entity: AnimalAction) {
+    override fun bind(key: String, values: List<AnimalAction>) {
         with(view) {
-            animalCell.text = entity.animalId
+            animalCell.text = key
 
-            val graphViews: Map<Int, TextView> = hashMapOf(
+            val graphViews: Map<Int, TextView> = mapOf(
                 Calendar.JANUARY to janCell,
                 Calendar.FEBRUARY to febCell,
                 Calendar.MARCH to marCell,
@@ -36,12 +38,21 @@ class GraphAnimalActionHolder(val view: View) : BaseMasterHolder<AnimalAction>(v
                 Calendar.DECEMBER to decCell
             )
 
-            val dateToDisplay = entity.actionDate.toDate()
-            val calendar = Calendar.getInstance().apply { time = dateToDisplay }
+            graphViews.values.forEach { it.text = "" }
 
-            val monthToPopulate = calendar.get(Calendar.MONTH)
+            values.forEach {
+                val month = it.actionDate.month()
+                val sb = StringBuffer(graphViews.getValue(month).text)
 
-            graphViews[monthToPopulate]?.text = calendar.get(Calendar.DAY_OF_MONTH).toString()
+                with(sb) {
+                    if (isNotEmpty()) {
+                        append(System.lineSeparator())
+                    }
+                    append(it.actionDate.day())
+                }
+
+                graphViews.getValue(month).text = sb.toString()
+            }
         }
     }
 
