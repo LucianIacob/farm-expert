@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 9:36 PM.
+ * Last modified 4/19/19 10:15 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -58,6 +58,11 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
             this.adapter = this@BaseMasterFragment.adapter
             this.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        savedInstanceState?.getString(KEY_SELECTED_YEAR)?.let { selectedYear = it }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -122,4 +127,12 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
     abstract fun getHeaderLayoutRes(): Int
 
     abstract fun createHolder(view: View): ModelHolder
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString(KEY_SELECTED_YEAR, selectedYear)
+    }
+
+    companion object {
+        const val KEY_SELECTED_YEAR = "com.farmexpert.android.masterscreen.SelectedYear"
+    }
 }
