@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_graph_row_border"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/animalCell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:layout_weight="3"
+        android:background="@drawable/item_graph_clickable_box"
+        android:fontFamily="@font/telegroteskscreen_medium"
+        android:gravity="center"
+        android:paddingStart="2dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="2dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/large_text" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/janCell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/telegroteskscreen_medium"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_18" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/febCell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/telegroteskscreen_medium"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_18" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/marCell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/telegroteskscreen_medium"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_18" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/aprCell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/telegroteskscreen_medium"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_18" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/mayCell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/telegroteskscreen_medium"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_18" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/junCell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/telegroteskscreen_medium"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_18" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/julCell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/telegroteskscreen_medium"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_18" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/augCell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/telegroteskscreen_medium"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_18" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/sepCell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/telegroteskscreen_medium"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_18" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/octCell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/telegroteskscreen_medium"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_18" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/novCell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/telegroteskscreen_medium"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_18" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/decCell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/telegroteskscreen_medium"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_18" />
+
+    <View
+        android:layout_width="@dimen/separator_height_1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+</LinearLayout>
