@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 9:11 PM.
+ * Last modified 4/19/19 10:24 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -43,5 +43,7 @@ class BreedingsMasterFragment : BaseMasterFragment<Breeding, GraphBreedingViewHo
     override fun transformData(documents: QuerySnapshot?): Map<String, List<Breeding>> {
         return GraphDataTransformer.transformDocumentsForBreedingsGraph(documents)
     }
+
+    override fun getTitle(): String = getString(R.string.dashboard_graph_breedings)
 
 }

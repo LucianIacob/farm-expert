@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 10:15 PM.
+ * Last modified 4/19/19 10:24 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -92,6 +92,7 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
     }
 
     private fun retrieveData() {
+        updateTitle()
         loadingShow()
         val queryRangeStart = AppUtils.getStartOfTheYear(selectedYear)
         val queryRangeEnd = AppUtils.getEndOfTheYear(selectedYear)
@@ -113,6 +114,14 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
             }
             .addOnCompleteListener { loadingHide() }
     }
+
+    private fun updateTitle() {
+        val sb = StringBuilder(getTitle())
+        sb.append(" ").append(selectedYear)
+        setTitle(sb.toString())
+    }
+
+    abstract fun getTitle(): String
 
     abstract fun transformData(documents: QuerySnapshot?): Map<String, List<ModelClass>>
 
