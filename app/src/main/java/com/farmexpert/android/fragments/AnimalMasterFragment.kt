@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 9:05 PM.
+ * Last modified 4/19/19 11:07 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -12,9 +12,8 @@ package com.farmexpert.android.fragments
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,19 +32,47 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.android.synthetic.main.fragment_animal_master.*
-import org.jetbrains.anko.*
+import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.noButton
+import org.jetbrains.anko.okButton
 import org.jetbrains.anko.support.v4.alert
+import org.jetbrains.anko.yesButton
 import java.util.*
 
 /**
  * Created by Lucian Iacob on March 22, 2019.
  */
-class AnimalMasterFragment : BaseFragment(), AnkoLogger {
+class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextListener {
 
     private lateinit var animalsCollections: CollectionReference
 
     private lateinit var adapter: AnimalsAdapter
+
+    private var query: String = ""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_headcount, menu)
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem?.actionView as SearchView
+        with(searchView) {
+            setOnQueryTextListener(this@AnimalMasterFragment)
+            queryHint = getString(R.string.search_id)
+        }
+
+        if (query.isNotEmpty()) {
+            searchView.isIconified = false
+            searchItem.expandActionView()
+            searchView.setQuery(query, true)
+            searchView.clearFocus()
+        }
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,6 +86,11 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
         super.onViewCreated(view, savedInstanceState)
         animalsCollections = farmReference.collection(FirestorePath.Collections.ANIMALS)
         initAnimalList()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        savedInstanceState?.getString(KEY_QUERY)?.let { query = it }
     }
 
     override fun onViewReady() {
@@ -183,9 +215,24 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
             .addOnCompleteListener { loadingHide() }
     }
 
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        query?.let { this.query = it }
+        return true
+    }
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        query?.let { this.query = it }
+        return true
+    }
+
     override fun onPause() {
         super.onPause()
         addAnimalBtn.setOnClickListener(null)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(KEY_QUERY, query)
     }
 
     override fun onStop() {
@@ -195,5 +242,6 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger {
 
     companion object {
         const val ADD_ANIMAL_RQ = 678
+        const val KEY_QUERY = "com.farmexpert.android.Query"
     }
 }
