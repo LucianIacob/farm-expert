@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "334662227793-972u6c209ks192m8k1tbmrftv9hp13bf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.farmexpert.android",
+            "certificate_hash": "06bd05f9011b0bb4998888b5c35bbe554bcceb53"
+          }
+        },
+        {
           "client_id": "334662227793-nq5a025iqtt0hc3hheao0khqfqpttegr.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -33,20 +41,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "334662227793-nq5a025iqtt0hc3hheao0khqfqpttegr.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

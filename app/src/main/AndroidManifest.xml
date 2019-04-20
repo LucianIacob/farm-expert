@@ -1,51 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.farmexpert.android">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.farmexpert.android">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-            android:name=".app.FarmExpertApplication"
-            android:allowBackup="true"
-            android:fullBackupContent="true"
-            android:icon="@drawable/icon_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@drawable/icon_launcher"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            tools:ignore="GoogleAppIndexingWarning">
+        android:name=".app.FarmExpertApplication"
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:icon="@drawable/icon_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/icon_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-                android:name=".activities.SplashActivity"
-                android:theme="@style/AppTheme.NoActionBarCustom">
+            android:name=".activities.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBarCustom">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
-                android:name=".activities.AuthenticationActivity"
-                android:theme="@style/AppTheme.NoActionbar"/>
+            android:name=".activities.AuthenticationActivity"
+            android:theme="@style/AppTheme.NoActionbar" />
 
-        <activity android:name=".activities.FarmSelectorActivity"
-                  android:theme="@style/AppTheme.NoActionbar"
-                  android:windowSoftInputMode="adjustPan"
-                  android:screenOrientation="portrait"
-                  android:label="Select Farm"/>
+        <activity
+            android:name=".activities.FarmSelectorActivity"
+            android:label="Select Farm"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionbar"
+            android:windowSoftInputMode="adjustPan" />
 
-        <activity android:name=".activities.MainActivity"
-                  android:theme="@style/AppTheme.NoActionbar"/>
+        <activity
+            android:name=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionbar" />
 
-        <activity android:name=".activities.ConfigurationActivity"
-                  android:theme="@style/AppTheme.NoActionbar"/>
+        <activity
+            android:name=".activities.ConfigurationActivity"
+            android:theme="@style/AppTheme.NoActionbar" />
 
         <meta-data
-                android:name="io.fabric.ApiKey"
-                android:value="5d4448d20e679cf6898ea263ef13ea9444bc9a91"/>
+            android:name="io.fabric.ApiKey"
+            android:value="5d4448d20e679cf6898ea263ef13ea9444bc9a91" />
 
     </application>
 
