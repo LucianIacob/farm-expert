@@ -3,13 +3,15 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 10:24 PM.
+ * Last modified 4/20/19 3:43 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
 package com.farmexpert.android.fragments
 
 import android.view.View
+import androidx.navigation.fragment.NavHostFragment
+import com.farmexpert.android.NavGraphDirections
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.GraphBirthViewHolder
 import com.farmexpert.android.model.Birth
@@ -26,7 +28,21 @@ class BirthsMasterFragment : BaseMasterFragment<Birth, GraphBirthViewHolder>() {
 
     override fun getHolderLayoutRes() = R.layout.item_graph_birth
 
-    override fun createHolder(view: View) = GraphBirthViewHolder(view)
+    override fun createHolder(view: View) = GraphBirthViewHolder(
+        itemView = view,
+        motherIdClick = { motherId -> handleMotherClicked(motherId) },
+        calfIdClick = { calfId -> handleCalfClicked(calfId) }
+    )
+
+    private fun handleCalfClicked(calfId: String) {
+        val direction = NavGraphDirections.actionGlobalAnimalDetailFragment(animalId = calfId)
+        NavHostFragment.findNavController(this).navigate(direction)
+    }
+
+    private fun handleMotherClicked(motherId: String) {
+        val direction = NavGraphDirections.actionGlobalBirthsDetailFragment(animalId = motherId)
+        NavHostFragment.findNavController(this).navigate(direction)
+    }
 
     override fun getHeaderLayoutRes() = R.layout.graph_births_header
 

@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 10:04 PM.
+ * Last modified 4/20/19 3:43 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -109,10 +109,22 @@ class AnimalDetailFragment : BaseFragment() {
 
     override fun onViewReady() {
         loadingShow()
-        animalRef.get(Source.CACHE) // todo not whether Source.CACHE should go in production
+        animalRef.get(if (args.shouldGetFromCache) Source.CACHE else Source.DEFAULT)
             .addOnFailureListener { toast(R.string.unknown_error) }
             .addOnSuccessListener { populateUi(it.toObject(Animal::class.java)) }
-            .addOnCompleteListener { loadingHide() }
+            .addOnCompleteListener {
+                loadingHide()
+                if (it.isSuccessful && it.isComplete && it.result != null && !it.result!!.exists()) {
+                    displayAnimalNotFoundAlert()
+                }
+            }
+    }
+
+    private fun displayAnimalNotFoundAlert() {
+        alert(message = R.string.err_animal_not_exists) {
+            isCancelable = false
+            okButton { activity?.onBackPressed() }
+        }.show()
     }
 
     private fun populateUi(animal: Animal?) {

@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 9:11 PM.
+ * Last modified 4/20/19 3:43 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -17,11 +17,15 @@ import com.farmexpert.android.utils.month
 import kotlinx.android.synthetic.main.item_graph_animal_action.view.*
 import java.util.*
 
-class GraphAnimalActionHolder(val view: View) : BaseMasterHolder<AnimalAction>(view) {
+class GraphAnimalActionHolder(
+    val view: View,
+    val animalIdClick: (String) -> Unit
+) : BaseMasterHolder<AnimalAction>(itemView = view) {
 
     override fun bind(key: String, values: List<AnimalAction>) {
         with(view) {
             animalCell.text = key
+            animalCell.setOnClickListener { animalIdClick(key) }
 
             val graphViews: Map<Int, TextView> = mapOf(
                 Calendar.JANUARY to janCell,

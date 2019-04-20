@@ -3,12 +3,14 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 10:24 PM.
+ * Last modified 4/20/19 3:43 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
 package com.farmexpert.android.fragments
 
+import androidx.navigation.NavDirections
+import com.farmexpert.android.NavGraphDirections
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.FirestorePath
 import com.google.firebase.firestore.CollectionReference
@@ -23,4 +25,8 @@ class PedicuresMasterFragment : BaseAnimalActionMasterFragment() {
     }
 
     override fun getTitle(): String = getString(R.string.dashboard_graph_pedicures)
+
+    override fun getAnimalClickDirection(animalId: String): NavDirections {
+        return NavGraphDirections.actionGlobalPedicuresDetailFragment(animalId = animalId)
+    }
 }

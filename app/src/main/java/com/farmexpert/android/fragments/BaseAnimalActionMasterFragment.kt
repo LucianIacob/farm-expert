@@ -3,13 +3,15 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 9:11 PM.
+ * Last modified 4/20/19 3:43 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
 package com.farmexpert.android.fragments
 
 import android.view.View
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.NavHostFragment
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.GraphAnimalActionHolder
 import com.farmexpert.android.model.AnimalAction
@@ -31,7 +33,17 @@ abstract class BaseAnimalActionMasterFragment :
 
     override fun getHeaderLayoutRes() = R.layout.graph_animal_actions_header
 
-    override fun createHolder(view: View) = GraphAnimalActionHolder(view)
+    override fun createHolder(view: View) = GraphAnimalActionHolder(
+        view = view,
+        animalIdClick = { animalId -> handleAnimalClicked(animalId) }
+    )
+
+    private fun handleAnimalClicked(animalId: String) {
+        val direction = getAnimalClickDirection(animalId)
+        NavHostFragment.findNavController(this).navigate(direction)
+    }
+
+    abstract fun getAnimalClickDirection(animalId: String): NavDirections
 
     override fun transformData(documents: QuerySnapshot?): Map<String, List<AnimalAction>> {
         return GraphDataTransformer.transformDocumentsForAnimalActionsGraph(documents)

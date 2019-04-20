@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 9:11 PM.
+ * Last modified 4/20/19 3:43 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -17,11 +17,22 @@ import com.farmexpert.android.utils.month
 import kotlinx.android.synthetic.main.item_graph_birth.view.*
 import java.util.*
 
-class GraphBirthViewHolder(itemView: View) : BaseMasterHolder<Birth>(itemView) {
+class GraphBirthViewHolder(
+    itemView: View,
+    val motherIdClick: (String) -> Unit,
+    val calfIdClick: (String) -> Unit
+) : BaseMasterHolder<Birth>(itemView = itemView) {
 
     override fun bind(key: String, values: List<Birth>) = with(itemView) {
-        motherCell.text = key
-        calfCell.text = values.maxBy { it.dateOfBirth }?.calfId
+        with(motherCell) {
+            text = key
+            setOnClickListener { motherIdClick(key) }
+        }
+
+        values.maxBy { it.dateOfBirth }?.calfId?.let { calfId ->
+            calfCell.text = calfId
+            calfCell.setOnClickListener { calfIdClick(calfId) }
+        }
 
         val graphViews: Map<Int, TextView> = hashMapOf(
             Calendar.JANUARY to janCell,
@@ -54,5 +65,4 @@ class GraphBirthViewHolder(itemView: View) : BaseMasterHolder<Birth>(itemView) {
             graphViews.getValue(month).text = sb.toString()
         }
     }
-
 }

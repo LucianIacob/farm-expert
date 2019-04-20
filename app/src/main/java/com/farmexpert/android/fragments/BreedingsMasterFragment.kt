@@ -3,13 +3,15 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 10:24 PM.
+ * Last modified 4/20/19 3:43 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
 package com.farmexpert.android.fragments
 
 import android.view.View
+import androidx.navigation.fragment.NavHostFragment
+import com.farmexpert.android.NavGraphDirections
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.GraphBreedingViewHolder
 import com.farmexpert.android.model.Breeding
@@ -38,7 +40,21 @@ class BreedingsMasterFragment : BaseMasterFragment<Breeding, GraphBreedingViewHo
 
     override fun getHeaderLayoutRes() = R.layout.graph_breedings_header
 
-    override fun createHolder(view: View) = GraphBreedingViewHolder(view)
+    override fun createHolder(view: View) = GraphBreedingViewHolder(
+        view = view,
+        femaleIdClick = { femaleId -> handleFemaleClicked(femaleId) },
+        maleIdClick = { maleId -> handleMaleClicked(maleId) }
+    )
+
+    private fun handleMaleClicked(maleId: String) {
+        val direction = NavGraphDirections.actionGlobalAnimalDetailFragment(animalId = maleId)
+        NavHostFragment.findNavController(this).navigate(direction)
+    }
+
+    private fun handleFemaleClicked(femaleId: String) {
+        val direction = NavGraphDirections.actionGlobalBreedingsDetailFragment(animalId = femaleId)
+        NavHostFragment.findNavController(this).navigate(direction)
+    }
 
     override fun transformData(documents: QuerySnapshot?): Map<String, List<Breeding>> {
         return GraphDataTransformer.transformDocumentsForBreedingsGraph(documents)

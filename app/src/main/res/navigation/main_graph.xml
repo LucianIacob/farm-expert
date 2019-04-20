@@ -133,6 +133,11 @@
             android:name="animalId"
             app:argType="string" />
 
+        <argument
+            android:name="shouldGetFromCache"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
     </fragment>
 
     <action

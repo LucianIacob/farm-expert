@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 11:07 PM.
+ * Last modified 4/20/19 3:43 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -126,7 +126,10 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
 
     private fun animalClick(animal: Animal) {
         animal.id?.let {
-            val direction = NavGraphDirections.actionGlobalAnimalDetailFragment(animalId = it)
+            val direction = NavGraphDirections.actionGlobalAnimalDetailFragment(
+                animalId = it,
+                shouldGetFromCache = true
+            )
             NavHostFragment.findNavController(this).navigate(direction)
         }
     }

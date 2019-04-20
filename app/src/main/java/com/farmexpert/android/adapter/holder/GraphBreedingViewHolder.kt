@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 9:11 PM.
+ * Last modified 4/20/19 3:43 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -18,13 +18,21 @@ import com.farmexpert.android.utils.month
 import kotlinx.android.synthetic.main.item_graph_breeding.view.*
 import java.util.*
 
-class GraphBreedingViewHolder(val view: View) : BaseMasterHolder<Breeding>(view) {
+class GraphBreedingViewHolder(
+    val view: View,
+    val femaleIdClick: (String) -> Unit,
+    val maleIdClick: (String) -> Unit
+) : BaseMasterHolder<Breeding>(view) {
 
     override fun bind(key: String, values: List<Breeding>): Unit = with(view) {
-        femaleCell.text = key
-        values.maxBy { it.actionDate }?.let {
-            maleCell.text = it.male
-            estimatedBirth.text = it.birthExpectedAt.asDisplayable()
+        with(femaleCell) {
+            text = key
+            setOnClickListener { femaleIdClick(key) }
+        }
+        values.maxBy { it.actionDate }?.let { breeding ->
+            maleCell.text = breeding.male
+            estimatedBirth.text = breeding.birthExpectedAt.asDisplayable()
+            maleCell.setOnClickListener { maleIdClick(breeding.male) }
         }
 
         val graphViews: Map<Int, TextView> = hashMapOf(
@@ -58,5 +66,4 @@ class GraphBreedingViewHolder(val view: View) : BaseMasterHolder<Breeding>(view)
             graphViews.getValue(month).text = sb.toString()
         }
     }
-
 }
