@@ -281,22 +281,16 @@
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right" />
 
-    <!--<fragment-->
-    <!--android:id="@+id/plannerFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.PlannerFragment"-->
-    <!--android:label="@string/planner"-->
-    <!--tools:layout="@layout/fragment_planner" />-->
+    <fragment
+        android:id="@+id/plannerFragment"
+        android:name="com.farmexpert.android.fragments.PlannerFragment"
+        android:label="@string/planner"
+        tools:layout="@layout/fragment_planner" />
 
     <!--<fragment-->
     <!--android:id="@+id/statisticsFragment"-->
     <!--android:name="com.fermavatamanu.android.fragments.StatisticsFragment"-->
     <!--android:label="@string/nav_statistics"-->
     <!--tools:layout="@layout/fragment_statistics" />-->
-
-    <!--<fragment-->
-    <!--android:id="@+id/recoveryFragment"-->
-    <!--android:name="com.fermavatamanu.android.fragments.RecoveryFragment"-->
-    <!--android:label="@string/recuperare_date"-->
-    <!--tools:layout="@layout/fragment_recovery" />-->
 
 </navigation>
