@@ -3,12 +3,18 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/25/19 5:10 PM.
+ * Last modified 4/25/19 8:58 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
 package com.farmexpert.android.planner
 
+import com.farmexpert.android.R
+
 class PlannerVaccinationsFragment : BasePlannerFragment() {
+
+    override fun getHeaderText(): String {
+        return getString(R.string.planner_vaccinations_title)
+    }
 
 }

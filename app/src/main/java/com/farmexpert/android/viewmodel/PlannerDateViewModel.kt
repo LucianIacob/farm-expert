@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/25/19 5:10 PM.
+ * Last modified 4/25/19 8:58 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -23,10 +23,6 @@ import java.util.*
 class PlannerDateViewModel : ViewModel() {
 
     private val date: MutableLiveData<Date> = MutableLiveData()
-
-    init {
-        setDate(Date())
-    }
 
     fun setDate(newDate: Date) {
         date.value = newDate

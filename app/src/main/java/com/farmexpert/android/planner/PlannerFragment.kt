@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/25/19 5:10 PM.
+ * Last modified 4/25/19 8:58 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -22,10 +22,11 @@ import com.farmexpert.android.fragments.BaseFragment
 import com.farmexpert.android.utils.getShort
 import com.farmexpert.android.viewmodel.PlannerDateViewModel
 import kotlinx.android.synthetic.main.fragment_planner.*
+import java.util.*
 
 class PlannerFragment : BaseFragment() {
 
-    private lateinit var mPlannerDateViewModel: PlannerDateViewModel
+    private lateinit var plannerDateViewModel: PlannerDateViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,12 +39,11 @@ class PlannerFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         inflateFragments()
-        mPlannerDateViewModel = ViewModelProviders.of(this).get(PlannerDateViewModel::class.java)
-//        if (PlannerConstants.SHOULD_RESET_PLANNER_DATE) {
-//            mPlannerDateViewModel.setDate(Date())
-//        } else {
-//            PlannerConstants.SHOULD_RESET_PLANNER_DATE = true
-//        }
+        plannerDateViewModel = ViewModelProviders.of(this).get(PlannerDateViewModel::class.java)
+
+        (savedInstanceState?.getSerializable(KEY_SELECTED_DATE) as? Date)?.let {
+            plannerDateViewModel.setDate(it)
+        } ?: run { plannerDateViewModel.setDate(Date()) }
     }
 
     private fun inflateFragments() {
@@ -62,14 +62,23 @@ class PlannerFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        prevDayBtn.setOnClickListener { mPlannerDateViewModel.prevDay() }
-        nextDayBtn.setOnClickListener { mPlannerDateViewModel.nextDay() }
-        mPlannerDateViewModel.getDate().observe(this,
-            Observer { date -> currentDay.text = date.getShort() })
+        prevDayBtn.setOnClickListener { plannerDateViewModel.prevDay() }
+        nextDayBtn.setOnClickListener { plannerDateViewModel.nextDay() }
+        plannerDateViewModel.getDate()
+            .observe(this, Observer { date -> currentDay.text = date.getShort() })
     }
 
     override fun onPause() {
         super.onPause()
-        mPlannerDateViewModel.getDate().removeObservers(this)
+        plannerDateViewModel.getDate().removeObservers(this)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable(KEY_SELECTED_DATE, plannerDateViewModel.getDate().value)
+    }
+
+    companion object {
+        const val KEY_SELECTED_DATE = "com.farmexpert.android.Planner.SelectedDate"
     }
 }
