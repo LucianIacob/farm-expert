@@ -12,7 +12,8 @@
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/small_margin"
         android:layout_weight="1"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
         <FrameLayout
             android:id="@+id/heatsContainer"
@@ -27,21 +28,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/tiny_margin"
+            android:layout_marginEnd="@dimen/tiny_margin"
             android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/small_margin"
-        android:layout_weight="1"
-        android:baselineAligned="false">
 
         <FrameLayout
             android:id="@+id/vaccinationsContainer"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/tiny_margin"
             android:layout_marginEnd="@dimen/tiny_margin"
             android:layout_weight="1"
             tools:ignore="NestedWeights" />

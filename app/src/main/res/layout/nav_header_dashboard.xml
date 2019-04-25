@@ -3,18 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@drawable/nav_header_gradient"
     android:gravity="bottom"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
-
-    <View
-        android:id="@+id/developer_mode"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/userIcon"
@@ -33,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/medium_margin"
         android:layout_marginTop="@dimen/small_margin"
-        android:fontFamily="@font/new_telegroteskscreen_regular"
-        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/white"
         android:textSize="@dimen/large_text"
         app:layout_constraintTop_toBottomOf="@id/userIcon" />
 
@@ -45,7 +36,7 @@
         android:layout_marginStart="@dimen/medium_margin"
         android:layout_marginTop="@dimen/tiny_margin"
         android:layout_marginEnd="@dimen/large_margin"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/telegroteskscreen_medium"
         android:textColor="@color/black"
         android:textSize="@dimen/text_18"
         app:layout_constraintBottom_toTopOf="@id/userEmail"
@@ -57,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/medium_margin"
         android:fontFamily="@font/telegroteskscreen_medium"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_18"
         app:layout_constraintTop_toBottomOf="@id/userName" />
 
@@ -65,8 +56,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/medium_margin"
-        android:alpha="0.7"
-        android:background="@color/colorPrimaryDark"
         app:layout_constraintTop_toBottomOf="@id/userEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

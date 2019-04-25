@@ -283,7 +283,7 @@
 
     <fragment
         android:id="@+id/plannerFragment"
-        android:name="com.farmexpert.android.fragments.PlannerFragment"
+        android:name="com.farmexpert.android.planner.PlannerFragment"
         android:label="@string/planner"
         tools:layout="@layout/fragment_planner" />
 

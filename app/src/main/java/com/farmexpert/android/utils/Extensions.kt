@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 9:11 PM.
+ * Last modified 4/25/19 5:10 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -58,6 +58,19 @@ fun Date.getShort(): String {
     val simpleDateFormat = SimpleDateFormat(format, Locale.getDefault())
     return simpleDateFormat.format(this)
 }
+
+fun Date.getPrevDay(): Date {
+    val calendar = Calendar.getInstance().also { it.time = this }
+    calendar.add(Calendar.DATE, -1)
+    return calendar.time
+}
+
+fun Date.getNextDay(): Date {
+    val calendar = Calendar.getInstance().also { it.time = this }
+    calendar.add(Calendar.DATE, 1)
+    return calendar.time
+}
+
 
 fun Calendar.year() = this.get(Calendar.YEAR)
 fun Calendar.month() = this.get(Calendar.MONTH)
