@@ -115,10 +115,11 @@
     <string name="dec">DEC</string>
 
     <string name="err_animal_not_exists">The selected animal does not exists in this farm.\n\nPress OK to go back on the graph screen.</string>
-    <string name="planner_heatings_title">Heat Cycle</string>
+    <string name="planner_heats_title">Heat Cycle</string>
     <string name="planner_reprod_control_title">Reproduction Control</string>
     <string name="planner_disinfections_title">Disinfections</string>
     <string name="planner_vaccinations_title">Vaccines</string>
+    <string name="planner_heats_reason">The animal might be in heat cycle.</string>
 
     <string-array name="gender_types">
         <item>Unknown</item>
