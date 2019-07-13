@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 9:36 PM.
+ * Last modified 7/13/19 11:19 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -21,15 +21,18 @@ import com.farmexpert.android.dialogs.EditBreedingDialogFragment
 import com.farmexpert.android.model.Breeding
 import com.farmexpert.android.utils.AppUtils
 import com.farmexpert.android.utils.FirestorePath
+import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
+import org.jetbrains.anko.error
 import java.util.*
 
 class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>() {
 
     private val args: BreedingsDetailFragmentArgs by navArgs()
+    private var latestBreeding: Breeding? = null
 
     override val snapshotParser: SnapshotParser<Breeding> = SnapshotParser {
         it.toObject(Breeding::class.java)!!.apply { id = it.id }
@@ -60,20 +63,44 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
             .orderBy(FirestorePath.Breeding.ACTION_DATE, Query.Direction.DESCENDING)
     }
 
+    override fun onNewDataArrived(snapshots: ObservableSnapshotArray<Breeding>) {
+        latestBreeding = snapshots.maxBy { it.actionDate }
+    }
+
     override fun constructEntityFromBundle(bundle: Bundle): Any {
-        val date = Date(bundle.getLong(BaseAddRecordDialogFragment.ADD_DIALOG_DATE))
+        val breedingDate = Date(bundle.getLong(BaseAddRecordDialogFragment.ADD_DIALOG_DATE))
         val male = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_MALE, "")
         val note = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_NOTE, "")
-        val expectedBirth = AppUtils.getExpectedBirth(date)
+        val expectedBirthDate = AppUtils.getExpectedBirthDate(breedingDate)
 
-        return Breeding(
+        val breedingToAdd = Breeding(
             female = getAnimalId(),
             male = male,
-            actionDate = Timestamp(date),
+            actionDate = Timestamp(breedingDate),
             note = note,
-            birthExpectedAt = Timestamp(expectedBirth),
-            createdBy = currentUser?.uid
+            birthExpectedAt = Timestamp(expectedBirthDate),
+            createdBy = currentUser?.uid,
+            latestBreeding = true
         )
+
+        latestBreeding?.let {
+            if (breedingToAdd.actionDate.compareTo(it.actionDate) == 1) {
+                removeLatestBreedingFlag(breedingToAmend = it)
+                latestBreeding = breedingToAdd
+            } else {
+                breedingToAdd.latestBreeding = false
+            }
+        }
+
+        return breedingToAdd
+    }
+
+    private fun removeLatestBreedingFlag(breedingToAmend: Breeding) {
+        breedingToAmend.id?.let {
+            getCollectionReference().document(it)
+                .update(FirestorePath.Breeding.LATEST_BREEDING, false)
+                .addOnFailureListener { error { it } }
+        }
     }
 
     override fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any> {

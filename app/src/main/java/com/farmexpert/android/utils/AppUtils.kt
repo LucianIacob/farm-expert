@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/13/19 6:34 PM.
+ * Last modified 7/13/19 11:19 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -55,7 +55,7 @@ class AppUtils {
             return Timestamp(calendar.time)
         }
 
-        fun getExpectedBirth(breedingDate: Date): Date? {
+        fun getExpectedBirthDate(breedingDate: Date): Date? {
             val breedingCalendar = Calendar.getInstance().apply { time = breedingDate }
 
             val resources = FarmExpertApplication.appContext.resources

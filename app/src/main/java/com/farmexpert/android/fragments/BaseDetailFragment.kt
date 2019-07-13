@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/15/19 1:08 PM.
+ * Last modified 7/13/19 11:19 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -24,6 +24,7 @@ import com.farmexpert.android.model.BaseEntity
 import com.farmexpert.android.utils.hidden
 import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
@@ -66,6 +67,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
             ::createHolder
         ) {
             override fun onDataChanged() {
+                onNewDataArrived(snapshots)
                 loadingHide()
                 if (itemCount != 0) {
                     placeholderText?.hidden()
@@ -76,6 +78,9 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
         }
 
         actionsRecycler.adapter = adapter
+    }
+
+    open fun onNewDataArrived(snapshots: ObservableSnapshotArray<ModelClass>) {
     }
 
     abstract fun getQuery(): Query
