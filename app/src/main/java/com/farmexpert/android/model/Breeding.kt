@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/13/19 11:19 PM.
+ * Last modified 7/15/19 11:34 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -24,7 +24,7 @@ data class Breeding(
     @PropertyName(FirestorePath.Breeding.NOTE) val note: String = "",
     @PropertyName(FirestorePath.Breeding.EXPECTED_BIRTH) val birthExpectedAt: Timestamp = Timestamp.now(),
     @PropertyName(FirestorePath.Breeding.CREATED_BY) val createdBy: String? = "",
-    @PropertyName(FirestorePath.Breeding.LATEST_BREEDING) var latestBreeding: Boolean? = false
+    @PropertyName(FirestorePath.Breeding.LATEST_BREEDING) var latestBreeding: Boolean = false
 ) : BaseEntity() {
 
     @Exclude

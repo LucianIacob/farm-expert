@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 9:36 PM.
+ * Last modified 7/15/19 11:34 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -21,10 +21,12 @@ import com.farmexpert.android.dialogs.EditBirthDialogFragment
 import com.farmexpert.android.model.Animal
 import com.farmexpert.android.model.Birth
 import com.farmexpert.android.utils.FirestorePath
+import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
+import org.jetbrains.anko.error
 import org.jetbrains.anko.okButton
 import org.jetbrains.anko.support.v4.alert
 import java.util.*
@@ -50,12 +52,40 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
         it.toObject(Birth::class.java)!!.apply { id = it.id }
     }
 
+    override fun onNewDataArrived(snapshots: ObservableSnapshotArray<Birth>) {
+        val latestBirth = snapshots.maxBy { it.dateOfBirth }
+
+        if (latestBirth?.latestBirth == false) {
+            updateLatestBirthFlag(birthToAmend = latestBirth, flagValue = true)
+        }
+
+        snapshots.minusElement(latestBirth).forEach {
+            if (it?.latestBirth == true) {
+                updateLatestBirthFlag(birthToAmend = it, flagValue = false)
+            }
+        }
+    }
+
+    private fun updateLatestBirthFlag(birthToAmend: Birth?, flagValue: Boolean) {
+        birthToAmend?.id?.let {
+            getCollectionReference().document(it)
+                .update(FirestorePath.Birth.LATEST_BIRTH, flagValue)
+                .addOnFailureListener { error { it } }
+        }
+    }
+
     override fun constructEntityFromBundle(bundle: Bundle): Birth {
         val calfId = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_CALF, "")
         val dateOfBirth = Date(bundle.getLong(BaseAddRecordDialogFragment.ADD_DIALOG_DATE))
         val note = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_NOTE, "")
 
-        return Birth(calfId, Timestamp(dateOfBirth), getAnimalId(), note, currentUser?.uid)
+        return Birth(
+            calfId = calfId,
+            dateOfBirth = Timestamp(dateOfBirth),
+            motherId = getAnimalId(),
+            note = note,
+            createdBy = currentUser?.uid
+        )
     }
 
     override fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any> {
