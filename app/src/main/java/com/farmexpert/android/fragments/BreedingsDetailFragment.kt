@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/13/19 11:19 PM.
+ * Last modified 7/15/19 11:19 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -32,7 +32,6 @@ import java.util.*
 class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>() {
 
     private val args: BreedingsDetailFragmentArgs by navArgs()
-    private var latestBreeding: Breeding? = null
 
     override val snapshotParser: SnapshotParser<Breeding> = SnapshotParser {
         it.toObject(Breeding::class.java)!!.apply { id = it.id }
@@ -64,7 +63,17 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
     }
 
     override fun onNewDataArrived(snapshots: ObservableSnapshotArray<Breeding>) {
-        latestBreeding = snapshots.maxBy { it.actionDate }
+        val latestBreeding = snapshots.maxBy { it.actionDate }
+
+        if (latestBreeding?.latestBreeding == false) {
+            updateLatestBreedingFlag(breedingToAmend = latestBreeding, flagValue = true)
+        }
+
+        snapshots.minusElement(latestBreeding).forEach {
+            if (it?.latestBreeding == true) {
+                updateLatestBreedingFlag(breedingToAmend = it, flagValue = false)
+            }
+        }
     }
 
     override fun constructEntityFromBundle(bundle: Bundle): Any {
@@ -73,32 +82,20 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
         val note = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_NOTE, "")
         val expectedBirthDate = AppUtils.getExpectedBirthDate(breedingDate)
 
-        val breedingToAdd = Breeding(
+        return Breeding(
             female = getAnimalId(),
             male = male,
             actionDate = Timestamp(breedingDate),
             note = note,
             birthExpectedAt = Timestamp(expectedBirthDate),
-            createdBy = currentUser?.uid,
-            latestBreeding = true
+            createdBy = currentUser?.uid
         )
-
-        latestBreeding?.let {
-            if (breedingToAdd.actionDate.compareTo(it.actionDate) == 1) {
-                removeLatestBreedingFlag(breedingToAmend = it)
-                latestBreeding = breedingToAdd
-            } else {
-                breedingToAdd.latestBreeding = false
-            }
-        }
-
-        return breedingToAdd
     }
 
-    private fun removeLatestBreedingFlag(breedingToAmend: Breeding) {
-        breedingToAmend.id?.let {
+    private fun updateLatestBreedingFlag(breedingToAmend: Breeding?, flagValue: Boolean) {
+        breedingToAmend?.id?.let {
             getCollectionReference().document(it)
-                .update(FirestorePath.Breeding.LATEST_BREEDING, false)
+                .update(FirestorePath.Breeding.LATEST_BREEDING, flagValue)
                 .addOnFailureListener { error { it } }
         }
     }
