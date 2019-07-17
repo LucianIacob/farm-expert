@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/13/19 11:19 PM.
+ * Last modified 7/17/19 8:29 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -19,7 +19,7 @@ import com.google.firebase.Timestamp
 import org.jetbrains.anko.error
 import java.util.*
 
-class HeatsPlannerFragment : BasePlannerFragment() {
+class PlannerHeatsFragment : BasePlannerFragment() {
 
     override fun getHeaderText(): String {
         return getString(R.string.planner_heats_title)

@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/13/19 6:34 PM.
+ * Last modified 7/17/19 8:29 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -47,7 +47,7 @@ class PlannerFragment : BaseFragment() {
     }
 
     private fun inflateFragments() {
-        inflateFragment(HeatsPlannerFragment(), R.id.heatsContainer)
+        inflateFragment(PlannerHeatsFragment(), R.id.heatsContainer)
         inflateFragment(PlannerReproductionControlFragment(), R.id.reprodControlContainer)
         inflateFragment(PlannerVaccinationsFragment(), R.id.vaccinationsContainer)
         inflateFragment(PlannerDisinfectionsFragment(), R.id.disinfectionsContainer)
