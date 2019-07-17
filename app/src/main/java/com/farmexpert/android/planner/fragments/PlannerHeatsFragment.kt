@@ -3,13 +3,14 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/17/19 8:29 PM.
+ * Last modified 7/17/19 10:02 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
 package com.farmexpert.android.planner.fragments
 
 import com.farmexpert.android.R
+import com.farmexpert.android.planner.model.PlannerContainer
 import com.farmexpert.android.planner.transformer.PlannerDataTransformer
 import com.farmexpert.android.utils.ConfigPickerUtils
 import com.farmexpert.android.utils.FirestorePath
@@ -24,6 +25,8 @@ class PlannerHeatsFragment : BasePlannerFragment() {
     override fun getHeaderText(): String {
         return getString(R.string.planner_heats_title)
     }
+
+    override fun getPlannerContainer() = PlannerContainer.HEAT_CYCLE
 
     override fun retrieveDataForDate(date: Date) {
         val heatCycleStart = farmTimelinePrefs.getInt(

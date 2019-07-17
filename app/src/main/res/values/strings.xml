@@ -100,6 +100,10 @@
     <string name="err_retrieving_items">Error while retrieving data. Please try again later.</string>
     <string name="search_id">Search ID…</string>
 
+    <string name="planner_item_details_hint">Details</string>
+    <string name="planner_item_add_title">Add custom reminder</string>
+    <string name="dialog_add_negative_btn">Close</string>
+
     <!--MONTHS-->
     <string name="jan">JAN</string>
     <string name="feb">FEB</string>
