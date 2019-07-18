@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/13/19 6:34 PM.
+ * Last modified 7/18/19 9:55 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -17,8 +17,11 @@ import kotlinx.android.synthetic.main.item_planner.view.*
 class PlannerViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(plannerItem: PlannerItem, clickListener: (PlannerItem) -> Unit) = with(view) {
-        animalId.text = plannerItem.animalId
-        reason.text = plannerItem.reason
+        headline.text = plannerItem.headline
+        plannerItem.reason?.let {
+            reason.text = it
+            reason.visibility = View.VISIBLE
+        } ?: run { reason.visibility = View.GONE }
     }
 
 }

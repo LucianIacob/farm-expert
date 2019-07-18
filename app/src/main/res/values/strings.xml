@@ -98,6 +98,7 @@
     <string name="err_updating_record">An error occurred updating the item. Please try again later.</string>
     <string name="item_updated">Item successfully updated</string>
     <string name="err_retrieving_items">Error while retrieving data. Please try again later.</string>
+    <string name="err_retrieving_reminders">Error while retrieving custom reminders. Please try again later.</string>
     <string name="search_id">Search ID…</string>
 
     <string name="planner_item_details_hint">Details</string>

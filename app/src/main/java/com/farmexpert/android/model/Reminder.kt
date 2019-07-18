@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/17/19 10:02 PM.
+ * Last modified 7/18/19 9:55 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -18,5 +18,5 @@ data class Reminder(
     @PropertyName(FirestorePath.Reminder.REMINDER_DATE) val reminderDate: Timestamp = Timestamp(Date()),
     @PropertyName(FirestorePath.Reminder.DETAILS) val details: String = "",
     @PropertyName(FirestorePath.Reminder.CREATED_BY) val createdBy: String? = "",
-    @PropertyName(FirestorePath.Reminder.HOLDER_PARENT) val holderParent: String
+    @PropertyName(FirestorePath.Reminder.HOLDER_PARENT) val holderParent: String = ""
 ) : BaseEntity()

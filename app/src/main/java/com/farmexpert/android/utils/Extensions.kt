@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/13/19 6:34 PM.
+ * Last modified 7/18/19 9:55 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -71,7 +71,7 @@ fun Date.getNextDay(): Date {
     return calendar.time
 }
 
-fun Date.shift(days: Int, jumpTo: TimeOfTheDay = TimeOfTheDay.DEFAULT): Date {
+fun Date.shift(days: Int = 0, jumpTo: TimeOfTheDay = TimeOfTheDay.DEFAULT): Date {
     val calendar = Calendar.getInstance().also { it.time = this }
     calendar.add(Calendar.DATE, days)
 

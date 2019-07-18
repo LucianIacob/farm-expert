@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/17/19 10:02 PM.
+ * Last modified 7/18/19 9:55 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -39,8 +39,8 @@ class PlannerHeatsFragment : BasePlannerFragment() {
             ConfigPickerUtils.getDefaultValue(getString(R.string.pref_heating_end_key), resources)
         )
 
-        val startDate = date.shift(-heatCycleEnd, TimeOfTheDay.START)
-        val endDate = date.shift(-heatCycleStart, TimeOfTheDay.END)
+        val startDate = date.shift(days = -heatCycleEnd, jumpTo = TimeOfTheDay.START)
+        val endDate = date.shift(days = -heatCycleStart, jumpTo = TimeOfTheDay.END)
 
         loadingShow()
         farmReference.collection(FirestorePath.Collections.BREEDINGS)
@@ -50,11 +50,11 @@ class PlannerHeatsFragment : BasePlannerFragment() {
             .get()
             .addOnSuccessListener {
                 PlannerDataTransformer.transformForHeatsContainer(it, resources)?.let { data ->
-                    adapter.data = data
+                    dataRetrievedSuccessfully(data, PLANNER_DATA_ANIMALS)
                 }
             }
             .addOnFailureListener { error { it } }
-            .addOnCompleteListener { loadingHide() }
+            .addOnCompleteListener { super.retrieveDataForDate(date) }
     }
 
 }

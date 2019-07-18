@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/17/19 10:02 PM.
+ * Last modified 7/18/19 9:55 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -27,9 +27,14 @@ import com.farmexpert.android.model.Reminder
 import com.farmexpert.android.planner.adapter.PlannerAdapter
 import com.farmexpert.android.planner.fragments.dialog.AddPlannerItemDialogFragment
 import com.farmexpert.android.planner.model.PlannerContainer
+import com.farmexpert.android.planner.model.PlannerItem
+import com.farmexpert.android.planner.transformer.PlannerDataTransformer
 import com.farmexpert.android.utils.FirestorePath
+import com.farmexpert.android.utils.TimeOfTheDay
+import com.farmexpert.android.utils.shift
 import com.farmexpert.android.viewmodel.PlannerDateViewModel
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.android.synthetic.main.fragment_planner.*
 import kotlinx.android.synthetic.main.fragment_planner_section.*
 import org.jetbrains.anko.design.snackbar
@@ -41,9 +46,15 @@ import java.util.*
 
 abstract class BasePlannerFragment : BaseFragment() {
 
+    private var snapshotListener: ListenerRegistration? = null
     protected lateinit var adapter: PlannerAdapter
 
     private var plannerDateViewModel: PlannerDateViewModel? = null
+
+    protected var plannerData = mutableMapOf(
+        PLANNER_DATA_REMINDERS to emptyList<PlannerItem>(),
+        PLANNER_DATA_ANIMALS to emptyList()
+    )
 
     protected val farmTimelinePrefs: SharedPreferences =
         FarmExpertApplication.appContext.getSharedPreferences(
@@ -61,7 +72,7 @@ abstract class BasePlannerFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         containerHeader.text = getHeaderText()
-        PlannerAdapter { plannerItem -> toast(plannerItem.animalId) }.run {
+        PlannerAdapter { plannerItem -> plannerItem.headline?.let { toast(it) } }.run {
             adapter = this
             plannerRecycler.adapter = this
         }
@@ -123,7 +134,38 @@ abstract class BasePlannerFragment : BaseFragment() {
     abstract fun getPlannerContainer(): PlannerContainer
 
     open fun retrieveDataForDate(date: Date) {
+        snapshotListener?.remove()
+        retrieveRemindersForDate(date)
+    }
 
+    private fun retrieveRemindersForDate(date: Date) {
+        val startDate = date.shift(jumpTo = TimeOfTheDay.START)
+        val endDate = date.shift(jumpTo = TimeOfTheDay.END)
+
+        loadingShow()
+        snapshotListener = farmReference.collection(FirestorePath.Collections.REMINDERS)
+            .whereGreaterThanOrEqualTo(FirestorePath.Reminder.REMINDER_DATE, Timestamp(startDate))
+            .whereLessThanOrEqualTo(FirestorePath.Reminder.REMINDER_DATE, Timestamp(endDate))
+            .whereEqualTo(FirestorePath.Reminder.HOLDER_PARENT, getPlannerContainer().name)
+            .addSnapshotListener { querySnapshot, exception ->
+                loadingHide()
+                if (exception != null) {
+                    error { exception }
+                    toast(R.string.err_retrieving_reminders)
+                } else if (querySnapshot != null) {
+                    val reminders = PlannerDataTransformer.transformReminders(querySnapshot)
+                    dataRetrievedSuccessfully(reminders, PLANNER_DATA_REMINDERS)
+                }
+            }
+    }
+
+    open fun dataRetrievedSuccessfully(plannerList: List<PlannerItem>, dataType: String) {
+        plannerData[dataType] = plannerList
+
+        val adapterData = (plannerData[PLANNER_DATA_ANIMALS] as List<PlannerItem>)
+            .plus((plannerData[PLANNER_DATA_REMINDERS] as List<PlannerItem>))
+
+        adapter.data = adapterData
     }
 
     override fun onPause() {
@@ -134,6 +176,8 @@ abstract class BasePlannerFragment : BaseFragment() {
 
     companion object {
         const val ADD_PLANNER_ITEM_RQ = 6374
+        const val PLANNER_DATA_REMINDERS = "com.farmexpert.android.PlannerData.Reminders"
+        const val PLANNER_DATA_ANIMALS = "com.farmexpert.android.PlannerData.Animals"
     }
 
 }
