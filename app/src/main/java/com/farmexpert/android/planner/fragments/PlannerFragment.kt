@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/17/19 8:29 PM.
+ * Last modified 8/5/19 8:57 AM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -19,6 +19,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.farmexpert.android.R
 import com.farmexpert.android.fragments.BaseFragment
+import com.farmexpert.android.utils.NavigationConstants
 import com.farmexpert.android.utils.getShort
 import com.farmexpert.android.viewmodel.PlannerDateViewModel
 import kotlinx.android.synthetic.main.fragment_planner.*
@@ -43,7 +44,13 @@ class PlannerFragment : BaseFragment() {
 
         (savedInstanceState?.getSerializable(KEY_SELECTED_DATE) as? Date)?.let {
             plannerDateViewModel.setDate(it)
-        } ?: run { plannerDateViewModel.setDate(Date()) }
+        }
+
+        if (NavigationConstants.SHOULD_RESET_PLANNER_DATE) {
+            plannerDateViewModel.setDate(Date())
+        } else {
+            NavigationConstants.SHOULD_RESET_PLANNER_DATE = true
+        }
     }
 
     private fun inflateFragments() {
@@ -76,6 +83,7 @@ class PlannerFragment : BaseFragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putSerializable(KEY_SELECTED_DATE, plannerDateViewModel.getDate().value)
+        NavigationConstants.SHOULD_RESET_PLANNER_DATE = false
     }
 
     companion object {

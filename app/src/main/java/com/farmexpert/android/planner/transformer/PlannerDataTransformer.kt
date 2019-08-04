@@ -3,13 +3,14 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 8/4/19 10:12 PM.
+ * Last modified 8/4/19 10:52 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
 package com.farmexpert.android.planner.transformer
 
 import android.content.res.Resources
+import com.farmexpert.android.NavGraphDirections
 import com.farmexpert.android.R
 import com.farmexpert.android.model.Birth
 import com.farmexpert.android.model.Breeding
@@ -29,14 +30,20 @@ class PlannerDataTransformer {
                 val breeding = it.toObject(Breeding::class.java)
                 PlannerItem(
                     headline = breeding.female,
-                    reason = resources.getString(R.string.planner_heats_reason)
+                    reason = resources.getString(R.string.planner_heats_reason),
+                    onClickAction = NavGraphDirections.actionGlobalBreedingsDetailFragment(animalId = breeding.female)
                 )
             }
         }
 
         fun transformReminders(querySnapshot: QuerySnapshot): List<PlannerItem> {
             return querySnapshot.map { it.toObject(Reminder::class.java) }
-                .map { PlannerItem(headline = it.details) }
+                .map {
+                    PlannerItem(
+                        headline = it.details,
+                        longClickId = it.id
+                    )
+                }
         }
 
         fun transformGestations(
@@ -48,7 +55,8 @@ class PlannerDataTransformer {
                 val breeding = it.toObject(Breeding::class.java)
                 PlannerItem(
                     headline = breeding.female,
-                    reason = res.getString(R.string.planner_gest_ctrl_reason, gestationCtrlDays)
+                    reason = res.getString(R.string.planner_gest_ctrl_reason, gestationCtrlDays),
+                    onClickAction = NavGraphDirections.actionGlobalBreedingsDetailFragment(animalId = breeding.female)
                 )
             }
         }
@@ -65,7 +73,8 @@ class PlannerDataTransformer {
                     reason = resources.getString(
                         R.string.planner_physiological_ctrl_reason,
                         physiologicalPeriod
-                    )
+                    ),
+                    onClickAction = NavGraphDirections.actionGlobalBirthsDetailFragment(animalId = birth.motherId)
                 )
             }
         }
@@ -82,7 +91,8 @@ class PlannerDataTransformer {
                     reason = resources.getString(
                         R.string.planner_first_vaccine_reason,
                         daysOfFirstVaccine
-                    )
+                    ),
+                    onClickAction = NavGraphDirections.actionGlobalBirthsDetailFragment(animalId = birth.motherId)
                 )
             }
         }
@@ -99,7 +109,8 @@ class PlannerDataTransformer {
                     reason = resources.getString(
                         R.string.planner_before_birth_vaccine_reason,
                         daysCount
-                    )
+                    ),
+                    onClickAction = NavGraphDirections.actionGlobalBreedingsDetailFragment(animalId = breeding.female)
                 )
             }
         }

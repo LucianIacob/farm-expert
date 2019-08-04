@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 8/4/19 9:10 PM.
+ * Last modified 8/4/19 10:52 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -19,6 +19,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.ConfigurationActivity
 import com.farmexpert.android.app.FarmExpertApplication
@@ -30,6 +32,7 @@ import com.farmexpert.android.planner.model.PlannerContainer
 import com.farmexpert.android.planner.model.PlannerItem
 import com.farmexpert.android.planner.transformer.PlannerDataTransformer
 import com.farmexpert.android.utils.FirestorePath
+import com.farmexpert.android.utils.NavigationConstants
 import com.farmexpert.android.utils.TimeOfTheDay
 import com.farmexpert.android.utils.shift
 import com.farmexpert.android.viewmodel.PlannerDateViewModel
@@ -72,10 +75,22 @@ abstract class BasePlannerFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         containerHeader.text = getHeaderText()
-        PlannerAdapter { plannerItem -> plannerItem.headline?.let { toast(it) } }.run {
+        PlannerAdapter(
+            clickListener = { handleClick(it) },
+            longClickListener = { handleLongClick(it) }
+        ).run {
             adapter = this
             plannerRecycler.adapter = this
         }
+    }
+
+    private fun handleClick(clickDirections: NavDirections) {
+        NavigationConstants.SHOULD_RESET_PLANNER_DATE = false
+        parentFragment?.findNavController()?.navigate(clickDirections)
+    }
+
+    private fun handleLongClick(reminderId: String) {
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
