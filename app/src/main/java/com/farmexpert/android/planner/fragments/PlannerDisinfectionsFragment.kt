@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/17/19 10:02 PM.
+ * Last modified 8/4/19 10:12 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -11,6 +11,13 @@ package com.farmexpert.android.planner.fragments
 
 import com.farmexpert.android.R
 import com.farmexpert.android.planner.model.PlannerContainer
+import com.farmexpert.android.planner.transformer.PlannerDataTransformer
+import com.farmexpert.android.utils.ConfigPickerUtils
+import com.farmexpert.android.utils.FirestorePath
+import com.farmexpert.android.utils.TimeOfTheDay
+import com.farmexpert.android.utils.shift
+import com.google.firebase.Timestamp
+import java.util.*
 
 class PlannerDisinfectionsFragment : BasePlannerFragment() {
 
@@ -20,4 +27,29 @@ class PlannerDisinfectionsFragment : BasePlannerFragment() {
         return getString(R.string.planner_disinfections_title)
     }
 
+    override fun retrieveDataForDate(date: Date) {
+        val daysOfDisinfection = farmTimelinePrefs.getInt(
+            getString(R.string.pref_disinfection_key),
+            ConfigPickerUtils.getDefaultValue(
+                getString(R.string.pref_disinfection_key),
+                resources
+            )
+        )
+
+        val startDate = date.shift(days = daysOfDisinfection, jumpTo = TimeOfTheDay.START)
+        val endDate = date.shift(days = daysOfDisinfection, jumpTo = TimeOfTheDay.END)
+
+        farmReference.collection(FirestorePath.Collections.BREEDINGS)
+            .whereGreaterThanOrEqualTo(FirestorePath.Breeding.EXPECTED_BIRTH, Timestamp(startDate))
+            .whereLessThanOrEqualTo(FirestorePath.Breeding.EXPECTED_BIRTH, Timestamp(endDate))
+            .whereEqualTo(FirestorePath.Breeding.LATEST_BREEDING, true)
+            .get()
+            .addOnSuccessListener {
+                val disinfections = PlannerDataTransformer
+                    .transformBeforeBirthItems(it, daysOfDisinfection, resources)
+                dataRetrievedSuccessfully(disinfections, PLANNER_DATA_ANIMALS)
+            }
+            .addOnFailureListener { error { it } }
+            .addOnCompleteListener { super.retrieveDataForDate(date) }
+    }
 }

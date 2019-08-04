@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 8/4/19 9:57 PM.
+ * Last modified 8/4/19 10:12 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -99,7 +99,7 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
             .addOnSuccessListener {
                 vaccine2Arrived = true
                 val vaccine2 = PlannerDataTransformer
-                    .transformBeforeBirthVaccine(it, daysOfSecondVaccine, resources)
+                    .transformBeforeBirthItems(it, daysOfSecondVaccine, resources)
                 dataRetrieved(vaccine2, PLANNER_DATA_VACCINE_2, date)
             }
             .addOnFailureListener { error { it } }
@@ -125,7 +125,7 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
             .addOnSuccessListener {
                 vaccine3Arrived = true
                 val vaccine3 = PlannerDataTransformer
-                    .transformBeforeBirthVaccine(it, daysOfThirdVaccine, resources)
+                    .transformBeforeBirthItems(it, daysOfThirdVaccine, resources)
                 dataRetrieved(vaccine3, PLANNER_DATA_VACCINE_3, date)
             }
             .addOnFailureListener { error { it } }
@@ -151,7 +151,7 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
             .addOnSuccessListener {
                 vaccine4Arrived = true
                 val vaccine4 = PlannerDataTransformer
-                    .transformBeforeBirthVaccine(it, daysOfForthVaccine, resources)
+                    .transformBeforeBirthItems(it, daysOfForthVaccine, resources)
                 dataRetrieved(vaccine4, PLANNER_DATA_VACCINE_4, date)
             }
             .addOnFailureListener { error { it } }

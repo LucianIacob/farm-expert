@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 8/4/19 9:57 PM.
+ * Last modified 8/4/19 10:12 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -24,7 +24,7 @@ class PlannerDataTransformer {
         fun transformForHeatsContainer(
             querySnapshot: QuerySnapshot,
             resources: Resources
-        ): List<PlannerItem>? {
+        ): List<PlannerItem> {
             return querySnapshot.map {
                 val breeding = it.toObject(Breeding::class.java)
                 PlannerItem(
@@ -87,15 +87,15 @@ class PlannerDataTransformer {
             }
         }
 
-        fun transformBeforeBirthVaccine(
+        fun transformBeforeBirthItems(
             querySnapshot: QuerySnapshot,
             daysCount: Int,
             resources: Resources
         ): List<PlannerItem> {
             return querySnapshot.map {
-                val birth = it.toObject(Breeding::class.java)
+                val breeding = it.toObject(Breeding::class.java)
                 PlannerItem(
-                    headline = birth.female,
+                    headline = breeding.female,
                     reason = resources.getString(
                         R.string.planner_before_birth_vaccine_reason,
                         daysCount
@@ -103,7 +103,5 @@ class PlannerDataTransformer {
                 )
             }
         }
-
     }
-
 }

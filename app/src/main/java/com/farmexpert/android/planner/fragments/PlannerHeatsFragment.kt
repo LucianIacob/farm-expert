@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/18/19 9:55 PM.
+ * Last modified 8/4/19 10:12 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -49,9 +49,8 @@ class PlannerHeatsFragment : BasePlannerFragment() {
             .whereEqualTo(FirestorePath.Breeding.LATEST_BREEDING, true)
             .get()
             .addOnSuccessListener {
-                PlannerDataTransformer.transformForHeatsContainer(it, resources)?.let { data ->
-                    dataRetrievedSuccessfully(data, PLANNER_DATA_ANIMALS)
-                }
+                val items = PlannerDataTransformer.transformForHeatsContainer(it, resources)
+                dataRetrievedSuccessfully(items, PLANNER_DATA_ANIMALS)
             }
             .addOnFailureListener { error { it } }
             .addOnCompleteListener { super.retrieveDataForDate(date) }
