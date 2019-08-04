@@ -125,6 +125,8 @@
     <string name="planner_disinfections_title">Disinfections</string>
     <string name="planner_vaccinations_title">Vaccines</string>
     <string name="planner_heats_reason">The animal might be in heat cycle.</string>
+    <string name="planner_gest_ctrl_reason">%d days since the last breeding</string>
+    <string name="planner_physiological_ctrl_reason">%d days since the last birth</string>
 
     <string-array name="gender_types">
         <item>Unknown</item>

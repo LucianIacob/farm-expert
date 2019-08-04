@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/18/19 9:55 PM.
+ * Last modified 8/4/19 9:10 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -51,7 +51,7 @@ abstract class BasePlannerFragment : BaseFragment() {
 
     private var plannerDateViewModel: PlannerDateViewModel? = null
 
-    protected var plannerData = mutableMapOf(
+    private var plannerData = mutableMapOf(
         PLANNER_DATA_REMINDERS to emptyList<PlannerItem>(),
         PLANNER_DATA_ANIMALS to emptyList()
     )
