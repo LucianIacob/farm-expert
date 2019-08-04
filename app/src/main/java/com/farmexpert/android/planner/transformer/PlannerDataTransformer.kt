@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 8/4/19 9:10 PM.
+ * Last modified 8/4/19 9:57 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -59,12 +59,46 @@ class PlannerDataTransformer {
             resources: Resources
         ): List<PlannerItem> {
             return querySnapshot.map {
-                val breeding = it.toObject(Birth::class.java)
+                val birth = it.toObject(Birth::class.java)
                 PlannerItem(
-                    headline = breeding.motherId,
+                    headline = birth.motherId,
                     reason = resources.getString(
                         R.string.planner_physiological_ctrl_reason,
                         physiologicalPeriod
+                    )
+                )
+            }
+        }
+
+        fun transformVaccine1(
+            querySnapshot: QuerySnapshot,
+            daysOfFirstVaccine: Int,
+            resources: Resources
+        ): List<PlannerItem> {
+            return querySnapshot.map {
+                val birth = it.toObject(Birth::class.java)
+                PlannerItem(
+                    headline = birth.motherId,
+                    reason = resources.getString(
+                        R.string.planner_first_vaccine_reason,
+                        daysOfFirstVaccine
+                    )
+                )
+            }
+        }
+
+        fun transformBeforeBirthVaccine(
+            querySnapshot: QuerySnapshot,
+            daysCount: Int,
+            resources: Resources
+        ): List<PlannerItem> {
+            return querySnapshot.map {
+                val birth = it.toObject(Breeding::class.java)
+                PlannerItem(
+                    headline = birth.female,
+                    reason = resources.getString(
+                        R.string.planner_before_birth_vaccine_reason,
+                        daysCount
                     )
                 )
             }

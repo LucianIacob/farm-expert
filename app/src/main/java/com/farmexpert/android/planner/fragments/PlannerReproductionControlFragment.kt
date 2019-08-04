@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 8/4/19 9:10 PM.
+ * Last modified 8/4/19 9:57 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -95,8 +95,8 @@ class PlannerReproductionControlFragment : BasePlannerFragment() {
             .addOnFailureListener { error { it } }
     }
 
-    private fun dataRetrieved(gestations: List<PlannerItem>, mapKey: String, date: Date) {
-        containerData[mapKey] = gestations
+    private fun dataRetrieved(data: List<PlannerItem>, mapKey: String, date: Date) {
+        containerData[mapKey] = data
 
         if (birthsArrived && gestationsArrived) {
             val combinedData = (containerData[PLANNER_DATA_GESTATIONS_CONTROL] as List<PlannerItem>)

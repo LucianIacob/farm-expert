@@ -127,6 +127,8 @@
     <string name="planner_heats_reason">The animal might be in heat cycle.</string>
     <string name="planner_gest_ctrl_reason">%d days since the last breeding</string>
     <string name="planner_physiological_ctrl_reason">%d days since the last birth</string>
+    <string name="planner_first_vaccine_reason">%d days since the last birth</string>
+    <string name="planner_before_birth_vaccine_reason">%d days before the estimated day of birth</string>
 
     <string-array name="gender_types">
         <item>Unknown</item>
