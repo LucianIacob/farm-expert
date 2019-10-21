@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:id="@+id/text_with_header_expand"
@@ -16,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        tools:text="Header text"
         android:fontFamily="@font/roboto"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/medium_text" />
@@ -27,7 +29,8 @@
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/small_margin"
         android:layout_weight="1"
-        android:fontFamily="@font/allerta"
+        android:fontFamily="@font/roboto"
+        tools:text="Value"
         android:gravity="end"
         android:textColor="@color/black"
         android:textSize="@dimen/text_18" />

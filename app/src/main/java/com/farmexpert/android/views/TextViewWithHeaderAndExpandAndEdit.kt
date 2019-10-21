@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/9/19 9:30 AM.
+ * Last modified 10/21/19 5:25 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.layout_text_view_with_header.view.*
 class TextViewWithHeaderAndExpandAndEdit(context: Context, attributes: AttributeSet) :
     LinearLayout(context, attributes) {
 
-    internal var isExpanded = false
+    private var isExpanded = false
 
     init {
         val typedArray =

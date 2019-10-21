@@ -3,16 +3,18 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/20/19 3:43 PM.
+ * Last modified 10/21/19 5:25 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
 package com.farmexpert.android.fragments
 
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
@@ -22,15 +24,20 @@ import com.farmexpert.android.model.Animal
 import com.farmexpert.android.transactions.DeleteAnimalTransaction
 import com.farmexpert.android.utils.*
 import com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Source
 import kotlinx.android.synthetic.main.fragment_animal_detail.*
-import org.jetbrains.anko.*
 import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.error
+import org.jetbrains.anko.noButton
+import org.jetbrains.anko.okButton
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.selector
 import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.yesButton
 
 class AnimalDetailFragment : BaseFragment() {
 
@@ -279,18 +286,29 @@ class AnimalDetailFragment : BaseFragment() {
     }
 
     private fun readTextInput(@StringRes hintId: Int, update: (String) -> Unit) {
-        alert {
-            customView = ctx.UI {
-                frameLayout {
-                    padding = dip(10)
-                    val newRace = editText().apply { this.hint = getString(hintId) }
-                    positiveButton(R.string.common_google_play_services_update_button) {
-                        update(newRace.text.toString())
-                    }
-                    negativeButton(R.string.fui_cancel) {}
+        activity?.let {
+            val view = layoutInflater.inflate(R.layout.dialog_simple_edit, null)
+            view.findViewById<TextInputLayout>(R.id.edittext_header).hint = getString(hintId)
+
+            val dialog = AlertDialog.Builder(it, R.style.Theme_AppCompat_Light_Dialog)
+                .setView(view)
+                .setPositiveButton(R.string.common_google_play_services_update_button) { _, i ->
+                    val edittext = view.findViewById<TextInputEditText>(R.id.edittext)
+                    update(edittext.text.toString())
                 }
-            }.view
-        }.show()
+                .setNegativeButton(R.string.fui_cancel) { _, _ -> }
+                .setCancelable(false)
+                .create()
+
+            dialog.setOnShowListener {
+                dialog.getButton(DialogInterface.BUTTON_NEGATIVE)
+                    .applyFarmexpertStyle(this@AnimalDetailFragment.requireContext())
+                dialog.getButton(DialogInterface.BUTTON_POSITIVE)
+                    .applyFarmexpertStyle(this@AnimalDetailFragment.requireContext())
+            }
+
+            dialog.show()
+        }
     }
 
     private fun updateField(

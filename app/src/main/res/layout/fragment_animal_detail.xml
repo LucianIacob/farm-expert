@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -136,33 +135,32 @@
             android:layout_marginTop="@dimen/small_margin"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/goToBirths"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/tiny_margin"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_weight="1"
-                android:background="@drawable/ic_button_secondary"
+                app:iconGravity="textStart"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:text="@string/dashboard_graph_births"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/large_text"
-                tools:ignore="ButtonStyle" />
+                app:iconPadding="@dimen/xl_margin"
+                app:iconSize="25dp"
+                app:strokeColor="@color/sea_green" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/goToBreedings"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/tiny_margin"
                 android:layout_weight="1"
-                android:background="@drawable/ic_button_secondary"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:textColor="@color/colorPrimaryDark"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:text="@string/dashboard_graph_breedings"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/large_text"
-                tools:ignore="ButtonStyle" />
+                app:strokeColor="@color/sea_green" />
 
         </LinearLayout>
 
@@ -172,33 +170,29 @@
             android:layout_marginTop="@dimen/small_margin"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/goToDisinfections"
                 android:layout_width="0dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_marginEnd="@dimen/tiny_margin"
                 android:layout_weight="1"
-                android:background="@drawable/ic_button_secondary"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:text="@string/dashboard_graph_disinfections"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/large_text"
-                tools:ignore="ButtonStyle" />
+                app:strokeColor="@color/sea_green" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/goToVitaminizations"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_marginStart="@dimen/tiny_margin"
                 android:layout_weight="1"
-                android:background="@drawable/ic_button_secondary"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:text="@string/dashboard_graph_vitaminisations"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/large_text"
-                tools:ignore="ButtonStyle" />
+                app:strokeColor="@color/sea_green" />
 
         </LinearLayout>
 
@@ -208,47 +202,42 @@
             android:layout_marginTop="@dimen/small_margin"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/goToVaccinations"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/tiny_margin"
                 android:layout_weight="1"
-                android:background="@drawable/ic_button_secondary"
+                android:textColor="@color/colorPrimaryDark"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:text="@string/dashboard_graph_vaccinations"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/large_text"
-                tools:ignore="ButtonStyle" />
+                app:strokeColor="@color/sea_green" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/goToPedicures"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_marginStart="@dimen/tiny_margin"
                 android:layout_weight="1"
-                android:background="@drawable/ic_button_secondary"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:text="@string/dashboard_graph_pedicures"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/large_text"
-                tools:ignore="ButtonStyle" />
+                app:strokeColor="@color/sea_green" />
 
         </LinearLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/goToTreatments"
             android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
-            android:background="@drawable/ic_button_secondary"
+            android:textColor="@color/colorPrimaryDark"
             android:fontFamily="@font/telegroteskscreen_medium"
             android:text="@string/dashboard_graph_treatments"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/large_text" />
+            app:strokeColor="@color/sea_green" />
 
         <View
             android:layout_width="wrap_content"

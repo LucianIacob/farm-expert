@@ -3,16 +3,21 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/18/19 9:55 PM.
+ * Last modified 10/21/19 5:25 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
 package com.farmexpert.android.utils
 
+import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
+import com.farmexpert.android.R
 import com.farmexpert.android.model.Animal
 import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
@@ -107,4 +112,13 @@ fun Date.month(): Int {
 
 fun Date.day(): Int {
     return Calendar.getInstance().apply { time = this@day }.day()
+}
+
+fun Button.applyFarmexpertStyle(context: Context) {
+    setBackgroundResource(0)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        setTextColor(resources.getColor(R.color.sea_green, null))
+    } else {
+        setTextColor(ContextCompat.getColor(context, R.color.sea_green))
+    }
 }
