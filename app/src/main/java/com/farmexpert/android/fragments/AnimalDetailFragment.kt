@@ -30,6 +30,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Source
+import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.fragment_animal_detail.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.error
@@ -119,7 +120,7 @@ class AnimalDetailFragment : BaseFragment() {
         loadingShow()
         animalRef.get(if (args.shouldGetFromCache) Source.CACHE else Source.DEFAULT)
             .addOnFailureListener { toast(R.string.unknown_error) }
-            .addOnSuccessListener { populateUi(it.toObject(Animal::class.java)) }
+            .addOnSuccessListener { populateUi(it.toObject<Animal>()) }
             .addOnCompleteListener {
                 loadingHide()
                 if (it.isSuccessful && it.isComplete && it.result != null && !it.result!!.exists()) {

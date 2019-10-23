@@ -13,6 +13,7 @@ import com.farmexpert.android.model.AnimalAction
 import com.farmexpert.android.model.Birth
 import com.farmexpert.android.model.Breeding
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.toObject
 
 class GraphDataTransformer {
 
@@ -22,7 +23,7 @@ class GraphDataTransformer {
             val adapterMap = mutableMapOf<String, MutableList<Birth>>()
 
             documents?.forEach { document ->
-                val birth = document.toObject(Birth::class.java)
+                val birth = document.toObject<Birth>()
                 if (!adapterMap.containsKey(birth.motherId)) {
                     adapterMap[birth.motherId] = mutableListOf()
                 }
@@ -37,7 +38,7 @@ class GraphDataTransformer {
             val adapterMap = mutableMapOf<String, MutableList<AnimalAction>>()
 
             documents?.forEach { document ->
-                val animalAction = document.toObject(AnimalAction::class.java)
+                val animalAction = document.toObject<AnimalAction>()
                 if (!adapterMap.containsKey(animalAction.animalId)) {
                     adapterMap[animalAction.animalId] = mutableListOf()
                 }
@@ -52,7 +53,7 @@ class GraphDataTransformer {
             val adapterMap = mutableMapOf<String, MutableList<Breeding>>()
 
             documents?.forEach { document ->
-                val breeding = document.toObject(Breeding::class.java)
+                val breeding = document.toObject<Breeding>()
                 if (!adapterMap.containsKey(breeding.female)) {
                     adapterMap[breeding.female] = mutableListOf()
                 }

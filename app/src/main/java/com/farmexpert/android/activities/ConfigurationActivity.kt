@@ -18,7 +18,8 @@ import androidx.preference.PreferenceManager
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.ConfigPickerUtils
 import com.farmexpert.android.utils.FirestorePath
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_configuration.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
@@ -62,7 +63,7 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
 
         val sharedPrefs = getSharedPreferences(FARM_TIMELINE_PREFS, Context.MODE_PRIVATE)
 
-        FirebaseFirestore.getInstance()
+        Firebase.firestore
             .collection(FirestorePath.Collections.FARMS)
             .document(farmId)
             .update(

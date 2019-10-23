@@ -16,8 +16,6 @@ import com.crashlytics.android.answers.Answers
 import com.facebook.stetho.Stetho
 import com.farmexpert.android.BuildConfig
 import com.google.firebase.FirebaseApp
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreSettings
 import io.fabric.sdk.android.Fabric
 
 /**
@@ -36,11 +34,6 @@ class FarmExpertApplication : MultiDexApplication() {
 
     private fun initFirebaseApp() {
         FirebaseApp.initializeApp(this)
-        val firestore = FirebaseFirestore.getInstance()
-        val settings = FirebaseFirestoreSettings.Builder()
-            .setTimestampsInSnapshotsEnabled(true)
-            .build()
-        firestore.firestoreSettings = settings
     }
 
     private fun initStetho() {

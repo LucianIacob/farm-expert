@@ -19,6 +19,7 @@ import com.farmexpert.android.utils.FirestorePath
 import com.farmexpert.android.utils.GraphDataTransformer
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.toObject
 
 abstract class BaseAnimalActionMasterFragment :
     BaseMasterFragment<AnimalAction, GraphAnimalActionHolder>() {
@@ -26,7 +27,7 @@ abstract class BaseAnimalActionMasterFragment :
     override fun getHolderLayoutRes() = R.layout.item_graph_animal_action
 
     override val snapshotParser: SnapshotParser<AnimalAction> = SnapshotParser {
-        it.toObject(AnimalAction::class.java)!!.apply { id = it.id }
+        it.toObject<AnimalAction>()!!.apply { id = it.id }
     }
 
     override fun getFilterField() = FirestorePath.AnimalAction.ACTION_DATE

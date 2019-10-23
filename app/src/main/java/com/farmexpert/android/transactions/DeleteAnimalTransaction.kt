@@ -11,7 +11,8 @@ package com.farmexpert.android.transactions
 
 import com.farmexpert.android.utils.FirestorePath
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
 
@@ -152,7 +153,7 @@ class DeleteAnimalTransaction(
             && disinfectionsRetrieved
             && vitaminizationsRetrieved
         ) {
-            val batch = FirebaseFirestore.getInstance().batch()
+            val batch = Firebase.firestore.batch()
 
             birthsToDelete.forEach { batch.delete(it) }
             breedingsToDelete.forEach { batch.delete(it) }

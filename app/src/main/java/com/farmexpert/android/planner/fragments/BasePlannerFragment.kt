@@ -129,7 +129,8 @@ abstract class BasePlannerFragment : BaseFragment() {
         val details = extras.getString(AddPlannerItemDialogFragment.REMINDER_DIALOG_DETAILS, "")
 
         val reminder = Reminder(
-            reminderDate = Timestamp(plannerDateViewModel?.getDate()?.value),
+            reminderDate = plannerDateViewModel?.getDate()?.value?.let { Timestamp(it) }
+                ?: Timestamp.now(),
             details = details,
             createdBy = currentUser?.uid,
             holderParent = getPlannerContainer().name

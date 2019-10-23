@@ -20,6 +20,7 @@ import com.farmexpert.android.utils.GraphDataTransformer
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.toObject
 
 /**
  * Created by Lucian Iacob on March 22, 2019.
@@ -53,7 +54,8 @@ class BirthsMasterFragment : BaseMasterFragment<Birth, GraphBirthViewHolder>() {
     }
 
     override val snapshotParser: SnapshotParser<Birth> = SnapshotParser {
-        it.toObject(Birth::class.java)!!.apply { id = it.id }
+        it.toObject<Birth>()!!.apply { id = it.id }
+        it.toObject<Birth>()!!.apply { id = it.id }
     }
 
     override fun transformData(documents: QuerySnapshot?): Map<String, List<Birth>> {

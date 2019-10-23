@@ -23,12 +23,13 @@ import com.farmexpert.android.utils.FirestorePath
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.toObject
 import java.util.*
 
 class PedicuresDetailFragment : BaseDetailFragment<AnimalAction, PedicureViewHolder>() {
 
     override val snapshotParser: SnapshotParser<AnimalAction> = SnapshotParser {
-        it.toObject(AnimalAction::class.java)!!.apply { id = it.id }
+        it.toObject<AnimalAction>()!!.apply { id = it.id }
     }
 
     override fun getTitleAndHolderLayout(): Pair<String, Int> =

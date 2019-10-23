@@ -30,6 +30,9 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_farm_selector.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
@@ -49,7 +52,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_farm_selector)
-        firestore = FirebaseFirestore.getInstance()
+        firestore = Firebase.firestore
         currentUser = FirebaseAuth.getInstance().currentUser!!
         initFarmsList()
     }
@@ -61,7 +64,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             .orderBy(FirestorePath.Farm.NAME, Query.Direction.ASCENDING)
 
         val options = FirestoreRecyclerOptions.Builder<Farm>()
-            .setQuery(query) { it.toObject(Farm::class.java)!!.apply { id = it.id } }
+            .setQuery(query) { it.toObject<Farm>()!!.apply { id = it.id } }
             .setLifecycleOwner(this)
             .build()
 
@@ -260,7 +263,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             .addOnSuccessListener { snapshots ->
                 if (!snapshots.isEmpty) {
                     val document = snapshots.documents[0]
-                    val farm = document.toObject(Farm::class.java).also { it?.id = document.id }
+                    val farm = document.toObject<Farm>().also { it?.id = document.id }
                     listener(true, farm)
                 } else {
                     listener(false, null)

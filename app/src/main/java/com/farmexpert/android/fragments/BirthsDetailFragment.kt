@@ -26,6 +26,7 @@ import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.toObject
 import org.jetbrains.anko.error
 import org.jetbrains.anko.okButton
 import org.jetbrains.anko.support.v4.alert
@@ -49,7 +50,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
     override fun getEditRecordDialog() = EditBirthDialogFragment()
 
     override val snapshotParser: SnapshotParser<Birth> = SnapshotParser {
-        it.toObject(Birth::class.java)!!.apply { id = it.id }
+      it.toObject<Birth>()!!.apply { id = it.id }
     }
 
     override fun onNewDataArrived(snapshots: ObservableSnapshotArray<Birth>) {

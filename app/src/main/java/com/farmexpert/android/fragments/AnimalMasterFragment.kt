@@ -31,6 +31,7 @@ import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.fragment_animal_master.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.design.snackbar
@@ -101,7 +102,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
     private fun initAnimalList() {
         loadingShow()
         val options = FirestoreRecyclerOptions.Builder<Animal>()
-            .setQuery(animalsCollections) { it.toObject(Animal::class.java)!!.apply { id = it.id } }
+            .setQuery(animalsCollections) { it.toObject<Animal>()!!.apply { id = it.id } }
             .build()
 
         adapter = object : AnimalsAdapter(

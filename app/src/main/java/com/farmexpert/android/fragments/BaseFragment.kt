@@ -24,7 +24,8 @@ import com.farmexpert.android.utils.FirestorePath
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.longToast
 
@@ -40,7 +41,7 @@ open class BaseFragment : Fragment(), AnkoLogger {
 
         farmId?.let {
             currentUser = FirebaseAuth.getInstance().currentUser
-            farmReference = FirebaseFirestore.getInstance()
+            farmReference = Firebase.firestore
                 .collection(FirestorePath.Collections.FARMS)
                 .document(farmId)
         } ?: run {

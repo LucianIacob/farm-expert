@@ -26,6 +26,7 @@ import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.toObject
 import org.jetbrains.anko.error
 import java.util.*
 
@@ -34,7 +35,7 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
     private val args: BreedingsDetailFragmentArgs by navArgs()
 
     override val snapshotParser: SnapshotParser<Breeding> = SnapshotParser {
-        it.toObject(Breeding::class.java)!!.apply { id = it.id }
+        it.toObject<Breeding>()!!.apply { id = it.id }
     }
 
     override fun getAnimalId() = args.animalId

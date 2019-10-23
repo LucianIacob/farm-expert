@@ -53,7 +53,7 @@ class AppUtils {
             return Timestamp(calendar.time)
         }
 
-        fun getExpectedBirthDate(breedingDate: Date): Date? {
+        fun getExpectedBirthDate(breedingDate: Date): Date {
             val breedingCalendar = Calendar.getInstance().apply { time = breedingDate }
 
             val resources = FarmExpertApplication.appContext.resources

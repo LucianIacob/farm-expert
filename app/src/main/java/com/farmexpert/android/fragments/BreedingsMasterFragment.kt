@@ -20,6 +20,7 @@ import com.farmexpert.android.utils.GraphDataTransformer
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.toObject
 
 /**
  * Created by Lucian Iacob on March 22, 2019.
@@ -27,7 +28,7 @@ import com.google.firebase.firestore.QuerySnapshot
 class BreedingsMasterFragment : BaseMasterFragment<Breeding, GraphBreedingViewHolder>() {
 
     override val snapshotParser: SnapshotParser<Breeding> = SnapshotParser {
-        it.toObject(Breeding::class.java)!!.apply { id = it.id }
+        it.toObject<Breeding>()!!.apply { id = it.id }
     }
 
     override fun getFilterField() = FirestorePath.Breeding.ACTION_DATE

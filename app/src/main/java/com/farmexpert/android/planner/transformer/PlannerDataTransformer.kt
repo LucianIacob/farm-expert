@@ -17,6 +17,7 @@ import com.farmexpert.android.model.Breeding
 import com.farmexpert.android.model.Reminder
 import com.farmexpert.android.planner.model.PlannerItem
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.toObject
 
 class PlannerDataTransformer {
 
@@ -27,7 +28,7 @@ class PlannerDataTransformer {
             resources: Resources
         ): List<PlannerItem> {
             return querySnapshot.map {
-                val breeding = it.toObject(Breeding::class.java)
+              val breeding = it.toObject<Breeding>()
                 PlannerItem(
                     headline = breeding.female,
                     reason = resources.getString(R.string.planner_heats_reason),
@@ -37,7 +38,7 @@ class PlannerDataTransformer {
         }
 
         fun transformReminders(querySnapshot: QuerySnapshot): List<PlannerItem> {
-            return querySnapshot.map { it.toObject(Reminder::class.java) }
+          return querySnapshot.map { it.toObject<Reminder>() }
                 .map {
                     PlannerItem(
                         headline = it.details,
@@ -52,7 +53,7 @@ class PlannerDataTransformer {
             res: Resources
         ): List<PlannerItem> {
             return querySnapshot.map {
-                val breeding = it.toObject(Breeding::class.java)
+              val breeding = it.toObject<Breeding>()
                 PlannerItem(
                     headline = breeding.female,
                     reason = res.getString(R.string.planner_gest_ctrl_reason, gestationCtrlDays),
@@ -67,7 +68,7 @@ class PlannerDataTransformer {
             resources: Resources
         ): List<PlannerItem> {
             return querySnapshot.map {
-                val birth = it.toObject(Birth::class.java)
+              val birth = it.toObject<Birth>()
                 PlannerItem(
                     headline = birth.motherId,
                     reason = resources.getString(
@@ -85,7 +86,7 @@ class PlannerDataTransformer {
             resources: Resources
         ): List<PlannerItem> {
             return querySnapshot.map {
-                val birth = it.toObject(Birth::class.java)
+              val birth = it.toObject<Birth>()
                 PlannerItem(
                     headline = birth.motherId,
                     reason = resources.getString(
@@ -103,7 +104,7 @@ class PlannerDataTransformer {
             resources: Resources
         ): List<PlannerItem> {
             return querySnapshot.map {
-                val breeding = it.toObject(Breeding::class.java)
+              val breeding = it.toObject<Breeding>()
                 PlannerItem(
                     headline = breeding.female,
                     reason = resources.getString(
