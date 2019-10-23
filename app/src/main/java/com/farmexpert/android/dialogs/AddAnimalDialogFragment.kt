@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 9:05 PM.
+ * Last modified 10/23/19 12:26 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -17,7 +17,8 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.farmexpert.android.R
-import com.farmexpert.android.utils.AppUtils
+import com.farmexpert.android.utils.SpinnerUtils
+import com.farmexpert.android.utils.SpinnerUtils.getGenderByPosition
 import kotlinx.android.synthetic.main.dialog_add_animal.view.*
 
 /**
@@ -34,10 +35,10 @@ class AddAnimalDialogFragment : BaseAddRecordDialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         mView = View.inflate(activity, R.layout.dialog_add_animal, null)
         mView.dialogDate.setOnClickListener { onChangeDateClick() }
-        AppUtils.configureSpinner(
+        SpinnerUtils.configureSpinner(
             spinner = mView.dialogGenderSpinner,
-            elements = resources.getStringArray(R.array.gender_types),
-            selectedElement = getString(R.string.gender_unknown)
+            values = resources.getStringArray(R.array.gender_types_values),
+            selected = 1
         )
 
         setupDate()
@@ -57,7 +58,10 @@ class AddAnimalDialogFragment : BaseAddRecordDialogFragment() {
         val bundle = Bundle()
         bundle.putString(ADD_DIALOG_ANIMAL, id)
         bundle.putLong(ADD_DIALOG_DATE, mSetDate.time)
-        bundle.putString(ADD_DIALOG_GENDER, mView.dialogGenderSpinner.selectedItem.toString())
+        bundle.putInt(
+            ADD_DIALOG_GENDER,
+            getGenderByPosition(mView.dialogGenderSpinner.selectedItemPosition, resources)
+        )
         bundle.putString(ADD_DIALOG_RACE, mView.dialogRace.text.toString())
         bundle.putString(ADD_DIALOG_FATHER, mView.dialogFather.text.toString())
         bundle.putString(ADD_DIALOG_MOTHER, mView.dialogMother.text.toString())

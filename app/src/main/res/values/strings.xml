@@ -130,26 +130,46 @@
     <string name="planner_first_vaccine_reason">%d days since the last birth</string>
     <string name="planner_before_birth_vaccine_reason">%d days before the estimated day of birth</string>
 
-    <string-array name="gender_types">
+    <integer-array name="gender_types">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </integer-array>
+
+    <string-array name="gender_types_values">
         <item>Unknown</item>
         <item>Male</item>
         <item>Female</item>
     </string-array>
 
-    <string-array name="breeding_notes">
-        <item>1 - Medium heat with problems</item>
-        <item>2 - Medium heat without problems</item>
-        <item>3 - Clear heat with time problems</item>
-        <item>4 - Clear heat with health problems</item>
-        <item>5 - Normal heats</item>
+    <integer-array name="breeding_notes">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </integer-array>
+
+    <string-array name="breeding_notes_values">
+        <item name="breeding_note_1">1 - Medium heat with problems</item>
+        <item name="breeding_note_2">2 - Medium heat without problems</item>
+        <item name="breeding_note_3">3 - Clear heat with time problems</item>
+        <item name="breeding_note_4">4 - Clear heat with health problems</item>
+        <item name="breeding_note_5">5 - Normal heats</item>
     </string-array>
 
-    <string-array name="birth_notes">
-        <item>1 - Retentions, postpartum paraplegia</item>
-        <item>2 - Medical assisted</item>
-        <item>3 - Farmer assisted + technician</item>
-        <item>4 - No problems</item>
-    </string-array>
+    <integer-array name="birth_notes">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </integer-array>
 
+    <string-array name="birth_notes_values">
+        <item name="birth_note_1">1 - Retentions, postpartum paraplegia</item>
+        <item name="birth_note_2">2 - Medical assisted</item>
+        <item name="birth_note_3">3 - Farmer assisted + technician</item>
+        <item name="birth_note_4">4 - No problems</item>
+    </string-array>
 
 </resources>

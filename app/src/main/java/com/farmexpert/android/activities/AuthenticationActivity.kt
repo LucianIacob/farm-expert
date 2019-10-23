@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 3/15/19 10:47 AM.
+ * Last modified 10/23/19 12:26 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -59,7 +59,7 @@ class AuthenticationActivity : Activity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
-            if (resultCode == Activity.RESULT_OK) {
+            if (resultCode == RESULT_OK) {
                 startActivity<FarmSelectorActivity>()
                 finish()
             } else {

@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/15/19 11:19 PM.
+ * Last modified 10/23/19 12:26 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -79,7 +79,7 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
     override fun constructEntityFromBundle(bundle: Bundle): Any {
         val breedingDate = Date(bundle.getLong(BaseAddRecordDialogFragment.ADD_DIALOG_DATE))
         val male = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_MALE, "")
-        val note = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_NOTE, "")
+        val note = bundle.getInt(BaseAddRecordDialogFragment.ADD_DIALOG_NOTE, 5)
         val expectedBirthDate = AppUtils.getExpectedBirthDate(breedingDate)
 
         return Breeding(
@@ -104,9 +104,9 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
         val timestamp = args.getLong(BaseEditRecordDialogFragment.EDIT_DIALOG_DATE)
         val newActionDate = Timestamp(Date(timestamp))
 
-        val newNote = args.getString(
+        val newNote = args.getInt(
             BaseEditRecordDialogFragment.EDIT_DIALOG_NOTE,
-            getString(R.string.default_breeding_note)
+            5
         )
 
         val newMale = args.getString(BaseEditRecordDialogFragment.EDIT_DIALOG_MALE, "")

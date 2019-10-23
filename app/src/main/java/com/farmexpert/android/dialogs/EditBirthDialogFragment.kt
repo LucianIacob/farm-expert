@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/15/19 1:08 PM.
+ * Last modified 10/23/19 12:26 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -13,7 +13,8 @@ import android.app.Activity
 import android.content.Intent
 import androidx.core.os.bundleOf
 import com.farmexpert.android.R
-import com.farmexpert.android.utils.AppUtils
+import com.farmexpert.android.utils.SpinnerUtils
+import com.farmexpert.android.utils.SpinnerUtils.getBirthNoteByPosition
 import kotlinx.android.synthetic.main.dialog_edit_birth.view.*
 
 /**
@@ -23,13 +24,12 @@ import kotlinx.android.synthetic.main.dialog_edit_birth.view.*
 
 class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
 
-    private lateinit var mNoteToSelect: String
+    private var mNoteToSelect: Int = 4
 
     override fun getTitle() = R.string.edit_birth_title
 
     override fun extractAdditionalArgs() {
-        mNoteToSelect =
-            arguments!!.getString(EDIT_DIALOG_NOTE, getString(R.string.default_birth_note))
+        arguments?.let { mNoteToSelect = it.getInt(EDIT_DIALOG_NOTE, 4) }
     }
 
     override fun getLayoutId(): Int {
@@ -37,10 +37,10 @@ class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
     }
 
     override fun populateFields() {
-        AppUtils.configureSpinner(
+        SpinnerUtils.configureSpinner(
             spinner = mView.notesSpinner,
-            elements = resources.getStringArray(R.array.birth_notes),
-            selectedElement = mNoteToSelect
+            values = resources.getStringArray(R.array.birth_notes),
+            selected = mNoteToSelect
         )
     }
 
@@ -48,7 +48,10 @@ class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
         val args = bundleOf(
             EDIT_DIALOG_DOC_ID to documentId,
             EDIT_DIALOG_DATE to mActionDate.time,
-            EDIT_DIALOG_NOTE to mView.notesSpinner.selectedItem
+            EDIT_DIALOG_NOTE to getBirthNoteByPosition(
+                mView.notesSpinner.selectedItemPosition,
+                resources
+            )
         )
         val intent = Intent()
         intent.putExtras(args)

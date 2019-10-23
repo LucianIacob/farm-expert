@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/13/19 9:05 PM.
+ * Last modified 10/23/19 12:26 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -13,24 +13,22 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.farmexpert.android.R
-import com.farmexpert.android.utils.AppUtils
+import com.farmexpert.android.utils.SpinnerUtils
+import com.farmexpert.android.utils.SpinnerUtils.getBreedingNoteByPosition
 import kotlinx.android.synthetic.main.dialog_add_breeding.view.*
 
-class AddBreedingDialogFragment : BaseAddRecordDialogFragment(), TextWatcher {
+class AddBreedingDialogFragment : BaseAddRecordDialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         mView = View.inflate(activity, R.layout.dialog_add_breeding, null)
         mView.dialogDate.setOnClickListener { onChangeDateClick() }
-        mView.maleInput.addTextChangedListener(this)
-        AppUtils.configureSpinner(
+        SpinnerUtils.configureSpinner(
             spinner = mView.breedingNotes,
-            elements = resources.getStringArray(R.array.breeding_notes)
+            values = resources.getStringArray(R.array.breeding_notes_values)
         )
 
         setupDate()
@@ -47,23 +45,13 @@ class AddBreedingDialogFragment : BaseAddRecordDialogFragment(), TextWatcher {
         val bundle = Bundle()
         bundle.putLong(ADD_DIALOG_DATE, mSetDate.time)
         bundle.putString(ADD_DIALOG_MALE, mView.maleInput.text.toString())
-        bundle.putString(ADD_DIALOG_NOTE, mView.breedingNotes.selectedItem.toString())
+        bundle.putInt(
+            ADD_DIALOG_NOTE,
+            getBreedingNoteByPosition(mView.breedingNotes.selectedItemPosition, resources)
+        )
         intent.putExtras(bundle)
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
     }
 
     override fun getDateView(): TextView = mView.dialogDate
-
-    // todo check whether this should be used anymore
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-    }
-
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-    }
-
-    override fun afterTextChanged(s: Editable?) {
-
-    }
 }

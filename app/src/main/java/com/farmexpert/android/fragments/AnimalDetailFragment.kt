@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 10/21/19 5:25 PM.
+ * Last modified 10/23/19 12:26 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -23,6 +23,7 @@ import com.farmexpert.android.R
 import com.farmexpert.android.model.Animal
 import com.farmexpert.android.transactions.DeleteAnimalTransaction
 import com.farmexpert.android.utils.*
+import com.farmexpert.android.utils.SpinnerUtils.getGenderByKey
 import com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -139,7 +140,7 @@ class AnimalDetailFragment : BaseFragment() {
         animal?.let {
             raceView?.setValue(it.race)
             dateOfBirthView?.setValue(it.dateOfBirth.toDate().getShort())
-            genderView?.setValue(it.gender)
+            genderView?.setValue(SpinnerUtils.getGenderByKey(it.gender, resources))
             fatherIdView?.setValue(it.fatherId)
             fatherFatherIdView?.setValue(it.fatherFatherId)
             fatherMotherIdView?.setValue(it.fatherMotherId)
@@ -250,11 +251,11 @@ class AnimalDetailFragment : BaseFragment() {
     }
 
     private fun editGender() {
-        val genderTypes = resources.getStringArray(R.array.gender_types)
+        val genderTypes = resources.getStringArray(R.array.gender_types_values)
         selector(items = genderTypes.asList()) { _, position ->
             updateField(
                 fieldToUpdate = FirestorePath.Animal.GENDER,
-                newValue = genderTypes[position],
+                newValue = position,
                 viewToUpdate = genderView
             )
         }
@@ -320,6 +321,7 @@ class AnimalDetailFragment : BaseFragment() {
         animalRef.update(fieldToUpdate, newValue)
             .addOnSuccessListener {
                 when (newValue) {
+                    is Int -> viewToUpdate.setValue(getGenderByKey(newValue, resources))
                     is String -> viewToUpdate.setValue(newValue)
                     is Timestamp -> viewToUpdate.setValue(newValue.asDisplayable())
                 }

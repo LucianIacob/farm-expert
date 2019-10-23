@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:16 PM.
+ * Last modified 10/23/19 12:26 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -11,6 +11,7 @@ package com.farmexpert.android.adapter.holder
 
 import android.view.View
 import com.farmexpert.android.model.Birth
+import com.farmexpert.android.utils.SpinnerUtils
 import com.farmexpert.android.utils.asDisplayable
 import kotlinx.android.synthetic.main.item_birth.view.*
 
@@ -23,7 +24,7 @@ class BirthViewHolder(
     override fun bind(entity: Birth) {
         with(itemView) {
             birthDate.text = entity.dateOfBirth.asDisplayable()
-            note.text = entity.note
+            note.text = SpinnerUtils.getBirthNoteValue(entity.note, itemView.resources)
             calfId.text = entity.calfId
             updateBtn.setOnClickListener { updateListener(entity) }
             deleteBtn.setOnClickListener { deleteListener(entity) }

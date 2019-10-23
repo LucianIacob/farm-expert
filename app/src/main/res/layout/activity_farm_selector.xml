@@ -7,7 +7,7 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -93,16 +93,14 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/createFarmButton"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:background="@drawable/ic_button_primary"
-                android:fontFamily="@font/cabin_semibold"
                 android:text="@string/create_new_farm"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
                 android:textSize="@dimen/large_text" />
 
             <TextView
@@ -115,16 +113,14 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/medium_text" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/joinFarmButton"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small_margin"
-                android:background="@drawable/ic_button_secondary"
-                android:fontFamily="@font/cabin_semibold"
                 android:text="@string/join_existing_farm"
                 android:textAllCaps="false"
-                android:textColor="@color/sea_green"
                 android:textSize="@dimen/large_text" />
 
         </LinearLayout>

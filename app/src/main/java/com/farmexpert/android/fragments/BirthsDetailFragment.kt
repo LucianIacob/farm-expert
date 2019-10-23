@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/15/19 11:34 PM.
+ * Last modified 10/23/19 12:26 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -77,7 +77,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
     override fun constructEntityFromBundle(bundle: Bundle): Birth {
         val calfId = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_CALF, "")
         val dateOfBirth = Date(bundle.getLong(BaseAddRecordDialogFragment.ADD_DIALOG_DATE))
-        val note = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_NOTE, "")
+        val note = bundle.getInt(BaseAddRecordDialogFragment.ADD_DIALOG_NOTE, 5)
 
         return Birth(
             calfId = calfId,
@@ -92,9 +92,9 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
         val timestamp = args.getLong(BaseEditRecordDialogFragment.EDIT_DIALOG_DATE)
         val newActionDate = Timestamp(Date(timestamp))
 
-        val newNote = args.getString(
+        val newNote = args.getInt(
             BaseEditRecordDialogFragment.EDIT_DIALOG_NOTE,
-            getString(R.string.default_birth_note)
+            4
         )
 
         return mutableMapOf(
@@ -134,7 +134,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
         (entity as? Birth)?.let {
             val animal = Animal(
                 dateOfBirth = it.dateOfBirth,
-                gender = getString(R.string.gender_unknown),
+                gender = 0,
                 motherId = getAnimalId(),
                 createdBy = currentUser?.uid
             )

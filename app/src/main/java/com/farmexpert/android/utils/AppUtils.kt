@@ -3,16 +3,14 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 7/13/19 11:19 PM.
+ * Last modified 10/23/19 12:26 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
 package com.farmexpert.android.utils
 
 import android.content.Context
-import android.widget.ArrayAdapter
 import android.widget.ImageView
-import android.widget.Spinner
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.ConfigurationActivity.Companion.FARM_TIMELINE_PREFS
 import com.farmexpert.android.app.FarmExpertApplication
@@ -32,23 +30,23 @@ class AppUtils {
             return calendar.time
         }
 
-        fun configureSpinner(
-            spinner: Spinner,
-            elements: Array<out String>,
-            selectedElement: String? = null
-        ) {
-            val spinnerAdapter =
-                ArrayAdapter(spinner.context, R.layout.spinner_item_header, elements).apply {
-                    setDropDownViewResource(R.layout.spinner_item_layout)
-                }
-            spinner.adapter = spinnerAdapter
-
-            val selectedElementIndex = elements.indexOf(selectedElement)
-            spinner.setSelection(
-                if (selectedElementIndex == -1) elements.size - 1 else selectedElementIndex,
-                true
-            )
-        }
+//        fun configureSpinner(
+//            spinner: Spinner,
+//            elements: Array<out String>,
+//            selectedElement: String? = null
+//        ) {
+//            val spinnerAdapter =
+//                ArrayAdapter(spinner.context, R.layout.spinner_item_header, elements).apply {
+//                    setDropDownViewResource(R.layout.spinner_item_layout)
+//                }
+//            spinner.adapter = spinnerAdapter
+//
+//            val selectedElementIndex = elements.indexOf(selectedElement)
+//            spinner.setSelection(
+//                if (selectedElementIndex == -1) elements.size - 1 else selectedElementIndex,
+//                true
+//            )
+//        }
 
         fun timestampFor(year: Int, month: Int, day: Int): Timestamp {
             val calendar = Calendar.getInstance().apply { set(year, month, day) }

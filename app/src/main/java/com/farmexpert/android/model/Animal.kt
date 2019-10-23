@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:18 AM.
+ * Last modified 10/23/19 12:26 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -16,7 +16,7 @@ import com.google.firebase.firestore.PropertyName
 data class Animal(
     @PropertyName(FirestorePath.Animal.RACE) val race: String = "",
     @PropertyName(FirestorePath.Animal.DATE_OF_BIRTH) val dateOfBirth: Timestamp = Timestamp.now(),
-    @PropertyName(FirestorePath.Animal.GENDER) val gender: String = "Unknown",
+    @PropertyName(FirestorePath.Animal.GENDER) val gender: Int = 0,
     @PropertyName(FirestorePath.Animal.FATHER_ID) val fatherId: String = "",
     @PropertyName(FirestorePath.Animal.FATHER_FATHER_ID) val fatherFatherId: String = "",
     @PropertyName(FirestorePath.Animal.FATHER_MOTHER_ID) val fatherMotherId: String = "",

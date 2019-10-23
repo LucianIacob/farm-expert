@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/10/19 9:16 PM.
+ * Last modified 10/23/19 12:26 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -11,6 +11,7 @@ package com.farmexpert.android.adapter.holder
 
 import android.view.View
 import com.farmexpert.android.model.Breeding
+import com.farmexpert.android.utils.SpinnerUtils
 import com.farmexpert.android.utils.asDisplayable
 import kotlinx.android.synthetic.main.item_breeding.view.*
 
@@ -23,7 +24,7 @@ class BreedingViewHolder(
     override fun bind(entity: Breeding) {
         with(itemView) {
             date.text = entity.actionDate.asDisplayable()
-            note.text = entity.note
+            note.text = SpinnerUtils.getBreedingNoteValue(entity.note, itemView.resources)
             male.text = entity.male
             estimatedBirth.text = entity.birthExpectedAt.asDisplayable()
             updateBtn.setOnClickListener { updateListener(entity) }

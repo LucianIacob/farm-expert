@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/15/19 1:08 PM.
+ * Last modified 10/23/19 12:26 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -13,7 +13,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.core.os.bundleOf
 import com.farmexpert.android.R
-import com.farmexpert.android.utils.AppUtils
+import com.farmexpert.android.utils.SpinnerUtils
 import kotlinx.android.synthetic.main.dialog_edit_breeding.view.*
 
 
@@ -24,23 +24,22 @@ import kotlinx.android.synthetic.main.dialog_edit_breeding.view.*
 
 class EditBreedingDialogFragment : BaseEditRecordDialogFragment() {
 
-    private lateinit var selectedNote: String
+    private var selectedNote: Int = 5
     private lateinit var breedingMale: String
 
     override fun getTitle() = R.string.edit_breeding_title
 
     override fun extractAdditionalArgs() {
-        selectedNote =
-            arguments!!.getString(EDIT_DIALOG_NOTE, getString(R.string.default_breeding_note))
+        selectedNote = arguments!!.getInt(EDIT_DIALOG_NOTE, 5)
         breedingMale = arguments!!.getString(EDIT_DIALOG_MALE, "")
     }
 
     override fun populateFields() {
         mView.maleInput.setText(breedingMale)
-        AppUtils.configureSpinner(
+        SpinnerUtils.configureSpinner(
             spinner = mView.notesSpinner,
-            elements = resources.getStringArray(R.array.breeding_notes),
-            selectedElement = selectedNote
+            values = resources.getStringArray(R.array.breeding_notes_values),
+            selected = selectedNote
         )
     }
 
@@ -51,7 +50,10 @@ class EditBreedingDialogFragment : BaseEditRecordDialogFragment() {
             EDIT_DIALOG_DOC_ID to documentId,
             EDIT_DIALOG_DATE to mActionDate.time,
             EDIT_DIALOG_MALE to mView.maleInput.text.toString(),
-            EDIT_DIALOG_NOTE to mView.notesSpinner.selectedItem
+            EDIT_DIALOG_NOTE to SpinnerUtils.getBreedingNoteByPosition(
+                mView.notesSpinner.selectedItemPosition,
+                resources
+            )
         )
         val intent = Intent()
         intent.putExtras(bundle)

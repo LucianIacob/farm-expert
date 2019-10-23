@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/20/19 3:43 PM.
+ * Last modified 10/23/19 12:26 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -179,7 +179,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
     private fun insertAnimal(extras: Bundle) {
         val id = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_ANIMAL, "")
         val dateOfBirth = Date(extras.getLong(BaseAddRecordDialogFragment.ADD_DIALOG_DATE))
-        val gender = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_GENDER, "")
+        val gender = extras.getInt(BaseAddRecordDialogFragment.ADD_DIALOG_GENDER, 0)
         val race = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_RACE, "")
         val fatherId = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_FATHER, "")
         val motherId = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_MOTHER, "")
