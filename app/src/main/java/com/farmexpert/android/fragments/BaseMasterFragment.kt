@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 4/19/19 10:24 PM.
+ * Last modified 10/23/19 3:00 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -101,7 +101,11 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
             .whereGreaterThanOrEqualTo(getFilterField(), queryRangeStart)
             .whereLessThanOrEqualTo(getFilterField(), queryRangeEnd)
             .get()
-            .addOnFailureListener { alert(message = R.string.err_retrieving_items) { okButton { } } }
+            .addOnFailureListener {
+                alert(message = R.string.err_retrieving_items) {
+                    okButton { }
+                }
+            }
             .addOnSuccessListener { documents ->
                 val adapterData = transformData(documents)
                 adapter.data = adapterData
