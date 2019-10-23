@@ -3,7 +3,7 @@
  * Cluj-Napoca, 2019.
  * Project: FarmExpert
  * Email: contact@lucianiacob.com
- * Last modified 10/23/19 12:26 PM.
+ * Last modified 10/23/19 1:57 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -39,7 +39,7 @@ class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
     override fun populateFields() {
         SpinnerUtils.configureSpinner(
             spinner = mView.notesSpinner,
-            values = resources.getStringArray(R.array.birth_notes),
+            values = resources.getStringArray(R.array.birth_notes_values),
             selected = mNoteToSelect
         )
     }
