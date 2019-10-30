@@ -7,7 +7,7 @@
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
-package com.farmexpert.android.planner.fragments;
+package com.farmexpert.android.planner.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

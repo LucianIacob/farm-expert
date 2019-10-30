@@ -28,10 +28,6 @@ import kotlinx.android.synthetic.main.fragment_dashboard.*
  */
 class DashboardFragment : Fragment() {
 
-    companion object {
-        val TAG: String = DashboardFragment::class.java.simpleName
-    }
-
     private val clickListener: (DashboardItem) -> Unit = { dashboardItem -> onItemClick(dashboardItem) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

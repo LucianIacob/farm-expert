@@ -129,6 +129,7 @@
     <string name="planner_physiological_ctrl_reason">%d days since the last birth</string>
     <string name="planner_first_vaccine_reason">%d days since the last birth</string>
     <string name="planner_before_birth_vaccine_reason">%d days before the estimated day of birth</string>
+    <string name="go_to">Go to:</string>
 
     <integer-array name="gender_types">
         <item>0</item>

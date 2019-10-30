@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_margin"
             android:fontFamily="@font/josefin_sans"
-            android:text="Go to:"
+          android:text="@string/go_to"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_18" />
