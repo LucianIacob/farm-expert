@@ -31,10 +31,7 @@ import com.farmexpert.android.planner.fragments.dialog.AddPlannerItemDialogFragm
 import com.farmexpert.android.planner.model.PlannerContainer
 import com.farmexpert.android.planner.model.PlannerItem
 import com.farmexpert.android.planner.transformer.PlannerDataTransformer
-import com.farmexpert.android.utils.FirestorePath
-import com.farmexpert.android.utils.NavigationConstants
-import com.farmexpert.android.utils.TimeOfTheDay
-import com.farmexpert.android.utils.shift
+import com.farmexpert.android.utils.*
 import com.farmexpert.android.viewmodel.PlannerDateViewModel
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.ListenerRegistration
@@ -42,8 +39,6 @@ import kotlinx.android.synthetic.main.fragment_planner.*
 import kotlinx.android.synthetic.main.fragment_planner_section.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.error
-import org.jetbrains.anko.okButton
-import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
 
@@ -141,7 +136,7 @@ abstract class BasePlannerFragment : BaseFragment() {
             .add(reminder)
             .addOnSuccessListener { parentFragment?.rootLayout?.snackbar(R.string.item_added) }
             .addOnFailureListener { e ->
-                alert(message = R.string.err_adding_record) { okButton {} }.show()
+                failureAlert(message = R.string.err_adding_record)
                 error { e }
             }
             .addOnCompleteListener { loadingHide() }

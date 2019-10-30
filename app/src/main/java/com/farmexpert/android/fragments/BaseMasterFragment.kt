@@ -17,14 +17,14 @@ import com.farmexpert.android.adapter.GraphAdapter
 import com.farmexpert.android.adapter.holder.BaseMasterHolder
 import com.farmexpert.android.model.BaseEntity
 import com.farmexpert.android.utils.AppUtils
+import com.farmexpert.android.utils.failureAlert
 import com.farmexpert.android.utils.hidden
 import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.android.synthetic.main.fragment_graph_master.*
-import org.jetbrains.anko.okButton
-import org.jetbrains.anko.support.v4.alert
+import org.jetbrains.anko.error
 import java.util.*
 
 
@@ -102,9 +102,8 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
             .whereLessThanOrEqualTo(getFilterField(), queryRangeEnd)
             .get()
             .addOnFailureListener {
-                alert(message = R.string.err_retrieving_items) {
-                    okButton { }
-                }
+                failureAlert(message = R.string.err_retrieving_items)
+                error { it }
             }
             .addOnSuccessListener { documents ->
                 val adapterData = transformData(documents)

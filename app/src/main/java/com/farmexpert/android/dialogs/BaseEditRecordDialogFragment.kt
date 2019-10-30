@@ -11,6 +11,8 @@ package com.farmexpert.android.dialogs
 
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.DialogInterface.BUTTON_NEGATIVE
+import android.content.DialogInterface.BUTTON_POSITIVE
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -26,54 +28,65 @@ import java.util.*
  */
 abstract class BaseEditRecordDialogFragment : DialogFragment() {
 
-    private lateinit var mDateView: TextView
-
+    private var mDateView: TextView? = null
     protected var documentId: String? = null
-
-    protected lateinit var mView: View
-    protected lateinit var mActionDate: Date
+    protected var mView: View? = null
+    protected var mActionDate: Date? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            documentId = it.getString(EDIT_DIALOG_DOC_ID)
-            mActionDate = Date(it.getLong(EDIT_DIALOG_DATE))
-            extractAdditionalArgs()
+        arguments?.run {
+            documentId = getString(EDIT_DIALOG_DOC_ID)
+            mActionDate = Date(getLong(EDIT_DIALOG_DATE))
+            extractAdditionalArgs(this)
         }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        mView = activity!!.layoutInflater.inflate(getLayoutId(), null)
-        mDateView = mView.findViewById(R.id.actionDate)
-        mDateView.text = mActionDate.getShort()
-        mDateView.setOnClickListener { onChangeDateClick() }
+        mView = activity?.layoutInflater?.inflate(getLayoutId(), null)
+        mDateView = mView?.findViewById(R.id.actionDate)
+        mDateView?.text = mActionDate?.getShort()
+        mDateView?.setOnClickListener { onChangeDateClick() }
 
         populateFields()
-        return AlertDialog.Builder(activity!!)
-            .setTitle(getTitle())
-            .setView(mView)
-            .setPositiveButton(R.string.dialog_update_btn) { _, _ -> sendNewRecord() }
-            .setNegativeButton(R.string.dialog_cancel_btn, null)
-            .create().also { it.setCanceledOnTouchOutside(false) }
+        context?.run {
+            return AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+                .setTitle(getTitle())
+                .setView(mView)
+                .setPositiveButton(R.string.dialog_update_btn) { _, _ -> sendNewRecord() }
+                .setNegativeButton(R.string.dialog_cancel_btn, null)
+                .setCancelable(false)
+                .create()
+                .apply {
+                    setOnShowListener {
+                        getButton(BUTTON_NEGATIVE).applyFarmexpertStyle(context)
+                        getButton(BUTTON_POSITIVE).applyFarmexpertStyle(context)
+                    }
+                }
+        } ?: throw IllegalArgumentException()
     }
 
     private fun onChangeDateClick() {
-        val calendar = Calendar.getInstance().apply { time = mActionDate }
-        DatePickerDialog(
-            activity!!,
-            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                mActionDate = AppUtils.getTime(year, month, dayOfMonth)
-                mDateView.text = mActionDate.getShort()
-            },
-            calendar.year(),
-            calendar.month(),
-            calendar.day()
-        ).show()
+        context?.run {
+            val calendar = Calendar.getInstance().apply {
+                mActionDate?.let { time = it }
+            }
+            DatePickerDialog(
+                this,
+                DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                    mActionDate = AppUtils.getTime(year, month, dayOfMonth)
+                    mDateView?.text = mActionDate?.getShort()
+                },
+                calendar.year(),
+                calendar.month(),
+                calendar.day()
+            ).show()
+        }
     }
 
     abstract fun sendNewRecord()
 
-    open fun extractAdditionalArgs() {}
+    open fun extractAdditionalArgs(bundle: Bundle) {}
 
     abstract fun getLayoutId(): Int
 

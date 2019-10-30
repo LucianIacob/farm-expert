@@ -11,6 +11,7 @@ package com.farmexpert.android.dialogs
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import androidx.core.os.bundleOf
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.SpinnerUtils
@@ -24,12 +25,12 @@ import kotlinx.android.synthetic.main.dialog_edit_birth.view.*
 
 class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
 
-    private var mNoteToSelect: Int = 4
+    private var noteToSelect: Int = 4
 
     override fun getTitle() = R.string.edit_birth_title
 
-    override fun extractAdditionalArgs() {
-        arguments?.let { mNoteToSelect = it.getInt(EDIT_DIALOG_NOTE, 4) }
+    override fun extractAdditionalArgs(bundle: Bundle) {
+        noteToSelect = bundle.getInt(EDIT_DIALOG_NOTE, noteToSelect)
     }
 
     override fun getLayoutId(): Int {
@@ -37,24 +38,24 @@ class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
     }
 
     override fun populateFields() {
-        SpinnerUtils.configureSpinner(
-            spinner = mView.notesSpinner,
-            values = resources.getStringArray(R.array.birth_notes_values),
-            selected = mNoteToSelect
-        )
+        mView?.notesSpinner?.let {
+            SpinnerUtils.configureSpinner(
+                spinner = it,
+                values = resources.getStringArray(R.array.birth_notes_values),
+                selected = noteToSelect
+            )
+        }
     }
 
     override fun sendNewRecord() {
         val args = bundleOf(
             EDIT_DIALOG_DOC_ID to documentId,
-            EDIT_DIALOG_DATE to mActionDate.time,
-            EDIT_DIALOG_NOTE to getBirthNoteByPosition(
-                mView.notesSpinner.selectedItemPosition,
-                resources
-            )
+            EDIT_DIALOG_DATE to mActionDate?.time,
+            EDIT_DIALOG_NOTE to mView?.notesSpinner?.selectedItemPosition?.let {
+                getBirthNoteByPosition(it, resources)
+            }
         )
-        val intent = Intent()
-        intent.putExtras(args)
+        val intent = Intent().putExtras(args)
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
     }
 

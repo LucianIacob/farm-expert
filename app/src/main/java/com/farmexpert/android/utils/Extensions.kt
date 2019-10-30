@@ -10,13 +10,16 @@
 package com.farmexpert.android.utils
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.farmexpert.android.R
 import com.farmexpert.android.model.Animal
 import com.google.firebase.Timestamp
@@ -132,3 +135,31 @@ fun Button.applyFarmexpertStyle(context: Context, redButton: Boolean = false) {
         )
     }
 }
+
+fun Fragment.failureAlert(
+    message: Int,
+    isCancellable: Boolean = true,
+    okListener: (() -> Unit)? = null
+) {
+    context?.let { context ->
+        AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+            .setMessage(message)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                okListener?.invoke()
+            }
+            .setCancelable(isCancellable)
+            .create()
+            .run {
+                getButton(DialogInterface.BUTTON_NEGATIVE).applyFarmexpertStyle(context)
+                getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(context)
+                show()
+            }
+    }
+}
+
+fun Int.encode(): String =
+    if (this == R.drawable.left_nail_problem || this == R.drawable.right_nail_problem) {
+        AppUtils.NAIL_WITH_PROBLEM
+    } else {
+        AppUtils.NAIL_WITHOUT_PROBLEM
+    }

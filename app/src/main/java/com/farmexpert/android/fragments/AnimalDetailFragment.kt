@@ -34,8 +34,6 @@ import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.fragment_animal_detail.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.error
-import org.jetbrains.anko.okButton
-import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.selector
 import org.jetbrains.anko.support.v4.toast
 
@@ -69,7 +67,7 @@ class AnimalDetailFragment : BaseFragment() {
 
     private fun displayDeleteDialog(): Boolean {
         context?.let { context ->
-            AlertDialog.Builder(context)
+            AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
                 .setTitle(R.string.delete_animal)
                 .setMessage(getString(R.string.delete_animal_message, args.animalId))
                 .setPositiveButton(R.string.delete) { _, i ->
@@ -136,16 +134,13 @@ class AnimalDetailFragment : BaseFragment() {
             .addOnCompleteListener {
                 loadingHide()
                 if (it.isSuccessful && it.isComplete && it.result != null && !it.result!!.exists()) {
-                    displayAnimalNotFoundAlert()
+                    failureAlert(
+                        message = R.string.err_animal_not_exists,
+                        isCancellable = false,
+                        okListener = { activity?.onBackPressed() }
+                    )
                 }
             }
-    }
-
-    private fun displayAnimalNotFoundAlert() {
-        alert(message = R.string.err_animal_not_exists) {
-            isCancelable = false
-            okButton { activity?.onBackPressed() }
-        }.show()
     }
 
     private fun populateUi(animal: Animal?) {
@@ -153,7 +148,7 @@ class AnimalDetailFragment : BaseFragment() {
         animal?.let {
             raceView?.setValue(it.race)
             dateOfBirthView?.setValue(it.dateOfBirth.toDate().getShort())
-            genderView?.setValue(SpinnerUtils.getGenderByKey(it.gender, resources))
+            genderView?.setValue(getGenderByKey(it.gender, resources))
             fatherIdView?.setValue(it.fatherId)
             fatherFatherIdView?.setValue(it.fatherFatherId)
             fatherMotherIdView?.setValue(it.fatherMotherId)
@@ -330,7 +325,7 @@ class AnimalDetailFragment : BaseFragment() {
             view.findViewById<TextInputLayout>(R.id.edittext_header).hint = getString(hintId)
             view.findViewById<TextInputEditText>(R.id.edittext).setText(currentValue)
 
-            AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog)
+            AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
                 .setView(view)
                 .setPositiveButton(R.string.common_google_play_services_update_button) { _, i ->
                     val edittext = view.findViewById<TextInputEditText>(R.id.edittext)

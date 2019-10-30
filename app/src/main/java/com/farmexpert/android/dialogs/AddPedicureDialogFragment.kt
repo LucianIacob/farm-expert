@@ -11,19 +11,23 @@ package com.farmexpert.android.dialogs
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.DialogInterface.BUTTON_NEGATIVE
+import android.content.DialogInterface.BUTTON_POSITIVE
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.os.bundleOf
 import com.farmexpert.android.R
-import com.farmexpert.android.utils.AppUtils
+import com.farmexpert.android.utils.applyFarmexpertStyle
+import com.farmexpert.android.utils.encode
 import kotlinx.android.synthetic.main.dialog_add_pedicure.view.*
 
 class AddPedicureDialogFragment : BaseAddRecordDialogFragment() {
 
-    private lateinit var mNailsMap: HashMap<ImageView, Int>
+    private lateinit var mNailsMap: HashMap<View, Int>
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         mView = View.inflate(activity, R.layout.dialog_add_pedicure, null)
@@ -31,12 +35,21 @@ class AddPedicureDialogFragment : BaseAddRecordDialogFragment() {
         setupHoofs()
         setupDate()
 
-        return AlertDialog.Builder(activity!!)
-            .setView(mView)
-            .setTitle(R.string.add_pedicure_title)
-            .setPositiveButton(R.string.dialog_add_positive_btn) { _, _ -> addRecord() }
-            .setNegativeButton(R.string.dialog_cancel_btn, null)
-            .create().also { it.setCanceledOnTouchOutside(false) }
+        context?.let { context ->
+            return AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+                .setView(mView)
+                .setTitle(R.string.add_pedicure_title)
+                .setPositiveButton(R.string.dialog_add_positive_btn) { _, _ -> addRecord() }
+                .setNegativeButton(R.string.dialog_cancel_btn, null)
+                .setCancelable(false)
+                .create()
+                .apply {
+                    setOnShowListener {
+                        getButton(BUTTON_NEGATIVE).applyFarmexpertStyle(context)
+                        getButton(BUTTON_POSITIVE).applyFarmexpertStyle(context)
+                    }
+                }
+        } ?: throw IllegalArgumentException()
     }
 
     override fun getDateView(): TextView = mView.dialogDate
@@ -45,112 +58,111 @@ class AddPedicureDialogFragment : BaseAddRecordDialogFragment() {
         with(mView) {
 
             mNailsMap = hashMapOf(
-                left_top_hoof_left_nail to R.drawable.left_nail_default,
-                left_top_hoof_right_nail to R.drawable.right_nail_default,
-                right_top_left_nail to R.drawable.left_nail_default,
-                right_top_right_nail to R.drawable.right_nail_default,
-                left_bottom_hoof_left_nail to R.drawable.left_nail_default,
-                left_bottom_hoof_right_nail to R.drawable.right_nail_default,
-                right_bottom_left_nail to R.drawable.left_nail_default,
-                right_bottom_right_nail to R.drawable.right_nail_default
+                leftTopLeftNail to R.drawable.left_nail_default,
+                leftTopRightNail to R.drawable.right_nail_default,
+                rightTopLeftNail to R.drawable.left_nail_default,
+                rightTopRightNail to R.drawable.right_nail_default,
+                leftBottomLeftNail to R.drawable.left_nail_default,
+                leftBottomRightNail to R.drawable.right_nail_default,
+                rightBottomLeftNail to R.drawable.left_nail_default,
+                rightBottomRightNail to R.drawable.right_nail_default
             )
 
-            left_top_hoof_left_nail.setOnClickListener {
-                if (mNailsMap[left_top_hoof_left_nail] == R.drawable.left_nail_default) {
-                    mNailsMap[left_top_hoof_left_nail] = R.drawable.left_nail_problem
-                } else {
-                    mNailsMap[left_top_hoof_left_nail] = R.drawable.left_nail_default
-                }
-                left_top_hoof_left_nail.setImageResource(mNailsMap[left_top_hoof_left_nail]!!)
+            leftTopLeftNail.setOnClickListener { nail ->
+                mNailsMap[nail] = if (mNailsMap[nail] == leftNailDefault) {
+                    leftNailProblem
+                } else leftNailDefault
+
+                mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
-            left_top_hoof_right_nail.setOnClickListener {
-                if (mNailsMap[left_top_hoof_right_nail] == R.drawable.right_nail_default) {
-                    mNailsMap[left_top_hoof_right_nail] = R.drawable.right_nail_problem
-                } else {
-                    mNailsMap[left_top_hoof_right_nail] = R.drawable.right_nail_default
-                }
-                left_top_hoof_right_nail.setImageResource(mNailsMap[left_top_hoof_right_nail]!!)
+            leftTopRightNail.setOnClickListener { nail ->
+                mNailsMap[nail] = if (mNailsMap[nail] == rightNailDefault) {
+                    rightNailProblem
+                } else rightNailDefault
+
+                mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
-            right_top_left_nail.setOnClickListener {
-                if (mNailsMap[right_top_left_nail] == R.drawable.left_nail_default) {
-                    mNailsMap[right_top_left_nail] = R.drawable.left_nail_problem
-                } else {
-                    mNailsMap[right_top_left_nail] = R.drawable.left_nail_default
-                }
-                right_top_left_nail.setImageResource(mNailsMap[right_top_left_nail]!!)
+            rightTopLeftNail.setOnClickListener { nail ->
+                mNailsMap[nail] = if (mNailsMap[nail] == leftNailDefault) {
+                    leftNailProblem
+                } else leftNailDefault
+
+                mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
-            right_top_right_nail.setOnClickListener {
-                if (mNailsMap[right_top_right_nail] == R.drawable.right_nail_default) {
-                    mNailsMap[right_top_right_nail] = R.drawable.right_nail_problem
-                } else {
-                    mNailsMap[right_top_right_nail] = R.drawable.right_nail_default
-                }
-                right_top_right_nail.setImageResource(mNailsMap[right_top_right_nail]!!)
+            rightTopRightNail.setOnClickListener { nail ->
+                mNailsMap[nail] = if (mNailsMap[nail] == rightNailDefault) {
+                    rightNailProblem
+                } else rightNailDefault
+
+                mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
-            left_bottom_hoof_left_nail.setOnClickListener {
-                if (mNailsMap[left_bottom_hoof_left_nail] == R.drawable.left_nail_default) {
-                    mNailsMap[left_bottom_hoof_left_nail] = R.drawable.left_nail_problem
-                } else {
-                    mNailsMap[left_bottom_hoof_left_nail] = R.drawable.left_nail_default
-                }
-                left_bottom_hoof_left_nail.setImageResource(mNailsMap[left_bottom_hoof_left_nail]!!)
+            leftBottomLeftNail.setOnClickListener { nail ->
+                mNailsMap[nail] = if (mNailsMap[nail] == leftNailDefault) {
+                    leftNailProblem
+                } else leftNailDefault
+
+                mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
-            left_bottom_hoof_right_nail.setOnClickListener {
-                if (mNailsMap[left_bottom_hoof_right_nail] == R.drawable.right_nail_default) {
-                    mNailsMap[left_bottom_hoof_right_nail] = R.drawable.right_nail_problem
-                } else {
-                    mNailsMap[left_bottom_hoof_right_nail] = R.drawable.right_nail_default
-                }
-                left_bottom_hoof_right_nail.setImageResource(mNailsMap[left_bottom_hoof_right_nail]!!)
+            leftBottomRightNail.setOnClickListener { nail ->
+                mNailsMap[nail] = if (mNailsMap[nail] == rightNailDefault) {
+                    rightNailProblem
+                } else rightNailDefault
+
+                mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
-            right_bottom_left_nail.setOnClickListener {
-                if (mNailsMap[right_bottom_left_nail] == R.drawable.left_nail_default) {
-                    mNailsMap[right_bottom_left_nail] = R.drawable.left_nail_problem
-                } else {
-                    mNailsMap[right_bottom_left_nail] = R.drawable.left_nail_default
-                }
-                right_bottom_left_nail.setImageResource(mNailsMap[right_bottom_left_nail]!!)
+            rightBottomLeftNail.setOnClickListener { nail ->
+                mNailsMap[nail] = if (mNailsMap[nail] == leftNailDefault) {
+                    leftNailProblem
+                } else leftNailDefault
+
+                mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
-            right_bottom_right_nail.setOnClickListener {
-                if (mNailsMap[right_bottom_right_nail] == R.drawable.right_nail_default) {
-                    mNailsMap[right_bottom_right_nail] = R.drawable.right_nail_problem
-                } else {
-                    mNailsMap[right_bottom_right_nail] = R.drawable.right_nail_default
-                }
-                right_bottom_right_nail.setImageResource(mNailsMap[right_bottom_right_nail]!!)
+            rightBottomRightNail.setOnClickListener { nail ->
+                mNailsMap[nail] = if (mNailsMap[nail] == rightNailDefault) {
+                    rightNailProblem
+                } else rightNailDefault
+
+                mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
         }
     }
 
     private fun addRecord() {
-        val intent = Intent()
-        val bundle = Bundle()
-        val hoofsEncoded = getEncodedHoofs()
-        bundle.putString(ADD_DIALOG_DETAILS, hoofsEncoded + mView.details.text.toString())
-        bundle.putLong(ADD_DIALOG_DATE, mSetDate.time)
-        intent.putExtras(bundle)
+        val bundle = bundleOf(
+            ADD_DIALOG_DETAILS to getEncodedHoofs() + mView.details.text.toString(),
+            ADD_DIALOG_DATE to mSetDate.time
+        )
+        val intent = Intent().putExtras(bundle)
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
     }
 
     private fun getEncodedHoofs(): String {
         val stringBuilder = StringBuilder()
         with(mView) {
-            stringBuilder.append(AppUtils.getByteByNail(mNailsMap[left_top_hoof_left_nail]))
-            stringBuilder.append(AppUtils.getByteByNail(mNailsMap[left_top_hoof_right_nail]))
-            stringBuilder.append(AppUtils.getByteByNail(mNailsMap[right_top_left_nail]))
-            stringBuilder.append(AppUtils.getByteByNail(mNailsMap[right_top_right_nail]))
-            stringBuilder.append(AppUtils.getByteByNail(mNailsMap[left_bottom_hoof_left_nail]))
-            stringBuilder.append(AppUtils.getByteByNail(mNailsMap[left_bottom_hoof_right_nail]))
-            stringBuilder.append(AppUtils.getByteByNail(mNailsMap[right_bottom_left_nail]))
-            stringBuilder.append(AppUtils.getByteByNail(mNailsMap[right_bottom_right_nail]))
+            stringBuilder
+                .append(mNailsMap[leftTopLeftNail]?.encode())
+                .append(mNailsMap[leftTopRightNail]?.encode())
+                .append(mNailsMap[rightTopLeftNail]?.encode())
+                .append(mNailsMap[rightTopRightNail]?.encode())
+                .append(mNailsMap[leftBottomLeftNail]?.encode())
+                .append(mNailsMap[leftBottomRightNail]?.encode())
+                .append(mNailsMap[rightBottomLeftNail]?.encode())
+                .append(mNailsMap[rightBottomRightNail]?.encode())
         }
         return stringBuilder.toString()
+    }
+
+    companion object {
+        const val leftNailDefault = R.drawable.left_nail_default
+        const val leftNailProblem = R.drawable.left_nail_problem
+        const val rightNailDefault = R.drawable.right_nail_default
+        const val rightNailProblem = R.drawable.right_nail_problem
     }
 }

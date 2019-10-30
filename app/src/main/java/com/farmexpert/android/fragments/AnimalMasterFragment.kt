@@ -34,9 +34,6 @@ import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.fragment_animal_master.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.design.snackbar
-import org.jetbrains.anko.okButton
-import org.jetbrains.anko.support.v4.alert
-import org.jetbrains.anko.yesButton
 import java.util.*
 
 /**
@@ -135,7 +132,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
 
     private fun animalLongClick(animal: Animal) {
         context?.let { context ->
-            AlertDialog.Builder(context)
+            AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
                 .setTitle(R.string.delete_animal)
                 .setMessage(getString(R.string.delete_animal_message, animal.id))
                 .setPositiveButton(R.string.delete) { _, i ->
@@ -197,7 +194,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
         val motherId = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_MOTHER, "")
 
         if (!FarmValidator.isValidAnimalId(id)) {
-            alert(R.string.err_adding_animal_message) { yesButton { } }.show()
+            failureAlert(message = R.string.err_adding_animal_message)
             return
         }
 
@@ -215,18 +212,18 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
             .get()
             .addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {
-                    alert(R.string.err_adding_animal_constraint) { okButton { } }.show()
+                    failureAlert(message = R.string.err_adding_animal_constraint)
                 } else {
                     animalsCollections.document(id)
                         .set(animal)
                         .addOnSuccessListener { rootLayout.snackbar(R.string.item_added) }
                         .addOnFailureListener {
-                            alert(R.string.err_adding_animal) { okButton { } }.show()
+                            failureAlert(message = R.string.err_adding_animal)
                             error { it }
                         }
                 }
             }
-            .addOnFailureListener { alert(R.string.err_adding_animal) { okButton { } }.show() }
+            .addOnFailureListener { failureAlert(R.string.err_adding_animal) }
             .addOnCompleteListener { loadingHide() }
     }
 

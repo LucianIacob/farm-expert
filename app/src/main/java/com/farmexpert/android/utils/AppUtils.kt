@@ -21,32 +21,14 @@ class AppUtils {
 
     companion object {
 
-        private const val NAIL_WITH_PROBLEM = "1"
-        private const val NAIL_WITHOUT_PROBLEM = "0"
+        const val NAIL_WITH_PROBLEM = "1"
+        const val NAIL_WITHOUT_PROBLEM = "0"
 
         fun getTime(year: Int, month: Int, day: Int): Date {
             val calendar = Calendar.getInstance()
             calendar.set(year, month, day)
             return calendar.time
         }
-
-//        fun configureSpinner(
-//            spinner: Spinner,
-//            elements: Array<out String>,
-//            selectedElement: String? = null
-//        ) {
-//            val spinnerAdapter =
-//                ArrayAdapter(spinner.context, R.layout.spinner_item_header, elements).apply {
-//                    setDropDownViewResource(R.layout.spinner_item_layout)
-//                }
-//            spinner.adapter = spinnerAdapter
-//
-//            val selectedElementIndex = elements.indexOf(selectedElement)
-//            spinner.setSelection(
-//                if (selectedElementIndex == -1) elements.size - 1 else selectedElementIndex,
-//                true
-//            )
-//        }
 
         fun timestampFor(year: Int, month: Int, day: Int): Timestamp {
             val calendar = Calendar.getInstance().apply { set(year, month, day) }
@@ -76,15 +58,7 @@ class AppUtils {
             return breedingCalendar.time
         }
 
-        fun getByteByNail(drawableId: Int?): Any {
-            return if (drawableId == R.drawable.left_nail_problem || drawableId == R.drawable.right_nail_problem) {
-                NAIL_WITH_PROBLEM
-            } else {
-                NAIL_WITHOUT_PROBLEM
-            }
-        }
-
-        fun populateLeftNail(imageView: ImageView?, char: String): Int {
+        fun populateLeftNail(imageView: ImageView?, char: String?): Int {
             return if (char == NAIL_WITH_PROBLEM) {
                 imageView?.setImageResource(R.drawable.left_nail_problem)
                 R.drawable.left_nail_problem
@@ -94,7 +68,7 @@ class AppUtils {
             }
         }
 
-        fun populateRightNail(imageView: ImageView?, char: String): Int {
+        fun populateRightNail(imageView: ImageView?, char: String?): Int {
             return if (char == NAIL_WITH_PROBLEM) {
                 imageView?.setImageResource(R.drawable.right_nail_problem)
                 R.drawable.right_nail_problem

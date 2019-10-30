@@ -34,10 +34,10 @@ abstract class BaseAddRecordDialogFragment : DialogFragment() {
     abstract fun getDateView(): TextView
 
     internal fun onChangeDateClick() {
-        mSetDate.run {
-            val calendar = Calendar.getInstance().apply { time = this@run }
+        context?.run {
+            val calendar = Calendar.getInstance().apply { time = mSetDate }
             DatePickerDialog(
-                activity!!,
+                this,
                 DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                     mSetDate = AppUtils.getTime(year, month, dayOfMonth)
                     setupDate()

@@ -21,6 +21,7 @@ import com.farmexpert.android.dialogs.EditBirthDialogFragment
 import com.farmexpert.android.model.Animal
 import com.farmexpert.android.model.Birth
 import com.farmexpert.android.utils.FirestorePath
+import com.farmexpert.android.utils.failureAlert
 import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.Timestamp
@@ -28,8 +29,6 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 import org.jetbrains.anko.error
-import org.jetbrains.anko.okButton
-import org.jetbrains.anko.support.v4.alert
 import java.util.*
 
 class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
@@ -108,13 +107,13 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
         animalsCollections.document((entity as Birth).calfId)
             .get()
             .addOnFailureListener {
-                alert(R.string.err_validating_calf) { okButton { } }.show()
+                failureAlert(R.string.err_validating_calf)
                 listener(false)
                 loadingHide()
             }
             .addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {
-                    alert(R.string.err_adding_animal_constraint) { okButton { } }.show()
+                    failureAlert(R.string.err_adding_animal_constraint)
                     loadingHide()
                 }
                 listener(!snapshot.exists())
@@ -143,7 +142,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
             animalsCollections.document(it.calfId)
                 .set(animal)
                 .addOnFailureListener {
-                    alert(R.string.err_adding_animal_from_birth) { okButton { } }.show()
+                    failureAlert(R.string.err_adding_animal_from_birth)
                     error { it }
                 }
         }

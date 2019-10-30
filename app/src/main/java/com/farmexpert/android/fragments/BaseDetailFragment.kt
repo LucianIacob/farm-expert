@@ -10,17 +10,22 @@
 package com.farmexpert.android.fragments
 
 import android.app.Activity
+import android.content.DialogInterface.BUTTON_NEGATIVE
+import android.content.DialogInterface.BUTTON_POSITIVE
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.AnimalActionsAdapter
 import com.farmexpert.android.adapter.holder.BaseDetailHolder
 import com.farmexpert.android.dialogs.BaseEditRecordDialogFragment
 import com.farmexpert.android.model.BaseEntity
+import com.farmexpert.android.utils.applyFarmexpertStyle
+import com.farmexpert.android.utils.failureAlert
 import com.farmexpert.android.utils.hidden
 import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -31,10 +36,6 @@ import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_animal_action_detail.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.error
-import org.jetbrains.anko.noButton
-import org.jetbrains.anko.okButton
-import org.jetbrains.anko.support.v4.alert
-import org.jetbrains.anko.yesButton
 
 abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDetailHolder<ModelClass>> :
     BaseFragment() {
@@ -103,10 +104,22 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
     open fun addDependentData(entity: Any) {}
 
     fun showDeleteDialog(entity: ModelClass) {
-        alert(message = R.string.delete_confirmation_request) {
-            yesButton { deleteEntity(entity) }
-            noButton { }
-        }.show()
+        context?.let { context ->
+            AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+                .setMessage(R.string.delete_confirmation_request)
+                .setPositiveButton(R.string.common_google_play_services_update_button) { _, i ->
+                    deleteEntity(entity)
+                }
+                .setNegativeButton(R.string.fui_cancel) { _, _ -> }
+                .create()
+                .apply {
+                    setOnShowListener {
+                        getButton(BUTTON_NEGATIVE).applyFarmexpertStyle(context)
+                        getButton(BUTTON_POSITIVE).applyFarmexpertStyle(context, redButton = true)
+                    }
+                    show()
+                }
+        }
     }
 
     private fun deleteEntity(entity: ModelClass) {
@@ -114,7 +127,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
         entity.id?.let {
             getCollectionReference().document(it)
                 .delete()
-                .addOnFailureListener { alert(message = R.string.err_deleting_item) { okButton { } }.show() }
+                .addOnFailureListener { failureAlert(message = R.string.err_deleting_item) }
                 .addOnCompleteListener { loadingHide() }
         }
     }
@@ -178,7 +191,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
                 .update(getPairsToUpdateFromBundle(args))
                 .addOnSuccessListener { rootLayout.snackbar(R.string.item_updated) }
                 .addOnFailureListener {
-                    alert(message = R.string.err_updating_record) { okButton {} }.show()
+                    failureAlert(message = R.string.err_updating_record)
                     error { it }
                 }
                 .addOnCompleteListener { loadingHide() }
@@ -194,7 +207,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
                     .add(entity)
                     .addOnSuccessListener { rootLayout.snackbar(R.string.item_added) }
                     .addOnFailureListener {
-                        alert(message = R.string.err_adding_record) { okButton {} }.show()
+                        failureAlert(message = R.string.err_adding_record)
                         error { it }
                     }
                     .addOnCompleteListener { loadingHide() }

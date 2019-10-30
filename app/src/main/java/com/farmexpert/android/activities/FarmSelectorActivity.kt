@@ -10,6 +10,8 @@
 package com.farmexpert.android.activities
 
 import android.content.Context
+import android.content.DialogInterface.BUTTON_NEGATIVE
+import android.content.DialogInterface.BUTTON_POSITIVE
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -20,10 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.FarmSelectorAdapter
 import com.farmexpert.android.model.Farm
-import com.farmexpert.android.utils.FirestorePath
-import com.farmexpert.android.utils.hidden
-import com.farmexpert.android.utils.invisible
-import com.farmexpert.android.utils.visible
+import com.farmexpert.android.utils.*
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -119,17 +118,19 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
     private fun displayDialog(
         title: String,
         okButton: String,
-        cancelButton: String? = null,
-        ok: (() -> Unit)? = null,
-        cancel: (() -> Unit)? = null
+        ok: (() -> Unit)? = null
     ) {
-        val builder = AlertDialog.Builder(this)
+        AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
             .setTitle(title)
             .setPositiveButton(okButton) { _, _ -> ok?.let { ok() } }
-
-        cancelButton?.let { builder.setNegativeButton(it) { _, _ -> cancel?.let { cancel() } } }
-
-        builder.create().show()
+            .create()
+            .run {
+                setOnShowListener {
+                    getButton(BUTTON_NEGATIVE).applyFarmexpertStyle(context)
+                    getButton(BUTTON_POSITIVE).applyFarmexpertStyle(context)
+                }
+                show()
+            }
     }
 
     private fun saveFarm(farm: Farm) {

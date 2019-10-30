@@ -11,6 +11,7 @@ package com.farmexpert.android.dialogs
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import androidx.core.os.bundleOf
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.SpinnerUtils
@@ -25,22 +26,26 @@ import kotlinx.android.synthetic.main.dialog_edit_breeding.view.*
 class EditBreedingDialogFragment : BaseEditRecordDialogFragment() {
 
     private var selectedNote: Int = 5
-    private lateinit var breedingMale: String
+    private var breedingMale: String? = null
 
     override fun getTitle() = R.string.edit_breeding_title
 
-    override fun extractAdditionalArgs() {
-        selectedNote = arguments!!.getInt(EDIT_DIALOG_NOTE, 5)
-        breedingMale = arguments!!.getString(EDIT_DIALOG_MALE, "")
+    override fun extractAdditionalArgs(bundle: Bundle) {
+        with(bundle) {
+            selectedNote = getInt(EDIT_DIALOG_NOTE, selectedNote)
+            breedingMale = getString(EDIT_DIALOG_MALE)
+        }
     }
 
     override fun populateFields() {
-        mView.maleInput.setText(breedingMale)
-        SpinnerUtils.configureSpinner(
-            spinner = mView.notesSpinner,
-            values = resources.getStringArray(R.array.breeding_notes_values),
-            selected = selectedNote
-        )
+        mView?.maleInput?.setText(breedingMale)
+        mView?.notesSpinner?.let {
+            SpinnerUtils.configureSpinner(
+                spinner = it,
+                values = resources.getStringArray(R.array.breeding_notes_values),
+                selected = selectedNote
+            )
+        }
     }
 
     override fun getLayoutId() = R.layout.dialog_edit_breeding
@@ -48,15 +53,13 @@ class EditBreedingDialogFragment : BaseEditRecordDialogFragment() {
     override fun sendNewRecord() {
         val bundle = bundleOf(
             EDIT_DIALOG_DOC_ID to documentId,
-            EDIT_DIALOG_DATE to mActionDate.time,
-            EDIT_DIALOG_MALE to mView.maleInput.text.toString(),
-            EDIT_DIALOG_NOTE to SpinnerUtils.getBreedingNoteByPosition(
-                mView.notesSpinner.selectedItemPosition,
-                resources
-            )
+            EDIT_DIALOG_DATE to mActionDate?.time,
+            EDIT_DIALOG_MALE to mView?.maleInput?.text.toString(),
+            EDIT_DIALOG_NOTE to mView?.notesSpinner?.selectedItemPosition?.let {
+                SpinnerUtils.getBreedingNoteByPosition(it, resources)
+            }
         )
-        val intent = Intent()
-        intent.putExtras(bundle)
-        targetFragment!!.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
+        val intent = Intent().putExtras(bundle)
+        targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
     }
 }

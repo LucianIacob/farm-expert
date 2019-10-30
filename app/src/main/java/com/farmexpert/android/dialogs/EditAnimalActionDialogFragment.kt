@@ -11,6 +11,7 @@ package com.farmexpert.android.dialogs
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import androidx.core.os.bundleOf
 import com.farmexpert.android.R
 import kotlinx.android.synthetic.main.dialog_edit_animal_action.view.*
@@ -22,16 +23,18 @@ import kotlinx.android.synthetic.main.dialog_edit_animal_action.view.*
 
 open class EditAnimalActionDialogFragment : BaseEditRecordDialogFragment() {
 
-    private lateinit var mDefaultDetails: String
+    private var mDefaultDetails: String? = null
     private var mTitleRedId: Int = R.string.edit_animal_action_title
 
-    override fun extractAdditionalArgs() {
-        mDefaultDetails = arguments!!.getString(EDIT_DIALOG_DETAILS, "")
-        mTitleRedId = arguments!!.getInt(EDIT_DIALOG_TITLE, R.string.edit_animal_action_title)
+    override fun extractAdditionalArgs(bundle: Bundle) {
+        with(bundle) {
+            mDefaultDetails = getString(EDIT_DIALOG_DETAILS)
+            mTitleRedId = getInt(EDIT_DIALOG_TITLE)
+        }
     }
 
     override fun populateFields() {
-        mView.details.setText(mDefaultDetails)
+        mView?.details?.setText(mDefaultDetails)
     }
 
     override fun getLayoutId() = R.layout.dialog_edit_animal_action
@@ -41,12 +44,12 @@ open class EditAnimalActionDialogFragment : BaseEditRecordDialogFragment() {
     override fun sendNewRecord() {
         val bundle = bundleOf(
             EDIT_DIALOG_DOC_ID to documentId,
-            EDIT_DIALOG_DATE to mActionDate.time,
-            EDIT_DIALOG_DETAILS to mView.details.text.toString()
+            EDIT_DIALOG_DATE to mActionDate?.time,
+            EDIT_DIALOG_DETAILS to mView?.details?.text.toString()
         )
         val intent = Intent()
         intent.putExtras(bundle)
-        targetFragment!!.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
+        targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
     }
 
     companion object {
