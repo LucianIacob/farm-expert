@@ -34,12 +34,10 @@ import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.fragment_animal_detail.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.error
-import org.jetbrains.anko.noButton
 import org.jetbrains.anko.okButton
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.selector
 import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.yesButton
 
 class AnimalDetailFragment : BaseFragment() {
 
@@ -70,13 +68,27 @@ class AnimalDetailFragment : BaseFragment() {
     }
 
     private fun displayDeleteDialog(): Boolean {
-        alert(
-            title = getString(R.string.delete_animal),
-            message = getString(R.string.delete_animal_message, args.animalId)
-        ) {
-            noButton { }
-            yesButton { deleteAnimalConfirmed() }
-        }.show()
+        context?.let { context ->
+            AlertDialog.Builder(context)
+                .setTitle(R.string.delete_animal)
+                .setMessage(getString(R.string.delete_animal_message, args.animalId))
+                .setPositiveButton(R.string.delete) { _, i ->
+                    deleteAnimalConfirmed()
+                }
+                .setNegativeButton(R.string.fui_cancel) { _, _ -> }
+                .setCancelable(false)
+                .create()
+                .run {
+                    setOnShowListener {
+                        getButton(DialogInterface.BUTTON_NEGATIVE).applyFarmexpertStyle(context)
+                        getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(
+                            context,
+                            redButton = true
+                        )
+                    }
+                    show()
+                }
+        }
 
         return true
     }
@@ -313,12 +325,12 @@ class AnimalDetailFragment : BaseFragment() {
         currentValue: String = "",
         update: (String) -> Unit
     ) {
-        activity?.let {
+        context?.let { context ->
             val view = layoutInflater.inflate(R.layout.dialog_simple_edit, null)
             view.findViewById<TextInputLayout>(R.id.edittext_header).hint = getString(hintId)
             view.findViewById<TextInputEditText>(R.id.edittext).setText(currentValue)
 
-            val dialog = AlertDialog.Builder(it, R.style.Theme_AppCompat_Light_Dialog)
+            AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog)
                 .setView(view)
                 .setPositiveButton(R.string.common_google_play_services_update_button) { _, i ->
                     val edittext = view.findViewById<TextInputEditText>(R.id.edittext)
@@ -327,15 +339,13 @@ class AnimalDetailFragment : BaseFragment() {
                 .setNegativeButton(R.string.fui_cancel) { _, _ -> }
                 .setCancelable(false)
                 .create()
-
-            dialog.setOnShowListener {
-                dialog.getButton(DialogInterface.BUTTON_NEGATIVE)
-                    .applyFarmexpertStyle(this@AnimalDetailFragment.requireContext())
-                dialog.getButton(DialogInterface.BUTTON_POSITIVE)
-                    .applyFarmexpertStyle(this@AnimalDetailFragment.requireContext())
-            }
-
-            dialog.show()
+                .apply {
+                    setOnShowListener {
+                        getButton(DialogInterface.BUTTON_NEGATIVE).applyFarmexpertStyle(context)
+                        getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(context)
+                    }
+                    show()
+                }
         }
     }
 

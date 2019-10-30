@@ -114,11 +114,21 @@ fun Date.day(): Int {
     return Calendar.getInstance().apply { time = this@day }.day()
 }
 
-fun Button.applyFarmexpertStyle(context: Context) {
+fun Button.applyFarmexpertStyle(context: Context, redButton: Boolean = false) {
     setBackgroundResource(0)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        setTextColor(resources.getColor(R.color.sea_green, null))
+        setTextColor(resources.getColor(
+            redButton.takeIf { it }?.let {
+                R.color.red
+            } ?: R.color.sea_green,
+            null)
+        )
     } else {
-        setTextColor(ContextCompat.getColor(context, R.color.sea_green))
+        setTextColor(ContextCompat.getColor(
+            context,
+            redButton.takeIf { it }?.let {
+                R.color.red
+            } ?: R.color.sea_green)
+        )
     }
 }

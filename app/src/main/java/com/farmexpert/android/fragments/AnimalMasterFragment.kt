@@ -10,10 +10,12 @@
 package com.farmexpert.android.fragments
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,10 +26,7 @@ import com.farmexpert.android.dialogs.AddAnimalDialogFragment
 import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
 import com.farmexpert.android.model.Animal
 import com.farmexpert.android.transactions.DeleteAnimalTransaction
-import com.farmexpert.android.utils.FarmValidator
-import com.farmexpert.android.utils.FirestorePath
-import com.farmexpert.android.utils.hidden
-import com.farmexpert.android.utils.visible
+import com.farmexpert.android.utils.*
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
@@ -35,7 +34,6 @@ import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.fragment_animal_master.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.design.snackbar
-import org.jetbrains.anko.noButton
 import org.jetbrains.anko.okButton
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.yesButton
@@ -136,19 +134,32 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
     }
 
     private fun animalLongClick(animal: Animal) {
-        alert(
-            title = getString(R.string.delete_animal),
-            message = getString(R.string.delete_animal_message, animal.id!!)
-        ) {
-            noButton { }
-            yesButton {
-                loadingShow()
-                DeleteAnimalTransaction(farmReference,
-                    { rootLayout.snackbar(R.string.item_deleted) },
-                    { exception -> error { exception } },
-                    { loadingHide() }).execute(animal.id!!)
-            }
-        }.show()
+        context?.let { context ->
+            AlertDialog.Builder(context)
+                .setTitle(R.string.delete_animal)
+                .setMessage(getString(R.string.delete_animal_message, animal.id))
+                .setPositiveButton(R.string.delete) { _, i ->
+                    loadingShow()
+                    DeleteAnimalTransaction(farmReference,
+                        { rootLayout.snackbar(R.string.item_deleted) },
+                        { exception -> error { exception } },
+                        { loadingHide() })
+                        .execute(animal.id!!)
+                }
+                .setNegativeButton(R.string.fui_cancel) { _, _ -> }
+                .setCancelable(false)
+                .create()
+                .run {
+                    setOnShowListener {
+                        getButton(DialogInterface.BUTTON_NEGATIVE).applyFarmexpertStyle(context)
+                        getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(
+                            context,
+                            redButton = true
+                        )
+                    }
+                    show()
+                }
+        }
     }
 
     override fun onStart() {
