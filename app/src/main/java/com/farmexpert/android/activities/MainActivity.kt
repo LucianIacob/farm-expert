@@ -21,6 +21,7 @@ import androidx.preference.PreferenceManager
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_NAME
 import com.farmexpert.android.utils.CircleTransform
+import com.farmexpert.android.utils.takeIfNotBlank
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
@@ -42,25 +43,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavHeader() {
-        FirebaseAuth.getInstance().currentUser?.let {
-            it.photoUrl?.let { photoUri ->
-                if (photoUri.toString().isNotEmpty()) {
-                    Picasso.get().load(it.photoUrl).transform(CircleTransform()).into(userIcon)
-                }
+        FirebaseAuth.getInstance().currentUser?.let { user ->
+            user.photoUrl?.toString()?.isNotEmpty()?.let { photoUri ->
+                Picasso.get().load(user.photoUrl).transform(CircleTransform()).into(userIcon)
             }
-            if (!it.phoneNumber.isNullOrEmpty()) {
-                userName.text = it.phoneNumber
-            }
-            if (!it.displayName.isNullOrEmpty()) {
-                userName.text = it.displayName
-            }
-            if (!it.email.isNullOrEmpty()) {
-                userEmail.text = it.email
-            }
+            user.phoneNumber?.takeIfNotBlank()?.let { userName.text = it }
+            user.displayName?.takeIfNotBlank()?.let { userName.text = it }
+            user.email?.takeIfNotBlank()?.let { userEmail.text = it }
         }
 
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        farmName.text = prefs.getString(KEY_CURRENT_FARM_NAME, "")!!
+        PreferenceManager.getDefaultSharedPreferences(this)
+            .getString(KEY_CURRENT_FARM_NAME, null)?.takeIfNotBlank()?.let {
+                farmName.text = it
+            }
     }
 
     private fun setupNavigationDrawer(navController: NavController) {

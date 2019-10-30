@@ -20,10 +20,6 @@ open class BaseEntity {
 
     @Exclude
     var id: String? = null
-        @Exclude get() {
-            return field
-        }
-        @Exclude set(value) {
-            field = value
-        }
+        @Exclude get
+        @Exclude set
 }

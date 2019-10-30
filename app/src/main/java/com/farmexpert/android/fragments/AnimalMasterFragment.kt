@@ -103,7 +103,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
         adapter = object : AnimalsAdapter(
             options,
             { animal -> animalClick(animal) },
-            { animal -> animalLongClick(animal) }) {
+            { animalId -> animalLongClick(animalId) }) {
             override fun onDataChanged() {
                 loadingHide()
                 (activity as? AppCompatActivity)?.supportActionBar?.title = if (itemCount != 0) {
@@ -130,18 +130,18 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
         }
     }
 
-    private fun animalLongClick(animal: Animal) {
+    private fun animalLongClick(animalId: String) {
         context?.let { context ->
             AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
                 .setTitle(R.string.delete_animal)
-                .setMessage(getString(R.string.delete_animal_message, animal.id))
+                .setMessage(getString(R.string.delete_animal_message, animalId))
                 .setPositiveButton(R.string.delete) { _, i ->
                     loadingShow()
                     DeleteAnimalTransaction(farmReference,
                         { rootLayout.snackbar(R.string.item_deleted) },
                         { exception -> error { exception } },
                         { loadingHide() })
-                        .execute(animal.id!!)
+                        .execute(animalId)
                 }
                 .setNegativeButton(R.string.fui_cancel) { _, _ -> }
                 .setCancelable(false)
@@ -172,15 +172,17 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
     private fun addAnimalClicked() {
         val addDialog = AddAnimalDialogFragment()
         addDialog.setTargetFragment(this, ADD_ANIMAL_RQ)
-        if (fragmentManager?.findFragmentByTag(AddAnimalDialogFragment.TAG) == null) {
-            addDialog.show(fragmentManager!!, AddAnimalDialogFragment.TAG)
+        fragmentManager?.run {
+            if (findFragmentByTag(AddAnimalDialogFragment.TAG) == null) {
+                addDialog.show(this, AddAnimalDialogFragment.TAG)
+            }
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode != Activity.RESULT_OK || data?.extras == null) return
         when (requestCode) {
-            ADD_ANIMAL_RQ -> insertAnimal(data.extras!!)
+            ADD_ANIMAL_RQ -> data.extras?.let { insertAnimal(it) }
             else -> super.onActivityResult(requestCode, resultCode, data)
         }
     }
@@ -198,7 +200,6 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
             return
         }
 
-        loadingShow()
         val animal = Animal(
             race = race,
             dateOfBirth = Timestamp(dateOfBirth),
@@ -208,7 +209,8 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
             createdBy = currentUser?.uid
         )
 
-        animalsCollections.document(id!!)
+        loadingShow()
+        animalsCollections.document(id)
             .get()
             .addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {

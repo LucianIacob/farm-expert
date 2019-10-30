@@ -133,7 +133,10 @@ class AnimalDetailFragment : BaseFragment() {
             .addOnSuccessListener { populateUi(it.toObject<Animal>()) }
             .addOnCompleteListener {
                 loadingHide()
-                if (it.isSuccessful && it.isComplete && it.result != null && !it.result!!.exists()) {
+                if (it.isSuccessful &&
+                    it.isComplete &&
+                    it.result?.exists() != true
+                ) {
                     failureAlert(
                         message = R.string.err_animal_not_exists,
                         isCancellable = false,
@@ -289,16 +292,22 @@ class AnimalDetailFragment : BaseFragment() {
 
     private fun editDateOfBirth() {
         currentAnimal?.run {
-            DatePickerDialog(
-                context!!,
-                DatePickerDialog.OnDateSetListener { _, year, month, day ->
-                    val newTimestamp = AppUtils.timestampFor(year, month, day)
-                    updateField(FirestorePath.Animal.DATE_OF_BIRTH, newTimestamp, dateOfBirthView)
-                },
-                yearOfBirth(),
-                monthOfBirth(),
-                dayOfBirth()
-            ).show()
+            context?.let {
+                DatePickerDialog(
+                    it,
+                    DatePickerDialog.OnDateSetListener { _, year, month, day ->
+                        val newTimestamp = AppUtils.timestampFor(year, month, day)
+                        updateField(
+                            FirestorePath.Animal.DATE_OF_BIRTH,
+                            newTimestamp,
+                            dateOfBirthView
+                        )
+                    },
+                    yearOfBirth(),
+                    monthOfBirth(),
+                    dayOfBirth()
+                ).show()
+            }
         }
     }
 

@@ -163,3 +163,6 @@ fun Int.encode(): String =
     } else {
         AppUtils.NAIL_WITHOUT_PROBLEM
     }
+
+fun String?.takeIfNotBlank(): String? =
+    this.takeUnless { this.isNullOrBlank() }

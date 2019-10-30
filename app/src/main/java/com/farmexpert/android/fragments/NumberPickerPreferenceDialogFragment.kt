@@ -31,10 +31,10 @@ class NumberPickerPreferenceDialogFragment : PreferenceDialogFragmentCompat() {
 
     private lateinit var mNumberPicker: NumberPicker
 
-    override fun onBindDialogView(view: View?) {
+    override fun onBindDialogView(view: View) {
         super.onBindDialogView(view)
 
-        mNumberPicker = view?.findViewById(R.id.number_picker)!!
+        mNumberPicker = view.findViewById(R.id.number_picker)
         mNumberPicker.maxValue = ConfigPickerUtils.getMaxValueByKey(preference.key, resources)
         mNumberPicker.minValue = ConfigPickerUtils.getMinValueByKey(preference.key, resources)
         mNumberPicker.setFormatter { value -> resources.getQuantityString(R.plurals.days, value, value) }

@@ -32,9 +32,8 @@ class NumberPickerPreference(context: Context, attrs: AttributeSet) :
 
     private var mValue: Int = 1
 
-    override fun onGetDefaultValue(a: TypedArray?, index: Int): Any {
-        return a!!.getInt(index, mValue)
-    }
+    override fun onGetDefaultValue(a: TypedArray?, index: Int): Any =
+        a?.getInt(index, mValue) ?: mValue
 
     override fun onSetInitialValue(defaultValue: Any?) {
         defaultValue?.let {

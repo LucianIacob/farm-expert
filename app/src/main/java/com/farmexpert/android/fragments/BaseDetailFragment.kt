@@ -177,8 +177,8 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode != Activity.RESULT_OK || data?.extras == null) return
         when (requestCode) {
-            ADD_RECORD_RQ -> insertRecord(data.extras!!)
-            UPDATE_RECORD_RQ -> updateRecord(data.extras!!)
+            ADD_RECORD_RQ -> data.extras?.let { insertRecord(it) }
+            UPDATE_RECORD_RQ -> data.extras?.let { updateRecord(it) }
             else -> super.onActivityResult(requestCode, resultCode, data)
         }
     }

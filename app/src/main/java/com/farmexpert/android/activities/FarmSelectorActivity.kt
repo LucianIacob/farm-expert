@@ -12,6 +12,7 @@ package com.farmexpert.android.activities
 import android.content.Context
 import android.content.DialogInterface.BUTTON_NEGATIVE
 import android.content.DialogInterface.BUTTON_POSITIVE
+import android.content.res.Resources
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -52,8 +53,13 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_farm_selector)
         firestore = Firebase.firestore
-        currentUser = FirebaseAuth.getInstance().currentUser!!
-        initFarmsList()
+        FirebaseAuth.getInstance().currentUser?.let {
+            currentUser = it
+            initFarmsList()
+        } ?: run {
+            startActivity<AuthenticationActivity>()
+            finish()
+        }
     }
 
     private fun initFarmsList() {
@@ -184,8 +190,8 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             loadingProgressBar.visible()
             checkFarmExists(farmName, accessCode,
                 { exists, farm ->
-                    if (exists) {
-                        storeFarmDetails(farm!!)
+                    if (exists && farm != null) {
+                        storeFarmDetails(farm)
                         updateFarm(farm)
                     } else {
                         loadingProgressBar.invisible()
@@ -219,18 +225,20 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
     }
 
     private fun updateFarm(farm: Farm) {
-        firestore.collection(FirestorePath.Collections.FARMS)
-            .document(farm.id!!)
-            .update(FirestorePath.Farm.USERS, FieldValue.arrayUnion(currentUser.uid))
-            .addOnSuccessListener {
-                loadingProgressBar.invisible()
-                storeFarmId(farm.id!!, farm.name)
-                openMainActivity()
-            }
-            .addOnFailureListener { ex ->
-                loadingProgressBar.invisible()
-                ex.message?.let { longToast(it) }
-            }
+        farm.id?.let { farmId ->
+            firestore.collection(FirestorePath.Collections.FARMS)
+                .document(farmId)
+                .update(FirestorePath.Farm.USERS, FieldValue.arrayUnion(currentUser.uid))
+                .addOnSuccessListener {
+                    loadingProgressBar.invisible()
+                    storeFarmId(farmId, farm.name)
+                    openMainActivity()
+                }
+                .addOnFailureListener { ex ->
+                    loadingProgressBar.invisible()
+                    ex.message?.let { longToast(it) }
+                }
+        }
     }
 
     private fun storeFarmId(farmId: String, name: String) {
@@ -264,8 +272,10 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             .addOnSuccessListener { snapshots ->
                 if (!snapshots.isEmpty) {
                     val document = snapshots.documents[0]
-                    val farm = document.toObject<Farm>().also { it?.id = document.id }
-                    listener(true, farm)
+                    document.toObject<Farm>()?.also {
+                        it.id = document.id
+                        listener(true, it)
+                    } ?: failure.invoke(Resources.NotFoundException())
                 } else {
                     listener(false, null)
                 }

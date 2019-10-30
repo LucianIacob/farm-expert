@@ -55,7 +55,6 @@ class BirthsMasterFragment : BaseMasterFragment<Birth, GraphBirthViewHolder>() {
 
     override val snapshotParser: SnapshotParser<Birth> = SnapshotParser {
         it.toObject<Birth>()!!.apply { id = it.id }
-        it.toObject<Birth>()!!.apply { id = it.id }
     }
 
     override fun transformData(documents: QuerySnapshot?): Map<String, List<Birth>> {

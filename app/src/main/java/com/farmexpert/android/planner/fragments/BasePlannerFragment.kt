@@ -115,7 +115,7 @@ abstract class BasePlannerFragment : BaseFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode != Activity.RESULT_OK || data?.extras == null) return
         when (requestCode) {
-            ADD_PLANNER_ITEM_RQ -> insertPlannerItem(data.extras!!)
+            ADD_PLANNER_ITEM_RQ -> data.extras?.let { insertPlannerItem(it) }
             else -> super.onActivityResult(requestCode, resultCode, data)
         }
     }

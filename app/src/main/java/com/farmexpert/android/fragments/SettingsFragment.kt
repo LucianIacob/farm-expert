@@ -34,7 +34,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             val dialogFragment =
                 NumberPickerPreferenceDialogFragment.newInstance(preference.getKey())
             dialogFragment.setTargetFragment(this, 0)
-            dialogFragment.show(fragmentManager!!, null)
+            fragmentManager?.let { dialogFragment.show(it, null) }
         } else {
             super.onDisplayPreferenceDialog(preference)
         }
