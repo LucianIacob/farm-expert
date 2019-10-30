@@ -23,6 +23,9 @@ class TextViewWithHeaderAndExpandAndEdit(context: Context, attributes: Attribute
 
     private var isExpanded = false
 
+    val value: String
+        get() = text_with_header_value.text.toString()
+
     init {
         val typedArray =
             context.obtainStyledAttributes(

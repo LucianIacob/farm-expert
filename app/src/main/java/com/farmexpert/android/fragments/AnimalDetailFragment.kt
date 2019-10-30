@@ -192,7 +192,10 @@ class AnimalDetailFragment : BaseFragment() {
     }
 
     private fun editMotherMother() {
-        readTextInput(hintId = R.string.mother_mother_id) { textRead ->
+        readTextInput(
+            hintId = R.string.mother_mother_id,
+            currentValue = motherMotherIdView.value
+        ) { textRead ->
             updateField(
                 fieldToUpdate = FirestorePath.Animal.MOTHER_MOTHER_ID,
                 newValue = textRead,
@@ -202,7 +205,10 @@ class AnimalDetailFragment : BaseFragment() {
     }
 
     private fun editMotherFather() {
-        readTextInput(hintId = R.string.mother_father_id) { textRead ->
+        readTextInput(
+            hintId = R.string.mother_father_id,
+            currentValue = motherFatherIdView.value
+        ) { textRead ->
             updateField(
                 fieldToUpdate = FirestorePath.Animal.MOTHER_FATHER_ID,
                 newValue = textRead,
@@ -212,7 +218,10 @@ class AnimalDetailFragment : BaseFragment() {
     }
 
     private fun editMother() {
-        readTextInput(hintId = R.string.mother_id) { textRead ->
+        readTextInput(
+            hintId = R.string.mother_id,
+            currentValue = motherIdView.value
+        ) { textRead ->
             updateField(
                 fieldToUpdate = FirestorePath.Animal.MOTHER_ID,
                 newValue = textRead,
@@ -222,7 +231,10 @@ class AnimalDetailFragment : BaseFragment() {
     }
 
     private fun editFatherMother() {
-        readTextInput(hintId = R.string.father_mother_id) { textRead ->
+        readTextInput(
+            hintId = R.string.father_mother_id,
+            currentValue = fatherMotherIdView.value
+        ) { textRead ->
             updateField(
                 fieldToUpdate = FirestorePath.Animal.FATHER_MOTHER_ID,
                 newValue = textRead,
@@ -232,7 +244,10 @@ class AnimalDetailFragment : BaseFragment() {
     }
 
     private fun editFatherFather() {
-        readTextInput(hintId = R.string.father_father_id) { textRead ->
+        readTextInput(
+            hintId = R.string.father_father_id,
+            currentValue = fatherFatherIdView.value
+        ) { textRead ->
             updateField(
                 fieldToUpdate = FirestorePath.Animal.FATHER_FATHER_ID,
                 newValue = textRead,
@@ -242,7 +257,10 @@ class AnimalDetailFragment : BaseFragment() {
     }
 
     private fun editFather() {
-        readTextInput(hintId = R.string.father_id) { textRead ->
+        readTextInput(
+            hintId = R.string.father_id,
+            currentValue = fatherIdView.value
+        ) { textRead ->
             updateField(
                 fieldToUpdate = FirestorePath.Animal.FATHER_ID,
                 newValue = textRead,
@@ -278,7 +296,10 @@ class AnimalDetailFragment : BaseFragment() {
     }
 
     private fun editRace() {
-        readTextInput(hintId = R.string.race) { textRead ->
+        readTextInput(
+            hintId = R.string.race,
+            currentValue = raceView.value
+        ) { textRead ->
             updateField(
                 fieldToUpdate = FirestorePath.Animal.RACE,
                 newValue = textRead,
@@ -287,10 +308,15 @@ class AnimalDetailFragment : BaseFragment() {
         }
     }
 
-    private fun readTextInput(@StringRes hintId: Int, update: (String) -> Unit) {
+    private fun readTextInput(
+        @StringRes hintId: Int,
+        currentValue: String = "",
+        update: (String) -> Unit
+    ) {
         activity?.let {
             val view = layoutInflater.inflate(R.layout.dialog_simple_edit, null)
             view.findViewById<TextInputLayout>(R.id.edittext_header).hint = getString(hintId)
+            view.findViewById<TextInputEditText>(R.id.edittext).setText(currentValue)
 
             val dialog = AlertDialog.Builder(it, R.style.Theme_AppCompat_Light_Dialog)
                 .setView(view)
