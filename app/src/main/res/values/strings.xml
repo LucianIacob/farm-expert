@@ -134,6 +134,8 @@
     <string name="logout">Logout</string>
     <string name="change_farm_confirmation_message">You are about to sign out from this farm and return to farm selector screen. You will see there all your subscriptions.</string>
     <string name="confirm_button">Confirm</string>
+    <string name="logout_confirmation_message">You will be returned back to the login screen. Are you sure you want to log out?</string>
+    <string name="err_logging_out">Sorry, an error occurred while logging you out. Please try again later.</string>
 
     <integer-array name="gender_types">
         <item>0</item>

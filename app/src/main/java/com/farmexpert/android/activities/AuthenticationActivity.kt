@@ -25,6 +25,8 @@ class AuthenticationActivity : Activity() {
 
     companion object {
         const val RC_SIGN_IN = 1234
+        const val termsOfServiceUrl = "https://www.lucianiacob.com"
+        const val privacyPolicyUrl = "https://www.lucianiacob.com"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +44,7 @@ class AuthenticationActivity : Activity() {
             .setTheme(R.style.AppTheme)
             .setIsSmartLockEnabled(true, true)
             .setAlwaysShowSignInMethodScreen(true)
-            .setTosAndPrivacyPolicyUrls("https://www.lucianiacob.com", "https://www.lucianiacob.com")
+            .setTosAndPrivacyPolicyUrls(termsOfServiceUrl, privacyPolicyUrl)
             .setAvailableProviders(
                 listOf(
                     AuthUI.IdpConfig.EmailBuilder().build(),

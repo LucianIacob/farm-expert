@@ -13,6 +13,7 @@ import android.content.DialogInterface.BUTTON_NEGATIVE
 import android.content.DialogInterface.BUTTON_POSITIVE
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
@@ -28,14 +29,18 @@ import com.farmexpert.android.R
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_NAME
 import com.farmexpert.android.utils.CircleTransform
 import com.farmexpert.android.utils.applyFarmexpertStyle
+import com.farmexpert.android.utils.failureAlert
 import com.farmexpert.android.utils.takeIfNotBlank
+import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_header_dashboard.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.error
 import org.jetbrains.anko.startActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,7 +110,41 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun logOutRequested() {
+        AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+            .setMessage(R.string.logout_confirmation_message)
+            .setPositiveButton(R.string.confirm_button) { _, _ ->
+                logOutConfirmed()
+            }
+            .setNegativeButton(R.string.fui_cancel) { _, _ -> }
+            .setCancelable(false)
+            .create()
+            .run {
+                setOnShowListener {
+                    getButton(BUTTON_NEGATIVE).applyFarmexpertStyle(context)
+                    getButton(BUTTON_POSITIVE).applyFarmexpertStyle(
+                        context,
+                        redButton = true
+                    )
+                }
+                show()
+            }
+    }
 
+    private fun logOutConfirmed() {
+        setLoadingVisibility(View.VISIBLE)
+        AuthUI.getInstance()
+            .signOut(this)
+            .addOnSuccessListener {
+                PreferenceManager.getDefaultSharedPreferences(this)
+                    .edit { remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID) }
+                startActivity<FarmSelectorActivity>()
+                finish()
+            }
+            .addOnFailureListener {
+                error { it }
+                failureAlert(R.string.err_logging_out)
+            }
+            .addOnCompleteListener { setLoadingVisibility(View.GONE) }
     }
 
     override fun onBackPressed() {

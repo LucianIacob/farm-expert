@@ -9,6 +9,7 @@
 
 package com.farmexpert.android.utils
 
+import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Build
@@ -155,6 +156,25 @@ fun Fragment.failureAlert(
                 show()
             }
     }
+}
+
+fun Activity.failureAlert(
+    message: Int,
+    isCancellable: Boolean = true,
+    okListener: (() -> Unit)? = null
+) {
+    AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+        .setMessage(message)
+        .setPositiveButton(android.R.string.ok) { _, _ ->
+            okListener?.invoke()
+        }
+        .setCancelable(isCancellable)
+        .create()
+        .run {
+            getButton(DialogInterface.BUTTON_NEGATIVE).applyFarmexpertStyle(context)
+            getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(context)
+            show()
+        }
 }
 
 fun Int.encode(): String =
