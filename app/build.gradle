@@ -25,7 +25,6 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-        resConfigs "en", "ro"
     }
 
     buildTypes {
@@ -48,7 +47,9 @@ android {
     flavorDimensions "tier"
     productFlavors {
         vatamanu {
+            resConfigs "ro"
             dimension "tier"
+            applicationIdSuffix ".vatamanu"
             versionNameSuffix '-vatamanu'
         }
         generic {

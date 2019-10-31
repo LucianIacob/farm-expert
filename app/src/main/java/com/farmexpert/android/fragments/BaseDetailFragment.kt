@@ -107,7 +107,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
         context?.let { context ->
             AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
                 .setMessage(R.string.delete_confirmation_request)
-                .setPositiveButton(R.string.common_google_play_services_update_button) { _, _ ->
+                .setPositiveButton(R.string.delete) { _, _ ->
                     deleteEntity(entity)
                 }
                 .setNegativeButton(R.string.fui_cancel) { _, _ -> }
