@@ -23,16 +23,22 @@
         </menu>
     </item>
 
-    <!--<item android:title="@string/settings">-->
-    <!--<menu>-->
-    <!--<group android:checkableBehavior="single">-->
-    <!--<item-->
-    <!--android:id="@+id/recoveryFragment"-->
-    <!--android:checkable="false"-->
-    <!--android:icon="@drawable/ic_settings_backup_restore_black_24dp"-->
-    <!--android:title="Test" />-->
-    <!--</group>-->
-    <!--</menu>-->
-    <!--</item>-->
+    <item android:title="@string/settings">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                  android:id="@+id/changeFarm"
+                  android:checkable="false"
+                  android:icon="@drawable/baseline_flip_camera_android_black_48"
+                  android:title="@string/change_farm" />
+
+                <item
+                  android:id="@+id/logOut"
+                  android:checkable="false"
+                  android:icon="@drawable/baseline_open_in_new_black_48"
+                  android:title="@string/logout" />
+            </group>
+        </menu>
+    </item>
 
 </menu>

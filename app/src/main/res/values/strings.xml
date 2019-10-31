@@ -130,6 +130,10 @@
     <string name="planner_first_vaccine_reason">%d days since the last birth</string>
     <string name="planner_before_birth_vaccine_reason">%d days before the estimated day of birth</string>
     <string name="go_to">Go to:</string>
+    <string name="change_farm">Change farm</string>
+    <string name="logout">Logout</string>
+    <string name="change_farm_confirmation_message">You are about to sign out from this farm and return to farm selector screen. You will see there all your subscriptions.</string>
+    <string name="confirm_button">Confirm</string>
 
     <integer-array name="gender_types">
         <item>0</item>

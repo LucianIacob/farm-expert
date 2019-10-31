@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
 import com.farmexpert.android.R
+import com.farmexpert.android.activities.FarmSelectorActivity
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_ID
 import com.farmexpert.android.activities.MainActivity
 import com.farmexpert.android.utils.FirestorePath
@@ -28,6 +29,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.support.v4.longToast
+import org.jetbrains.anko.support.v4.startActivity
 
 open class BaseFragment : Fragment(), AnkoLogger {
 
@@ -46,7 +48,10 @@ open class BaseFragment : Fragment(), AnkoLogger {
                 .document(farmId)
         } ?: run {
             longToast(R.string.error_inexistent_farm_id)
-            NavHostFragment.findNavController(this).popBackStack()
+            if (NavHostFragment.findNavController(this).popBackStack().not()) {
+                startActivity<FarmSelectorActivity>()
+                activity?.finish()
+            }
         }
     }
 
