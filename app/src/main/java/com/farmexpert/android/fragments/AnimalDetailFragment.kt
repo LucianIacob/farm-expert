@@ -70,7 +70,7 @@ class AnimalDetailFragment : BaseFragment() {
             AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
                 .setTitle(R.string.delete_animal)
                 .setMessage(getString(R.string.delete_animal_message, args.animalId))
-                .setPositiveButton(R.string.delete) { _, i ->
+                .setPositiveButton(R.string.delete) { _, _ ->
                     deleteAnimalConfirmed()
                 }
                 .setNegativeButton(R.string.fui_cancel) { _, _ -> }
@@ -336,7 +336,7 @@ class AnimalDetailFragment : BaseFragment() {
 
             AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
                 .setView(view)
-                .setPositiveButton(R.string.common_google_play_services_update_button) { _, i ->
+                .setPositiveButton(R.string.common_google_play_services_update_button) { _, _ ->
                     val edittext = view.findViewById<TextInputEditText>(R.id.edittext)
                     update(edittext.text.toString())
                 }

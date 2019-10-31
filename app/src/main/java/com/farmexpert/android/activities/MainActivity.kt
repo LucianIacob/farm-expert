@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
 
     private fun setupNavHeader() {
         FirebaseAuth.getInstance().currentUser?.let { user ->
-            user.photoUrl?.toString()?.isNotEmpty()?.let { photoUri ->
+            user.photoUrl?.toString()?.isNotEmpty()?.let {
                 Picasso.get().load(user.photoUrl).transform(CircleTransform()).into(userIcon)
             }
             user.phoneNumber?.takeIfNotBlank()?.let { userName.text = it }
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
     private fun changeFarmRequested() {
         AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
             .setMessage(R.string.change_farm_confirmation_message)
-            .setPositiveButton(R.string.confirm_button) { _, i ->
+            .setPositiveButton(R.string.confirm_button) { _, _ ->
                 PreferenceManager.getDefaultSharedPreferences(this)
                     .edit { remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID) }
                 startActivity<FarmSelectorActivity>()

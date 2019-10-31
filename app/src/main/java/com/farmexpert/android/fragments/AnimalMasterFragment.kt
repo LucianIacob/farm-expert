@@ -135,7 +135,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
             AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
                 .setTitle(R.string.delete_animal)
                 .setMessage(getString(R.string.delete_animal_message, animalId))
-                .setPositiveButton(R.string.delete) { _, i ->
+                .setPositiveButton(R.string.delete) { _, _ ->
                     loadingShow()
                     DeleteAnimalTransaction(farmReference,
                         { rootLayout.snackbar(R.string.item_deleted) },
