@@ -14,6 +14,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/calfInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/calf_id"
@@ -21,19 +22,18 @@
             app:hintEnabled="true"
             app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/calfId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/telegroteskscreen_medium"
-                android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:lines="1"
                 android:maxLength="30"
                 android:minWidth="150dp"
                 android:textColor="#000080"
-                android:textSize="22sp"
+                android:textSize="@dimen/large_text"
                 tools:ignore="LabelFor"
                 tools:targetApi="o" />
 
@@ -50,7 +50,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:textColor="#000080"
-            android:textSize="22sp"
+            android:textSize="@dimen/large_text"
             app:layout_constraintTop_toBottomOf="@id/calfInputLayout" />
 
         <TextView
@@ -61,7 +61,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/note"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="@dimen/large_text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dialogDate" />
 
@@ -72,7 +72,7 @@
             android:layout_marginStart="@dimen/tiny_margin"
             android:entries="@array/birth_notes"
             android:fontFamily="@font/telegroteskscreen_medium"
-            android:textSize="22sp"
+            android:textSize="@dimen/large_text"
             app:layout_constraintBottom_toBottomOf="@id/dialogNoteHeader"
             app:layout_constraintLeft_toRightOf="@id/dialogNoteHeader"
             app:layout_constraintRight_toRightOf="parent"

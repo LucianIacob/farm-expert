@@ -14,6 +14,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/dialogIdHeader"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
@@ -24,12 +25,11 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialogId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/telegroteskscreen_medium"
-                android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:maxLength="@integer/animal_id_max_length"
@@ -74,7 +74,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:entries="@array/gender_types"
+            android:entries="@array/gender_types_values"
             android:fontFamily="@font/telegroteskscreen_medium"
             android:textAlignment="center"
             android:textSize="@dimen/large_text"
@@ -85,6 +85,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/dialogRaceHeader"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -96,12 +97,11 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dialogGenderSpinner">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialogRace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/telegroteskscreen_medium"
-                android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:maxLength="@integer/animal_id_max_length"
@@ -114,6 +114,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/dialogFatherHeader"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -125,12 +126,11 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dialogRaceHeader">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialogFather"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/telegroteskscreen_medium"
-                android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:maxLength="@integer/animal_id_max_length"
@@ -142,6 +142,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -153,12 +154,11 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dialogFatherHeader">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialogMother"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/telegroteskscreen_medium"
-                android:gravity="center_horizontal"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:maxLength="@integer/animal_id_max_length"

@@ -14,6 +14,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/dialog_comment_root"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/details"
@@ -21,12 +22,11 @@
             app:hintEnabled="true"
             app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/telegroteskscreen_medium"
-                android:gravity="center"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
                 android:textColor="#000080"
@@ -59,7 +59,7 @@
             app:layout_constraintRight_toRightOf="parent" />
 
         <ImageView
-          android:id="@+id/leftTopRightNail"
+            android:id="@+id/leftTopRightNail"
             android:layout_width="@dimen/hoof_width"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
@@ -70,18 +70,18 @@
             app:layout_constraintTop_toBottomOf="@id/dialogDate" />
 
         <ImageView
-          android:id="@+id/leftTopLeftNail"
+            android:id="@+id/leftTopLeftNail"
             android:layout_width="@dimen/hoof_width"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/tiny_margin"
             android:contentDescription="@null"
             android:src="@drawable/left_nail_default"
-          app:layout_constraintRight_toLeftOf="@id/leftTopRightNail"
+            app:layout_constraintRight_toLeftOf="@id/leftTopRightNail"
             app:layout_constraintTop_toBottomOf="@id/dialogDate" />
 
         <ImageView
-          android:id="@+id/rightTopLeftNail"
+            android:id="@+id/rightTopLeftNail"
             android:layout_width="@dimen/hoof_width"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/medium_margin"
@@ -92,24 +92,24 @@
             app:layout_constraintTop_toBottomOf="@id/dialogDate" />
 
         <ImageView
-          android:id="@+id/rightTopRightNail"
+            android:id="@+id/rightTopRightNail"
             android:layout_width="@dimen/hoof_width"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/tiny_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:contentDescription="@null"
             android:src="@drawable/right_nail_default"
-          app:layout_constraintLeft_toRightOf="@id/rightTopLeftNail"
+            app:layout_constraintLeft_toRightOf="@id/rightTopLeftNail"
             app:layout_constraintTop_toBottomOf="@id/dialogDate" />
 
         <View
             android:id="@+id/horizontal_separator"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-          app:layout_constraintTop_toBottomOf="@id/rightTopLeftNail" />
+            app:layout_constraintTop_toBottomOf="@id/rightTopLeftNail" />
 
         <ImageView
-          android:id="@+id/leftBottomRightNail"
+            android:id="@+id/leftBottomRightNail"
             android:layout_width="@dimen/hoof_width"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/medium_margin"
@@ -119,17 +119,17 @@
             app:layout_constraintTop_toBottomOf="@id/horizontal_separator" />
 
         <ImageView
-          android:id="@+id/leftBottomLeftNail"
+            android:id="@+id/leftBottomLeftNail"
             android:layout_width="@dimen/hoof_width"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/tiny_margin"
             android:contentDescription="@null"
             android:src="@drawable/left_nail_default"
-          app:layout_constraintRight_toLeftOf="@id/leftBottomRightNail"
+            app:layout_constraintRight_toLeftOf="@id/leftBottomRightNail"
             app:layout_constraintTop_toBottomOf="@id/horizontal_separator" />
 
         <ImageView
-          android:id="@+id/rightBottomLeftNail"
+            android:id="@+id/rightBottomLeftNail"
             android:layout_width="@dimen/hoof_width"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/medium_margin"
@@ -139,13 +139,13 @@
             app:layout_constraintTop_toBottomOf="@id/horizontal_separator" />
 
         <ImageView
-          android:id="@+id/rightBottomRightNail"
+            android:id="@+id/rightBottomRightNail"
             android:layout_width="@dimen/hoof_width"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/tiny_margin"
             android:contentDescription="@null"
             android:src="@drawable/right_nail_default"
-          app:layout_constraintLeft_toRightOf="@id/rightBottomLeftNail"
+            app:layout_constraintLeft_toRightOf="@id/rightBottomLeftNail"
             app:layout_constraintTop_toBottomOf="@id/horizontal_separator" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/detailsHeader"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/details"
@@ -21,18 +22,15 @@
             app:hintEnabled="true"
             app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/tiny_margin"
                 android:fontFamily="@font/telegroteskscreen_medium"
-                android:gravity="center"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
                 android:textColor="#000080"
                 android:textSize="@dimen/large_text"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="LabelFor"
                 tools:targetApi="o" />
 

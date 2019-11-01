@@ -124,10 +124,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_margin"
             android:fontFamily="@font/josefin_sans"
-          android:text="@string/go_to"
+            android:text="@string/go_to"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_18" />
+            android:textSize="@dimen/large_text" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -141,25 +141,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/tiny_margin"
-                android:textColor="@color/colorPrimaryDark"
                 android:layout_weight="1"
-                app:iconGravity="textStart"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:text="@string/dashboard_graph_births"
+                android:textColor="@color/colorPrimaryDark"
+                app:iconGravity="textStart"
                 app:iconPadding="@dimen/xl_margin"
                 app:iconSize="25dp"
                 app:strokeColor="@color/sea_green" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/goToBreedings"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/tiny_margin"
                 android:layout_weight="1"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:textColor="@color/colorPrimaryDark"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:text="@string/dashboard_graph_breedings"
+                android:textColor="@color/colorPrimaryDark"
                 app:strokeColor="@color/sea_green" />
 
         </LinearLayout>
@@ -172,26 +172,26 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/goToDisinfections"
-                android:layout_width="0dp"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
                 android:layout_marginEnd="@dimen/tiny_margin"
                 android:layout_weight="1"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:text="@string/dashboard_graph_disinfections"
+                android:textColor="@color/colorPrimaryDark"
                 app:strokeColor="@color/sea_green" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/goToVitaminizations"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:textColor="@color/colorPrimaryDark"
                 android:layout_marginStart="@dimen/tiny_margin"
                 android:layout_weight="1"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:text="@string/dashboard_graph_vitaminisations"
+                android:textColor="@color/colorPrimaryDark"
                 app:strokeColor="@color/sea_green" />
 
         </LinearLayout>
@@ -209,9 +209,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/tiny_margin"
                 android:layout_weight="1"
-                android:textColor="@color/colorPrimaryDark"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:text="@string/dashboard_graph_vaccinations"
+                android:textColor="@color/colorPrimaryDark"
                 app:strokeColor="@color/sea_green" />
 
             <com.google.android.material.button.MaterialButton
@@ -219,24 +219,24 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
                 android:layout_marginStart="@dimen/tiny_margin"
                 android:layout_weight="1"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:text="@string/dashboard_graph_pedicures"
+                android:textColor="@color/colorPrimaryDark"
                 app:strokeColor="@color/sea_green" />
 
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/goToTreatments"
-            android:layout_width="match_parent"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
-            android:textColor="@color/colorPrimaryDark"
             android:fontFamily="@font/telegroteskscreen_medium"
             android:text="@string/dashboard_graph_treatments"
+            android:textColor="@color/colorPrimaryDark"
             app:strokeColor="@color/sea_green" />
 
         <View

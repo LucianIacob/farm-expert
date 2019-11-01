@@ -14,6 +14,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/maleInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/maleInputHint"
@@ -21,12 +22,11 @@
             app:hintEnabled="true"
             app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/maleInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/telegroteskscreen_medium"
-                android:gravity="center"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:lines="1"
@@ -71,7 +71,7 @@
             android:layout_marginStart="10dp"
             android:entries="@array/breeding_notes"
             android:fontFamily="@font/telegroteskscreen_medium"
-            android:textSize="22sp"
+            android:textSize="@dimen/large_text"
             app:layout_constraintBottom_toBottomOf="@id/noteHeader"
             app:layout_constraintLeft_toRightOf="@id/noteHeader"
             app:layout_constraintRight_toRightOf="parent"

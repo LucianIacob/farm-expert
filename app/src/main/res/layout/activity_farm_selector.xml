@@ -19,7 +19,7 @@
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-          app:title="@string/select_farm"
+            app:title="@string/select_farm"
             app:titleTextColor="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -36,14 +36,15 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/xxl_margin"
+        android:layout_marginStart="@dimen/large_margin"
         android:layout_marginTop="@dimen/small_margin"
-        android:layout_marginEnd="@dimen/xxl_margin"
-        android:layout_weight="5">
+        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_weight="2">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:orientation="vertical">
 
             <TextView
@@ -56,11 +57,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/farmNameHolder"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/tiny_margin">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/farmName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -75,11 +77,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/accessCodeHolder"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/tiny_margin">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/accessCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -93,35 +96,35 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/createFarmButton"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:text="@string/create_new_farm"
-                android:textAllCaps="false"
-              android:textSize="@dimen/text_18" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
-                android:fontFamily="@font/josefin_sans_semibold"
-                android:gravity="center"
-                android:text="@string/or"
-                android:textColor="@color/black"
-                android:textSize="@dimen/medium_text" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/createFarmButton"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/tiny_margin"
+                    android:layout_weight="1"
+                    android:text="@string/create_new_farm"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/text_18" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/joinFarmButton"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
-                android:text="@string/join_existing_farm"
-                android:textAllCaps="false"
-              android:textSize="@dimen/text_18" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/joinFarmButton"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/tiny_margin"
+                    android:layout_weight="1"
+                    android:text="@string/join_existing_farm"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/text_18" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -131,15 +134,22 @@
         android:id="@+id/farmListContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/xxl_margin"
-        android:layout_marginTop="@dimen/xxl_margin"
-        android:layout_marginEnd="@dimen/xxl_margin"
-        android:layout_marginBottom="@dimen/xxl_margin"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_marginBottom="@dimen/large_margin"
         android:layout_weight="3"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
 
         <TextView
+            android:layout_marginTop="@dimen/small_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/telegroteskscreen_medium"

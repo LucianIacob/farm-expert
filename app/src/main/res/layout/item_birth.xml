@@ -25,7 +25,7 @@
             android:drawablePadding="5dp"
             android:fontFamily="@font/telegroteskscreen_medium"
             android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            android:textSize="@dimen/large_text" />
 
         <LinearLayout
             android:id="@+id/noteContainer"
@@ -52,7 +52,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="@dimen/large_text"
                 tools:ignore="RtlSymmetry" />
 
         </LinearLayout>
@@ -84,7 +84,7 @@
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:paddingStart="3dp"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="@dimen/large_text"
                 tools:ignore="RtlSymmetry" />
 
         </LinearLayout>

@@ -11,9 +11,9 @@
   <string name="err_access_code_invalid">Codul de access trebuie sa aiba cel putin 4 caractere</string>
   <string name="hint_farm_name">Numele fermei</string>
   <string name="hint_access_code_4_6_digits">Codul de access (4–6 caractere)</string>
-  <string name="create_new_farm">Creaza o ferma noua</string>
+  <string name="create_new_farm">Creaza</string>
   <string name="create_farm_guideline">Introduceti detaliile fermei pe care doriti sa o creati sau in care doriti sa colaborati</string>
-  <string name="join_existing_farm">Intra intr-o ferma existenta</string>
+  <string name="join_existing_farm">Intra</string>
   <string name="or_select_one_of_your_previous_farms">Sau, selecteaza una din fermele din trecut</string>
   <string name="select_farm">Selecteaza ferma</string>
 

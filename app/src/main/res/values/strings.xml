@@ -11,9 +11,9 @@
     <string name="err_access_code_invalid">Access code length must have at least 4 digits</string>
     <string name="hint_farm_name">Farm name</string>
     <string name="hint_access_code_4_6_digits">Access code (4–6 digits)</string>
-    <string name="create_new_farm">Create new farm</string>
+    <string name="create_new_farm">Create</string>
     <string name="create_farm_guideline">Please type in the details of your farm you want to create or join</string>
-    <string name="join_existing_farm">Join existing farm</string>
+    <string name="join_existing_farm">Join</string>
     <string name="or_select_one_of_your_previous_farms">Or, select one of your previous farms:</string>
 
     <string name="configuration_activity_title">Farm configurations</string>
