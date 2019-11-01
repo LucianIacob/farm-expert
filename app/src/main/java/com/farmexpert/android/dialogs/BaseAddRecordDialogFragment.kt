@@ -24,7 +24,13 @@ abstract class BaseAddRecordDialogFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mSetDate = Date()
+        mSetDate = savedInstanceState?.getLong(ADD_DIALOG_DATE)
+            ?.takeIfExists()?.let { Date(it) }
+            ?: run {
+                arguments?.getLong(ADD_DIALOG_DATE)?.takeIfExists()?.let {
+                    Date(it)
+                } ?: Date()
+            }
     }
 
     internal fun setupDate() {
@@ -47,6 +53,11 @@ abstract class BaseAddRecordDialogFragment : DialogFragment() {
                 calendar.day()
             ).show()
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putLong(ADD_DIALOG_DATE, mSetDate.time)
     }
 
     companion object {

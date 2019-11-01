@@ -184,5 +184,6 @@ fun Int.encode(): String =
         AppUtils.NAIL_WITHOUT_PROBLEM
     }
 
-fun String?.takeIfNotBlank(): String? =
-    this.takeUnless { this.isNullOrBlank() }
+fun String?.takeIfNotBlank(): String? = this.takeUnless { this.isNullOrBlank() }
+
+fun Long.takeIfExists() = this.takeIf { it != 0L }

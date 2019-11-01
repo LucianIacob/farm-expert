@@ -29,8 +29,10 @@ class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
 
     override fun getTitle() = R.string.edit_birth_title
 
-    override fun extractAdditionalArgs(bundle: Bundle) {
-        noteToSelect = bundle.getInt(EDIT_DIALOG_NOTE, noteToSelect)
+    override fun extractAdditionalArgs(savedInstanceState: Bundle?, bundle: Bundle) {
+        noteToSelect = savedInstanceState?.getInt(EDIT_DIALOG_NOTE, -1)
+            ?.takeIf { it != -1 }?.let { it }
+            ?: run { bundle.getInt(EDIT_DIALOG_NOTE, noteToSelect) }
     }
 
     override fun getLayoutId(): Int {
@@ -44,6 +46,13 @@ class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
                 values = resources.getStringArray(R.array.birth_notes_values),
                 selected = noteToSelect
             )
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mView?.notesSpinner?.selectedItemPosition?.let {
+            outState.putInt(EDIT_DIALOG_NOTE, getBirthNoteByPosition(it, resources))
         }
     }
 

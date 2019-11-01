@@ -24,6 +24,7 @@ import androidx.navigation.fragment.findNavController
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.ConfigurationActivity
 import com.farmexpert.android.app.FarmExpertApplication
+import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
 import com.farmexpert.android.fragments.BaseFragment
 import com.farmexpert.android.model.Reminder
 import com.farmexpert.android.planner.adapter.PlannerAdapter
@@ -105,10 +106,11 @@ abstract class BasePlannerFragment : BaseFragment() {
     }
 
     private fun displayAddReminderDialog() {
-        parentFragment?.childFragmentManager?.let {
-            val addPlannerItem = AddPlannerItemDialogFragment()
-            addPlannerItem.setTargetFragment(this, ADD_PLANNER_ITEM_RQ)
-            addPlannerItem.show(it, AddPlannerItemDialogFragment.TAG)
+        parentFragment?.childFragmentManager?.let { fragmentManager ->
+            AddPlannerItemDialogFragment.getInstance(plannerDateViewModel?.getDate()?.value).also {
+                it.setTargetFragment(this, ADD_PLANNER_ITEM_RQ)
+                it.show(fragmentManager, AddPlannerItemDialogFragment.TAG)
+            }
         }
     }
 
@@ -122,10 +124,10 @@ abstract class BasePlannerFragment : BaseFragment() {
 
     private fun insertPlannerItem(extras: Bundle) {
         val details = extras.getString(AddPlannerItemDialogFragment.REMINDER_DIALOG_DETAILS, "")
+        val date = Date(extras.getLong(BaseAddRecordDialogFragment.ADD_DIALOG_DATE))
 
         val reminder = Reminder(
-            reminderDate = plannerDateViewModel?.getDate()?.value?.let { Timestamp(it) }
-                ?: Timestamp.now(),
+            reminderDate = Timestamp(date),
             details = details,
             createdBy = currentUser?.uid,
             holderParent = getPlannerContainer().name

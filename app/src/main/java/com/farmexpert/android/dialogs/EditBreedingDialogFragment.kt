@@ -30,9 +30,11 @@ class EditBreedingDialogFragment : BaseEditRecordDialogFragment() {
 
     override fun getTitle() = R.string.edit_breeding_title
 
-    override fun extractAdditionalArgs(bundle: Bundle) {
+    override fun extractAdditionalArgs(savedInstanceState: Bundle?, bundle: Bundle) {
         with(bundle) {
-            selectedNote = getInt(EDIT_DIALOG_NOTE, selectedNote)
+            selectedNote = savedInstanceState?.getInt(EDIT_DIALOG_NOTE, -1)
+                ?.takeIf { it != -1 }?.let { it }
+                ?: getInt(EDIT_DIALOG_NOTE, selectedNote)
             breedingMale = getString(EDIT_DIALOG_MALE)
         }
     }
@@ -46,6 +48,11 @@ class EditBreedingDialogFragment : BaseEditRecordDialogFragment() {
                 selected = selectedNote
             )
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(EDIT_DIALOG_NOTE, selectedNote)
     }
 
     override fun getLayoutId() = R.layout.dialog_edit_breeding

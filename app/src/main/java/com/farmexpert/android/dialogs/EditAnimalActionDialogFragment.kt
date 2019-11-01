@@ -26,9 +26,10 @@ open class EditAnimalActionDialogFragment : BaseEditRecordDialogFragment() {
     private var mDefaultDetails: String? = null
     private var mTitleRedId: Int = R.string.edit_animal_action_title
 
-    override fun extractAdditionalArgs(bundle: Bundle) {
+    override fun extractAdditionalArgs(savedInstanceState: Bundle?, bundle: Bundle) {
         with(bundle) {
-            mDefaultDetails = getString(EDIT_DIALOG_DETAILS)
+            mDefaultDetails = savedInstanceState?.getString(EDIT_DIALOG_DETAILS)?.let { it }
+                ?: getString(EDIT_DIALOG_DETAILS)
             mTitleRedId = getInt(EDIT_DIALOG_TITLE)
         }
     }
@@ -50,6 +51,11 @@ open class EditAnimalActionDialogFragment : BaseEditRecordDialogFragment() {
         val intent = Intent()
         intent.putExtras(bundle)
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(EDIT_DIALOG_DETAILS, mDefaultDetails)
     }
 
     companion object {

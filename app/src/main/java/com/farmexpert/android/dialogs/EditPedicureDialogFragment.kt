@@ -30,8 +30,9 @@ class EditPedicureDialogFragment : BaseEditRecordDialogFragment() {
     private var mDefaultDetails: String? = null
     private lateinit var mNailsMap: HashMap<View, Int>
 
-    override fun extractAdditionalArgs(bundle: Bundle) {
-        mDefaultDetails = bundle.getString(EDIT_DIALOG_DETAILS)
+    override fun extractAdditionalArgs(savedInstanceState: Bundle?, bundle: Bundle) {
+        mDefaultDetails = savedInstanceState?.getString(EDIT_DIALOG_DETAILS)?.let { it }
+            ?: run { bundle.getString(EDIT_DIALOG_DETAILS) }
     }
 
     override fun getTitle() = R.string.edit_pedicure_title
@@ -89,6 +90,11 @@ class EditPedicureDialogFragment : BaseEditRecordDialogFragment() {
     }
 
     override fun getLayoutId() = R.layout.dialog_edit_pedicure
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(EDIT_DIALOG_DETAILS, getEncodedHoofs() + mView?.details?.text.toString())
+    }
 
     private fun setupHoofs() {
         mView?.run {

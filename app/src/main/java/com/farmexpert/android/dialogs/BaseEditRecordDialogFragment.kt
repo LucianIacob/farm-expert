@@ -37,9 +37,21 @@ abstract class BaseEditRecordDialogFragment : DialogFragment() {
         super.onCreate(savedInstanceState)
         arguments?.run {
             documentId = getString(EDIT_DIALOG_DOC_ID)
-            mActionDate = Date(getLong(EDIT_DIALOG_DATE))
-            extractAdditionalArgs(this)
+            extractAdditionalArgs(savedInstanceState, this)
         }
+
+        mActionDate = savedInstanceState?.getLong(EDIT_DIALOG_DATE)
+            ?.takeIfExists()?.let { Date(it) }
+            ?: run {
+                arguments?.getLong(EDIT_DIALOG_DATE)?.takeIfExists()?.let {
+                    Date(it)
+                } ?: Date()
+            }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mActionDate?.time?.let { outState.putLong(EDIT_DIALOG_DATE, it) }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -86,7 +98,7 @@ abstract class BaseEditRecordDialogFragment : DialogFragment() {
 
     abstract fun sendNewRecord()
 
-    open fun extractAdditionalArgs(bundle: Bundle) {}
+    open fun extractAdditionalArgs(savedInstanceState: Bundle?, bundle: Bundle) {}
 
     abstract fun getLayoutId(): Int
 
