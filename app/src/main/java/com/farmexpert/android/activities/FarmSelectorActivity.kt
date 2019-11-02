@@ -23,7 +23,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.FarmSelectorAdapter
 import com.farmexpert.android.model.Farm
-import com.farmexpert.android.utils.*
+import com.farmexpert.android.utils.FirestorePath
+import com.farmexpert.android.utils.applyFarmexpertStyle
+import com.farmexpert.android.utils.invisible
+import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -75,7 +78,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
 
         val adapter = object : FarmSelectorAdapter(options, { farm -> farmClicked(farm) }) {
             override fun onDataChanged() {
-                if (itemCount != 0) farmListContainer.visible() else farmListContainer.hidden()
+                if (itemCount != 0) farmListContainer.visible() else farmListContainer.invisible()
             }
         }
 
