@@ -15,7 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/AppTheme.NoActionBarCustom">
@@ -44,6 +43,11 @@
 
         <activity
             android:name=".activities.ConfigurationActivity"
+            android:theme="@style/AppTheme.NoActionbar" />
+
+        <activity
+            android:name=".activities.UserProfileActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionbar" />
 
         <meta-data

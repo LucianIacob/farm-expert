@@ -151,8 +151,9 @@ fun Fragment.failureAlert(
             .setCancelable(isCancellable)
             .create()
             .run {
-                getButton(DialogInterface.BUTTON_NEGATIVE).applyFarmexpertStyle(context)
-                getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(context)
+                setOnShowListener {
+                    getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(context)
+                }
                 show()
             }
     }
@@ -171,8 +172,9 @@ fun Activity.failureAlert(
         .setCancelable(isCancellable)
         .create()
         .run {
-            getButton(DialogInterface.BUTTON_NEGATIVE).applyFarmexpertStyle(context)
-            getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(context)
+            setOnShowListener {
+                getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(context)
+            }
             show()
         }
 }

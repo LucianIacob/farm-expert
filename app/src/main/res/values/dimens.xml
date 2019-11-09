@@ -17,6 +17,7 @@
     <dimen name="tiny_text">5sp</dimen>
     <dimen name="small_text">10sp</dimen>
     <dimen name="medium_text">15sp</dimen>
+    <dimen name="text_16">16sp</dimen>
     <dimen name="text_18">18sp</dimen>
     <dimen name="large_text">20sp</dimen>
     <dimen name="xl_text">25sp</dimen>

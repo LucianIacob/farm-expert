@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.UserProfileActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="@string/user_profile"
+            app:titleTextColor="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/xxxl_margin"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_user_black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbarlayout" />
+
+    <TextView
+        android:id="@+id/createdOn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:fontFamily="@font/roboto_bold"
+        android:textAlignment="center"
+        android:textSize="@dimen/medium_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/icon"
+        tools:text="Account created on 12.12.2012" />
+
+    <TextView
+        android:id="@+id/provider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tiny_margin"
+        android:fontFamily="@font/roboto_bold"
+        android:textAlignment="center"
+        android:textSize="@dimen/medium_text"
+        app:layout_constraintTop_toBottomOf="@id/createdOn"
+        tools:text="Plaftorm: Google" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="@dimen/xl_margin"
+        android:background="@drawable/user_header_separator"
+        app:layout_constraintTop_toBottomOf="@id/provider" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/nameInfoGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium_margin">
+
+                <ImageView
+                    android:id="@+id/nameImage"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_person_rounded"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/nameNavigation"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/baseline_navigate_next_black_48"
+                    android:tint="@color/arrow_navigation_tint"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/nameHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:fontFamily="@font/cabin_semibold"
+                    android:text="@string/name_header"
+                    app:layout_constraintLeft_toRightOf="@id/nameImage"
+                    app:layout_constraintRight_toLeftOf="@id/nameNavigation"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/nameImage"
+                    app:layout_constraintRight_toLeftOf="@id/nameNavigation"
+                    app:layout_constraintTop_toBottomOf="@id/nameHeader"
+                    tools:text="Lucian Iacob" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/nameSeparator"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/separator_height_1dp"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintTop_toBottomOf="@id/nameInfoGroup" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/phoneInfoGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium_margin">
+
+                <ImageView
+                    android:id="@+id/phoneImage"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/outline_phone_iphone_black_36"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/phoneNavigation"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/baseline_navigate_next_black_48"
+                    android:tint="@color/arrow_navigation_tint"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/phoneHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:fontFamily="@font/cabin_semibold"
+                    android:text="@string/phone_header"
+                    app:layout_constraintLeft_toRightOf="@id/phoneImage"
+                    app:layout_constraintRight_toLeftOf="@id/phoneNavigation"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/phoneImage"
+                    app:layout_constraintRight_toLeftOf="@id/phoneNavigation"
+                    app:layout_constraintTop_toBottomOf="@id/phoneHeader"
+                    tools:text="+4-21878921739812" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/phoneSeparator"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/separator_height_1dp"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintTop_toBottomOf="@id/phoneInfoGroup" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/emailInfoGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium_margin">
+
+                <ImageView
+                    android:id="@+id/emailImage"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/outline_email_black_36"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/emailNavigation"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/baseline_navigate_next_black_48"
+                    android:tint="@color/arrow_navigation_tint"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/emailHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:fontFamily="@font/cabin_semibold"
+                    android:text="@string/email_header"
+                    app:layout_constraintLeft_toRightOf="@id/emailImage"
+                    app:layout_constraintRight_toLeftOf="@id/emailNavigation"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/emailHeader"
+                    app:layout_constraintRight_toLeftOf="@id/emailNavigation"
+                    app:layout_constraintTop_toBottomOf="@id/emailHeader">
+
+                    <TextView
+                        android:id="@+id/userEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/baseline_verified_user_black_18"
+                        android:drawablePadding="@dimen/tiny_margin"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/text_16"
+                        tools:text="mail@lucianiacob.com" />
+
+                </FrameLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/emailSeparator"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/separator_height_1dp"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintTop_toBottomOf="@id/userEmail" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/farmsInfoGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium_margin">
+
+                <ImageView
+                    android:id="@+id/farmsImage"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_cow_material"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/farmsNavigation"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/baseline_navigate_next_black_48"
+                    android:tint="@color/arrow_navigation_tint"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/farmsHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:fontFamily="@font/cabin_semibold"
+                    android:text="@string/farms_header"
+                    app:layout_constraintLeft_toRightOf="@id/farmsImage"
+                    app:layout_constraintRight_toLeftOf="@id/farmsNavigation"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/farmsList"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/farmsHeader"
+                    app:layout_constraintRight_toLeftOf="@id/farmsNavigation"
+                    app:layout_constraintTop_toBottomOf="@id/farmsHeader"
+                    tools:text="Ferma Iacob\nFermaVatamanu\nTexas Ranch Farm" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

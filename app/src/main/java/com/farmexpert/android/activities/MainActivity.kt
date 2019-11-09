@@ -12,6 +12,7 @@ package com.farmexpert.android.activities
 import android.content.DialogInterface.BUTTON_NEGATIVE
 import android.content.DialogInterface.BUTTON_POSITIVE
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -33,6 +34,7 @@ import com.farmexpert.android.utils.failureAlert
 import com.farmexpert.android.utils.takeIfNotBlank
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_header_dashboard.*
@@ -58,11 +60,23 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
     private fun setupNavHeader() {
         FirebaseAuth.getInstance().currentUser?.let { user ->
             user.photoUrl?.toString()?.isNotEmpty()?.let {
-                Picasso.get().load(user.photoUrl).transform(CircleTransform()).into(userIcon)
+                Picasso.get()
+                    .load(user.photoUrl)
+                    .transform(CircleTransform())
+                    .into(userIcon, object : Callback.EmptyCallback() {
+                        override fun onError(e: Exception?) {
+                            Log.i("", "")
+                        }
+                    })
             }
             user.phoneNumber?.takeIfNotBlank()?.let { userName.text = it }
             user.displayName?.takeIfNotBlank()?.let { userName.text = it }
             user.email?.takeIfNotBlank()?.let { userEmail.text = it }
+        }
+
+        profileSettingsBtn.setOnClickListener {
+            drawer_layout.closeDrawer(nav_view, true)
+            startActivity<UserProfileActivity>()
         }
 
         PreferenceManager.getDefaultSharedPreferences(this)

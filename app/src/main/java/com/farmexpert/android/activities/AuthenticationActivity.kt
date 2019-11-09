@@ -13,10 +13,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.annotation.StringRes
 import com.farmexpert.android.R
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
 import kotlinx.android.synthetic.main.activity_authentication.*
 import org.jetbrains.anko.startActivity
@@ -65,22 +63,14 @@ class AuthenticationActivity : Activity() {
                 startActivity<FarmSelectorActivity>()
                 finish()
             } else {
-                val response = IdpResponse.fromResultIntent(data)
-                if (response?.error?.errorCode == ErrorCodes.NO_NETWORK) {
-                    showMessage(R.string.no_internet_connection)
-                    return
-                }
-
-                if (response?.error?.errorCode == ErrorCodes.UNKNOWN_ERROR) {
-                    showMessage(R.string.unknown_error)
-                    return
-                }
+                IdpResponse.fromResultIntent(data)?.error?.message?.let { showMessage(it) }
+                return
             }
         }
     }
 
-    private fun showMessage(@StringRes stringId: Int) {
-        Toast.makeText(this, stringId, Toast.LENGTH_LONG).show()
+    private fun showMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onStop() {

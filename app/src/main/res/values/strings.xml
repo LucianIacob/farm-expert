@@ -136,6 +136,20 @@
     <string name="confirm_button">Confirm</string>
     <string name="logout_confirmation_message">You will be returned back to the login screen. Are you sure you want to log out?</string>
     <string name="err_logging_out">Sorry, an error occurred while logging you out. Please try again later.</string>
+    <string name="user_profile">Your profile</string>
+    <string name="user_not_available">Your user profile is not available at the moment. Please try again later.</string>
+    <string name="user_creation_date">Created on %s</string>
+    <string name="profile_created_with_provider">Profile created with %s</string>
+    <string name="name_header">Name</string>
+    <string name="phone_header">Phone</string>
+    <string name="email_header">Email</string>
+    <string name="email_provider">email and password</string>
+    <string name="google_provider">Google</string>
+    <string name="phone_provider">phone number</string>
+    <string name="unknown_provider">an unknown provider</string>
+    <string name="add_name">Tap to set your name</string>
+    <string name="farms_header">Subscribed farms</string>
+    <string name="err_retrieving_farms">Error while checking your farms</string>
 
     <integer-array name="gender_types">
         <item>0</item>
