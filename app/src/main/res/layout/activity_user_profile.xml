@@ -26,17 +26,55 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/xxxl_margin"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_user_black"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appbarlayout" />
+    <ProgressBar
+        android:id="@+id/loadingView"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/barLayout"
+        tools:visibility="visible" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xl_margin">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_user_black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/iconBarrier"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/icon"
+            app:layout_constraintRight_toRightOf="@id/icon" />
+
+        <ImageView
+            android:id="@+id/editAccountPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:contentDescription="@null"
+            android:padding="@dimen/tiny_margin"
+            android:src="@drawable/baseline_camera_alt_black_24"
+            android:tint="@color/link_color"
+            app:layout_constraintBottom_toBottomOf="@id/iconBarrier"
+            app:layout_constraintLeft_toLeftOf="@id/iconBarrier"
+            app:layout_constraintRight_toRightOf="@id/iconBarrier"
+            app:layout_constraintTop_toTopOf="@id/iconBarrier"
+            tools:ignore="UnusedAttribute" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/createdOn"

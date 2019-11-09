@@ -74,15 +74,18 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
             user.email?.takeIfNotBlank()?.let { userEmail.text = it }
         }
 
-        profileSettingsBtn.setOnClickListener {
-            drawer_layout.closeDrawer(nav_view, true)
-            startActivity<UserProfileActivity>()
-        }
+        userIcon.setOnClickListener { openUserProfileScreen() }
+        profileSettingsBtn.setOnClickListener { openUserProfileScreen() }
 
         PreferenceManager.getDefaultSharedPreferences(this)
             .getString(KEY_CURRENT_FARM_NAME, null)?.takeIfNotBlank()?.let {
                 farmName.text = it
             }
+    }
+
+    private fun openUserProfileScreen() {
+        drawer_layout.closeDrawer(nav_view, true)
+        startActivity<UserProfileActivity>()
     }
 
     private fun setupNavigationDrawer(navController: NavController) {

@@ -1,8 +1,11 @@
 package com.farmexpert.android.activities
 
+import android.app.Activity
+import android.content.Intent
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Bundle
-import android.view.View.GONE
+import android.view.View.*
 import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -16,10 +19,13 @@ import com.google.firebase.auth.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import com.google.firebase.storage.ktx.storageMetadata
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_user_profile.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
+import org.jetbrains.anko.toast
 import java.util.*
 
 class UserProfileActivity : AppCompatActivity(), AnkoLogger {
@@ -47,7 +53,6 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 provider.text = getString(R.string.profile_created_with_provider, providerText)
             } ?: run { provider.visibility = GONE }
 
-            //            user.reload() // todo in on resume maybe
             displayEmailVerificationStatus(isEmailVerified)
 
             displayName?.takeIfNotBlank()?.let {
@@ -77,13 +82,19 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
 //            updateEmail()
 //            user.updatePassword()
 //
-//            user.updateProfile(
-//                UserProfileChangeRequest.Builder()
-//                    .setDisplayName()
-//                    .setPhotoUri()
-//                    .build()
-//            )
+
             fetchSubscribedFarms(this)
+
+            editAccountPicture.setOnClickListener {
+                val intent = Intent().apply {
+                    type = "image/*"
+                    action = Intent.ACTION_GET_CONTENT
+                }
+                startActivityForResult(
+                    Intent.createChooser(intent, "Select Picture"),
+                    PICK_IMAGE_RC
+                )
+            }
         } ?: run {
             failureAlert(
                 message = R.string.user_not_available,
@@ -91,7 +102,61 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 okListener = { finish() }
             )
         }
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            PICK_IMAGE_RC -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    data?.data?.let { uploadProfilePicture(it) }
+                }
+            }
+            else -> super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    private fun uploadProfilePicture(imageUri: Uri) {
+        FirebaseAuth.getInstance().currentUser?.let { user ->
+            val metadata = storageMetadata { contentType = "image/jpg" }
+
+            loadingView.visibility = VISIBLE
+            val fileRef = Firebase.storage
+                .getReference("profilepictures")
+                .child(user.uid)
+
+            fileRef.putFile(imageUri, metadata)
+                .continueWithTask { task ->
+                    if (task.isSuccessful.not()) {
+                        task.exception?.let { throw it }
+                    }
+                    fileRef.downloadUrl
+                }
+                .addOnSuccessListener { updateUserProfile(user, it) }
+                .addOnFailureListener {
+                    loadingView.visibility = INVISIBLE
+                    failureAlert(R.string.err_updating_record)
+                    error { it }
+                }
+        }
+    }
+
+    private fun updateUserProfile(user: FirebaseUser, imageUri: Uri) {
+        user
+            .updateProfile(
+                UserProfileChangeRequest.Builder()
+                    .setPhotoUri(imageUri)
+                    .build()
+            )
+            .addOnSuccessListener {
+                user.reload().addOnSuccessListener {
+                    fillData()
+                    loadingView.visibility = INVISIBLE
+                }
+            }
+            .addOnFailureListener { exception ->
+                exception.message?.let { toast(it) }
+                loadingView.visibility = INVISIBLE
+            }
     }
 
     private fun fetchSubscribedFarms(firebaseUser: FirebaseUser) {
@@ -130,6 +195,10 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
 
     private fun getTextColor(@ColorRes colorId: Int) =
         ResourcesCompat.getColor(resources, colorId, null)
+
+    companion object {
+        const val PICK_IMAGE_RC = 1234
+    }
 }
 
 private fun String.mapProviderId(resources: Resources): String = when (this) {

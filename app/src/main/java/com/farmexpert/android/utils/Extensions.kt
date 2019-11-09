@@ -179,6 +179,26 @@ fun Activity.failureAlert(
         }
 }
 
+fun Activity.failureAlert(
+    message: String,
+    isCancellable: Boolean = true,
+    okListener: (() -> Unit)? = null
+) {
+    AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+        .setMessage(message)
+        .setPositiveButton(android.R.string.ok) { _, _ ->
+            okListener?.invoke()
+        }
+        .setCancelable(isCancellable)
+        .create()
+        .run {
+            setOnShowListener {
+                getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(context)
+            }
+            show()
+        }
+}
+
 fun Int.encode(): String =
     if (this == R.drawable.left_nail_problem || this == R.drawable.right_nail_problem) {
         AppUtils.NAIL_WITH_PROBLEM
