@@ -150,6 +150,9 @@
     <string name="add_name">Tap to set your name</string>
     <string name="farms_header">Subscribed farms</string>
     <string name="err_retrieving_farms">Error while checking your farms</string>
+    <string name="update_username_title">Update your name</string>
+    <string name="set_username_title">Set your name</string>
+    <string name="profile_load_unsuccessful">Your profile could not be load right now. Please try again later.\nError: %s</string>
 
     <integer-array name="gender_types">
         <item>0</item>

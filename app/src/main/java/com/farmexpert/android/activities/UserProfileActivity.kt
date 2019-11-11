@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_user_profile.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import java.util.*
 
@@ -33,13 +34,11 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
-
         setupToolbar()
-        fillData()
     }
 
-    private fun fillData() {
-        FirebaseAuth.getInstance().currentUser?.apply {
+    private fun fillData(firebaseUser: FirebaseUser) {
+        with(firebaseUser) {
             photoUrl?.toString()?.isNotEmpty()?.let {
                 Picasso.get().load(photoUrl).transform(CircleTransform()).into(icon)
             }
@@ -84,22 +83,45 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
 //
 
             fetchSubscribedFarms(this)
+            setClickListeners(this)
+        }
+    }
 
-            editAccountPicture.setOnClickListener {
-                val intent = Intent().apply {
-                    type = "image/*"
-                    action = Intent.ACTION_GET_CONTENT
+    override fun onStart() {
+        super.onStart()
+        FirebaseAuth.getInstance().currentUser?.run {
+            loadingView.visibility = VISIBLE
+            reload()
+                .addOnSuccessListener { fillData(this) }
+                .addOnFailureListener {
+                    error { it }
+                    failureAlert(getString(R.string.profile_load_unsuccessful, it.message))
                 }
-                startActivityForResult(
-                    Intent.createChooser(intent, "Select Picture"),
-                    PICK_IMAGE_RC
-                )
-            }
+                .addOnCompleteListener { loadingView.visibility = INVISIBLE }
         } ?: run {
             failureAlert(
                 message = R.string.user_not_available,
                 isCancellable = false,
                 okListener = { finish() }
+            )
+        }
+    }
+
+    private fun setClickListeners(firebaseUser: FirebaseUser) {
+        editAccountPicture.setOnClickListener {
+            val intent = Intent().apply {
+                type = "image/*"
+                action = Intent.ACTION_GET_CONTENT
+            }
+            startActivityForResult(
+                Intent.createChooser(intent, "Select Picture"),
+                PICK_IMAGE_RC
+            )
+        }
+
+        nameInfoGroup.setOnClickListener {
+            startActivity<ChangeUserNameActivity>(
+                ChangeUserNameActivity.USER_NAME to firebaseUser.displayName
             )
         }
     }
@@ -149,7 +171,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
             )
             .addOnSuccessListener {
                 user.reload().addOnSuccessListener {
-                    fillData()
+                    fillData(user)
                     loadingView.visibility = INVISIBLE
                 }
             }
