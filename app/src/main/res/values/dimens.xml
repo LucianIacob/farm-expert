@@ -40,5 +40,6 @@
     <dimen name="width_graph_month">30dp</dimen>
     <dimen name="width_graph_estimated_birth">100dp</dimen>
     <dimen name="item_planner_elevation">3dp</dimen>
+    <dimen name="profile_picture_size">70dp</dimen>
 
 </resources>

@@ -78,7 +78,13 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
 
         val adapter = object : FarmSelectorAdapter(options, { farm -> farmClicked(farm) }) {
             override fun onDataChanged() {
-                if (itemCount != 0) farmListContainer.visible() else farmListContainer.invisible()
+                if (itemCount != 0) {
+                    recyclerViewFarms.visible()
+                    subscribedFarms.visible()
+                } else {
+                    recyclerViewFarms.invisible()
+                    subscribedFarms.invisible()
+                }
             }
         }
 

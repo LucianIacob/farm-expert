@@ -37,10 +37,40 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
         setupToolbar()
     }
 
+    private fun setupToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        FirebaseAuth.getInstance().currentUser?.run {
+            loadingView.visibility = VISIBLE
+            reload()
+                .addOnSuccessListener { fillData(this) }
+                .addOnFailureListener {
+                    error { it }
+                    failureAlert(getString(R.string.profile_load_unsuccessful, it.message))
+                }
+                .addOnCompleteListener { loadingView.visibility = INVISIBLE }
+        } ?: run {
+            failureAlert(
+                message = R.string.user_not_available,
+                isCancellable = false,
+                okListener = { finish() }
+            )
+        }
+    }
+
     private fun fillData(firebaseUser: FirebaseUser) {
         with(firebaseUser) {
             photoUrl?.toString()?.isNotEmpty()?.let {
-                Picasso.get().load(photoUrl).transform(CircleTransform()).into(icon)
+                Picasso.get()
+                    .load(photoUrl)
+                    .transform(CircleTransform())
+                    .fit()
+                    .centerCrop()
+                    .into(icon)
             }
 
             metadata?.creationTimestamp?.let {
@@ -84,26 +114,6 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
 
             fetchSubscribedFarms(this)
             setClickListeners(this)
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        FirebaseAuth.getInstance().currentUser?.run {
-            loadingView.visibility = VISIBLE
-            reload()
-                .addOnSuccessListener { fillData(this) }
-                .addOnFailureListener {
-                    error { it }
-                    failureAlert(getString(R.string.profile_load_unsuccessful, it.message))
-                }
-                .addOnCompleteListener { loadingView.visibility = INVISIBLE }
-        } ?: run {
-            failureAlert(
-                message = R.string.user_not_available,
-                isCancellable = false,
-                okListener = { finish() }
-            )
         }
     }
 
@@ -208,11 +218,6 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
             DrawableCompat.setTint(wrappedDrawable, ContextCompat.getColor(this, tintColor))
             userEmail.setCompoundDrawablesWithIntrinsicBounds(null, null, wrappedDrawable, null)
         }
-    }
-
-    private fun setupToolbar() {
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun getTextColor(@ColorRes colorId: Int) =

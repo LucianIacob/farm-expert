@@ -12,7 +12,6 @@ package com.farmexpert.android.activities
 import android.content.DialogInterface.BUTTON_NEGATIVE
 import android.content.DialogInterface.BUTTON_POSITIVE
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -26,6 +25,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.preference.PreferenceManager
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_NAME
 import com.farmexpert.android.utils.CircleTransform
@@ -54,6 +54,10 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
         val navController = host.navController
 
         setupNavigationDrawer(navController)
+    }
+
+    override fun onStart() {
+        super.onStart()
         setupNavHeader()
     }
 
@@ -63,9 +67,12 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
                 Picasso.get()
                     .load(user.photoUrl)
                     .transform(CircleTransform())
+                    .fit()
+                    .centerCrop()
                     .into(userIcon, object : Callback.EmptyCallback() {
                         override fun onError(e: Exception?) {
-                            Log.i("", "")
+                            Crashlytics.logException(e)
+                            error { e }
                         }
                     })
             }
