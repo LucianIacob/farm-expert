@@ -9,8 +9,10 @@ import android.view.View.*
 import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.edit
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.preference.PreferenceManager
 import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.model.Farm
@@ -50,11 +52,11 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 .addOnSuccessListener { fillData(this) }
                 .addOnFailureListener {
                     error { it }
-                    failureAlert(getString(R.string.profile_load_unsuccessful, it.message))
+                    alert(getString(R.string.profile_load_unsuccessful, it.message))
                 }
                 .addOnCompleteListener { loadingView.visibility = INVISIBLE }
         } ?: run {
-            failureAlert(
+            alert(
                 message = R.string.user_not_available,
                 isCancellable = false,
                 okListener = { finish() }
@@ -82,8 +84,6 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 provider.text = getString(R.string.profile_created_with_provider, providerText)
             } ?: run { provider.visibility = GONE }
 
-            displayEmailVerificationStatus(isEmailVerified)
-
             displayName?.takeIfNotBlank()?.let {
                 name.setTextColor(getTextColor(R.color.black))
                 name.text = it
@@ -97,23 +97,38 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 phoneSeparator.visibility = GONE
             }
 
-            email?.takeIfNotBlank()?.let { userEmail.text = it } ?: run {
-                emailInfoGroup.visibility = GONE
-                emailSeparator.visibility = GONE
+            email?.takeIfNotBlank()?.let {
+                userEmail.text = it
+                userEmail.setTextColor(getTextColor(R.color.black))
+                displayEmailVerificationStatus(isEmailVerified)
+                handlePasswordResetClick(it)
+            } ?: run {
+                userEmail.text = getString(R.string.add_email)
+                userEmail.setTextColor(getTextColor(R.color.link_color))
+                passResetGroup.visibility = GONE
+                passResetSeparator.visibility = GONE
             }
 
-//            user.sendEmailVerification(
-//                ActionCodeSettings.newBuilder()
-//                    .setAndroidPackageName("", true, "1.0.0")
-//                    .build()
-//            )
 
-//            updateEmail()
 //            user.updatePassword()
 //
 
             fetchSubscribedFarms(this)
             setClickListeners(this)
+        }
+    }
+
+    private fun handlePasswordResetClick(emailAddress: String) {
+        passReset.setText(R.string.pass_reset_message)
+        passResetGroup.setOnClickListener {
+            loadingView.visibility = VISIBLE
+            FirebaseAuth.getInstance()
+                .sendPasswordResetEmail(emailAddress)
+                .addOnSuccessListener { alert(R.string.password_reset_success) }
+                .addOnFailureListener {
+                    it.message?.let { it1 -> alert(message = it1, isCancellable = true) }
+                }
+                .addOnCompleteListener { loadingView.visibility = INVISIBLE }
         }
     }
 
@@ -134,6 +149,38 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 ChangeUserNameActivity.USER_NAME to firebaseUser.displayName
             )
         }
+
+        emailInfoGroup.setOnClickListener {
+            startActivity<ChangeUserEmailActivity>(
+                ChangeUserEmailActivity.USER_EMAIL to firebaseUser.email,
+                ChangeUserEmailActivity.EMAIL_VERIFIED to firebaseUser.isEmailVerified
+            )
+        }
+
+        deleteAccountGroup.setOnClickListener {
+            alert(
+                message = R.string.delete_account_confirmation,
+                negativeButton = true,
+                isCancellable = true,
+                okListener = { deleteUserAccount(firebaseUser) },
+                redButton = true
+            )
+        }
+    }
+
+    private fun deleteUserAccount(firebaseUser: FirebaseUser) {
+        loadingView.visibility = VISIBLE
+
+        firebaseUser
+            .delete()
+            .addOnSuccessListener {
+                PreferenceManager.getDefaultSharedPreferences(this)
+                    .edit { remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID) }
+                startActivity<AuthenticationActivity>()
+                finishAffinity()
+            }
+            .addOnFailureListener { it.message?.let { it1 -> alert(it1) } }
+            .addOnCompleteListener { loadingView?.visibility = VISIBLE }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -166,7 +213,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 .addOnSuccessListener { updateUserProfile(user, it) }
                 .addOnFailureListener {
                     loadingView.visibility = INVISIBLE
-                    failureAlert(R.string.err_updating_record)
+                    alert(R.string.err_updating_record)
                     error { it }
                 }
         }

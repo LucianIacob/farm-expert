@@ -196,7 +196,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
         val motherId = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_MOTHER, "")
 
         if (!FarmValidator.isValidAnimalId(id)) {
-            failureAlert(message = R.string.err_adding_animal_message)
+            alert(message = R.string.err_adding_animal_message)
             return
         }
 
@@ -214,18 +214,18 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
             .get()
             .addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {
-                    failureAlert(message = R.string.err_adding_animal_constraint)
+                    alert(message = R.string.err_adding_animal_constraint)
                 } else {
                     animalsCollections.document(id)
                         .set(animal)
                         .addOnSuccessListener { rootLayout.snackbar(R.string.item_added) }
                         .addOnFailureListener {
-                            failureAlert(message = R.string.err_adding_animal)
+                            alert(message = R.string.err_adding_animal)
                             error { it }
                         }
                 }
             }
-            .addOnFailureListener { failureAlert(R.string.err_adding_animal) }
+            .addOnFailureListener { alert(R.string.err_adding_animal) }
             .addOnCompleteListener { loadingHide() }
     }
 

@@ -29,8 +29,8 @@ import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_NAME
 import com.farmexpert.android.utils.CircleTransform
+import com.farmexpert.android.utils.alert
 import com.farmexpert.android.utils.applyFarmexpertStyle
-import com.farmexpert.android.utils.failureAlert
 import com.farmexpert.android.utils.takeIfNotBlank
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
@@ -166,7 +166,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
             }
             .addOnFailureListener {
                 error { it }
-                failureAlert(R.string.err_logging_out)
+                alert(R.string.err_logging_out)
             }
             .addOnCompleteListener { setLoadingVisibility(View.GONE) }
     }

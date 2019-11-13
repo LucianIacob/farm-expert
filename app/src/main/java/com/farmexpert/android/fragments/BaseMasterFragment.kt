@@ -17,7 +17,7 @@ import com.farmexpert.android.adapter.GraphAdapter
 import com.farmexpert.android.adapter.holder.BaseMasterHolder
 import com.farmexpert.android.model.BaseEntity
 import com.farmexpert.android.utils.AppUtils
-import com.farmexpert.android.utils.failureAlert
+import com.farmexpert.android.utils.alert
 import com.farmexpert.android.utils.hidden
 import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.SnapshotParser
@@ -102,7 +102,7 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
             .whereLessThanOrEqualTo(getFilterField(), queryRangeEnd)
             .get()
             .addOnFailureListener {
-                failureAlert(message = R.string.err_retrieving_items)
+                alert(message = R.string.err_retrieving_items)
                 error { it }
             }
             .addOnSuccessListener { documents ->

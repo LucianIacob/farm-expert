@@ -148,11 +148,24 @@
     <string name="phone_provider">phone number</string>
     <string name="unknown_provider">an unknown provider</string>
     <string name="add_name">Tap to set your name</string>
+    <string name="add_email">Tap to set your email</string>
     <string name="farms_header">Subscribed farms</string>
     <string name="err_retrieving_farms">Error while checking your farms</string>
     <string name="update_username_title">Update your name</string>
     <string name="set_username_title">Set your name</string>
+    <string name="update_email_title">Update your email</string>
+    <string name="set_email_title">Set your email</string>
     <string name="profile_load_unsuccessful">Your profile could not be load right now. Please try again later.\nError: %s</string>
+    <string name="send_verification_email">Re-Send verification email</string>
+    <string name="set">Set</string>
+    <string name="after_email_change_message">Your email address was updated. Please check your inbox in order to verify it. Press OK to go back to your profile.</string>
+    <string name="recent_login_required">This operation requires a recently signed in. Please re-login with your account detail. Press OK to be signed out now.</string>
+    <string name="pass_reset_header">Password reset</string>
+    <string name="pass_reset_message">Tap to send a password reset email</string>
+    <string name="password_reset_success">The request was successful. Please check your inbox.</string>
+    <string name="delete_account_header">Delete account</string>
+    <string name="delete_account_message">Warning! Deleting your account is an irreversible process.</string>
+    <string name="delete_account_confirmation">Are you sure you want to delete your account? This operation cannot be undone.</string>
 
     <integer-array name="gender_types">
         <item>0</item>

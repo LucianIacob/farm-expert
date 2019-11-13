@@ -7,7 +7,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.trimmedLength
 import com.farmexpert.android.R
-import com.farmexpert.android.utils.failureAlert
+import com.farmexpert.android.utils.alert
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.android.synthetic.main.activity_change_username.*
@@ -59,7 +59,7 @@ class ChangeUserNameActivity : AppCompatActivity(), AnkoLogger {
         FirebaseAuth.getInstance().currentUser
             ?.updateProfile(changeRequest)
             ?.addOnSuccessListener { finish() }
-            ?.addOnFailureListener { ex -> ex.message?.let { failureAlert(it) } }
+            ?.addOnFailureListener { ex -> ex.message?.let { alert(it) } }
             ?.addOnCompleteListener { loadingView.visibility = View.INVISIBLE }
     }
 
@@ -68,5 +68,5 @@ class ChangeUserNameActivity : AppCompatActivity(), AnkoLogger {
     }
 }
 
-private fun CharSequence?.isValidInput(): CharSequence? =
+internal fun CharSequence?.isValidInput(): CharSequence? =
     this?.trimmedLength()?.takeIf { it > 0 }?.let { this }

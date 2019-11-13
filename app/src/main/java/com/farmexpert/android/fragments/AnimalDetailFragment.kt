@@ -137,7 +137,7 @@ class AnimalDetailFragment : BaseFragment() {
                     it.isComplete &&
                     it.result?.exists() != true
                 ) {
-                    failureAlert(
+                    alert(
                         message = R.string.err_animal_not_exists,
                         isCancellable = false,
                         okListener = { activity?.onBackPressed() }

@@ -138,7 +138,7 @@ abstract class BasePlannerFragment : BaseFragment() {
             .add(reminder)
             .addOnSuccessListener { parentFragment?.rootLayout?.snackbar(R.string.item_added) }
             .addOnFailureListener { e ->
-                failureAlert(message = R.string.err_adding_record)
+                alert(message = R.string.err_adding_record)
                 error { e }
             }
             .addOnCompleteListener { loadingHide() }

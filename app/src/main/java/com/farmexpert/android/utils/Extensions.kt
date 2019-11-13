@@ -137,7 +137,7 @@ fun Button.applyFarmexpertStyle(context: Context, redButton: Boolean = false) {
     }
 }
 
-fun Fragment.failureAlert(
+fun Fragment.alert(
     message: Int,
     isCancellable: Boolean = true,
     okListener: (() -> Unit)? = null
@@ -152,34 +152,43 @@ fun Fragment.failureAlert(
             .create()
             .run {
                 setOnShowListener {
-                    getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(context)
+                    getButton(DialogInterface.BUTTON_POSITIVE)?.applyFarmexpertStyle(context)
                 }
                 show()
             }
     }
 }
 
-fun Activity.failureAlert(
+fun Activity.alert(
     message: Int,
     isCancellable: Boolean = true,
-    okListener: (() -> Unit)? = null
+    negativeButton: Boolean = false,
+    okListener: (() -> Unit)? = null,
+    redButton: Boolean = false
 ) {
-    AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+    val builder = AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
         .setMessage(message)
         .setPositiveButton(android.R.string.ok) { _, _ ->
             okListener?.invoke()
         }
+
+    if (negativeButton) {
+        builder.setNegativeButton(android.R.string.cancel, null)
+    }
+
+    builder
         .setCancelable(isCancellable)
         .create()
         .run {
             setOnShowListener {
-                getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(context)
+                getButton(DialogInterface.BUTTON_POSITIVE)?.applyFarmexpertStyle(context, redButton)
+                getButton(DialogInterface.BUTTON_NEGATIVE)?.applyFarmexpertStyle(context)
             }
             show()
         }
 }
 
-fun Activity.failureAlert(
+fun Activity.alert(
     message: String,
     isCancellable: Boolean = true,
     okListener: (() -> Unit)? = null
@@ -193,7 +202,7 @@ fun Activity.failureAlert(
         .create()
         .run {
             setOnShowListener {
-                getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(context)
+                getButton(DialogInterface.BUTTON_POSITIVE)?.applyFarmexpertStyle(context)
             }
             show()
         }

@@ -21,7 +21,7 @@ import com.farmexpert.android.dialogs.EditBirthDialogFragment
 import com.farmexpert.android.model.Animal
 import com.farmexpert.android.model.Birth
 import com.farmexpert.android.utils.FirestorePath
-import com.farmexpert.android.utils.failureAlert
+import com.farmexpert.android.utils.alert
 import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.Timestamp
@@ -107,13 +107,13 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
         animalsCollections.document((entity as Birth).calfId)
             .get()
             .addOnFailureListener {
-                failureAlert(R.string.err_validating_calf)
+                alert(R.string.err_validating_calf)
                 listener(false)
                 loadingHide()
             }
             .addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {
-                    failureAlert(R.string.err_adding_animal_constraint)
+                    alert(R.string.err_adding_animal_constraint)
                     loadingHide()
                 }
                 listener(!snapshot.exists())
@@ -142,7 +142,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
             animalsCollections.document(it.calfId)
                 .set(animal)
                 .addOnFailureListener {
-                    failureAlert(R.string.err_adding_animal_from_birth)
+                    alert(R.string.err_adding_animal_from_birth)
                     error { it }
                 }
         }

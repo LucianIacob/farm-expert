@@ -24,8 +24,8 @@ import com.farmexpert.android.adapter.AnimalActionsAdapter
 import com.farmexpert.android.adapter.holder.BaseDetailHolder
 import com.farmexpert.android.dialogs.BaseEditRecordDialogFragment
 import com.farmexpert.android.model.BaseEntity
+import com.farmexpert.android.utils.alert
 import com.farmexpert.android.utils.applyFarmexpertStyle
-import com.farmexpert.android.utils.failureAlert
 import com.farmexpert.android.utils.hidden
 import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -127,7 +127,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
         entity.id?.let {
             getCollectionReference().document(it)
                 .delete()
-                .addOnFailureListener { failureAlert(message = R.string.err_deleting_item) }
+                .addOnFailureListener { alert(message = R.string.err_deleting_item) }
                 .addOnCompleteListener { loadingHide() }
         }
     }
@@ -191,7 +191,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
                 .update(getPairsToUpdateFromBundle(args))
                 .addOnSuccessListener { rootLayout.snackbar(R.string.item_updated) }
                 .addOnFailureListener {
-                    failureAlert(message = R.string.err_updating_record)
+                    alert(message = R.string.err_updating_record)
                     error { it }
                 }
                 .addOnCompleteListener { loadingHide() }
@@ -207,7 +207,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
                     .add(entity)
                     .addOnSuccessListener { rootLayout.snackbar(R.string.item_added) }
                     .addOnFailureListener {
-                        failureAlert(message = R.string.err_adding_record)
+                        alert(message = R.string.err_adding_record)
                         error { it }
                     }
                     .addOnCompleteListener { loadingHide() }
