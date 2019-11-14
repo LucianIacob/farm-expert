@@ -156,7 +156,7 @@
     <string name="update_email_title">Update your email</string>
     <string name="set_email_title">Set your email</string>
     <string name="profile_load_unsuccessful">Your profile could not be load right now. Please try again later.\nError: %s</string>
-    <string name="send_verification_email">Re-Send verification email</string>
+    <string name="send_verification_email">Send verification email</string>
     <string name="set">Set</string>
     <string name="after_email_change_message">Your email address was updated. Please check your inbox in order to verify it. Press OK to go back to your profile.</string>
     <string name="recent_login_required">This operation requires a recently signed in. Please re-login with your account detail. Press OK to be signed out now.</string>
@@ -166,6 +166,12 @@
     <string name="delete_account_header">Delete account</string>
     <string name="delete_account_message">Warning! Deleting your account is an irreversible process.</string>
     <string name="delete_account_confirmation">Are you sure you want to delete your account? This operation cannot be undone.</string>
+    <string name="unsubscribe">Unsubscribe</string>
+    <string name="current_farm">• Current farm</string>
+    <string name="farm_subscribers_count">Subscribers count: %d</string>
+    <string name="you_are_the_owner">You are the owner</string>
+    <string name="unsubscribe_confirmation_message">Are you sure you want to unsubscribe?</string>
+    <string name="unsubscribe_current_farm_confirmation_message">This farm is your currently joined farm. If you otp to unscubscribe you will be redirected to select or create another farm. Are you sure you want to unsubscribe?</string>
 
     <integer-array name="gender_types">
         <item>0</item>

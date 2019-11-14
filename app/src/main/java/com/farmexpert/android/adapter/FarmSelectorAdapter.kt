@@ -17,8 +17,10 @@ import com.farmexpert.android.model.Farm
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
-open class FarmSelectorAdapter(options: FirestoreRecyclerOptions<Farm>, private val listener: (Farm) -> Unit) :
-    FirestoreRecyclerAdapter<Farm, FarmHolder>(options) {
+open class FarmSelectorAdapter(
+    options: FirestoreRecyclerOptions<Farm>,
+    private val listener: (Farm) -> Unit
+) : FirestoreRecyclerAdapter<Farm, FarmHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FarmHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_farm, parent, false)

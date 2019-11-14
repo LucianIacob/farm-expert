@@ -18,17 +18,16 @@ import com.farmexpert.android.R
 import com.farmexpert.android.model.Farm
 import com.farmexpert.android.utils.*
 import com.google.firebase.auth.*
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.google.firebase.storage.ktx.storageMetadata
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_user_profile.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.error
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 import java.util.*
 
 class UserProfileActivity : AppCompatActivity(), AnkoLogger {
@@ -109,10 +108,6 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 passResetSeparator.visibility = GONE
             }
 
-
-//            user.updatePassword()
-//
-
             fetchSubscribedFarms(this)
             setClickListeners(this)
         }
@@ -171,16 +166,59 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
     private fun deleteUserAccount(firebaseUser: FirebaseUser) {
         loadingView.visibility = VISIBLE
 
-        firebaseUser
-            .delete()
-            .addOnSuccessListener {
-                PreferenceManager.getDefaultSharedPreferences(this)
-                    .edit { remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID) }
-                startActivity<AuthenticationActivity>()
-                finishAffinity()
+        Firebase.firestore
+            .collection(FirestorePath.Collections.FARMS)
+            .whereArrayContains(FirestorePath.Farm.USERS, firebaseUser.uid)
+            .get()
+            .addOnSuccessListener { snapshots ->
+                info { "removing subscriber from ${snapshots.size()} farms" }
+                Firebase.firestore
+                    .runBatch {
+                        snapshots
+                            .map { it.toObject<Farm>().apply { id = it.id } }
+                            .mapNotNull { it.id }
+                            .map { farmId ->
+                                info { "updating farm with id $farmId" }
+                                it.update(
+                                    Firebase.firestore
+                                        .collection(FirestorePath.Collections.FARMS)
+                                        .document(farmId),
+                                    FirestorePath.Farm.USERS,
+                                    FieldValue.arrayRemove(firebaseUser.uid)
+                                )
+                            }
+
+                    }
+                    .addOnSuccessListener {
+                        info { "batch success" }
+                        firebaseUser
+                            .delete()
+                            .addOnSuccessListener {
+                                info { "delete user success" }
+                                PreferenceManager
+                                    .getDefaultSharedPreferences(this)
+                                    .edit {
+                                        remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID)
+                                    }
+
+                                startActivity<AuthenticationActivity>()
+                                finishAffinity()
+                            }
+                            .addOnFailureListener { it.message?.let { it1 -> alert(it1) } }
+                            .addOnCompleteListener { loadingView?.visibility = INVISIBLE }
+                    }
+                    .addOnFailureListener {
+                        error { it }
+                        it.message?.let { it1 -> alert(it1) }
+                        loadingView.visibility = INVISIBLE
+                    }
+
             }
-            .addOnFailureListener { it.message?.let { it1 -> alert(it1) } }
-            .addOnCompleteListener { loadingView?.visibility = VISIBLE }
+            .addOnFailureListener {
+                error { it }
+                it.message?.let { it1 -> alert(it1) }
+                loadingView.visibility = INVISIBLE
+            }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -250,6 +288,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                     separator = "\n",
                     transform = { it.name }
                 )
+                farmsInfoGroup.setOnClickListener { startActivity<UserFarmsActivity>() }
             }
             .addOnFailureListener {
                 error { it }
