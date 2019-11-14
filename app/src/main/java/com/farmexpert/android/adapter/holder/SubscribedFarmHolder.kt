@@ -31,11 +31,11 @@ class SubscribedFarmHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .takeIfTrue()
             ?.let {
                 ownerStatus.visibility = View.VISIBLE
-                deleteBtn.visibility = View.VISIBLE
+//                deleteBtn.visibility = View.VISIBLE
             }
             ?: run {
                 ownerStatus.visibility = View.GONE
-                deleteBtn.visibility = View.GONE
+//                deleteBtn.visibility = View.GONE
             }
 
         farmName.text = farm.name
