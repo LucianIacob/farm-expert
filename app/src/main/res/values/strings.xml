@@ -159,7 +159,6 @@
     <string name="send_verification_email">Send verification email</string>
     <string name="set">Set</string>
     <string name="after_email_change_message">Your email address was updated. Please check your inbox in order to verify it. Press OK to go back to your profile.</string>
-    <string name="recent_login_required">This operation requires a recently signed in. Please re-login with your account detail. Press OK to be signed out now.</string>
     <string name="pass_reset_header">Password reset</string>
     <string name="pass_reset_message">Tap to send a password reset email</string>
     <string name="password_reset_success">The request was successful. Please check your inbox.</string>
