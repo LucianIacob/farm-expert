@@ -40,7 +40,7 @@ import kotlinx.android.synthetic.main.fragment_planner.*
 import kotlinx.android.synthetic.main.fragment_planner_section.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.error
-import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.toast
 import java.util.*
 
 abstract class BasePlannerFragment : BaseFragment() {
@@ -164,7 +164,7 @@ abstract class BasePlannerFragment : BaseFragment() {
                 loadingHide()
                 if (exception != null) {
                     error { exception }
-                    toast(R.string.err_retrieving_reminders)
+                    activity?.toast(R.string.err_retrieving_reminders)
                 } else if (querySnapshot != null) {
                     val reminders = PlannerDataTransformer.transformReminders(querySnapshot)
                     dataRetrievedSuccessfully(reminders, PLANNER_DATA_REMINDERS)
@@ -178,7 +178,12 @@ abstract class BasePlannerFragment : BaseFragment() {
         val adapterData = (plannerData[PLANNER_DATA_ANIMALS] as List<PlannerItem>)
             .plus((plannerData[PLANNER_DATA_REMINDERS] as List<PlannerItem>))
 
-        adapter.data = adapterData
+        adapterData.takeIf { it.isNotEmpty() }?.let {
+            emptyList?.visibility = View.GONE
+            adapter.data = adapterData
+        } ?: run {
+            emptyList?.visibility = View.VISIBLE
+        }
     }
 
     override fun onPause() {

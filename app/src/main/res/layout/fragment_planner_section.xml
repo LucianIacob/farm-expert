@@ -42,6 +42,17 @@
             app:backgroundTint="@color/sea_green"
             app:fabSize="mini" />
 
+        <TextView
+            android:id="@+id/emptyList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/roboto_light"
+            android:gravity="center"
+            android:text="@string/empty_list"
+            android:textSize="@dimen/medium_text"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </LinearLayout>

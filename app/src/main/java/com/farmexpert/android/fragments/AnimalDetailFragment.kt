@@ -94,7 +94,7 @@ class AnimalDetailFragment : BaseFragment() {
     private fun deleteAnimalConfirmed() {
         loadingShow()
         DeleteAnimalTransaction(farmReference,
-            { rootLayout.snackbar(R.string.item_deleted) },
+            { rootLayout?.snackbar(R.string.item_deleted) },
             { exception -> error { exception } },
             {
                 loadingHide()
@@ -367,7 +367,7 @@ class AnimalDetailFragment : BaseFragment() {
                     is Timestamp -> viewToUpdate.setValue(newValue.asDisplayable())
                 }
             }
-            .addOnFailureListener { rootLayout.snackbar(R.string.err_updating_animal) }
+            .addOnFailureListener { rootLayout?.snackbar(R.string.err_updating_animal) }
             .addOnCompleteListener { loadingHide() }
     }
 }

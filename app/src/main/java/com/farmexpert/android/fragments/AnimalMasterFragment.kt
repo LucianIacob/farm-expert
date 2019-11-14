@@ -13,7 +13,9 @@ import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -52,23 +54,23 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_headcount, menu)
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem?.actionView as SearchView
-        with(searchView) {
-            setOnQueryTextListener(this@AnimalMasterFragment)
-            queryHint = getString(R.string.search_id)
-        }
-
-        if (query.isNotEmpty()) {
-            searchView.isIconified = false
-            searchItem.expandActionView()
-            searchView.setQuery(query, true)
-            searchView.clearFocus()
-        }
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.menu_headcount, menu)
+//        val searchItem = menu.findItem(R.id.action_search)
+//        val searchView = searchItem?.actionView as SearchView
+//        with(searchView) {
+//            setOnQueryTextListener(this@AnimalMasterFragment)
+//            queryHint = getString(R.string.search_id)
+//        }
+//
+//        if (query.isNotEmpty()) {
+//            searchView.isIconified = false
+//            searchItem.expandActionView()
+//            searchView.setQuery(query, true)
+//            searchView.clearFocus()
+//        }
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -138,7 +140,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
                 .setPositiveButton(R.string.delete) { _, _ ->
                     loadingShow()
                     DeleteAnimalTransaction(farmReference,
-                        { rootLayout.snackbar(R.string.item_deleted) },
+                        { rootLayout?.snackbar(R.string.item_deleted) },
                         { exception -> error { exception } },
                         { loadingHide() })
                         .execute(animalId)
@@ -218,7 +220,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
                 } else {
                     animalsCollections.document(id)
                         .set(animal)
-                        .addOnSuccessListener { rootLayout.snackbar(R.string.item_added) }
+                        .addOnSuccessListener { rootLayout?.snackbar(R.string.item_added) }
                         .addOnFailureListener {
                             alert(message = R.string.err_adding_animal)
                             error { it }

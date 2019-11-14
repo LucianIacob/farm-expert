@@ -189,7 +189,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
             loadingShow()
             getCollectionReference().document(it)
                 .update(getPairsToUpdateFromBundle(args))
-                .addOnSuccessListener { rootLayout.snackbar(R.string.item_updated) }
+                .addOnSuccessListener { rootLayout?.snackbar(R.string.item_updated) }
                 .addOnFailureListener {
                     alert(message = R.string.err_updating_record)
                     error { it }
@@ -205,7 +205,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
             if (isValid) {
                 getCollectionReference()
                     .add(entity)
-                    .addOnSuccessListener { rootLayout.snackbar(R.string.item_added) }
+                    .addOnSuccessListener { rootLayout?.snackbar(R.string.item_added) }
                     .addOnFailureListener {
                         alert(message = R.string.err_adding_record)
                         error { it }

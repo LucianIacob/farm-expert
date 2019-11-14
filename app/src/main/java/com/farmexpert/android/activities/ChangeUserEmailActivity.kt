@@ -13,6 +13,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
 import org.jetbrains.anko.info
 import org.jetbrains.anko.sdk27.coroutines.textChangedListener
+import org.jetbrains.anko.toast
 
 class ChangeUserEmailActivity : AppCompatActivity(), AnkoLogger {
 
@@ -59,6 +60,9 @@ class ChangeUserEmailActivity : AppCompatActivity(), AnkoLogger {
         }
 
         updateBtn.setOnClickListener { updateUserEmail() }
+        sendVerificationEmailBtn.setOnClickListener { _ ->
+            FirebaseAuth.getInstance().currentUser?.let { it -> sendUserEmailVerification(it) }
+        }
     }
 
     private fun updateUserEmail() {
@@ -95,6 +99,7 @@ class ChangeUserEmailActivity : AppCompatActivity(), AnkoLogger {
                     .setAndroidPackageName(this.packageName, true, "1.0.0")
                     .build()
             )
+            .addOnSuccessListener { toast(R.string.email_verification_success) }
             .addOnCompleteListener {
                 info { "email verification link sent to ${userEmailBox.text.toString()}" }
             }
