@@ -172,6 +172,7 @@
     <string name="unsubscribe_confirmation_message">Are you sure you want to unsubscribe?</string>
     <string name="unsubscribe_current_farm_confirmation_message">This farm is your currently joined farm. If you otp to unscubscribe you will be redirected to select or create another farm. Are you sure you want to unsubscribe?</string>
     <string name="email_verification_success">Email verification sent</string>
+    <string name="animal_details_title">Animal Details</string>
 
     <integer-array name="gender_types">
         <item>0</item>
