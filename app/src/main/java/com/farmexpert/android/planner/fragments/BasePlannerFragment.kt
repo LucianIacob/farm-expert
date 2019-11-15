@@ -178,9 +178,9 @@ abstract class BasePlannerFragment : BaseFragment() {
         val adapterData = (plannerData[PLANNER_DATA_ANIMALS] as List<PlannerItem>)
             .plus((plannerData[PLANNER_DATA_REMINDERS] as List<PlannerItem>))
 
+        adapter.data = adapterData
         adapterData.takeIf { it.isNotEmpty() }?.let {
             emptyList?.visibility = View.GONE
-            adapter.data = adapterData
         } ?: run {
             emptyList?.visibility = View.VISIBLE
         }
