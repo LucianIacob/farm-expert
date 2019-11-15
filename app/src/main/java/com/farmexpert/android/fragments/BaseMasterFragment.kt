@@ -21,7 +21,7 @@ import com.farmexpert.android.utils.alert
 import com.farmexpert.android.utils.hidden
 import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.SnapshotParser
-import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.android.synthetic.main.fragment_graph_master.*
 import org.jetbrains.anko.error
@@ -134,7 +134,7 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
 
     abstract fun getFilterField(): String
 
-    abstract fun getCollectionRef(): CollectionReference
+    abstract fun getCollectionRef(): Query
 
     abstract fun getHeaderLayoutRes(): Int
 

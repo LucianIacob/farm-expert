@@ -18,7 +18,7 @@ import com.farmexpert.android.model.Breeding
 import com.farmexpert.android.utils.FirestorePath
 import com.farmexpert.android.utils.GraphDataTransformer
 import com.firebase.ui.firestore.SnapshotParser
-import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
 
@@ -33,8 +33,14 @@ class BreedingsMasterFragment : BaseMasterFragment<Breeding, GraphBreedingViewHo
 
     override fun getFilterField() = FirestorePath.Breeding.ACTION_DATE
 
-    override fun getCollectionRef(): CollectionReference {
-        return farmReference.collection(FirestorePath.Collections.BREEDINGS)
+    override fun getCollectionRef(): Query {
+        return farmReference.collection(FirestorePath.Collections.BREEDINGS).let {
+            return@let if (resources.getBoolean(R.bool.graph_latest_breedings_only)) {
+                it.whereEqualTo(FirestorePath.Breeding.LATEST_BREEDING, true)
+            } else {
+                it
+            }
+        }
     }
 
     override fun getHolderLayoutRes() = R.layout.item_graph_breeding

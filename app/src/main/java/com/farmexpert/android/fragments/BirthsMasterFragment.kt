@@ -18,7 +18,7 @@ import com.farmexpert.android.model.Birth
 import com.farmexpert.android.utils.FirestorePath
 import com.farmexpert.android.utils.GraphDataTransformer
 import com.firebase.ui.firestore.SnapshotParser
-import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
 
@@ -49,8 +49,14 @@ class BirthsMasterFragment : BaseMasterFragment<Birth, GraphBirthViewHolder>() {
 
     override fun getFilterField() = FirestorePath.Birth.DATE_OF_BIRTH
 
-    override fun getCollectionRef(): CollectionReference {
-        return farmReference.collection(FirestorePath.Collections.BIRTHS)
+    override fun getCollectionRef(): Query {
+        return farmReference.collection(FirestorePath.Collections.BIRTHS).let {
+            return@let if (resources.getBoolean(R.bool.graph_latest_births_only)) {
+                it.whereEqualTo(FirestorePath.Birth.LATEST_BIRTH, true)
+            } else {
+                it
+            }
+        }
     }
 
     override val snapshotParser: SnapshotParser<Birth> = SnapshotParser {
