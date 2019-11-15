@@ -82,6 +82,7 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
         val male = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_MALE, "")
         val note = bundle.getInt(BaseAddRecordDialogFragment.ADD_DIALOG_NOTE, 5)
         val expectedBirthDate = AppUtils.getExpectedBirthDate(breedingDate)
+        val details = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_DETAILS)
 
         return Breeding(
             female = getAnimalId(),
@@ -89,7 +90,8 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
             actionDate = Timestamp(breedingDate),
             note = note,
             birthExpectedAt = Timestamp(expectedBirthDate),
-            createdBy = currentUser?.uid
+            createdBy = currentUser?.uid,
+            comments = details
         )
     }
 
@@ -101,7 +103,7 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
         }
     }
 
-    override fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any> {
+    override fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any?> {
         val timestamp = args.getLong(BaseEditRecordDialogFragment.EDIT_DIALOG_DATE)
         val newActionDate = Timestamp(Date(timestamp))
 
@@ -111,11 +113,13 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
         )
 
         val newMale = args.getString(BaseEditRecordDialogFragment.EDIT_DIALOG_MALE, "")
+        val newComments = args.getString(BaseEditRecordDialogFragment.EDIT_DIALOG_DETAILS)
 
         return mutableMapOf(
             FirestorePath.Breeding.ACTION_DATE to newActionDate,
             FirestorePath.Breeding.NOTE to newNote,
-            FirestorePath.Breeding.MALE to newMale
+            FirestorePath.Breeding.MALE to newMale,
+            FirestorePath.Breeding.COMMENTS to newComments
         )
     }
 }

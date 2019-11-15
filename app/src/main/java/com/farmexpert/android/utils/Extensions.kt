@@ -58,7 +58,7 @@ fun View.invisible() {
     visibility = View.INVISIBLE
 }
 
-fun View.hidden() {
+fun View.gone() {
     visibility = View.GONE
 }
 

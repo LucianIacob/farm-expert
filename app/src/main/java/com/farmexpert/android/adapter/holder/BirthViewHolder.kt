@@ -11,8 +11,7 @@ package com.farmexpert.android.adapter.holder
 
 import android.view.View
 import com.farmexpert.android.model.Birth
-import com.farmexpert.android.utils.SpinnerUtils
-import com.farmexpert.android.utils.asDisplayable
+import com.farmexpert.android.utils.*
 import kotlinx.android.synthetic.main.item_birth.view.*
 
 class BirthViewHolder(
@@ -26,6 +25,10 @@ class BirthViewHolder(
             birthDate.text = entity.dateOfBirth.asDisplayable()
             note.text = SpinnerUtils.getBirthNoteValue(entity.note, itemView.resources)
             calfId.text = entity.calfId
+            entity.comments?.takeIfNotBlank()?.let {
+                commentsContainer?.visible()
+                commentsDetails?.text = it
+            } ?: run { commentsContainer?.gone() }
             updateBtn.setOnClickListener { updateListener(entity) }
             deleteBtn.setOnClickListener { deleteListener(entity) }
         }

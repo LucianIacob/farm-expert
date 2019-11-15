@@ -25,7 +25,8 @@
             android:drawablePadding="5dp"
             android:fontFamily="@font/telegroteskscreen_medium"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/large_text" />
+            android:textSize="@dimen/large_text"
+            tools:text="@tools:sample/date/ddmmyy" />
 
         <LinearLayout
             android:id="@+id/noteContainer"
@@ -53,7 +54,8 @@
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/large_text"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="RtlSymmetry"
+                tools:text="@string/default_birth_note" />
 
         </LinearLayout>
 
@@ -85,7 +87,39 @@
                 android:paddingStart="3dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/large_text"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="RtlSymmetry"
+                tools:text="@tools:sample/full_names" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/commentsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/details"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/commentsDetails"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/telegroteskscreen_medium"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp"
+                tools:text="@tools:sample/lorem/random" />
 
         </LinearLayout>
 
@@ -111,8 +145,8 @@
                 android:padding="5dp"
                 android:text="@string/update"
                 android:textColor="@color/colorPrimaryDark"
-              android:textSize="16sp"
-              tools:targetApi="lollipop" />
+                android:textSize="16sp"
+                tools:targetApi="lollipop" />
 
             <TextView
                 android:id="@+id/deleteBtn"
@@ -132,8 +166,8 @@
                 android:padding="5dp"
                 android:text="@string/delete"
                 android:textColor="@color/colorPrimaryDark"
-              android:textSize="16sp"
-              tools:targetApi="lollipop" />
+                android:textSize="16sp"
+                tools:targetApi="lollipop" />
         </LinearLayout>
     </LinearLayout>
 

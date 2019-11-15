@@ -56,11 +56,12 @@ class AddBreedingDialogFragment : BaseAddRecordDialogFragment() {
     private fun addRecord() {
         val bundle = bundleOf(
             ADD_DIALOG_DATE to mSetDate.time,
-            ADD_DIALOG_MALE to mView.maleInput.text.toString(),
+            ADD_DIALOG_MALE to mView.maleInput.text?.toString(),
             ADD_DIALOG_NOTE to getBreedingNoteByPosition(
                 mView.breedingNotes.selectedItemPosition,
                 resources
-            )
+            ),
+            ADD_DIALOG_DETAILS to mView.detailsBox.text?.toString()
         )
         val intent = Intent().putExtras(bundle)
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)

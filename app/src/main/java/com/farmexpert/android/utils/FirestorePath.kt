@@ -62,6 +62,7 @@ object FirestorePath {
         const val NOTE = "note"
         const val CREATED_BY = "createdBy"
         const val LATEST_BIRTH = "latestBirth"
+        const val COMMENTS = "comments"
     }
 
     object AnimalAction {
@@ -79,6 +80,7 @@ object FirestorePath {
         const val CREATED_BY = "createdBy"
         const val EXPECTED_BIRTH = "birthExpectedAt"
         const val LATEST_BREEDING = "latestBreeding"
+        const val COMMENTS = "comments"
     }
 
     object Reminder {

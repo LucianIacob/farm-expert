@@ -81,7 +81,7 @@
     <string name="add_treatment_title">Adaugre tratament</string>
     <string name="add_disinfection_title">Adaugre deparazitare</string>
     <string name="add_pedicure_title">Adaugre pedichiura</string>
-    <string name="estimated_birth">Fatare estimata:</string>
+    <string name="estimated_birth">Fatare estimata</string>
     <string name="delete_confirmation_request">Esti sigur ca doresti sa stergi acest element?</string>
     <string name="err_deleting_item">A aparut o eroare la stergerea elementului</string>
     <string name="dialog_update_btn">Actualizare</string>

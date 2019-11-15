@@ -18,7 +18,7 @@ import com.farmexpert.android.adapter.holder.BaseMasterHolder
 import com.farmexpert.android.model.BaseEntity
 import com.farmexpert.android.utils.AppUtils
 import com.farmexpert.android.utils.alert
-import com.farmexpert.android.utils.hidden
+import com.farmexpert.android.utils.gone
 import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.firestore.Query
@@ -110,7 +110,7 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
                 adapter.data = adapterData
 
                 if (adapterData.isNotEmpty()) {
-                    empty_list?.hidden()
+                    empty_list?.gone()
                 } else {
                     empty_list?.visible()
                 }

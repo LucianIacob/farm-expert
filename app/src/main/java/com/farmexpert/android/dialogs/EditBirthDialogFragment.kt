@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.dialog_edit_birth.view.*
 
 class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
 
+    private var details: String? = null
     private var noteToSelect: Int = 4
 
     override fun getTitle() = R.string.edit_birth_title
@@ -33,6 +34,8 @@ class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
         noteToSelect = savedInstanceState?.getInt(EDIT_DIALOG_NOTE, -1)
             ?.takeIf { it != -1 }?.let { it }
             ?: run { bundle.getInt(EDIT_DIALOG_NOTE, noteToSelect) }
+        details = savedInstanceState?.getString(EDIT_DIALOG_DETAILS)?.let { it }
+            ?: bundle.getString(EDIT_DIALOG_DETAILS)
     }
 
     override fun getLayoutId(): Int {
@@ -40,6 +43,7 @@ class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
     }
 
     override fun populateFields() {
+        mView?.detailsBox?.setText(details)
         mView?.notesSpinner?.let {
             SpinnerUtils.configureSpinner(
                 spinner = it,
@@ -62,7 +66,8 @@ class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
             EDIT_DIALOG_DATE to mActionDate?.time,
             EDIT_DIALOG_NOTE to mView?.notesSpinner?.selectedItemPosition?.let {
                 getBirthNoteByPosition(it, resources)
-            }
+            },
+            EDIT_DIALOG_DETAILS to mView?.detailsBox?.text?.toString()
         )
         val intent = Intent().putExtras(args)
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)

@@ -109,7 +109,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
             override fun onDataChanged() {
                 loadingHide()
                 (activity as? AppCompatActivity)?.supportActionBar?.title = if (itemCount != 0) {
-                    emptyView.hidden()
+                    emptyView.gone()
                     getString(R.string.headcount_title, itemCount)
                 } else {
                     emptyView.visible()

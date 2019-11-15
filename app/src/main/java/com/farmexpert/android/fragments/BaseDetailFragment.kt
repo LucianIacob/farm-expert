@@ -26,7 +26,7 @@ import com.farmexpert.android.dialogs.BaseEditRecordDialogFragment
 import com.farmexpert.android.model.BaseEntity
 import com.farmexpert.android.utils.alert
 import com.farmexpert.android.utils.applyFarmexpertStyle
-import com.farmexpert.android.utils.hidden
+import com.farmexpert.android.utils.gone
 import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.firebase.ui.firestore.ObservableSnapshotArray
@@ -71,7 +71,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
                 onNewDataArrived(snapshots)
                 loadingHide()
                 if (itemCount != 0) {
-                    placeholderText?.hidden()
+                    placeholderText?.gone()
                 } else {
                     placeholderText?.visible()
                 }
@@ -136,7 +136,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
 
     abstract fun constructEntityFromBundle(bundle: Bundle): Any
 
-    abstract fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any>
+    abstract fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any?>
 
     abstract fun getAddRecordDialog(): DialogFragment
 

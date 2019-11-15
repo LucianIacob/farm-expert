@@ -24,7 +24,8 @@ data class Breeding(
     @PropertyName(FirestorePath.Breeding.NOTE) val note: Int = 5,
     @PropertyName(FirestorePath.Breeding.EXPECTED_BIRTH) val birthExpectedAt: Timestamp = Timestamp.now(),
     @PropertyName(FirestorePath.Breeding.CREATED_BY) val createdBy: String? = "",
-    @PropertyName(FirestorePath.Breeding.LATEST_BREEDING) var latestBreeding: Boolean = false
+    @PropertyName(FirestorePath.Breeding.LATEST_BREEDING) var latestBreeding: Boolean = false,
+    @PropertyName(FirestorePath.Breeding.COMMENTS) val comments: String? = ""
 ) : BaseEntity() {
 
     @Exclude
@@ -33,7 +34,8 @@ data class Breeding(
             BaseEditRecordDialogFragment.EDIT_DIALOG_DOC_ID to id,
             BaseEditRecordDialogFragment.EDIT_DIALOG_DATE to actionDate.toDate().time,
             BaseEditRecordDialogFragment.EDIT_DIALOG_NOTE to note,
-            BaseEditRecordDialogFragment.EDIT_DIALOG_MALE to male
+            BaseEditRecordDialogFragment.EDIT_DIALOG_MALE to male,
+            BaseEditRecordDialogFragment.EDIT_DIALOG_DETAILS to comments
         )
     }
 

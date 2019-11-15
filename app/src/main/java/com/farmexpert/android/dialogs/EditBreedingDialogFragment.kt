@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.dialog_edit_breeding.view.*
 
 class EditBreedingDialogFragment : BaseEditRecordDialogFragment() {
 
+    private var details: String? = null
     private var selectedNote: Int = 5
     private var breedingMale: String? = null
 
@@ -36,6 +37,8 @@ class EditBreedingDialogFragment : BaseEditRecordDialogFragment() {
                 ?.takeIf { it != -1 }?.let { it }
                 ?: getInt(EDIT_DIALOG_NOTE, selectedNote)
             breedingMale = getString(EDIT_DIALOG_MALE)
+            details = savedInstanceState?.getString(EDIT_DIALOG_DETAILS)?.let { it }
+                ?: getString(EDIT_DIALOG_DETAILS)
         }
     }
 
@@ -48,6 +51,7 @@ class EditBreedingDialogFragment : BaseEditRecordDialogFragment() {
                 selected = selectedNote
             )
         }
+        mView?.detailsBox?.setText(details)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -64,7 +68,8 @@ class EditBreedingDialogFragment : BaseEditRecordDialogFragment() {
             EDIT_DIALOG_MALE to mView?.maleInput?.text.toString(),
             EDIT_DIALOG_NOTE to mView?.notesSpinner?.selectedItemPosition?.let {
                 SpinnerUtils.getBreedingNoteByPosition(it, resources)
-            }
+            },
+            EDIT_DIALOG_DETAILS to mView?.detailsBox?.text?.toString()
         )
         val intent = Intent().putExtras(bundle)
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)

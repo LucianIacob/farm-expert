@@ -70,7 +70,7 @@ class PedicuresDetailFragment : BaseDetailFragment<AnimalAction, PedicureViewHol
         )
     }
 
-    override fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any> {
+    override fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any?> {
         val timestamp = args.getLong(BaseEditRecordDialogFragment.EDIT_DIALOG_DATE)
         val newActionDate = Timestamp(Date(timestamp))
 

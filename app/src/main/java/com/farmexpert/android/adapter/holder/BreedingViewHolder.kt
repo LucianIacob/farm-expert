@@ -11,8 +11,7 @@ package com.farmexpert.android.adapter.holder
 
 import android.view.View
 import com.farmexpert.android.model.Breeding
-import com.farmexpert.android.utils.SpinnerUtils
-import com.farmexpert.android.utils.asDisplayable
+import com.farmexpert.android.utils.*
 import kotlinx.android.synthetic.main.item_breeding.view.*
 
 class BreedingViewHolder(
@@ -27,6 +26,10 @@ class BreedingViewHolder(
             note.text = SpinnerUtils.getBreedingNoteValue(entity.note, itemView.resources)
             male.text = entity.male
             estimatedBirth.text = entity.birthExpectedAt.asDisplayable()
+            entity.comments?.takeIfNotBlank()?.let {
+                commentsContainer?.visible()
+                commentsDetails?.text = it
+            } ?: run { commentsContainer?.gone() }
             updateBtn.setOnClickListener { updateListener(entity) }
             deleteBtn.setOnClickListener { deleteListener(entity) }
         }
