@@ -15,6 +15,14 @@ repositories {
 }
 
 android {
+    signingConfigs {
+        release {
+            storePassword 'engineer10'
+            keyAlias = 'key0'
+            keyPassword 'engineer10'
+            storeFile file('/Users/lucianiacob/AndroidStudioProjects/FarmExpert/keystore')
+        }
+    }
     compileSdkVersion 'android-Q'
 
     defaultConfig {
@@ -22,7 +30,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -51,9 +59,11 @@ android {
             dimension "tier"
             applicationIdSuffix ".vatamanu"
             versionNameSuffix '-vatamanu'
+            signingConfig signingConfigs.release
         }
         generic {
             dimension "tier"
+            signingConfig signingConfigs.release
         }
     }
 }

@@ -23,8 +23,8 @@ class AuthenticationActivity : Activity() {
 
     companion object {
         const val RC_SIGN_IN = 1234
-        const val termsOfServiceUrl = "https://www.lucianiacob.com"
-        const val privacyPolicyUrl = "https://www.lucianiacob.com"
+        const val termsOfServiceUrl = "http://lucianiacob.com/farmexpert/tos.html"
+        const val privacyPolicyUrl = "http://lucianiacob.com/farmexpert/privacypolicy.html"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
