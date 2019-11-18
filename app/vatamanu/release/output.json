@@ -6,8 +6,8 @@
     "apkData": {
       "type": "MAIN",
       "splits": [],
-      "versionCode": 8,
-      "versionName": "1.0.0-vatamanu",
+      "versionCode": 10,
+      "versionName": "1.0.1-vatamanu",
       "enabled": true,
       "outputFile": "app-vatamanu-release.apk",
       "fullName": "vatamanuRelease",
