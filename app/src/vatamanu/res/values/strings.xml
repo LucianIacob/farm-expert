@@ -310,4 +310,16 @@
     <string name="fui_sms_terms_of_service">Dacă atingeți „%1$s”, poate fi trimis un SMS. Se pot aplica tarife pentru mesaje și date.</string>
     <string name="fui_sms_terms_of_service_and_privacy_policy_extended">Dacă atingeți „%1$s”, sunteți de acord cu %2$s și cu %3$s. Poate fi trimis un SMS. Se pot aplica tarife pentru mesaje și date.</string>
 
+
+    <string name="pref_heating_start_title">Numarul de zile pentru inceputul caldurilor</string>
+    <string name="pref_heating_end_title">Numarul de zile pentru sfarsitul caldurilor</string>
+    <string name="pref_gestation_title">Control pentru gestatie dupa</string>
+    <string name="pref_physiological_control_title">Controlul fiziologic dupa fatare</string>
+    <string name="pref_disinfection_title">Deparazitarea inainte de fatare</string>
+    <string name="pref_after_birth_vaccin_title">Vaccin dupa fatare</string>
+    <string name="pref_before_birth_vaccin1_title">Primul vaccin inainte de fatare</string>
+    <string name="pref_before_birth_vaccin2_title">Al doilea vaccin inainte de fatare</string>
+    <string name="pref_before_birth_vaccin3_title">Al treilea vaccin inainte de fatare</string>
+    <string name="pref_gestation_length_title">Numarul de zile pentru gestatie</string>
+
 </resources>
