@@ -322,4 +322,7 @@
     <string name="pref_before_birth_vaccin3_title">Al treilea vaccin inainte de fatare</string>
     <string name="pref_gestation_length_title">Numarul de zile pentru gestatie</string>
 
+    <string name="maleInputHeader">Matricol/Nume taur</string>
+    <string name="calfInputHeader">Matricol vițel</string>
+
 </resources>

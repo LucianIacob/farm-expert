@@ -65,6 +65,8 @@
     <string name="err_updating_animal">An error occurred updating the field</string>
     <string name="add_birth_title">Add birth</string>
     <string name="calf_id">Calf ID Number</string>
+    <string name="maleInputHeader">Latest male ID</string>
+    <string name="calfInputHeader">Latest Calf ID</string>
     <string name="note">Note:</string>
     <string name="maleInputHint">Male ID / Name</string>
     <string name="details">Details</string>
