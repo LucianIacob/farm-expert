@@ -11,6 +11,7 @@ package com.farmexpert.android.adapter.holder
 
 import android.view.View
 import android.widget.TextView
+import com.farmexpert.android.R
 import com.farmexpert.android.model.Breeding
 import com.farmexpert.android.utils.asDisplayable
 import com.farmexpert.android.utils.day
@@ -26,7 +27,8 @@ class GraphBreedingViewHolder(
 
     override fun bind(key: String, values: List<Breeding>): Unit = with(view) {
         with(femaleCell) {
-            text = key
+            val digitsToShow = resources.getInteger(R.integer.graph_key_take_digits)
+            text = key.takeLast(digitsToShow)
             setOnClickListener { femaleIdClick(key) }
         }
         values.maxBy { it.actionDate }?.let { breeding ->

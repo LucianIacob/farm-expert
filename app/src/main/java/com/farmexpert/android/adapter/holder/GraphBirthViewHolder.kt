@@ -11,6 +11,7 @@ package com.farmexpert.android.adapter.holder
 
 import android.view.View
 import android.widget.TextView
+import com.farmexpert.android.R
 import com.farmexpert.android.model.Birth
 import com.farmexpert.android.utils.day
 import com.farmexpert.android.utils.month
@@ -24,13 +25,15 @@ class GraphBirthViewHolder(
 ) : BaseMasterHolder<Birth>(itemView = itemView) {
 
     override fun bind(key: String, values: List<Birth>) = with(itemView) {
+        val digitsToShow = resources.getInteger(R.integer.graph_key_take_digits)
+
         with(motherCell) {
-            text = key
+            text = key.takeLast(digitsToShow)
             setOnClickListener { motherIdClick(key) }
         }
 
         values.maxBy { it.dateOfBirth }?.calfId?.let { calfId ->
-            calfCell.text = calfId
+            calfCell.text = calfId.takeLast(digitsToShow)
             calfCell.setOnClickListener { calfIdClick(calfId) }
         }
 
