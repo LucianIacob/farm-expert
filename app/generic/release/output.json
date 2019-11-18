@@ -1,0 +1,19 @@
+[
+  {
+    "outputType": {
+      "type": "APK"
+    },
+    "apkData": {
+      "type": "MAIN",
+      "splits": [],
+      "versionCode": 5,
+      "versionName": "1.0.0",
+      "enabled": true,
+      "outputFile": "app-generic-release.apk",
+      "fullName": "genericRelease",
+      "baseName": "generic-release"
+    },
+    "path": "app-generic-release.apk",
+    "properties": {}
+  }
+]
