@@ -1,0 +1,19 @@
+[
+  {
+    "outputType": {
+      "type": "APK"
+    },
+    "apkData": {
+      "type": "MAIN",
+      "splits": [],
+      "versionCode": 8,
+      "versionName": "1.0.0-vatamanu",
+      "enabled": true,
+      "outputFile": "app-vatamanu-release.apk",
+      "fullName": "vatamanuRelease",
+      "baseName": "vatamanu-release"
+    },
+    "path": "app-vatamanu-release.apk",
+    "properties": {}
+  }
+]
