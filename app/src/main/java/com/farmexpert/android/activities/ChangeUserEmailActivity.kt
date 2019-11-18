@@ -5,7 +5,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.alert
-import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_change_email.*
@@ -94,11 +93,7 @@ class ChangeUserEmailActivity : AppCompatActivity(), AnkoLogger {
 
     private fun sendUserEmailVerification(firebaseUser: FirebaseUser) {
         firebaseUser
-            .sendEmailVerification(
-                ActionCodeSettings.newBuilder()
-                    .setAndroidPackageName(this.packageName, true, "1.0.0")
-                    .build()
-            )
+            .sendEmailVerification()
             .addOnSuccessListener { toast(R.string.email_verification_success) }
             .addOnCompleteListener {
                 info { "email verification link sent to ${userEmailBox.text.toString()}" }
