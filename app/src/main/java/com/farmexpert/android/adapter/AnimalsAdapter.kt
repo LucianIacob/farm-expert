@@ -18,20 +18,22 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
 open class AnimalsAdapter(
     options: FirestoreRecyclerOptions<Animal>,
-    private val listener: (Animal) -> Unit,
-    private val longClick: (String) -> Unit
+    private val clickListener: (Animal) -> Unit,
+    private val longClickListener: (String) -> Unit
 ) : BaseFirestoreRecyclerAdapter<Animal, AnimalHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_animal, parent, false)
+        val view = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.item_animal, parent, false)
         return AnimalHolder(view)
     }
 
     override fun onBindViewHolder(animalHolder: AnimalHolder, position: Int, animal: Animal) {
         animalHolder.bind(animal)
-        animalHolder.itemView.setOnClickListener { listener(animal) }
+        animalHolder.itemView.setOnClickListener { clickListener(animal) }
         animalHolder.itemView.setOnLongClickListener {
-            animal.id?.let { longClick.invoke(it) }
+            animal.id?.let { longClickListener.invoke(it) }
             true
         }
     }

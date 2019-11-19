@@ -63,9 +63,9 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
             .build()
 
         adapter = object : AnimalActionsAdapter<ModelClass, ModelHolder>(
-            options,
-            getTitleAndHolderLayout().second,
-            ::createHolder
+            options = options,
+            layoutResId = getTitleAndHolderLayout().second,
+            createHolderClass = ::createHolder
         ) {
             override fun onDataChanged() {
                 onNewDataArrived(snapshots)

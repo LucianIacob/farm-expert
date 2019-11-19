@@ -103,9 +103,10 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
             .build()
 
         adapter = object : AnimalsAdapter(
-            options,
-            { animal -> animalClick(animal) },
-            { animalId -> animalLongClick(animalId) }) {
+            options = options,
+            clickListener = { animal -> animalClick(animal) },
+            longClickListener = { animalId -> animalLongClick(animalId) }
+        ) {
             override fun onDataChanged() {
                 loadingHide()
                 (activity as? AppCompatActivity)?.supportActionBar?.title = if (itemCount != 0) {
