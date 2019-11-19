@@ -20,13 +20,11 @@ class AnimalActionHolder(
     deleteListener: (AnimalAction) -> Unit
 ) : BaseDetailHolder<AnimalAction>(itemView, updateListener, deleteListener) {
 
-    override fun bind(entity: AnimalAction) {
+    override fun bind(entity: AnimalAction) =
         with(itemView) {
             item_animal_action_date.text = entity.actionDate.asDisplayable()
             item_animal_action_detail.text = entity.details
             item_animal_action_update.setOnClickListener { updateListener(entity) }
             item_animal_action_delete.setOnClickListener { deleteListener(entity) }
         }
-    }
-
 }

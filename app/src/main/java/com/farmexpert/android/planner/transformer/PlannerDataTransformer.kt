@@ -27,18 +27,25 @@ class PlannerDataTransformer {
             querySnapshot: QuerySnapshot,
             resources: Resources
         ): List<PlannerItem> {
-            return querySnapshot.map {
-              val breeding = it.toObject<Breeding>()
-                PlannerItem(
-                    headline = breeding.female,
-                    reason = resources.getString(R.string.planner_heats_reason),
-                    onClickAction = NavGraphDirections.actionGlobalBreedingsDetailFragment(animalId = breeding.female)
-                )
-            }
+
+            return querySnapshot
+                .map { it.toObject<Breeding>() }
+                .map {
+                    val digitsToShow = resources.getInteger(R.integer.graph_key_take_digits)
+
+                    PlannerItem(
+                        headline = it.female.takeLast(digitsToShow),
+                        reason = resources.getString(R.string.planner_heats_reason),
+                        onClickAction = NavGraphDirections.actionGlobalBreedingsDetailFragment(
+                            animalId = it.female
+                        )
+                    )
+                }
         }
 
         fun transformReminders(querySnapshot: QuerySnapshot): List<PlannerItem> {
-          return querySnapshot.map { it.toObject<Reminder>() }
+            return querySnapshot
+                .map { it.toObject<Reminder>() }
                 .map {
                     PlannerItem(
                         headline = it.details,
@@ -52,14 +59,23 @@ class PlannerDataTransformer {
             gestationCtrlDays: Int,
             res: Resources
         ): List<PlannerItem> {
-            return querySnapshot.map {
-              val breeding = it.toObject<Breeding>()
-                PlannerItem(
-                    headline = breeding.female,
-                    reason = res.getString(R.string.planner_gest_ctrl_reason, gestationCtrlDays),
-                    onClickAction = NavGraphDirections.actionGlobalBreedingsDetailFragment(animalId = breeding.female)
-                )
-            }
+
+            return querySnapshot
+                .map { it.toObject<Breeding>() }
+                .map {
+                    val digitsToShow = res.getInteger(R.integer.graph_key_take_digits)
+
+                    PlannerItem(
+                        headline = it.female.takeLast(digitsToShow),
+                        reason = res.getString(
+                            R.string.planner_gest_ctrl_reason,
+                            gestationCtrlDays
+                        ),
+                        onClickAction = NavGraphDirections.actionGlobalBreedingsDetailFragment(
+                            animalId = it.female
+                        )
+                    )
+                }
         }
 
         fun transformPhysiologicalControl(
@@ -67,17 +83,23 @@ class PlannerDataTransformer {
             physiologicalPeriod: Int,
             resources: Resources
         ): List<PlannerItem> {
-            return querySnapshot.map {
-              val birth = it.toObject<Birth>()
-                PlannerItem(
-                    headline = birth.motherId,
-                    reason = resources.getString(
-                        R.string.planner_physiological_ctrl_reason,
-                        physiologicalPeriod
-                    ),
-                    onClickAction = NavGraphDirections.actionGlobalBirthsDetailFragment(animalId = birth.motherId)
-                )
-            }
+
+            return querySnapshot
+                .map { it.toObject<Birth>() }
+                .map {
+                    val digitsToShow = resources.getInteger(R.integer.graph_key_take_digits)
+
+                    PlannerItem(
+                        headline = it.motherId.takeLast(digitsToShow),
+                        reason = resources.getString(
+                            R.string.planner_physiological_ctrl_reason,
+                            physiologicalPeriod
+                        ),
+                        onClickAction = NavGraphDirections.actionGlobalBirthsDetailFragment(
+                            animalId = it.motherId
+                        )
+                    )
+                }
         }
 
         fun transformVaccine1(
@@ -85,17 +107,23 @@ class PlannerDataTransformer {
             daysOfFirstVaccine: Int,
             resources: Resources
         ): List<PlannerItem> {
-            return querySnapshot.map {
-              val birth = it.toObject<Birth>()
-                PlannerItem(
-                    headline = birth.motherId,
-                    reason = resources.getString(
-                        R.string.planner_first_vaccine_reason,
-                        daysOfFirstVaccine
-                    ),
-                    onClickAction = NavGraphDirections.actionGlobalBirthsDetailFragment(animalId = birth.motherId)
-                )
-            }
+
+            return querySnapshot
+                .map { it.toObject<Birth>() }
+                .map {
+                    val digitsToShow = resources.getInteger(R.integer.graph_key_take_digits)
+
+                    PlannerItem(
+                        headline = it.motherId.takeLast(digitsToShow),
+                        reason = resources.getString(
+                            R.string.planner_first_vaccine_reason,
+                            daysOfFirstVaccine
+                        ),
+                        onClickAction = NavGraphDirections.actionGlobalBirthsDetailFragment(
+                            animalId = it.motherId
+                        )
+                    )
+                }
         }
 
         fun transformBeforeBirthItems(
@@ -103,17 +131,22 @@ class PlannerDataTransformer {
             daysCount: Int,
             resources: Resources
         ): List<PlannerItem> {
-            return querySnapshot.map {
-              val breeding = it.toObject<Breeding>()
-                PlannerItem(
-                    headline = breeding.female,
-                    reason = resources.getString(
-                        R.string.planner_before_birth_vaccine_reason,
-                        daysCount
-                    ),
-                    onClickAction = NavGraphDirections.actionGlobalBreedingsDetailFragment(animalId = breeding.female)
-                )
-            }
+
+            return querySnapshot.map { it.toObject<Breeding>() }
+                .map {
+                    val digitsToShow = resources.getInteger(R.integer.graph_key_take_digits)
+
+                    PlannerItem(
+                        headline = it.female.takeLast(digitsToShow),
+                        reason = resources.getString(
+                            R.string.planner_before_birth_vaccine_reason,
+                            daysCount
+                        ),
+                        onClickAction = NavGraphDirections.actionGlobalBreedingsDetailFragment(
+                            animalId = it.female
+                        )
+                    )
+                }
         }
     }
 }
