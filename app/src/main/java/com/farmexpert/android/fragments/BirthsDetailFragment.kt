@@ -136,7 +136,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
     }
 
     override fun addDependentData(entity: Any) {
-        val digits = resources.getInteger(R.integer.graph_key_take_digits)
+        val digits = resources.getInteger(R.integer.animal_id_digits_to_show)
 
         (entity as? Birth)?.let {
             val animal = Animal(

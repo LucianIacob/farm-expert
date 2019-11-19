@@ -25,7 +25,7 @@ class GraphBirthViewHolder(
 ) : BaseMasterHolder<Birth>(itemView = itemView) {
 
     override fun bind(key: String, values: List<Birth>) = with(itemView) {
-        val digitsToShow = resources.getInteger(R.integer.graph_key_take_digits)
+        val digitsToShow = resources.getInteger(R.integer.animal_id_digits_to_show)
 
         with(motherCell) {
             text = key.takeLast(digitsToShow)

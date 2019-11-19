@@ -27,7 +27,7 @@ class GraphBreedingViewHolder(
 
     override fun bind(key: String, values: List<Breeding>): Unit = with(view) {
         with(femaleCell) {
-            val digitsToShow = resources.getInteger(R.integer.graph_key_take_digits)
+            val digitsToShow = resources.getInteger(R.integer.animal_id_digits_to_show)
             text = key.takeLast(digitsToShow)
             setOnClickListener { femaleIdClick(key) }
         }

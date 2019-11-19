@@ -32,6 +32,7 @@ import com.farmexpert.android.utils.*
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.fragment_animal_master.*
 import org.jetbrains.anko.AnkoLogger
@@ -98,10 +99,8 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
 
     private fun initAnimalList() {
         loadingShow()
-        val options =
-            FirestoreRecyclerOptions.Builder<Animal>()
-                .setQuery(animalsCollections.orderBy(FirestorePath.Animal.LAST_DIGITS))
-                { it.toObject<Animal>()!!.apply { id = it.id } }
+        val options = FirestoreRecyclerOptions.Builder<Animal>()
+            .setQuery(getAnimalsQuery()) { it.toObject<Animal>()!!.apply { id = it.id } }
             .build()
 
         adapter = object : AnimalsAdapter(
@@ -123,6 +122,12 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
 
         headcountRecyclerView.layoutManager = LinearLayoutManager(activity)
         headcountRecyclerView.adapter = adapter
+    }
+
+    private fun getAnimalsQuery(): Query = with(animalsCollections) {
+        return if (resources.getBoolean(R.bool.sort_by_last_digits)) {
+            this.orderBy(FirestorePath.Animal.LAST_DIGITS)
+        } else this
     }
 
     private fun animalClick(animal: Animal) {
@@ -205,7 +210,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
             return
         }
 
-        val digits = resources.getInteger(R.integer.graph_key_take_digits)
+        val digits = resources.getInteger(R.integer.animal_id_digits_to_show)
 
         val animal = Animal(
             race = race,

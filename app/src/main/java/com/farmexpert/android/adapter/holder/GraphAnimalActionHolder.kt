@@ -24,7 +24,7 @@ class GraphAnimalActionHolder(
 ) : BaseMasterHolder<AnimalAction>(itemView = view) {
 
     override fun bind(key: String, values: List<AnimalAction>) = with(view) {
-        val digitsToShow = resources.getInteger(R.integer.graph_key_take_digits)
+        val digitsToShow = resources.getInteger(R.integer.animal_id_digits_to_show)
 
         animalCell.text = key.takeLast(digitsToShow)
         animalCell.setOnClickListener { animalIdClick(key) }

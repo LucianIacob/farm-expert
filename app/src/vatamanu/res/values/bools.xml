@@ -2,4 +2,5 @@
 <resources>
     <bool name="graph_latest_breedings_only">true</bool>
     <bool name="graph_latest_births_only">true</bool>
+    <bool name="sort_by_last_digits">true</bool>
 </resources>

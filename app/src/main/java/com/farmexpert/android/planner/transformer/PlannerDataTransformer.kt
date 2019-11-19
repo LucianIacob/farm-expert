@@ -31,7 +31,7 @@ class PlannerDataTransformer {
             return querySnapshot
                 .map { it.toObject<Breeding>() }
                 .map {
-                    val digitsToShow = resources.getInteger(R.integer.graph_key_take_digits)
+                    val digitsToShow = resources.getInteger(R.integer.animal_id_digits_to_show)
 
                     PlannerItem(
                         headline = it.female.takeLast(digitsToShow),
@@ -63,7 +63,7 @@ class PlannerDataTransformer {
             return querySnapshot
                 .map { it.toObject<Breeding>() }
                 .map {
-                    val digitsToShow = res.getInteger(R.integer.graph_key_take_digits)
+                    val digitsToShow = res.getInteger(R.integer.animal_id_digits_to_show)
 
                     PlannerItem(
                         headline = it.female.takeLast(digitsToShow),
@@ -87,7 +87,7 @@ class PlannerDataTransformer {
             return querySnapshot
                 .map { it.toObject<Birth>() }
                 .map {
-                    val digitsToShow = resources.getInteger(R.integer.graph_key_take_digits)
+                    val digitsToShow = resources.getInteger(R.integer.animal_id_digits_to_show)
 
                     PlannerItem(
                         headline = it.motherId.takeLast(digitsToShow),
@@ -111,7 +111,7 @@ class PlannerDataTransformer {
             return querySnapshot
                 .map { it.toObject<Birth>() }
                 .map {
-                    val digitsToShow = resources.getInteger(R.integer.graph_key_take_digits)
+                    val digitsToShow = resources.getInteger(R.integer.animal_id_digits_to_show)
 
                     PlannerItem(
                         headline = it.motherId.takeLast(digitsToShow),
@@ -134,7 +134,7 @@ class PlannerDataTransformer {
 
             return querySnapshot.map { it.toObject<Breeding>() }
                 .map {
-                    val digitsToShow = resources.getInteger(R.integer.graph_key_take_digits)
+                    val digitsToShow = resources.getInteger(R.integer.animal_id_digits_to_show)
 
                     PlannerItem(
                         headline = it.female.takeLast(digitsToShow),
