@@ -136,12 +136,15 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
     }
 
     override fun addDependentData(entity: Any) {
+        val digits = resources.getInteger(R.integer.graph_key_take_digits)
+
         (entity as? Birth)?.let {
             val animal = Animal(
                 dateOfBirth = it.dateOfBirth,
                 gender = 0,
                 motherId = getAnimalId(),
-                createdBy = currentUser?.uid
+                createdBy = currentUser?.uid,
+                lastDigits = it.calfId.takeLast(digits)
             )
 
             animalsCollections.document(it.calfId)

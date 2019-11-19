@@ -53,6 +53,7 @@ object FirestorePath {
         const val MOTHER_FATHER_ID = "motherFatherId"
         const val MOTHER_MOTHER_ID = "motherMotherId"
         const val CREATED_BY = "createdBy"
+        const val LAST_DIGITS = "lastDigits"
     }
 
     object Birth {

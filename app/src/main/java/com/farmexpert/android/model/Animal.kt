@@ -23,5 +23,6 @@ data class Animal(
     @PropertyName(FirestorePath.Animal.MOTHER_ID) val motherId: String = "",
     @PropertyName(FirestorePath.Animal.MOTHER_FATHER_ID) val motherFatherId: String = "",
     @PropertyName(FirestorePath.Animal.MOTHER_MOTHER_ID) val motherMotherId: String = "",
-    @PropertyName(FirestorePath.Animal.CREATED_BY) val createdBy: String? = ""
+    @PropertyName(FirestorePath.Animal.CREATED_BY) val createdBy: String? = "",
+    @PropertyName(FirestorePath.Animal.LAST_DIGITS) val lastDigits: String? = ""
 ) : BaseEntity()

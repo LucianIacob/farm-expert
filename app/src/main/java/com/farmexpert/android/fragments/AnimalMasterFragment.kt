@@ -98,8 +98,10 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
 
     private fun initAnimalList() {
         loadingShow()
-        val options = FirestoreRecyclerOptions.Builder<Animal>()
-            .setQuery(animalsCollections) { it.toObject<Animal>()!!.apply { id = it.id } }
+        val options =
+            FirestoreRecyclerOptions.Builder<Animal>()
+                .setQuery(animalsCollections.orderBy(FirestorePath.Animal.LAST_DIGITS))
+                { it.toObject<Animal>()!!.apply { id = it.id } }
             .build()
 
         adapter = object : AnimalsAdapter(
@@ -203,13 +205,16 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
             return
         }
 
+        val digits = resources.getInteger(R.integer.graph_key_take_digits)
+
         val animal = Animal(
             race = race,
             dateOfBirth = Timestamp(dateOfBirth),
             gender = gender,
             fatherId = fatherId,
             motherId = motherId,
-            createdBy = currentUser?.uid
+            createdBy = currentUser?.uid,
+            lastDigits = id.takeLast(digits)
         )
 
         loadingShow()
