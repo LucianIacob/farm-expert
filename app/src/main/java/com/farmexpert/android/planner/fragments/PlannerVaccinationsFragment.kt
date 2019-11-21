@@ -9,6 +9,7 @@
 
 package com.farmexpert.android.planner.fragments
 
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.planner.model.PlannerContainer
 import com.farmexpert.android.planner.model.PlannerItem
@@ -18,6 +19,7 @@ import com.farmexpert.android.utils.FirestorePath
 import com.farmexpert.android.utils.TimeOfTheDay
 import com.farmexpert.android.utils.shift
 import com.google.firebase.Timestamp
+import org.jetbrains.anko.error
 import java.util.*
 
 class PlannerVaccinationsFragment : BasePlannerFragment() {
@@ -76,7 +78,10 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
                     .transformVaccine1(it, daysOfFirstVaccine, resources)
                 dataRetrieved(vaccine1, PLANNER_DATA_VACCINE_1, date)
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
     }
 
     private fun fetchSecondDataSet(date: Date) {
@@ -102,7 +107,10 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
                     .transformBeforeBirthItems(it, daysOfSecondVaccine, resources)
                 dataRetrieved(vaccine2, PLANNER_DATA_VACCINE_2, date)
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
     }
 
     private fun fetchThirdDataSet(date: Date) {
@@ -128,7 +136,10 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
                     .transformBeforeBirthItems(it, daysOfThirdVaccine, resources)
                 dataRetrieved(vaccine3, PLANNER_DATA_VACCINE_3, date)
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
     }
 
     private fun fetchForthDataSet(date: Date) {
@@ -154,7 +165,10 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
                     .transformBeforeBirthItems(it, daysOfForthVaccine, resources)
                 dataRetrieved(vaccine4, PLANNER_DATA_VACCINE_4, date)
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
     }
 
     private fun dataRetrieved(items: List<PlannerItem>, mapKey: String, date: Date) {

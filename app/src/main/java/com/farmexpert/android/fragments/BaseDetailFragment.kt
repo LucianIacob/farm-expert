@@ -19,6 +19,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.AnimalActionsAdapter
 import com.farmexpert.android.adapter.holder.BaseDetailHolder
@@ -127,7 +128,10 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
         entity.id?.let {
             getCollectionReference().document(it)
                 .delete()
-                .addOnFailureListener { alert(message = R.string.err_deleting_item) }
+                .addOnFailureListener {
+                    alert(message = R.string.err_deleting_item)
+                    Crashlytics.logException(it)
+                }
                 .addOnCompleteListener { loadingHide() }
         }
     }
@@ -190,9 +194,10 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
             getCollectionReference().document(it)
                 .update(getPairsToUpdateFromBundle(args))
                 .addOnSuccessListener { rootLayout?.snackbar(R.string.item_updated) }
-                .addOnFailureListener {
+                .addOnFailureListener { exception ->
                     alert(message = R.string.err_updating_record)
-                    error { it }
+                    error { exception }
+                    Crashlytics.logException(exception)
                 }
                 .addOnCompleteListener { loadingHide() }
         }
@@ -209,6 +214,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
                     .addOnFailureListener {
                         alert(message = R.string.err_adding_record)
                         error { it }
+                        Crashlytics.logException(it)
                     }
                     .addOnCompleteListener { loadingHide() }
                 addDependentData(entity)

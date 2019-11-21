@@ -50,8 +50,9 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
             reload()
                 .addOnSuccessListener { fillData(this) }
                 .addOnFailureListener {
-                    error { it }
                     alert(getString(R.string.profile_load_unsuccessful, it.message))
+                    error { it }
+                    Crashlytics.logException(it)
                 }
                 .addOnCompleteListener { loadingView.visibility = INVISIBLE }
         } ?: run {
@@ -122,6 +123,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 .addOnSuccessListener { alert(R.string.password_reset_success) }
                 .addOnFailureListener {
                     it.message?.let { it1 -> alert(message = it1, isCancellable = true) }
+                    Crashlytics.logException(it)
                 }
                 .addOnCompleteListener { loadingView.visibility = INVISIBLE }
         }
@@ -204,20 +206,25 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                                 startActivity<AuthenticationActivity>()
                                 finishAffinity()
                             }
-                            .addOnFailureListener { it.message?.let { it1 -> alert(it1) } }
+                            .addOnFailureListener {
+                                it.message?.let { it1 -> alert(it1) }
+                                Crashlytics.logException(it)
+                            }
                             .addOnCompleteListener { loadingView?.visibility = INVISIBLE }
                     }
                     .addOnFailureListener {
-                        error { it }
                         it.message?.let { it1 -> alert(it1) }
                         loadingView.visibility = INVISIBLE
+                        error { it }
+                        Crashlytics.logException(it)
                     }
 
             }
             .addOnFailureListener {
-                error { it }
                 it.message?.let { it1 -> alert(it1) }
                 loadingView.visibility = INVISIBLE
+                error { it }
+                Crashlytics.logException(it)
             }
     }
 
@@ -253,6 +260,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                     loadingView.visibility = INVISIBLE
                     alert(R.string.err_updating_record)
                     error { it }
+                    Crashlytics.logException(it)
                 }
         }
     }
@@ -273,6 +281,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
             .addOnFailureListener { exception ->
                 exception.message?.let { toast(it) }
                 loadingView.visibility = INVISIBLE
+                Crashlytics.logException(exception)
             }
     }
 
@@ -291,9 +300,9 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 farmsInfoGroup.setOnClickListener { startActivity<UserFarmsActivity>() }
             }
             .addOnFailureListener {
+                farmsList.text = getString(R.string.err_retrieving_farms)
                 error { it }
                 Crashlytics.logException(it)
-                farmsList.text = getString(R.string.err_retrieving_farms)
             }
     }
 

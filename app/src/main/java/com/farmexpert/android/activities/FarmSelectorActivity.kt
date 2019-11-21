@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.FarmSelectorAdapter
 import com.farmexpert.android.model.Farm
@@ -156,9 +157,10 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
                 storeFarmId(documentReference.id, farm.name)
                 openFarmConfigurationsActivity()
             }
-            .addOnFailureListener { e ->
+            .addOnFailureListener { exception ->
                 loadingProgressBar.invisible()
-                error { e }
+                error { exception }
+                Crashlytics.logException(exception)
             }
     }
 
@@ -167,7 +169,10 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             .whereEqualTo(FirestorePath.Farm.NAME, farmName)
             .get()
             .addOnSuccessListener { farms -> listener(!farms.isEmpty) }
-            .addOnFailureListener { ex -> failure(ex) }
+            .addOnFailureListener { exception ->
+                failure(exception)
+                Crashlytics.logException(exception)
+            }
     }
 
     private fun validInputs(farmName: String, accessCode: String): Boolean {
@@ -243,9 +248,10 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
                     storeFarmId(farmId, farm.name)
                     openMainActivity()
                 }
-                .addOnFailureListener { ex ->
+                .addOnFailureListener { exception ->
                     loadingProgressBar.invisible()
-                    ex.message?.let { longToast(it) }
+                    exception.message?.let { longToast(it) }
+                    Crashlytics.logException(exception)
                 }
         }
     }
@@ -289,7 +295,10 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
                     listener(false, null)
                 }
             }
-            .addOnFailureListener { ex -> failure(ex) }
+            .addOnFailureListener { exception ->
+                failure(exception)
+                Crashlytics.logException(exception)
+            }
     }
 
     override fun onPause() {

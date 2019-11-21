@@ -12,6 +12,7 @@ package com.farmexpert.android.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.BirthViewHolder
 import com.farmexpert.android.dialogs.AddBirthDialogFragment
@@ -67,10 +68,13 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
     }
 
     private fun updateLatestBirthFlag(birthToAmend: Birth?, flagValue: Boolean) {
-        birthToAmend?.id?.let {
+        birthToAmend?.id?.let { it ->
             getCollectionReference().document(it)
                 .update(FirestorePath.Birth.LATEST_BIRTH, flagValue)
-                .addOnFailureListener { error { it } }
+                .addOnFailureListener { exception ->
+                    error { exception }
+                    Crashlytics.logException(exception)
+                }
         }
     }
 
@@ -115,6 +119,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
                 alert(R.string.err_validating_calf)
                 listener(false)
                 loadingHide()
+                Crashlytics.logException(it)
             }
             .addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {
@@ -149,9 +154,10 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
 
             animalsCollections.document(it.calfId)
                 .set(animal)
-                .addOnFailureListener {
+                .addOnFailureListener { exception ->
                     alert(R.string.err_adding_animal_from_birth)
-                    error { it }
+                    error { exception }
+                    Crashlytics.logException(exception)
                 }
         }
     }

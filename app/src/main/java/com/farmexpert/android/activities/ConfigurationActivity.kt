@@ -15,6 +15,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.ConfigPickerUtils
 import com.farmexpert.android.utils.FirestorePath
@@ -142,6 +143,7 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
             .addOnFailureListener {
                 longToast(R.string.unknown_error)
                 error { it }
+                Crashlytics.logException(it)
             }
     }
 

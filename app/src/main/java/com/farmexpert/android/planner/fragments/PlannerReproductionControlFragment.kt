@@ -9,6 +9,7 @@
 
 package com.farmexpert.android.planner.fragments
 
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.planner.model.PlannerContainer
 import com.farmexpert.android.planner.model.PlannerItem
@@ -18,6 +19,7 @@ import com.farmexpert.android.utils.FirestorePath
 import com.farmexpert.android.utils.TimeOfTheDay
 import com.farmexpert.android.utils.shift
 import com.google.firebase.Timestamp
+import org.jetbrains.anko.error
 import java.util.*
 
 class PlannerReproductionControlFragment : BasePlannerFragment() {
@@ -67,7 +69,10 @@ class PlannerReproductionControlFragment : BasePlannerFragment() {
                     .transformPhysiologicalControl(it, daysOfPhysiologicalPeriod, resources)
                 dataRetrieved(births, PLANNER_DATA_BIRTHS_CONTROL, date)
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
     }
 
     private fun triggerGestationsFetch(date: Date) {
@@ -92,7 +97,10 @@ class PlannerReproductionControlFragment : BasePlannerFragment() {
                     .transformGestations(it, daysOfGestationPeriod, resources)
                 dataRetrieved(gestations, PLANNER_DATA_GESTATIONS_CONTROL, date)
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
     }
 
     private fun dataRetrieved(data: List<PlannerItem>, mapKey: String, date: Date) {

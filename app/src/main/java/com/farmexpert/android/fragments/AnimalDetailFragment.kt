@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.NavGraphDirections
 import com.farmexpert.android.R
 import com.farmexpert.android.model.Animal
@@ -129,7 +130,10 @@ class AnimalDetailFragment : BaseFragment() {
     override fun onViewReady() {
         loadingShow()
         animalRef.get(if (args.shouldGetFromCache) Source.CACHE else Source.DEFAULT)
-            .addOnFailureListener { toast(R.string.unknown_error) }
+            .addOnFailureListener {
+                toast(R.string.unknown_error)
+                Crashlytics.logException(it)
+            }
             .addOnSuccessListener { populateUi(it.toObject<Animal>()) }
             .addOnCompleteListener {
                 loadingHide()
@@ -367,7 +371,10 @@ class AnimalDetailFragment : BaseFragment() {
                     is Timestamp -> viewToUpdate.setValue(newValue.asDisplayable())
                 }
             }
-            .addOnFailureListener { rootLayout?.snackbar(R.string.err_updating_animal) }
+            .addOnFailureListener {
+                rootLayout?.snackbar(R.string.err_updating_animal)
+                Crashlytics.logException(it)
+            }
             .addOnCompleteListener { loadingHide() }
     }
 }

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_ID
 import com.farmexpert.android.adapter.UserFarmsAdapter
@@ -96,7 +97,10 @@ class UserFarmsActivity : AppCompatActivity(), AnkoLogger {
                         finishAffinity()
                     }
                 }
-                .addOnFailureListener { it.message?.let { it1 -> alert(it1) } }
+                .addOnFailureListener {
+                    it.message?.let { it1 -> alert(it1) }
+                    Crashlytics.logException(it)
+                }
                 .addOnCompleteListener { loadingView.visibility = View.INVISIBLE }
         }
     }

@@ -9,6 +9,7 @@
 
 package com.farmexpert.android.planner.fragments
 
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.planner.model.PlannerContainer
 import com.farmexpert.android.planner.transformer.PlannerDataTransformer
@@ -52,7 +53,10 @@ class PlannerHeatsFragment : BasePlannerFragment() {
                 val items = PlannerDataTransformer.transformForHeatsContainer(it, resources)
                 dataRetrievedSuccessfully(items, PLANNER_DATA_ANIMALS)
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
             .addOnCompleteListener { super.retrieveDataForDate(date) }
     }
 

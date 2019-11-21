@@ -16,6 +16,7 @@ import com.crashlytics.android.answers.Answers
 import com.facebook.stetho.Stetho
 import com.farmexpert.android.BuildConfig
 import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
 import io.fabric.sdk.android.Fabric
 
 /**
@@ -44,6 +45,9 @@ class FarmExpertApplication : MultiDexApplication() {
 
     private fun setupFabric() {
         Fabric.with(this, Crashlytics(), Answers())
+        Crashlytics.setUserEmail(FirebaseAuth.getInstance().currentUser?.email)
+        Crashlytics.setUserName(FirebaseAuth.getInstance().currentUser?.displayName)
+        Crashlytics.setUserIdentifier(FirebaseAuth.getInstance().currentUser?.uid)
     }
 
     companion object {

@@ -12,6 +12,7 @@ package com.farmexpert.android.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.BreedingViewHolder
 import com.farmexpert.android.dialogs.AddBreedingDialogFragment
@@ -99,7 +100,10 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
         breedingToAmend?.id?.let {
             getCollectionReference().document(it)
                 .update(FirestorePath.Breeding.LATEST_BREEDING, flagValue)
-                .addOnFailureListener { error { it } }
+                .addOnFailureListener { exception ->
+                    error { exception }
+                    Crashlytics.logException(exception)
+                }
         }
     }
 

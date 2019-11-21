@@ -78,24 +78,20 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.0'
     implementation 'com.airbnb.android:lottie:3.2.0'
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation 'com.facebook.stetho:stetho:1.5.1'
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
     implementation 'com.firebaseui:firebase-ui-firestore:4.3.1'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.google.firebase:firebase-core:17.2.1'
-    implementation 'com.google.firebase:firebase-perf:19.0.1'
+    implementation 'com.google.firebase:firebase-perf:19.0.2'
     implementation 'com.google.firebase:firebase-auth:19.1.0'
-    implementation 'com.google.firebase:firebase-firestore-ktx:21.2.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx:21.3.0'
     implementation 'com.google.firebase:firebase-storage-ktx:19.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'org.jetbrains.anko:anko:0.10.8'
     implementation 'org.jetbrains.anko:anko-design:0.10.8'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') {
-        transitive = true
-    }
-
-    testImplementation 'junit:junit:4.12'
 }
 
 apply plugin: 'com.google.gms.google-services'

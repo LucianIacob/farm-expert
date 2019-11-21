@@ -9,6 +9,7 @@
 
 package com.farmexpert.android.transactions
 
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.utils.FirestorePath
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
@@ -77,7 +78,10 @@ class DeleteAnimalTransaction(
             .addOnSuccessListener {
                 birthsToDelete = it.documents.map { snapshot -> snapshot.reference }
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
             .addOnCompleteListener {
                 birthsRetrieved = true
                 checkRetrieveFinished()
@@ -87,7 +91,10 @@ class DeleteAnimalTransaction(
             .addOnSuccessListener {
                 breedingsToDelete = it.documents.map { snapshot -> snapshot.reference }
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
             .addOnCompleteListener {
                 breedingsRetrieved = true
                 checkRetrieveFinished()
@@ -97,7 +104,10 @@ class DeleteAnimalTransaction(
             .addOnSuccessListener {
                 pedicuresToDelete = it.documents.map { snapshot -> snapshot.reference }
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
             .addOnCompleteListener {
                 pedicuresRetrieved = true
                 checkRetrieveFinished()
@@ -107,7 +117,10 @@ class DeleteAnimalTransaction(
             .addOnSuccessListener {
                 treatmentsToDelete = it.documents.map { snapshot -> snapshot.reference }
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
             .addOnCompleteListener {
                 treatmentsRetrieved = true
                 checkRetrieveFinished()
@@ -117,7 +130,10 @@ class DeleteAnimalTransaction(
             .addOnSuccessListener {
                 vaccinationsToDelete = it.documents.map { snapshot -> snapshot.reference }
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
             .addOnCompleteListener {
                 vaccinationsRetrieved = true
                 checkRetrieveFinished()
@@ -127,7 +143,10 @@ class DeleteAnimalTransaction(
             .addOnSuccessListener {
                 disinfectionsToDelete = it.documents.map { snapshot -> snapshot.reference }
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
             .addOnCompleteListener {
                 disinfectionsRetrieved = true
                 checkRetrieveFinished()
@@ -137,7 +156,10 @@ class DeleteAnimalTransaction(
             .addOnSuccessListener {
                 vitaminizationsToDelete = it.documents.map { snapshot -> snapshot.reference }
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
             .addOnCompleteListener {
                 vitaminizationsRetrieved = true
                 checkRetrieveFinished()
@@ -166,9 +188,12 @@ class DeleteAnimalTransaction(
             batch.delete(animalRef)
 
             batch.commit()
-                .addOnSuccessListener { successListener() }
-                .addOnFailureListener { failureListener(it) }
-                .addOnCompleteListener { complete() }
+                .addOnSuccessListener { successListener.invoke() }
+                .addOnFailureListener {
+                    failureListener.invoke(it)
+                    Crashlytics.logException(it)
+                }
+                .addOnCompleteListener { complete.invoke() }
         }
     }
 

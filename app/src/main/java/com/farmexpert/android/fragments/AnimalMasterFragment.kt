@@ -21,6 +21,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.NavGraphDirections
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.AnimalsAdapter
@@ -37,6 +38,7 @@ import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.fragment_animal_master.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.error
 import java.util.*
 
 /**
@@ -235,10 +237,14 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
                         .addOnFailureListener {
                             alert(message = R.string.err_adding_animal)
                             error { it }
+                            Crashlytics.logException(it)
                         }
                 }
             }
-            .addOnFailureListener { alert(R.string.err_adding_animal) }
+            .addOnFailureListener {
+                alert(R.string.err_adding_animal)
+                Crashlytics.logException(it)
+            }
             .addOnCompleteListener { loadingHide() }
     }
 

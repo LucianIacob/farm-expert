@@ -12,6 +12,7 @@ package com.farmexpert.android.fragments
 import android.os.Bundle
 import android.view.*
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.GraphAdapter
 import com.farmexpert.android.adapter.holder.BaseMasterHolder
@@ -104,6 +105,7 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
             .addOnFailureListener {
                 alert(message = R.string.err_retrieving_items)
                 error { it }
+                Crashlytics.logException(it)
             }
             .addOnSuccessListener { documents ->
                 val adapterData = transformData(documents)

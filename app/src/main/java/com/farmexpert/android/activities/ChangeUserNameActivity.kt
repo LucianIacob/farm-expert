@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.trimmedLength
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.alert
 import com.google.firebase.auth.FirebaseAuth
@@ -59,7 +60,10 @@ class ChangeUserNameActivity : AppCompatActivity(), AnkoLogger {
         FirebaseAuth.getInstance().currentUser
             ?.updateProfile(changeRequest)
             ?.addOnSuccessListener { finish() }
-            ?.addOnFailureListener { ex -> ex.message?.let { alert(it) } }
+            ?.addOnFailureListener { exception ->
+                exception.message?.let { alert(it) }
+                Crashlytics.logException(exception)
+            }
             ?.addOnCompleteListener { loadingView.visibility = View.INVISIBLE }
     }
 

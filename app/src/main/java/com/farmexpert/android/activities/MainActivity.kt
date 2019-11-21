@@ -165,8 +165,9 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
                 finish()
             }
             .addOnFailureListener {
-                error { it }
                 alert(R.string.err_logging_out)
+                error { it }
+                Crashlytics.logException(it)
             }
             .addOnCompleteListener { setLoadingVisibility(View.GONE) }
     }

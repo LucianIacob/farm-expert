@@ -3,6 +3,7 @@ package com.farmexpert.android.activities
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.alert
 import com.google.firebase.auth.FirebaseAuth
@@ -79,13 +80,9 @@ class ChangeUserEmailActivity : AppCompatActivity(), AnkoLogger {
                     )
                 }
                 .addOnFailureListener { exception ->
-                    exception.message?.let {
-                        alert(
-                            message = it,
-                            isCancellable = true
-                        )
-                    }
+                    exception.message?.let { alert(message = it, isCancellable = true) }
                     error { exception }
+                    Crashlytics.logException(exception)
                 }
                 .addOnCompleteListener { loadingView.visibility = View.INVISIBLE }
         }

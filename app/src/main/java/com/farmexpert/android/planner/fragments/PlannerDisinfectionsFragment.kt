@@ -9,6 +9,7 @@
 
 package com.farmexpert.android.planner.fragments
 
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.planner.model.PlannerContainer
 import com.farmexpert.android.planner.transformer.PlannerDataTransformer
@@ -17,6 +18,7 @@ import com.farmexpert.android.utils.FirestorePath
 import com.farmexpert.android.utils.TimeOfTheDay
 import com.farmexpert.android.utils.shift
 import com.google.firebase.Timestamp
+import org.jetbrains.anko.error
 import java.util.*
 
 class PlannerDisinfectionsFragment : BasePlannerFragment() {
@@ -49,7 +51,10 @@ class PlannerDisinfectionsFragment : BasePlannerFragment() {
                     .transformBeforeBirthItems(it, daysOfDisinfection, resources)
                 dataRetrievedSuccessfully(disinfections, PLANNER_DATA_ANIMALS)
             }
-            .addOnFailureListener { error { it } }
+            .addOnFailureListener {
+                error { it }
+                Crashlytics.logException(it)
+            }
             .addOnCompleteListener { super.retrieveDataForDate(date) }
     }
 }

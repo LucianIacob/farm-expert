@@ -21,6 +21,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.ConfigurationActivity
 import com.farmexpert.android.app.FarmExpertApplication
@@ -137,9 +138,10 @@ abstract class BasePlannerFragment : BaseFragment() {
         farmReference.collection(FirestorePath.Collections.REMINDERS)
             .add(reminder)
             .addOnSuccessListener { parentFragment?.rootLayout?.snackbar(R.string.item_added) }
-            .addOnFailureListener { e ->
+            .addOnFailureListener { exception ->
                 alert(message = R.string.err_adding_record)
-                error { e }
+                error { exception }
+                Crashlytics.logException(exception)
             }
             .addOnCompleteListener { loadingHide() }
     }
