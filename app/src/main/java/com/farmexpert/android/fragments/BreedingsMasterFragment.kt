@@ -54,11 +54,13 @@ class BreedingsMasterFragment : BaseMasterFragment<Breeding, GraphBreedingViewHo
     )
 
     private fun handleMaleClicked(maleId: String) {
+        navigationListener.invoke()
         val direction = NavGraphDirections.actionGlobalAnimalDetailFragment(animalId = maleId)
         NavHostFragment.findNavController(this).navigate(direction)
     }
 
     private fun handleFemaleClicked(femaleId: String) {
+        navigationListener.invoke()
         val direction = NavGraphDirections.actionGlobalBreedingsDetailFragment(animalId = femaleId)
         NavHostFragment.findNavController(this).navigate(direction)
     }

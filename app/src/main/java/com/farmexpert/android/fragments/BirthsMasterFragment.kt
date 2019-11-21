@@ -36,11 +36,13 @@ class BirthsMasterFragment : BaseMasterFragment<Birth, GraphBirthViewHolder>() {
     )
 
     private fun handleCalfClicked(calfId: String) {
+        navigationListener.invoke()
         val direction = NavGraphDirections.actionGlobalAnimalDetailFragment(animalId = calfId)
         NavHostFragment.findNavController(this).navigate(direction)
     }
 
     private fun handleMotherClicked(motherId: String) {
+        navigationListener.invoke()
         val direction = NavGraphDirections.actionGlobalBirthsDetailFragment(animalId = motherId)
         NavHostFragment.findNavController(this).navigate(direction)
     }

@@ -13,13 +13,16 @@ import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.navigation.fragment.NavHostFragment
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.NavGraphDirections
@@ -35,6 +38,7 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_animal_master.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.design.snackbar
@@ -46,10 +50,12 @@ import java.util.*
  */
 class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextListener {
 
+    private lateinit var layoutManager: LinearLayoutManager
     private lateinit var animalsCollections: CollectionReference
 
     private lateinit var adapter: AnimalsAdapter
 
+    private var layoutState: Parcelable? = null
     private var query: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,12 +92,23 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         animalsCollections = farmReference.collection(FirestorePath.Collections.ANIMALS)
+
+        PreferenceManager.getDefaultSharedPreferences(context)
+            .getString(KEY_LAYOUT_STATE, null)?.let {
+                layoutState = Gson().fromJson(it, LinearLayoutManager.SavedState::class.java)
+                PreferenceManager.getDefaultSharedPreferences(context)
+                    .edit { remove(KEY_LAYOUT_STATE) }
+            }
+
         initAnimalList()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        savedInstanceState?.getString(KEY_QUERY)?.let { query = it }
+        savedInstanceState?.run {
+            getString(KEY_QUERY)?.let { query = it }
+            layoutState = getParcelable(KEY_LAYOUT_STATE)
+        }
     }
 
     override fun onViewReady() {
@@ -114,6 +131,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
                 loadingHide()
                 (activity as? AppCompatActivity)?.supportActionBar?.title = if (itemCount != 0) {
                     emptyView.gone()
+                    layoutState?.let { layoutManager.onRestoreInstanceState(it) }
                     getString(R.string.headcount_title, itemCount)
                 } else {
                     emptyView.visible()
@@ -122,7 +140,8 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
             }
         }
 
-        headcountRecyclerView.layoutManager = LinearLayoutManager(activity)
+        layoutManager = LinearLayoutManager(activity)
+        headcountRecyclerView.layoutManager = layoutManager
         headcountRecyclerView.adapter = adapter
     }
 
@@ -134,6 +153,14 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
 
     private fun animalClick(animal: Animal) {
         animal.id?.let {
+            PreferenceManager.getDefaultSharedPreferences(context)
+                .edit {
+                    val state = Gson().toJson(
+                        layoutManager.onSaveInstanceState() as? LinearLayoutManager.SavedState
+                    )
+                    putString(KEY_LAYOUT_STATE, state)
+                }
+
             val direction = NavGraphDirections.actionGlobalAnimalDetailFragment(
                 animalId = it,
                 shouldGetFromCache = true
@@ -266,6 +293,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(KEY_QUERY, query)
+        outState.putParcelable(KEY_LAYOUT_STATE, layoutManager.onSaveInstanceState())
     }
 
     override fun onStop() {
@@ -276,5 +304,6 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
     companion object {
         const val ADD_ANIMAL_RQ = 678
         const val KEY_QUERY = "com.farmexpert.android.Query"
+        const val KEY_LAYOUT_STATE = "com.farmexpert.android.LayoutState"
     }
 }

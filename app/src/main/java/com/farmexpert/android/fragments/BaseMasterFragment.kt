@@ -10,8 +10,13 @@
 package com.farmexpert.android.fragments
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.*
+import androidx.core.content.edit
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.GraphAdapter
@@ -24,6 +29,7 @@ import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_graph_master.*
 import org.jetbrains.anko.error
 import java.util.*
@@ -32,8 +38,10 @@ import java.util.*
 abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMasterHolder<ModelClass>> :
     BaseFragment() {
 
+    private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var adapter: GraphAdapter<ModelClass, ModelHolder>
 
+    private var layoutState: Parcelable? = null
     private var selectedYear: String = Calendar.getInstance().get(Calendar.YEAR).toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,16 +62,28 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
         graphHeader.layoutResource = getHeaderLayoutRes()
         graphHeader.inflate()
 
+        PreferenceManager.getDefaultSharedPreferences(context)
+            .getString(KEY_LAYOUT_STATE, null)?.let {
+                layoutState = Gson().fromJson(it, LinearLayoutManager.SavedState::class.java)
+                PreferenceManager.getDefaultSharedPreferences(context)
+                    .edit { remove(KEY_LAYOUT_STATE) }
+            }
+
+        layoutManager = LinearLayoutManager(context)
         adapter = GraphAdapter(getHolderLayoutRes(), ::createHolder)
         with(graphRecycler) {
-            this.adapter = this@BaseMasterFragment.adapter
-            this.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+            layoutManager = this@BaseMasterFragment.layoutManager
+            adapter = this@BaseMasterFragment.adapter
+            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        savedInstanceState?.getString(KEY_SELECTED_YEAR)?.let { selectedYear = it }
+        savedInstanceState?.run {
+            getString(KEY_SELECTED_YEAR)?.let { selectedYear = it }
+            layoutState = getParcelable(KEY_LAYOUT_STATE)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -113,6 +133,7 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
 
                 if (adapterData.isNotEmpty()) {
                     empty_list?.gone()
+                    layoutState?.let { layoutManager.onRestoreInstanceState(it) }
                 } else {
                     empty_list?.visible()
                 }
@@ -124,6 +145,15 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
         val sb = StringBuilder(getTitle())
         sb.append(" ").append(selectedYear)
         setTitle(sb.toString())
+    }
+
+    protected val navigationListener: (() -> Unit) = {
+        PreferenceManager.getDefaultSharedPreferences(context)
+            .edit {
+                val state = Gson()
+                    .toJson(layoutManager.onSaveInstanceState() as LinearLayoutManager.SavedState)
+                putString(KEY_LAYOUT_STATE, state)
+            }
     }
 
     abstract fun getTitle(): String
@@ -144,9 +174,11 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putString(KEY_SELECTED_YEAR, selectedYear)
+        outState.putParcelable(KEY_LAYOUT_STATE, layoutManager.onSaveInstanceState())
     }
 
     companion object {
         const val KEY_SELECTED_YEAR = "com.farmexpert.android.masterscreen.SelectedYear"
+        const val KEY_LAYOUT_STATE = "com.farmexpert.android.GraphLayoutState"
     }
 }

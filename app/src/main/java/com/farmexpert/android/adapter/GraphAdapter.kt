@@ -41,9 +41,7 @@ open class GraphAdapter<ModelClass : BaseEntity, HolderClass : BaseMasterHolder<
     override fun onBindViewHolder(holder: HolderClass, position: Int) {
         keys.elementAtOrNull(position)?.let { animalId ->
             val value = data[animalId]
-            value?.let {
-                holder.bind(key = animalId, values = value)
-            }
+            value?.let { holder.bind(key = animalId, values = value) }
         }
     }
 

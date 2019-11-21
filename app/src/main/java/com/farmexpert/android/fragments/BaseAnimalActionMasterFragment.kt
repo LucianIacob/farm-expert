@@ -40,6 +40,7 @@ abstract class BaseAnimalActionMasterFragment :
     )
 
     private fun handleAnimalClicked(animalId: String) {
+        navigationListener.invoke()
         val direction = getAnimalClickDirection(animalId)
         NavHostFragment.findNavController(this).navigate(direction)
     }
