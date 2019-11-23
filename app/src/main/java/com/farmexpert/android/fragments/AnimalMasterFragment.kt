@@ -293,7 +293,9 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(KEY_QUERY, query)
-        outState.putParcelable(KEY_LAYOUT_STATE, layoutManager.onSaveInstanceState())
+        if (::layoutManager.isInitialized) {
+            outState.putParcelable(KEY_LAYOUT_STATE, layoutManager.onSaveInstanceState())
+        }
     }
 
     override fun onStop() {

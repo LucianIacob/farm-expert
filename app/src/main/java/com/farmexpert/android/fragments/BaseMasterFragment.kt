@@ -174,7 +174,9 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putString(KEY_SELECTED_YEAR, selectedYear)
-        outState.putParcelable(KEY_LAYOUT_STATE, layoutManager.onSaveInstanceState())
+        if (::layoutManager.isInitialized) {
+            outState.putParcelable(KEY_LAYOUT_STATE, layoutManager.onSaveInstanceState())
+        }
     }
 
     companion object {
