@@ -35,7 +35,8 @@
                 android:textColor="#000080"
                 android:textSize="20sp"
                 tools:ignore="LabelFor"
-                tools:targetApi="o" />
+                tools:targetApi="o"
+                tools:text="@tools:sample/full_names" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,7 +52,9 @@
             android:padding="10dp"
             android:textColor="#000080"
             android:textSize="@dimen/large_text"
-            app:layout_constraintTop_toBottomOf="@id/maleInputLayout" />
+            app:layout_constraintTop_toBottomOf="@id/maleInputLayout"
+            tools:layout_editor_absoluteX="15dp"
+            tools:text="@tools:sample/date/ddmmyy" />
 
 
         <TextView
@@ -70,8 +73,7 @@
             android:id="@+id/breedingNotes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/tiny_margin"
-            android:entries="@array/breeding_notes"
+            android:entries="@array/breeding_notes_values"
             android:fontFamily="@font/telegroteskscreen_medium"
             android:textSize="@dimen/large_text"
             app:layout_constraintBottom_toBottomOf="@id/noteHeader"

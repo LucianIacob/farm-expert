@@ -119,7 +119,7 @@
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
-                tools:text="@tools:sample/lorem/random" />
+                tools:text="@tools:sample/lorem/random[4]" />
 
         </LinearLayout>
 

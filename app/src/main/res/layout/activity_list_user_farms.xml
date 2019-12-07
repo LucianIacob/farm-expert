@@ -41,6 +41,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/small_margin"
         android:layout_marginEnd="@dimen/small_margin"
+        tools:itemCount="3"
         tools:listitem="@layout/item_user_farm" />
 
 </LinearLayout>

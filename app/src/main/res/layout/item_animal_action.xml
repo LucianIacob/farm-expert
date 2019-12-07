@@ -26,7 +26,8 @@
             android:drawablePadding="5dp"
             android:fontFamily="@font/telegroteskscreen_medium"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="@tools:sample/date/ddmmyy[9]" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,7 +57,8 @@
                 android:paddingStart="3dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="RtlSymmetry"
+                tools:text="@tools:sample/lorem/random" />
 
         </LinearLayout>
 

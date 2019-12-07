@@ -1,13 +1,8 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'androidx.navigation.safeargs.kotlin'
-
 apply plugin: 'io.fabric'
-
 apply plugin: 'com.google.firebase.firebase-perf'
 
 repositories {
@@ -23,7 +18,7 @@ android {
             storeFile file('/Users/lucianiacob/AndroidStudioProjects/FarmExpert/keystore')
         }
     }
-    compileSdkVersion 'android-Q'
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "com.farmexpert.android"
@@ -80,13 +75,13 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation 'com.facebook.stetho:stetho:1.5.1'
-    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
+    implementation 'com.firebaseui:firebase-ui-auth:6.1.0'
     implementation 'com.firebaseui:firebase-ui-firestore:4.3.1'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.google.firebase:firebase-core:17.2.1'
     implementation 'com.google.firebase:firebase-perf:19.0.2'
-    implementation 'com.google.firebase:firebase-auth:19.1.0'
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:21.3.0'
     implementation 'com.google.firebase:firebase-storage-ktx:19.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'

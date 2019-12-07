@@ -33,7 +33,8 @@
                 android:textSize="@dimen/large_text"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="LabelFor"
-                tools:targetApi="o" />
+                tools:targetApi="o"
+                tools:text="@tools:sample/lorem/random[4]" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,7 +50,8 @@
             android:padding="@dimen/small_margin"
             android:textColor="#000080"
             android:textSize="@dimen/large_text"
-            app:layout_constraintTop_toBottomOf="@id/dialog_comment_root" />
+            app:layout_constraintTop_toBottomOf="@id/dialog_comment_root"
+            tools:text="@tools:sample/date/ddmmyy" />
 
         <View
             android:id="@+id/middle_separator"
@@ -84,23 +86,23 @@
             android:id="@+id/rightTopLeftNail"
             android:layout_width="@dimen/hoof_width"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:contentDescription="@null"
             android:src="@drawable/left_nail_default"
             app:layout_constraintLeft_toRightOf="@id/middle_separator"
-            app:layout_constraintTop_toBottomOf="@id/dialogDate" />
+            app:layout_constraintTop_toBottomOf="@id/dialogDate"
+            tools:srcCompat="@drawable/left_nail_problem" />
 
         <ImageView
             android:id="@+id/rightTopRightNail"
             android:layout_width="@dimen/hoof_width"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/tiny_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:contentDescription="@null"
             android:src="@drawable/right_nail_default"
             app:layout_constraintLeft_toRightOf="@id/rightTopLeftNail"
-            app:layout_constraintTop_toBottomOf="@id/dialogDate" />
+            app:layout_constraintTop_toBottomOf="@id/dialogDate"
+            tools:srcCompat="@drawable/right_nail_problem" />
 
         <View
             android:id="@+id/horizontal_separator"
@@ -122,11 +124,11 @@
             android:id="@+id/leftBottomLeftNail"
             android:layout_width="@dimen/hoof_width"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/tiny_margin"
             android:contentDescription="@null"
             android:src="@drawable/left_nail_default"
             app:layout_constraintRight_toLeftOf="@id/leftBottomRightNail"
-            app:layout_constraintTop_toBottomOf="@id/horizontal_separator" />
+            app:layout_constraintTop_toBottomOf="@id/horizontal_separator"
+            tools:srcCompat="@drawable/left_nail_problem" />
 
         <ImageView
             android:id="@+id/rightBottomLeftNail"

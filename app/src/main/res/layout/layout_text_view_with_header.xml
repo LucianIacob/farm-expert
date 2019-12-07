@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="android.widget.LinearLayout">
 
     <ImageView
         android:id="@+id/text_with_header_expand"
@@ -10,17 +11,18 @@
         android:contentDescription="@null"
         android:padding="@dimen/tiny_margin"
         android:src="@drawable/baseline_expand_more_black_24"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/text_with_header_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        tools:text="Header text"
         android:fontFamily="@font/roboto"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/medium_text" />
+        android:textSize="@dimen/medium_text"
+        tools:text="@tools:sample/lorem[1]" />
 
     <TextView
         android:id="@+id/text_with_header_value"
@@ -30,10 +32,10 @@
         android:layout_marginStart="@dimen/small_margin"
         android:layout_weight="1"
         android:fontFamily="@font/roboto"
-        tools:text="Value"
         android:gravity="end"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_18" />
+        android:textSize="@dimen/text_18"
+        tools:text="@tools:sample/lorem[2]" />
 
     <ImageView
         android:id="@+id/text_with_header_edit"

@@ -49,7 +49,8 @@
             android:src="@drawable/ic_user_black"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <View
             android:id="@+id/iconBarrier"
@@ -373,8 +374,8 @@
                     android:id="@+id/passResetImage"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:padding="@dimen/margin_3dp"
                     android:contentDescription="@null"
+                    android:padding="@dimen/margin_3dp"
                     android:src="@drawable/ic_password_reset"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -451,10 +452,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/medium_margin"
                     android:fontFamily="@font/roboto_medium"
+                    android:text="@string/delete_account_message"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/text_16"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:text="@string/delete_account_message"
                     app:layout_constraintLeft_toRightOf="@id/deleteAccountImage"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/deleteAccountHeader" />

@@ -32,7 +32,8 @@
 			android:textColor="#000080"
 			android:textSize="@dimen/large_text"
 			tools:ignore="LabelFor"
-			tools:targetApi="o" />
+            tools:targetApi="o"
+            tools:text="@tools:sample/lorem/random[5]" />
 
 	</com.google.android.material.textfield.TextInputLayout>
 
@@ -48,6 +49,8 @@
 		android:padding="10dp"
 		android:textColor="#000080"
 		android:textSize="@dimen/text_18"
-		app:layout_constraintTop_toBottomOf="@id/dialog_add_planner_item_header" />
+        app:layout_constraintTop_toBottomOf="@id/dialog_add_planner_item_header"
+        tools:layout_editor_absoluteX="20dp"
+        tools:text="@tools:sample/date/ddmmyy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -60,10 +60,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/margin_3dp"
             android:layout_marginEnd="@dimen/small_margin"
             android:background="@drawable/simple_cell_background"
             android:contentDescription="@null"
-            android:layout_margin="@dimen/margin_3dp"
             android:elevation="@dimen/small_elevation"
             android:paddingStart="@dimen/small_margin"
             android:paddingEnd="@dimen/small_margin"
@@ -81,15 +81,16 @@
             android:gravity="center"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textSize="@dimen/large_text" />
+            android:textSize="@dimen/large_text"
+            tools:text="@tools:sample/date/ddmmyy" />
 
         <ImageView
             android:id="@+id/nextDayBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/small_margin"
             android:layout_margin="@dimen/margin_3dp"
+            android:layout_marginStart="@dimen/small_margin"
             android:background="@drawable/simple_cell_background"
             android:contentDescription="@null"
             android:elevation="@dimen/small_elevation"

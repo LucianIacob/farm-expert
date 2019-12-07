@@ -35,7 +35,8 @@
                 android:textColor="#000080"
                 android:textSize="@dimen/large_text"
                 tools:ignore="LabelFor"
-                tools:targetApi="o" />
+                tools:targetApi="o"
+                tools:text="@tools:sample/us_zipcodes" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,7 +52,9 @@
             android:padding="10dp"
             android:textColor="#000080"
             android:textSize="@dimen/large_text"
-            app:layout_constraintTop_toBottomOf="@id/calfInputLayout" />
+            app:layout_constraintTop_toBottomOf="@id/calfInputLayout"
+            tools:layout_editor_absoluteX="15dp"
+            tools:text="@tools:sample/date/ddmmyy" />
 
         <TextView
             android:id="@+id/dialogNoteHeader"
@@ -69,8 +72,7 @@
             android:id="@+id/dialogNote"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/tiny_margin"
-            android:entries="@array/birth_notes"
+            android:entries="@array/birth_notes_values"
             android:fontFamily="@font/telegroteskscreen_medium"
             android:textSize="@dimen/large_text"
             app:layout_constraintBottom_toBottomOf="@id/dialogNoteHeader"
@@ -98,7 +100,7 @@
                 android:textColor="#000080"
                 android:textSize="@dimen/large_text"
                 tools:ignore="LabelFor"
-                tools:text="@string/lorem_ipsum" />
+                tools:text="@tools:sample/lorem[5]" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

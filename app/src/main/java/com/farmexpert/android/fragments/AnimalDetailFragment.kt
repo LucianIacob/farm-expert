@@ -153,15 +153,15 @@ class AnimalDetailFragment : BaseFragment() {
     private fun populateUi(animal: Animal?) {
         currentAnimal = animal
         animal?.let {
-            raceView?.setValue(it.race)
-            dateOfBirthView?.setValue(it.dateOfBirth.toDate().getShort())
-            genderView?.setValue(getGenderByKey(it.gender, resources))
-            fatherIdView?.setValue(it.fatherId)
-            fatherFatherIdView?.setValue(it.fatherFatherId)
-            fatherMotherIdView?.setValue(it.fatherMotherId)
-            motherIdView?.setValue(it.motherId)
-            motherFatherIdView?.setValue(it.motherFatherId)
-            motherMotherIdView?.setValue(it.motherMotherId)
+            raceView?.value = it.race
+            dateOfBirthView?.value = it.dateOfBirth.toDate().getShort()
+            genderView?.value = getGenderByKey(it.gender, resources)
+            fatherIdView?.value = it.fatherId
+            fatherFatherIdView?.value = it.fatherFatherId
+            fatherMotherIdView?.value = it.fatherMotherId
+            motherIdView?.value = it.motherId
+            motherFatherIdView?.value = it.motherFatherId
+            motherMotherIdView?.value = it.motherMotherId
         }
     }
 
@@ -366,9 +366,9 @@ class AnimalDetailFragment : BaseFragment() {
         animalRef.update(fieldToUpdate, newValue)
             .addOnSuccessListener {
                 when (newValue) {
-                    is Int -> viewToUpdate.setValue(getGenderByKey(newValue, resources))
-                    is String -> viewToUpdate.setValue(newValue)
-                    is Timestamp -> viewToUpdate.setValue(newValue.asDisplayable())
+                    is Int -> viewToUpdate.value = getGenderByKey(newValue, resources)
+                    is String -> viewToUpdate.value = newValue
+                    is Timestamp -> viewToUpdate.value = newValue.asDisplayable()
                 }
             }
             .addOnFailureListener {

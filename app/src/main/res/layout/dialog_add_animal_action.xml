@@ -33,7 +33,8 @@
                 android:textSize="@dimen/large_text"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="LabelFor"
-                tools:targetApi="o" />
+                tools:targetApi="o"
+                tools:text="@tools:sample/lorem/random[4]" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,7 +50,8 @@
             android:padding="10dp"
             android:textColor="#000080"
             android:textSize="@dimen/large_text"
-            app:layout_constraintTop_toBottomOf="@id/dialogCommentRoot" />
+            app:layout_constraintTop_toBottomOf="@id/dialogCommentRoot"
+            tools:text="@tools:sample/date/ddmmyy" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

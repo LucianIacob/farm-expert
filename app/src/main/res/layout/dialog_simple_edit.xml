@@ -11,10 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/large_margin"
         android:minWidth="400dp"
-        tools:hint="@string/hint_access_code_4_6_digits">
+        tools:hint="@tools:sample/lorem[1]">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edittext"
+            tools:text="@tools:sample/lorem/random[4]"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

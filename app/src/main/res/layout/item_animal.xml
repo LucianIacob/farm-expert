@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_dashboard_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -32,12 +33,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/large_margin"
             android:fontFamily="@font/josefin_sans"
-            android:text="@string/lorem_ipsum"
             android:textColor="@android:color/black"
             android:textSize="26sp"
             app:layout_constraintLeft_toRightOf="@id/cowIcon"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/us_phones" />
 
         <TextView
             android:id="@+id/dateOfBirthHeader"
@@ -57,13 +58,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/tiny_margin"
             android:fontFamily="@font/telegroteskscreen_medium"
-            android:text="@string/lorem_ipsum"
             android:textColor="@color/sea_green"
             android:textSize="@dimen/medium_text"
             app:layout_constraintBottom_toBottomOf="@id/dateOfBirthHeader"
             app:layout_constraintLeft_toRightOf="@id/dateOfBirthHeader"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/dateOfBirthHeader" />
+            app:layout_constraintTop_toTopOf="@id/dateOfBirthHeader"
+            tools:text="@tools:sample/date/ddmmyy" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

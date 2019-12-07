@@ -17,7 +17,8 @@
         android:contentDescription="@null"
         android:src="@drawable/ic_user"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/profileSettingsBtn"
@@ -43,7 +44,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/xl_text"
         app:layout_constraintTop_toBottomOf="@id/userIcon"
-        tools:text="Farm name" />
+        tools:text="@tools:sample/lorem[3]" />
 
     <TextView
         android:id="@+id/userName"
@@ -57,7 +58,7 @@
         android:textSize="@dimen/large_text"
         app:layout_constraintBottom_toTopOf="@id/userEmail"
         app:layout_constraintTop_toBottomOf="@id/farmName"
-        tools:text="@string/lorem_ipsum" />
+        tools:text="@tools:sample/full_names" />
 
     <TextView
         android:id="@+id/userEmail"
@@ -69,7 +70,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/large_text"
         app:layout_constraintTop_toBottomOf="@id/userName"
-        tools:text="@string/lorem_ipsum" />
+        tools:text="mail@lucianiacob.com" />
 
     <View
         android:layout_width="match_parent"
