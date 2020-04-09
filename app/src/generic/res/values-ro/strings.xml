@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">FarmExpert</string>
+    <string name="login">Conecteaza-te</string>
+    <string name="auth_welcome">Conecteaza-te cu contul tau sau inregistreaza-te pentru a utiliza aplicatia Ferma Vatamanu</string>
+    <string name="no_internet_connection">Nu exista conexiune la internet.</string>
+    <string name="unknown_error">A aparut o eroare neasteptata</string>
+    <string name="farm_creation_date">Data crearii: %s</string>
+    <string name="or">SAU</string>
+    <string name="err_empty_farm_name">Numele fermei nu poate fi gol</string>
+    <string name="err_access_code_invalid">Codul de access trebuie sa aiba cel putin 4 caractere</string>
+    <string name="hint_farm_name">Numele fermei</string>
+    <string name="hint_access_code_4_6_digits">Codul de access (4–6 caractere)</string>
+    <string name="create_new_farm">Creaza</string>
+    <string name="create_farm_guideline">Introduceti detaliile fermei pe care doriti sa o creati sau in care doriti sa colaborati</string>
+    <string name="join_existing_farm">Intra</string>
+    <string name="or_select_one_of_your_previous_farms">Sau, selecteaza una din fermele din trecut</string>
+    <string name="select_farm">Selecteaza ferma</string>
+
+    <string name="configuration_activity_title">Configurarile fermei dvs</string>
+    <string name="finish_action">Gata</string>
+    <string name="view">Vizualizare</string>
+    <string name="settings">Setari</string>
+    <string name="nav_statistics">Statistici</string>
+    <string name="planner">Planner</string>
+    <string name="dashboard">Panou de control</string>
+
+    <plurals name="days">
+        <item quantity="one">1 zi</item>
+        <item quantity="few">%d zile</item>
+        <item quantity="other">%d zile</item>
+    </plurals>
+
+    <string name="dashboard_headcount">Efectiv animale</string>
+    <string name="dashboard_graph_births">Fatari</string>
+    <string name="dashboard_graph_breedings">Monte</string>
+    <string name="dashboard_graph_disinfections">Deparazitari</string>
+    <string name="dashboard_graph_vitaminisations">Vitaminizari</string>
+    <string name="dashboard_graph_vaccinations">Vaccinari</string>
+    <string name="dashboard_graph_pedicures">Pedichiuri</string>
+    <string name="dashboard_graph_treatments">Tratamente</string>
+    <string name="animal_id">Numar matricol</string>
+    <string name="gender">Gen</string>
+    <string name="race">Rasa</string>
+    <string name="father_id">Matricol tata</string>
+    <string name="mother_id">Matricol mama</string>
+    <string name="add_animal_title">Adauga animal</string>
+    <string name="dialog_add_positive_btn">Adauga</string>
+    <string name="dialog_cancel_btn">Cancel</string>
+    <string name="err_adding_animal">Eroare la adaugarea animalului</string>
+    <string name="err_adding_animal_message">Numar matricol invalid. Animalul nu a fost salvat.</string>
+    <string name="err_adding_animal_constraint">Eroare la adaugarea animalului, acest matricol deja exista in baza de date.</string>
+    <string name="empty_list">Nici un element in lista</string>
+    <string name="item_added">Elementul a fost adaugat cu success</string>
+    <string name="item_deleted">Elementul a fost sters cu success</string>
+    <string name="empty_text" />
+    <string name="lorem_ipsum">Lorem ipsum</string>
+    <string name="date_of_birth">Data nasterii</string>
+    <string name="delete_animal">Sunteti sigur ca doriti sa stergeti acest animal?</string>
+    <string name="delete_animal_message">Toate actiunile animalului vor fi sterse de asemenea (fatari, monte, deparazitari, vaccinari, pedichiuri, tratamente, vitaminizari).\nAnimal ID: %s</string>
+    <string name="headcount_title">Efectiv, %d animale</string>
+    <string name="father_father_id">Matricol Tata-Tata</string>
+    <string name="father_mother_id">Matricol Tata-Mama</string>
+    <string name="mother_father_id">Matricol Mama-Tata</string>
+    <string name="mother_mother_id">Matricol Mama-Mama</string>
+    <string name="err_updating_animal">A aparut o eroare la actualizarea campului</string>
+    <string name="add_birth_title">Adauga fatare</string>
+    <string name="calf_id">Matricol vitel</string>
+    <string name="note">Nota</string>
+    <string name="maleInputHint">Matricol/Nume taur</string>
+    <string name="details">Detalii</string>
+    <string name="err_validating_calf">Matricolul vitelului nu a putut fi validat</string>
+    <string name="error_inexistent_farm_id">A aparut o eroare. Ferma nu a putut fi verificata.</string>
+    <string name="err_adding_record">A aparut o eroare la adaugarea elementului. Va rugam incercati mai tarziu.</string>
+    <string name="gender_unknown">Nespecificat</string>
+    <string name="err_adding_animal_from_birth">Adaugarea acestui vitel in lista de animale a esuat</string>
+    <string name="update">Actualizare</string>
+    <string name="delete">Stergere</string>
+    <string name="add_vitaminization_title">Adaugre vitaminizare</string>
+    <string name="add_breeding_title">Adaugre monta</string>
+    <string name="add_vaccination_title">Adaugre vaccinare</string>
+    <string name="add_treatment_title">Adaugre tratament</string>
+    <string name="add_disinfection_title">Adaugre deparazitare</string>
+    <string name="add_pedicure_title">Adaugre pedichiura</string>
+    <string name="estimated_birth">Fatare estimata</string>
+    <string name="delete_confirmation_request">Esti sigur ca doresti sa stergi acest element?</string>
+    <string name="err_deleting_item">A aparut o eroare la stergerea elementului</string>
+    <string name="dialog_update_btn">Actualizare</string>
+    <string name="edit_birth_title">Actualizeaza fatare</string>
+    <string name="edit_breeding_title">Actualizeaza monta</string>
+    <string name="edit_pedicure_title">Actualizeaza pedichiura</string>
+    <string name="edit_animal_action_title">Actualizeaza actiunea animalului</string>
+    <string name="edit_vitaminization_title">Actualizeaza vitaminizarea</string>
+    <string name="edit_vaccination_title">Actualizeaza vaccinarea</string>
+    <string name="edit_treatment_title">Actualizeaza tratament</string>
+    <string name="edit_disinfection_title">Actualizeaza deparazitarea</string>
+
+    <string name="default_birth_note">4 - Fara probleme</string>
+    <string name="default_breeding_note">5 - Calduri normale</string>
+    <string name="err_updating_record">A aparut o eroare la actualizarea elementului. Incercati mai tarziu.</string>
+    <string name="item_updated">Elementul a fost actualizat cu success</string>
+    <string name="err_retrieving_items">Eroare la procesarea datelor. Incercati mai tarziu.</string>
+    <string name="err_retrieving_reminders">Eroare la procesarea reminder-urilor. Incercati mai tarziu.</string>
+    <string name="search_id">Cauta matricol…</string>
+
+    <string name="planner_item_details_hint">Detalii</string>
+    <string name="planner_item_add_title">Adauga reminder personalizat</string>
+    <string name="dialog_add_negative_btn">Inchide</string>
+
+    <!--MONTHS-->
+    <string name="jan">IAN</string>
+    <string name="feb">FEB</string>
+    <string name="mar">MAR</string>
+    <string name="apr">APR</string>
+    <string name="may">MAI</string>
+    <string name="jun">IUN</string>
+    <string name="jul">IUL</string>
+    <string name="aug">AUG</string>
+    <string name="sep">SEP</string>
+    <string name="oct">OCT</string>
+    <string name="nov">NOV</string>
+    <string name="dec">DEC</string>
+
+    <string name="err_animal_not_exists">Animalul selectat nu exista in aceasta ferma.\n\nApasa OK pentru a merge la ecranul anterior.</string>
+    <string name="planner_heats_title">Calduri</string>
+    <string name="planner_reprod_control_title">Control Reproductie</string>
+    <string name="planner_disinfections_title">Deparazitari</string>
+    <string name="planner_vaccinations_title">Vaccinuri</string>
+    <string name="planner_heats_reason">Animalul este in perioada caldurilor.</string>
+    <string name="planner_gest_ctrl_reason">%d zile de la ultima monta</string>
+    <string name="planner_physiological_ctrl_reason">%d zile de la ultima fatare</string>
+    <string name="planner_first_vaccine_reason">%d zile de la ultima fatare</string>
+    <string name="planner_before_birth_vaccine_reason">%d zile inainte de data estimata a fatarii</string>
+    <string name="go_to">Mergi la:</string>
+    <string name="change_farm">Schimba ferma</string>
+    <string name="logout">Iesi din cont</string>
+    <string name="change_farm_confirmation_message">Vei fi directionat la ecranul pentru alegerea fermei. Acolo vei avea posibilitatea de a crea o noua ferma sau de a intra intr-o ferma deja existenta.</string>
+    <string name="confirm_button">Confirm</string>
+    <string name="logout_confirmation_message">Vei fi directionat la ecranul de logare. Esti sigur ca vrei sa iesi din cont?</string>
+    <string name="err_logging_out">A aparut o eroare la incercarea de iesire din cont. Incearca mai tarziua.</string>
+
+    <string name="user_profile">Profilul dvs</string>
+    <string name="user_not_available">Profilul dvs nu este disponibil în acest moment. Încercați mai târziu.</string>
+    <string name="user_creation_date">Creat la data %s</string>
+    <string name="profile_created_with_provider">Profil creat prin %s</string>
+    <string name="name_header">Nume</string>
+    <string name="phone_header">Telefon</string>
+    <string name="email_header">Email</string>
+    <string name="email_provider">email și parolă</string>
+    <string name="google_provider">Google</string>
+    <string name="phone_provider">număr de telefon</string>
+    <string name="unknown_provider">o entitate necunoscută</string>
+    <string name="add_name">Apasați pentru a vă seta numele</string>
+    <string name="add_email">Apasați pentru a vă seta email-ul</string>
+    <string name="farms_header">Fermele dvs</string>
+    <string name="err_retrieving_farms">A apărut o eroare încercând să procesăm cererea</string>
+    <string name="update_username_title">Actualizați-vă numele</string>
+    <string name="set_username_title">Setați-vă numele</string>
+    <string name="update_email_title">Actualizați-vă email-ul</string>
+    <string name="set_email_title">Setați-vă email-ul</string>
+    <string name="profile_load_unsuccessful">Profilul dvs nu este disponibil în acest moment. Încercați mai târziu.\nEroare: %s</string>
+    <string name="send_verification_email">Trimite email de verificare</string>
+    <string name="set">Seteaza</string>
+    <string name="after_email_change_message">Adresa dvs de email a fost actualizată. Vă rugăm să verificați casuța de email pentru a o verifica. Apasați OK pentru a merge înapoi la profilul dvs.</string>
+    <string name="pass_reset_header">Resetează parola</string>
+    <string name="pass_reset_message">Apăsați pentru a primi un email pentru resetarea parolei.</string>
+    <string name="password_reset_success">Cererea dvs a fost executată cu success. Vă rugăm să vă verificați casuța de email.</string>
+    <string name="delete_account_header">Șterge contul</string>
+    <string name="delete_account_message" tools:ignore="Typos">Atenție! Ștergerea contului este un proces ireversibil.</string>
+    <string name="delete_account_confirmation">Sunteți sigur că doriți să ștergeti contul dvs? Această operațiune nu poate fi anulată.</string>
+    <string name="unsubscribe">Dezabonează</string>
+    <string name="current_farm">• Ferma curentă</string>
+    <string name="farm_subscribers_count">Număr de abonați: %d</string>
+    <string name="you_are_the_owner">Sunteți proprietarul</string>
+    <string name="unsubscribe_confirmation_message">Sunteți sigur că doriți să vă dezabonați?</string>
+    <string name="unsubscribe_current_farm_confirmation_message">Această fermă este ferma cu care sunteți înregistrat la acest moment. Dacă optați să vă dezabonați, veți fi redirecționat înapoi la ecranul unde vă puteți alege o alta fermă sau să creați una. Sunteți sigur că doriți să vă dezabonați?</string>
+    <string name="animal_details_title">Detalii Animal</string>
+    <string name="email_verification_success">Email de verificare trimis.</string>
+
+    <integer-array name="gender_types">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </integer-array>
+
+    <string-array name="gender_types_values">
+        <item>Nespecificat</item>
+        <item>Mascul</item>
+        <item>Femela</item>
+    </string-array>
+
+    <integer-array name="breeding_notes">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </integer-array>
+
+    <string-array name="breeding_notes_values">
+        <item name="breeding_note_1">1 - Călduri șterse cu probleme</item>
+        <item name="breeding_note_2">2 - Călduri șterse fără probleme</item>
+        <item name="breeding_note_3">3 - Călduri evidente cu probleme de timp</item>
+        <item name="breeding_note_4">4 - Călduri evidente cu probleme de sănătate</item>
+        <item name="breeding_note_5">5 - Călduri normale</item>
+    </string-array>
+
+    <integer-array name="birth_notes">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </integer-array>
+
+    <string-array name="birth_notes_values">
+        <item name="birth_note_1">1 - Retenții, paraplegii post partum</item>
+        <item name="birth_note_2">2 - Asistată medic</item>
+        <item name="birth_note_3">3 - Asistată îngrijitor + tehnician</item>
+        <item name="birth_note_4">4 - Fără probleme</item>
+    </string-array>
+
+    <string name="fui_progress_dialog_loading" tools:ignore="ExtraTranslation">Se încarcă…</string>
+    <string name="fui_sign_in_default" tools:ignore="ExtraTranslation">Conectați-vă</string>
+    <string name="fui_cancel" tools:ignore="ExtraTranslation">Anulați</string>
+    <string name="fui_continue" tools:ignore="ExtraTranslation">Continuați</string>
+    <string name="fui_tos_and_pp" tools:ignore="ExtraTranslation">Dacă alegeți să continuați, sunteți de acord cu %1$s și cu %2$s.</string>
+    <string name="fui_tos_and_pp_footer" tools:ignore="ExtraTranslation">%1$s \u00A0 \u00A0 %2$s</string>
+    <string name="fui_no_internet" translation_descripition="User message shown when sign-in is attempted while offline." tools:ignore="ExtraTranslation">Eroare de rețea, verificați conexiunea la internet.</string>
+    <string name="fui_idp_name_google" tools:ignore="ExtraTranslation">Google</string>
+    <string name="fui_idp_name_facebook" tools:ignore="ExtraTranslation">Facebook</string>
+    <string name="fui_idp_name_twitter" tools:ignore="ExtraTranslation">Twitter</string>
+    <string name="fui_idp_name_github" tools:ignore="ExtraTranslation">GitHub</string>
+    <string name="fui_idp_name_phone" tools:ignore="ExtraTranslation">Număr de telefon</string>
+    <string name="fui_idp_name_email" tools:ignore="ExtraTranslation">Adresă de e-mail</string>
+    <string name="fui_sign_in_with_google" tools:ignore="ExtraTranslation">Conectați-vă cu Google</string>
+    <string name="fui_sign_in_with_facebook" tools:ignore="ExtraTranslation">Conectați-vă cu Facebook</string>
+    <string name="fui_sign_in_with_twitter" tools:ignore="ExtraTranslation">Conectați-vă cu Twitter</string>
+    <string name="fui_sign_in_with_github" tools:ignore="ExtraTranslation">Conectați-vă cu GitHub</string>
+    <string name="fui_sign_in_with_email" tools:ignore="ExtraTranslation">Conectați-vă cu adresa de e-mail</string>
+    <string name="fui_sign_in_with_phone" tools:ignore="ExtraTranslation">Conectați-vă cu numărul de telefon</string>
+    <string name="fui_sign_in_anonymously" tools:ignore="ExtraTranslation">Continuați ca invitat</string>
+    <string name="fui_next_default" tools:ignore="ExtraTranslation">Înainte</string>
+    <string name="fui_email_hint" tools:ignore="ExtraTranslation">Adresă de e-mail</string>
+    <string name="fui_phone_hint" tools:ignore="ExtraTranslation">Număr de telefon</string>
+    <string name="fui_password_hint" tools:ignore="ExtraTranslation">Parolă</string>
+    <string name="fui_required_field" tools:ignore="ExtraTranslation">Câmpul este obligatoriu.</string>
+    <string name="fui_invalid_email_address" tools:ignore="ExtraTranslation">Adresa de e-mail nu este corectă</string>
+    <string name="fui_missing_email_address" tools:ignore="ExtraTranslation">Introduceți adresa de e-mail pentru a continua</string>
+    <string name="fui_missing_first_and_last_name" tools:ignore="ExtraTranslation">Introduceți numele și prenumele.</string>
+    <string name="fui_progress_dialog_checking_accounts" tools:ignore="ExtraTranslation">Se caută conturi existente…</string>
+    <string name="fui_title_register_email" tools:ignore="ExtraTranslation">Înscrieți-vă</string>
+    <string name="fui_name_hint" tools:ignore="ExtraTranslation">Prenume și nume de familie</string>
+    <string name="fui_button_text_save" tools:ignore="ExtraTranslation">Salvați</string>
+    <string name="fui_progress_dialog_signing_up" tools:ignore="ExtraTranslation">Se creează un cont…</string>
+    <plurals name="fui_error_weak_password" tools:ignore="ExtraTranslation,MissingDefaultResource">
+        <item quantity="one">Parola nu este suficient de puternică. Folosiți cel puțin %1$d caracter și o combinație de litere și cifre.</item>
+        <item quantity="few">Parola nu este suficient de puternică. Folosiți cel puțin %1$d caractere și o combinație de litere și cifre.</item>
+        <item quantity="other">Parola nu este suficient de puternică. Folosiți cel puțin %1$d de caractere și o combinație de litere și cifre.</item>
+    </plurals>
+    <string name="fui_email_account_creation_error" tools:ignore="ExtraTranslation">Contul de e-mail nu a fost înregistrat</string>
+    <string name="fui_terms_of_service" tools:ignore="ExtraTranslation">Termeni și condițiile</string>
+    <string name="fui_privacy_policy" tools:ignore="ExtraTranslation">Politica de confidențialitate</string>
+    <string name="fui_welcome_back_idp_header" tools:ignore="ExtraTranslation">Aveți deja un cont</string>
+    <string name="fui_welcome_back_email_header" tools:ignore="ExtraTranslation">Bine ați revenit!</string>
+    <string name="fui_welcome_back_email_link_header" tools:ignore="ExtraTranslation">Aveți deja un cont\n</string>
+    <string name="fui_welcome_back_idp_prompt" tools:ignore="ExtraTranslation">Ați folosit deja %1$s. Pentru a continua, conectați-vă cu %2$s.</string>
+    <string name="fui_welcome_back_password_prompt_body" tools:ignore="ExtraTranslation">Ați folosit deja %1$s pentru a vă conecta. Introduceți parola acestui cont.</string>
+    <string name="fui_welcome_back_email_link_prompt_body" tools:ignore="ExtraTranslation">Ați folosit deja %1$s. Vă puteți conecta contul %2$s la %1$s folosind linkul din e-mail, aflat mai jos.\n\nPentru ca acest flux să conecteze contul %2$s la această adresă de e-mail, trebuie să accesați linkul pe același dispozitiv sau browser.</string>
+    <string name="fui_progress_dialog_signing_in" tools:ignore="ExtraTranslation">Se conectează…</string>
+    <string name="fui_trouble_signing_in" tools:ignore="ExtraTranslation">Nu reușiți să vă conectați?</string>
+    <string name="fui_title_recover_password_activity" tools:ignore="ExtraTranslation">Recuperați parola</string>
+    <string name="fui_title_confirm_recover_password" tools:ignore="ExtraTranslation">Verificați căsuța de e-mail</string>
+    <string name="fui_password_recovery_body" tools:ignore="ExtraTranslation">Primiți instrucțiuni de resetare a parolei la această adresă de e-mail.</string>
+    <string name="fui_button_text_send" tools:ignore="ExtraTranslation">Trimiteți</string>
+    <string name="fui_confirm_recovery_body" tools:ignore="ExtraTranslation">Urmați instrucțiunile trimise la %1$s pentru a vă recupera parola.</string>
+    <string name="fui_progress_dialog_sending" tools:ignore="ExtraTranslation">Se trimite…</string>
+    <string name="fui_error_email_does_not_exist" tools:ignore="ExtraTranslation">Adresa de e-mail nu corespunde unui cont existent</string>
+    <string name="fui_error_unknown" tools:ignore="ExtraTranslation">A apărut o eroare necunoscută.</string>
+    <string name="fui_error_invalid_password" tools:ignore="ExtraTranslation">Parolă incorectă</string>
+    <string name="fui_accessibility_logo" tools:ignore="ExtraTranslation">Sigla aplicației</string>
+    <string name="fui_email_link_header" tools:ignore="ExtraTranslation">A fost trimis e-mailul de conectare\n</string>
+    <string name="fui_email_link_email_sent" tools:ignore="ExtraTranslation">Un e-mail de conectare cu instrucțiuni suplimentare a fost trimis la %1$s. Verificați-vă căsuța de e-mail pentru a finaliza conectarea.</string>
+    <string name="fui_email_link_trouble_getting_email_header" tools:ignore="ExtraTranslation">Nu primiți e-mailuri?</string>
+    <string name="fui_email_link_trouble_getting_possible_fixes" tools:ignore="ExtraTranslation">Încercați aceste soluții folosite frecvent:\n\u2022 verificați dacă e-mailul a fost marcat ca spam sau filtrat;\n\u2022 verificați conexiunea la internet;\n\u2022 verificați dacă ați scris corect adresa de e-mail;\n\u2022 verificați dacă aveți spațiu în căsuța de e-mail sau dacă există alte probleme legate de setările căsuței de e-mail.\n</string>
+    <string name="fui_email_link_trouble_getting_email_resend_solution" tools:ignore="ExtraTranslation">Dacă pașii de mai sus nu funcționează, puteți să trimiteți din nou e-mailul. Rețineți că va fi dezactivat linkul din e-mailul anterior.</string>
+    <string name="fui_email_link_resend" tools:ignore="ExtraTranslation">Retrimiteți</string>
+    <string name="fui_email_link_wrong_device_header" tools:ignore="ExtraTranslation">A fost detectat un nou dispozitiv sau browser.</string>
+    <string name="fui_email_link_wrong_device_message" tools:ignore="ExtraTranslation">Încercați să accesați linkul folosind același dispozitiv sau browser pe care ați început procesul de conectare.</string>
+    <string name="fui_email_link_invalid_link_header" tools:ignore="ExtraTranslation">Conectarea nu poate fi finalizată</string>
+    <string name="fui_email_link_invalid_link_message" tools:ignore="ExtraTranslation">Codul de acțiune nu este valid. Se poate întâmpla în cazurile în care codul este incorect, expirat sau a fost folosit deja.</string>
+    <string name="fui_email_link_different_anonymous_user_header" tools:ignore="ExtraTranslation">S-a încheiat sesiunea</string>
+    <string name="fui_email_link_different_anonymous_user_message" tools:ignore="ExtraTranslation">Sesiunea asociată acestei solicitări de conectare a expirat sau a fost ștearsă.</string>
+    <string name="fui_email_link_confirm_email_header" tools:ignore="ExtraTranslation">Confirmați adresa de e-mail</string>
+    <string name="fui_email_link_confirm_email_message" tools:ignore="ExtraTranslation">Confirmați adresa de e-mail pentru a continua conectarea</string>
+    <string name="fui_email_link_dismiss_button" tools:ignore="ExtraTranslation">Închideți</string>
+    <string name="fui_email_link_cross_device_linking_text" tools:ignore="ExtraTranslation">Inițial ați intenționat să conectați %1$s la contul de e-mail, dar ați deschis linkul pe un dispozitiv pe care nu sunteți conectat(ă).\n\nDacă doriți să continuați conectarea contului %1$s, deschideți linkul pe același dispozitiv pe care ați început conectarea. În caz contrar, atingeți Continuați pentru a vă conecta pe acest dispozitiv.</string>
+    <string name="fui_email_link_cross_device_sign_in_button_text" tools:ignore="ExtraTranslation">Conectați-vă cu %1$s</string>
+    <string name="fui_verify_phone_number_title" tools:ignore="ExtraTranslation">Introduceți numărul de telefon</string>
+    <string name="fui_invalid_phone_number" tools:ignore="ExtraTranslation">Introduceți un număr valid de telefon</string>
+    <string name="fui_enter_confirmation_code" tools:ignore="ExtraTranslation">Introduceți codul din 6 cifre pe care l-am trimis la</string>
+    <string name="fui_resend_code_in" tools:ignore="ExtraTranslation">Retrimiteți codul în 00:%02d</string>
+    <string name="fui_verify_your_phone_title" tools:ignore="ExtraTranslation">Confirmați numărul de telefon</string>
+    <string name="fui_verifying" tools:ignore="ExtraTranslation">Se verifică…</string>
+    <string name="fui_incorrect_code_dialog_body" tools:ignore="ExtraTranslation">Cod greșit. Încercați din nou.</string>
+    <string name="fui_error_too_many_attempts" tools:ignore="ExtraTranslation">Acest număr de telefon a fost folosit de prea multe ori</string>
+    <string name="fui_error_quota_exceeded" tools:ignore="ExtraTranslation">A apărut o problemă la confirmarea numărului de telefon</string>
+    <string name="fui_error_session_expired" tools:ignore="ExtraTranslation">Codul nu mai este valid</string>
+    <string name="fui_sign_in_with_phone_number" tools:ignore="ExtraTranslation">Conectați-vă cu numărul de telefon</string>
+    <string name="fui_auto_verified" tools:ignore="ExtraTranslation">Numărul de telefon este verificat automat</string>
+    <string name="fui_resend_code" tools:ignore="ExtraTranslation">Retrimiteți codul</string>
+    <string name="fui_verify_phone_number" tools:ignore="ExtraTranslation">Confirmați numărul de telefon</string>
+    <string name="fui_sms_terms_of_service" tools:ignore="ExtraTranslation">Dacă atingeți „%1$s”, poate fi trimis un SMS. Se pot aplica tarife pentru mesaje și date.</string>
+    <string name="fui_sms_terms_of_service_and_privacy_policy_extended" tools:ignore="ExtraTranslation">Dacă atingeți „%1$s”, sunteți de acord cu %2$s și cu %3$s. Poate fi trimis un SMS. Se pot aplica tarife pentru mesaje și date.</string>
+
+
+    <string name="pref_heating_start_title">Numarul de zile pentru inceputul caldurilor</string>
+    <string name="pref_heating_end_title">Numarul de zile pentru sfarsitul caldurilor</string>
+    <string name="pref_gestation_title">Control pentru gestatie dupa</string>
+    <string name="pref_physiological_control_title">Controlul fiziologic dupa fatare</string>
+    <string name="pref_disinfection_title">Deparazitarea inainte de fatare</string>
+    <string name="pref_after_birth_vaccin_title">Vaccin dupa fatare</string>
+    <string name="pref_before_birth_vaccin1_title">Primul vaccin inainte de fatare</string>
+    <string name="pref_before_birth_vaccin2_title">Al doilea vaccin inainte de fatare</string>
+    <string name="pref_before_birth_vaccin3_title">Al treilea vaccin inainte de fatare</string>
+    <string name="pref_gestation_length_title">Numarul de zile pentru gestatie</string>
+
+    <string name="maleInputHeader">Matricol/Nume taur</string>
+    <string name="calfInputHeader">Matricol vițel</string>
+</resources>
