@@ -29,10 +29,6 @@ import org.jetbrains.anko.startActivity
 
 class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
 
-    companion object {
-        const val FARM_TIMELINE_PREFS = "com.farmexpert.android.farm_timeline_settings"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_configuration)
@@ -54,8 +50,9 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
     }
 
     private fun updateFarmDetails() {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val farmId = prefs.getString(FarmSelectorActivity.KEY_CURRENT_FARM_ID, "")
+        val farmId = PreferenceManager
+            .getDefaultSharedPreferences(this)
+            .getString(FarmSelectorActivity.KEY_CURRENT_FARM_ID, null)
 
         if (farmId.isNullOrEmpty()) {
             longToast(R.string.unknown_error)
@@ -152,4 +149,7 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
         finish()
     }
 
+    companion object {
+        const val FARM_TIMELINE_PREFS = "com.farmexpert.android.farm_timeline_settings"
+    }
 }

@@ -34,7 +34,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             val dialogFragment =
                 NumberPickerPreferenceDialogFragment.newInstance(preference.getKey())
             dialogFragment.setTargetFragment(this, 0)
-            fragmentManager?.let { dialogFragment.show(it, null) }
+            dialogFragment.show(parentFragmentManager, null)
         } else {
             super.onDisplayPreferenceDialog(preference)
         }
@@ -47,9 +47,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun initPreferenceSummaries() {
         val prefScreen = preferenceScreen
-        val prefCount = prefScreen.preferenceCount
 
-        for (current in 0 until prefCount) {
+        for (current in 0 until prefScreen.preferenceCount) {
             val preference = prefScreen.getPreference(current)
             preferenceChangeListener.onSharedPreferenceChanged(
                 prefScreen.sharedPreferences,

@@ -48,7 +48,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
         FirebaseAuth.getInstance().currentUser?.run {
             loadingView.visibility = VISIBLE
             reload()
-                .addOnSuccessListener { fillData(this) }
+                .addOnSuccessListener { fillData(firebaseUser = this) }
                 .addOnFailureListener {
                     alert(getString(R.string.profile_load_unsuccessful, it.message))
                     error { it }
@@ -64,54 +64,52 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
         }
     }
 
-    private fun fillData(firebaseUser: FirebaseUser) {
-        with(firebaseUser) {
-            photoUrl?.toString()?.isNotEmpty()?.let {
-                Picasso.get()
-                    .load(photoUrl)
-                    .transform(CircleTransform())
-                    .fit()
-                    .centerCrop()
-                    .into(icon)
-            }
-
-            metadata?.creationTimestamp?.let {
-                createdOn.text = getString(R.string.user_creation_date, Date(it).getShort())
-            } ?: run { createdOn.visibility = GONE }
-
-            providerData.lastOrNull()?.providerId?.takeIfNotBlank()?.let {
-                val providerText = it.mapProviderId(resources)
-                provider.text = getString(R.string.profile_created_with_provider, providerText)
-            } ?: run { provider.visibility = GONE }
-
-            displayName?.takeIfNotBlank()?.let {
-                name.setTextColor(getTextColor(R.color.black))
-                name.text = it
-            } ?: run {
-                name.text = getString(R.string.add_name)
-                name.setTextColor(getTextColor(R.color.link_color))
-            }
-
-            phoneNumber?.takeIfNotBlank()?.let { phone.text = it } ?: run {
-                phoneInfoGroup.visibility = GONE
-                phoneSeparator.visibility = GONE
-            }
-
-            email?.takeIfNotBlank()?.let {
-                userEmail.text = it
-                userEmail.setTextColor(getTextColor(R.color.black))
-                displayEmailVerificationStatus(isEmailVerified)
-                handlePasswordResetClick(it)
-            } ?: run {
-                userEmail.text = getString(R.string.add_email)
-                userEmail.setTextColor(getTextColor(R.color.link_color))
-                passResetGroup.visibility = GONE
-                passResetSeparator.visibility = GONE
-            }
-
-            fetchSubscribedFarms(this)
-            setClickListeners(this)
+    private fun fillData(firebaseUser: FirebaseUser) = with(firebaseUser) {
+        photoUrl?.toString()?.isNotEmpty()?.let {
+            Picasso.get()
+                .load(photoUrl)
+                .transform(CircleTransform())
+                .fit()
+                .centerCrop()
+                .into(icon)
         }
+
+        metadata?.creationTimestamp?.let {
+            createdOn.text = getString(R.string.user_creation_date, Date(it).getShort())
+        } ?: run { createdOn.visibility = GONE }
+
+        providerData.lastOrNull()?.providerId?.takeIfNotBlank()?.let {
+            val providerText = it.mapProviderId(resources)
+            provider.text = getString(R.string.profile_created_with_provider, providerText)
+        } ?: run { provider.visibility = GONE }
+
+        displayName?.takeIfNotBlank()?.let {
+            name.setTextColor(getTextColor(R.color.black))
+            name.text = it
+        } ?: run {
+            name.text = getString(R.string.add_name)
+            name.setTextColor(getTextColor(R.color.link_color))
+        }
+
+        phoneNumber?.takeIfNotBlank()?.let { phone.text = it } ?: run {
+            phoneInfoGroup.visibility = GONE
+            phoneSeparator.visibility = GONE
+        }
+
+        email?.takeIfNotBlank()?.let {
+            userEmail.text = it
+            userEmail.setTextColor(getTextColor(R.color.black))
+            displayEmailVerificationStatus(isEmailVerified)
+            handlePasswordResetClick(it)
+        } ?: run {
+            userEmail.text = getString(R.string.add_email)
+            userEmail.setTextColor(getTextColor(R.color.link_color))
+            passResetGroup.visibility = GONE
+            passResetSeparator.visibility = GONE
+        }
+
+        fetchSubscribedFarms(firebaseUser = this)
+        setClickListeners(this)
     }
 
     private fun handlePasswordResetClick(emailAddress: String) {
@@ -122,7 +120,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 .sendPasswordResetEmail(emailAddress)
                 .addOnSuccessListener { alert(R.string.password_reset_success) }
                 .addOnFailureListener {
-                    it.message?.let { it1 -> alert(message = it1, isCancellable = true) }
+                    it.message?.let { message -> alert(message = message, isCancellable = true) }
                     Crashlytics.logException(it)
                 }
                 .addOnCompleteListener { loadingView.visibility = INVISIBLE }
@@ -193,27 +191,10 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                     }
                     .addOnSuccessListener {
                         info { "batch success" }
-                        firebaseUser
-                            .delete()
-                            .addOnSuccessListener {
-                                info { "delete user success" }
-                                PreferenceManager
-                                    .getDefaultSharedPreferences(this)
-                                    .edit {
-                                        remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID)
-                                    }
-
-                                startActivity<AuthenticationActivity>()
-                                finishAffinity()
-                            }
-                            .addOnFailureListener {
-                                it.message?.let { it1 -> alert(it1) }
-                                Crashlytics.logException(it)
-                            }
-                            .addOnCompleteListener { loadingView?.visibility = INVISIBLE }
+                        deleteUser(firebaseUser = firebaseUser)
                     }
                     .addOnFailureListener {
-                        it.message?.let { it1 -> alert(it1) }
+                        it.message?.let { message -> alert(message) }
                         loadingView.visibility = INVISIBLE
                         error { it }
                         Crashlytics.logException(it)
@@ -221,18 +202,39 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
 
             }
             .addOnFailureListener {
-                it.message?.let { it1 -> alert(it1) }
+                it.message?.let { message -> alert(message) }
                 loadingView.visibility = INVISIBLE
                 error { it }
                 Crashlytics.logException(it)
             }
     }
 
+    private fun deleteUser(firebaseUser: FirebaseUser) {
+        firebaseUser
+            .delete()
+            .addOnSuccessListener {
+                info { "delete user success" }
+                PreferenceManager
+                    .getDefaultSharedPreferences(this)
+                    .edit {
+                        remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID)
+                    }
+
+                startActivity<AuthenticationActivity>()
+                finishAffinity()
+            }
+            .addOnFailureListener {
+                it.message?.let { message -> alert(message) }
+                Crashlytics.logException(it)
+            }
+            .addOnCompleteListener { loadingView?.visibility = INVISIBLE }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             PICK_IMAGE_RC -> {
                 if (resultCode == Activity.RESULT_OK) {
-                    data?.data?.let { uploadProfilePicture(it) }
+                    data?.data?.let { uploadProfilePicture(imageUri = it) }
                 }
             }
             else -> super.onActivityResult(requestCode, resultCode, data)
@@ -255,7 +257,12 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                     }
                     fileRef.downloadUrl
                 }
-                .addOnSuccessListener { updateUserProfile(user, it) }
+                .addOnSuccessListener { uri ->
+                    updateUserProfile(
+                        firebaseUser = user,
+                        imageUri = uri
+                    )
+                }
                 .addOnFailureListener {
                     loadingView.visibility = INVISIBLE
                     alert(R.string.err_updating_record)
@@ -265,16 +272,16 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
         }
     }
 
-    private fun updateUserProfile(user: FirebaseUser, imageUri: Uri) {
-        user
+    private fun updateUserProfile(firebaseUser: FirebaseUser, imageUri: Uri) {
+        firebaseUser
             .updateProfile(
                 UserProfileChangeRequest.Builder()
                     .setPhotoUri(imageUri)
                     .build()
             )
             .addOnSuccessListener {
-                user.reload().addOnSuccessListener {
-                    fillData(user)
+                firebaseUser.reload().addOnSuccessListener {
+                    fillData(firebaseUser = firebaseUser)
                     loadingView.visibility = INVISIBLE
                 }
             }

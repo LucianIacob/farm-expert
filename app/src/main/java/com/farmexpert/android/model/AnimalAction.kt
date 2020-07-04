@@ -33,5 +33,4 @@ data class AnimalAction(
             BaseEditRecordDialogFragment.EDIT_DIALOG_DETAILS to details
         )
     }
-
 }

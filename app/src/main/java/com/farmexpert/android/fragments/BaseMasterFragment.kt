@@ -53,9 +53,7 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_graph_master, container, false)
-    }
+    ) = inflater.inflate(R.layout.fragment_graph_master, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -142,9 +140,10 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
     }
 
     private fun updateTitle() {
-        val sb = StringBuilder(getTitle())
-        sb.append(" ").append(selectedYear)
-        setTitle(sb.toString())
+        val stringBuilder = StringBuilder(getTitle())
+            .append(" ")
+            .append(selectedYear)
+        setTitle(stringBuilder.toString())
     }
 
     protected val navigationListener: (() -> Unit) = {

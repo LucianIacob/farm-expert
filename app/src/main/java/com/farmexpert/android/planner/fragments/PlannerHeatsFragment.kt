@@ -23,9 +23,7 @@ import java.util.*
 
 class PlannerHeatsFragment : BasePlannerFragment() {
 
-    override fun getHeaderText(): String {
-        return getString(R.string.planner_heats_title)
-    }
+    override fun getHeaderText() = getString(R.string.planner_heats_title)
 
     override fun getPlannerContainer() = PlannerContainer.HEAT_CYCLE
 
@@ -50,8 +48,15 @@ class PlannerHeatsFragment : BasePlannerFragment() {
             .whereEqualTo(FirestorePath.Breeding.LATEST_BREEDING, true)
             .get()
             .addOnSuccessListener {
-                val items = PlannerDataTransformer.transformForHeatsContainer(it, resources)
-                dataRetrievedSuccessfully(items, PLANNER_DATA_ANIMALS)
+                if (this.isAdded) {
+                    dataRetrievedSuccessfully(
+                        plannerList = PlannerDataTransformer.transformForHeatsContainer(
+                            querySnapshot = it,
+                            resources = resources
+                        ),
+                        dataType = PLANNER_DATA_ANIMALS
+                    )
+                }
             }
             .addOnFailureListener {
                 error { it }
@@ -59,5 +64,4 @@ class PlannerHeatsFragment : BasePlannerFragment() {
             }
             .addOnCompleteListener { super.retrieveDataForDate(date) }
     }
-
 }

@@ -25,9 +25,7 @@ class PlannerDisinfectionsFragment : BasePlannerFragment() {
 
     override fun getPlannerContainer() = PlannerContainer.DISINFECTION
 
-    override fun getHeaderText(): String {
-        return getString(R.string.planner_disinfections_title)
-    }
+    override fun getHeaderText() = getString(R.string.planner_disinfections_title)
 
     override fun retrieveDataForDate(date: Date) {
         val daysOfDisinfection = farmTimelinePrefs.getInt(
@@ -47,9 +45,16 @@ class PlannerDisinfectionsFragment : BasePlannerFragment() {
             .whereEqualTo(FirestorePath.Breeding.LATEST_BREEDING, true)
             .get()
             .addOnSuccessListener {
-                val disinfections = PlannerDataTransformer
-                    .transformBeforeBirthItems(it, daysOfDisinfection, resources)
-                dataRetrievedSuccessfully(disinfections, PLANNER_DATA_ANIMALS)
+                if (this.isAdded) {
+                    dataRetrievedSuccessfully(
+                        plannerList = PlannerDataTransformer.transformBeforeBirthItems(
+                            querySnapshot = it,
+                            daysCount = daysOfDisinfection,
+                            resources = resources
+                        ),
+                        dataType = PLANNER_DATA_ANIMALS
+                    )
+                }
             }
             .addOnFailureListener {
                 error { it }

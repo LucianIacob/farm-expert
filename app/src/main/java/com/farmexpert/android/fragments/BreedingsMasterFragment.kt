@@ -17,8 +17,8 @@ import com.farmexpert.android.adapter.holder.GraphBreedingViewHolder
 import com.farmexpert.android.model.Breeding
 import com.farmexpert.android.utils.FirestorePath
 import com.farmexpert.android.utils.GraphDataTransformer
+import com.farmexpert.android.utils.takeIfNotBlank
 import com.firebase.ui.firestore.SnapshotParser
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
 
@@ -33,42 +33,41 @@ class BreedingsMasterFragment : BaseMasterFragment<Breeding, GraphBreedingViewHo
 
     override fun getFilterField() = FirestorePath.Breeding.ACTION_DATE
 
-    override fun getCollectionRef(): Query {
-        return farmReference.collection(FirestorePath.Collections.BREEDINGS).let {
+    override fun getCollectionRef() =
+        farmReference.collection(FirestorePath.Collections.BREEDINGS).let {
             return@let if (resources.getBoolean(R.bool.graph_latest_breedings_only)) {
                 it.whereEqualTo(FirestorePath.Breeding.LATEST_BREEDING, true)
-            } else {
-                it
-            }
+            } else it
         }
-    }
 
     override fun getHolderLayoutRes() = R.layout.item_graph_breeding
 
     override fun getHeaderLayoutRes() = R.layout.graph_breedings_header
 
-    override fun createHolder(view: View) = GraphBreedingViewHolder(
-        view = view,
-        femaleIdClick = { femaleId -> handleFemaleClicked(femaleId) },
-        maleIdClick = { maleId -> handleMaleClicked(maleId) }
-    )
+    override fun createHolder(view: View) =
+        GraphBreedingViewHolder(
+            view = view,
+            femaleIdClick = { femaleId -> handleFemaleClicked(femaleId) },
+            maleIdClick = { maleId -> handleMaleClicked(maleId) }
+        )
 
     private fun handleMaleClicked(maleId: String) {
-        navigationListener.invoke()
-        val direction = NavGraphDirections.actionGlobalAnimalDetailFragment(animalId = maleId)
-        NavHostFragment.findNavController(this).navigate(direction)
+        maleId.takeIfNotBlank()?.let {
+            navigationListener.invoke()
+            NavHostFragment
+                .findNavController(this)
+                .navigate(NavGraphDirections.actionGlobalAnimalDetailFragment(animalId = maleId))
+        }
     }
 
     private fun handleFemaleClicked(femaleId: String) {
         navigationListener.invoke()
-        val direction = NavGraphDirections.actionGlobalBreedingsDetailFragment(animalId = femaleId)
-        NavHostFragment.findNavController(this).navigate(direction)
+        NavHostFragment.findNavController(this)
+            .navigate(NavGraphDirections.actionGlobalBreedingsDetailFragment(animalId = femaleId))
     }
 
-    override fun transformData(documents: QuerySnapshot?): Map<String, List<Breeding>> {
-        return GraphDataTransformer.transformDocumentsForBreedingsGraph(documents)
-    }
+    override fun transformData(documents: QuerySnapshot?): Map<String, List<Breeding>> =
+        GraphDataTransformer.transformDocumentsForBreedingsGraph(documents)
 
     override fun getTitle(): String = getString(R.string.dashboard_graph_breedings)
-
 }

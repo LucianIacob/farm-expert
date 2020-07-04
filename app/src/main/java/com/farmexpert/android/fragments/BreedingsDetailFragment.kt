@@ -25,7 +25,6 @@ import com.farmexpert.android.utils.FirestorePath
 import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.Timestamp
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 import org.jetbrains.anko.error
@@ -48,21 +47,20 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
 
     override fun getEditRecordDialog() = EditBreedingDialogFragment()
 
-    override fun createHolder(view: View): BreedingViewHolder {
-        return BreedingViewHolder(view,
-            { breedingToUpdate -> showUpdateDialog(breedingToUpdate) },
-            { breedingToDelete -> showDeleteDialog(breedingToDelete) })
-    }
+    override fun createHolder(view: View) =
+        BreedingViewHolder(
+            itemView = view,
+            updateListener = { toUpdate -> showUpdateDialog(toUpdate) },
+            deleteListener = { toDelete -> showDeleteDialog(toDelete) }
+        )
 
-    override fun getCollectionReference(): CollectionReference {
-        return farmReference.collection(FirestorePath.Collections.BREEDINGS)
-    }
+    override fun getCollectionReference() =
+        farmReference.collection(FirestorePath.Collections.BREEDINGS)
 
-    override fun getQuery(): Query {
-        return getCollectionReference()
+    override fun getQuery() =
+        getCollectionReference()
             .whereEqualTo(FirestorePath.Breeding.FEMALE, getAnimalId())
             .orderBy(FirestorePath.Breeding.ACTION_DATE, Query.Direction.DESCENDING)
-    }
 
     override fun onNewDataArrived(snapshots: ObservableSnapshotArray<Breeding>) {
         val latestBreeding = snapshots.maxBy { it.actionDate }

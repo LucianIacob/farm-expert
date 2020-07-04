@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "334662227793-jm7di43p7j2h9eukg8ffsf1t5f5807jl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.farmexpert.android",
+            "certificate_hash": "403d2a45bd8f02db5f2e98cbd0ab600d9420a124"
+          }
+        },
+        {
+          "client_id": "334662227793-opn1ns5onnr32hodjr6j6hh0imvogpa2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.farmexpert.android",
+            "certificate_hash": "a751766cc2efee285de8e0f157b9e8b4e5a463e8"
+          }
+        },
+        {
           "client_id": "334662227793-972u6c209ks192m8k1tbmrftv9hp13bf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -59,6 +75,22 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "334662227793-f22rvtk8ut16o9o46nndr1t1cjkppl9q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.farmexpert.android.vatamanu",
+            "certificate_hash": "403d2a45bd8f02db5f2e98cbd0ab600d9420a124"
+          }
+        },
+        {
+          "client_id": "334662227793-bgpo6bnqqu0up69erp4cd16s5388btcg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.farmexpert.android.vatamanu",
+            "certificate_hash": "2b297abe2e40500376eaf6be295c60e986d1806b"
+          }
+        },
         {
           "client_id": "334662227793-u1ph0o5fklujlqb9tps2ussb5qm7i231.apps.googleusercontent.com",
           "client_type": 1,

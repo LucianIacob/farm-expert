@@ -85,9 +85,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_animal_master, container, false)
-    }
+    ) = inflater.inflate(R.layout.fragment_animal_master, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -176,11 +174,12 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
                 .setMessage(getString(R.string.delete_animal_message, animalId))
                 .setPositiveButton(R.string.delete) { _, _ ->
                     loadingShow()
-                    DeleteAnimalTransaction(farmReference,
-                        { rootLayout?.snackbar(R.string.item_deleted) },
-                        { exception -> error { exception } },
-                        { loadingHide() })
-                        .execute(animalId)
+                    DeleteAnimalTransaction(
+                        farmReference = farmReference,
+                        successListener = { rootLayout?.snackbar(R.string.item_deleted) },
+                        failureListener = { exception -> error { exception } },
+                        complete = { loadingHide() }
+                    ).execute(animalId)
                 }
                 .setNegativeButton(R.string.fui_cancel) { _, _ -> }
                 .setCancelable(false)
@@ -211,7 +210,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
     private fun addAnimalClicked() {
         val addDialog = AddAnimalDialogFragment()
         addDialog.setTargetFragment(this, ADD_ANIMAL_RQ)
-        fragmentManager?.run {
+        parentFragmentManager.run {
             if (findFragmentByTag(AddAnimalDialogFragment.TAG) == null) {
                 addDialog.show(this, AddAnimalDialogFragment.TAG)
             }

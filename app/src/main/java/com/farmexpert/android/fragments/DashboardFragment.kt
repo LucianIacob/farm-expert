@@ -17,6 +17,7 @@ import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.crashlytics.android.answers.Answers
 import com.crashlytics.android.answers.ContentViewEvent
 import com.farmexpert.android.R
@@ -30,16 +31,19 @@ import kotlinx.android.synthetic.main.fragment_dashboard.*
  */
 class DashboardFragment : Fragment() {
 
-    private val clickListener: (DashboardItem) -> Unit = { dashboardItem -> onItemClick(dashboardItem) }
+    private val clickListener: (DashboardItem) -> Unit =
+        { dashboardItem -> onItemClick(dashboardItem) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
-    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,7 +61,7 @@ class DashboardFragment : Fragment() {
 
     private fun setupAdapter() {
         val columnsCount = resources.getInteger(R.integer.dashboard_columns_count)
-        recycler_dashboard.layoutManager = androidx.recyclerview.widget.GridLayoutManager(activity, columnsCount)
+        recycler_dashboard.layoutManager = GridLayoutManager(activity, columnsCount)
         recycler_dashboard.adapter = DashboardAdapter(DashboardItem.values(), clickListener)
     }
 

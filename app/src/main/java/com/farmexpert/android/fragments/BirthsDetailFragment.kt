@@ -37,7 +37,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
     private val args: BirthsDetailFragmentArgs by navArgs()
 
     private val animalsCollections
-            by lazy { farmReference.collection(FirestorePath.Collections.ANIMALS) }
+        by lazy { farmReference.collection(FirestorePath.Collections.ANIMALS) }
 
     override fun getAnimalId() = args.animalId
 
@@ -50,7 +50,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
     override fun getEditRecordDialog() = EditBirthDialogFragment()
 
     override val snapshotParser: SnapshotParser<Birth> = SnapshotParser {
-      it.toObject<Birth>()!!.apply { id = it.id }
+        it.toObject<Birth>()!!.apply { id = it.id }
     }
 
     override fun onNewDataArrived(snapshots: ObservableSnapshotArray<Birth>) {
@@ -60,16 +60,16 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
             updateLatestBirthFlag(birthToAmend = latestBirth, flagValue = true)
         }
 
-        snapshots.minusElement(latestBirth).forEach {
-            if (it?.latestBirth == true) {
-                updateLatestBirthFlag(birthToAmend = it, flagValue = false)
+        snapshots.minusElement(latestBirth).forEach { birth ->
+            if (birth?.latestBirth == true) {
+                updateLatestBirthFlag(birthToAmend = birth, flagValue = false)
             }
         }
     }
 
     private fun updateLatestBirthFlag(birthToAmend: Birth?, flagValue: Boolean) {
-        birthToAmend?.id?.let { it ->
-            getCollectionReference().document(it)
+        birthToAmend?.id?.let { birthId ->
+            getCollectionReference().document(birthId)
                 .update(FirestorePath.Birth.LATEST_BIRTH, flagValue)
                 .addOnFailureListener { exception ->
                     error { exception }
@@ -134,11 +134,10 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
         return farmReference.collection(FirestorePath.Collections.BIRTHS)
     }
 
-    override fun getQuery(): Query {
-        return getCollectionReference()
+    override fun getQuery() =
+        getCollectionReference()
             .whereEqualTo(FirestorePath.Birth.MOTHER_ID, getAnimalId())
             .orderBy(FirestorePath.Birth.DATE_OF_BIRTH, Query.Direction.DESCENDING)
-    }
 
     override fun addDependentData(entity: Any) {
         val digits = resources.getInteger(R.integer.animal_id_digits_to_show)
@@ -162,10 +161,10 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
         }
     }
 
-    override fun createHolder(view: View): BirthViewHolder {
-        return BirthViewHolder(view,
-            { birthToUpdate -> showUpdateDialog(birthToUpdate) },
-            { birthToDelete -> showDeleteDialog(birthToDelete) })
-    }
-
+    override fun createHolder(view: View) =
+        BirthViewHolder(
+            itemView = view,
+            updateListener = { birthToUpdate -> showUpdateDialog(birthToUpdate) },
+            deleteListener = { birthToDelete -> showDeleteDialog(birthToDelete) }
+        )
 }

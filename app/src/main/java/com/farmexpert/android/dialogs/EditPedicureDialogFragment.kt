@@ -31,7 +31,7 @@ class EditPedicureDialogFragment : BaseEditRecordDialogFragment() {
     private lateinit var mNailsMap: HashMap<View, Int>
 
     override fun extractAdditionalArgs(savedInstanceState: Bundle?, bundle: Bundle) {
-        mDefaultDetails = savedInstanceState?.getString(EDIT_DIALOG_DETAILS)?.let { it }
+        mDefaultDetails = savedInstanceState?.getString(EDIT_DIALOG_DETAILS)
             ?: run { bundle.getString(EDIT_DIALOG_DETAILS) }
     }
 

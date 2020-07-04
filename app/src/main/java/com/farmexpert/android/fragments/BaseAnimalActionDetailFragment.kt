@@ -34,11 +34,12 @@ abstract class BaseAnimalActionDetailFragment :
         it.toObject<AnimalAction>()!!.apply { id = it.id }
     }
 
-    override fun createHolder(view: View): AnimalActionHolder {
-        return AnimalActionHolder(view,
-            { animalActionToUpdate -> showUpdateDialog(animalActionToUpdate) },
-            { animalActionToDelete -> showDeleteDialog(animalActionToDelete) })
-    }
+    override fun createHolder(view: View) =
+        AnimalActionHolder(
+            itemView = view,
+            updateListener = { actionToUpdate -> showUpdateDialog(actionToUpdate) },
+            deleteListener = { actionToDelete -> showDeleteDialog(actionToDelete) }
+        )
 
     override fun constructEntityFromBundle(bundle: Bundle): Any {
         val details = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_DETAILS, "")

@@ -38,21 +38,22 @@ open class BaseFragment : Fragment(), AnkoLogger {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
-        val farmId = prefs.getString(KEY_CURRENT_FARM_ID, null)
 
-        farmId?.let {
-            currentUser = FirebaseAuth.getInstance().currentUser
-            farmReference = Firebase.firestore
-                .collection(FirestorePath.Collections.FARMS)
-                .document(farmId)
-        } ?: run {
-            longToast(R.string.error_inexistent_farm_id)
-            if (NavHostFragment.findNavController(this).popBackStack().not()) {
-                startActivity<FarmSelectorActivity>()
-                activity?.finish()
+        PreferenceManager.getDefaultSharedPreferences(activity)
+            .getString(KEY_CURRENT_FARM_ID, null)
+            ?.let { farmId ->
+                currentUser = FirebaseAuth.getInstance().currentUser
+                farmReference = Firebase.firestore
+                    .collection(FirestorePath.Collections.FARMS)
+                    .document(farmId)
             }
-        }
+            ?: run {
+                longToast(R.string.error_inexistent_farm_id)
+                if (NavHostFragment.findNavController(this).popBackStack().not()) {
+                    startActivity<FarmSelectorActivity>()
+                    activity?.finish()
+                }
+            }
     }
 
     override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
@@ -79,7 +80,7 @@ open class BaseFragment : Fragment(), AnkoLogger {
     }
 
     protected open fun onViewReady() {
-        // may be overridden by subclasses
+        // may be overridden by followers
     }
 
     fun loadingShow() {

@@ -16,7 +16,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.farmexpert.android.R
 import com.farmexpert.android.fragments.BaseFragment
 import com.farmexpert.android.utils.NavigationConstants
@@ -33,14 +33,12 @@ class PlannerFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_planner, container, false)
-    }
+    ): View = inflater.inflate(R.layout.fragment_planner, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         inflateFragments()
-        plannerDateViewModel = ViewModelProviders.of(this).get(PlannerDateViewModel::class.java)
+        plannerDateViewModel = ViewModelProvider(this).get(PlannerDateViewModel::class.java)
 
         (savedInstanceState?.getSerializable(KEY_SELECTED_DATE) as? Date)?.let {
             plannerDateViewModel.setDate(it)

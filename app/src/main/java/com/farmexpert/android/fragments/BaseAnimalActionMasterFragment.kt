@@ -41,14 +41,12 @@ abstract class BaseAnimalActionMasterFragment :
 
     private fun handleAnimalClicked(animalId: String) {
         navigationListener.invoke()
-        val direction = getAnimalClickDirection(animalId)
-        NavHostFragment.findNavController(this).navigate(direction)
+        NavHostFragment.findNavController(this)
+            .navigate(getAnimalClickDirection(animalId))
     }
 
     abstract fun getAnimalClickDirection(animalId: String): NavDirections
 
-    override fun transformData(documents: QuerySnapshot?): Map<String, List<AnimalAction>> {
-        return GraphDataTransformer.transformDocumentsForAnimalActionsGraph(documents)
-    }
-
+    override fun transformData(documents: QuerySnapshot?): Map<String, List<AnimalAction>> =
+        GraphDataTransformer.transformDocumentsForAnimalActionsGraph(documents)
 }

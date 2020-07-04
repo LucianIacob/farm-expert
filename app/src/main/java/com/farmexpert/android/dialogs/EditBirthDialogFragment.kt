@@ -32,21 +32,19 @@ class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
 
     override fun extractAdditionalArgs(savedInstanceState: Bundle?, bundle: Bundle) {
         noteToSelect = savedInstanceState?.getInt(EDIT_DIALOG_NOTE, -1)
-            ?.takeIf { it != -1 }?.let { it }
+            ?.takeIf { it != -1 }
             ?: run { bundle.getInt(EDIT_DIALOG_NOTE, noteToSelect) }
-        details = savedInstanceState?.getString(EDIT_DIALOG_DETAILS)?.let { it }
+        details = savedInstanceState?.getString(EDIT_DIALOG_DETAILS)
             ?: bundle.getString(EDIT_DIALOG_DETAILS)
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.dialog_edit_birth
-    }
+    override fun getLayoutId() = R.layout.dialog_edit_birth
 
     override fun populateFields() {
         mView?.detailsBox?.setText(details)
-        mView?.notesSpinner?.let {
+        mView?.notesSpinner?.let { spinner ->
             SpinnerUtils.configureSpinner(
-                spinner = it,
+                spinner = spinner,
                 values = resources.getStringArray(R.array.birth_notes_values),
                 selected = noteToSelect
             )
@@ -56,7 +54,10 @@ class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         mView?.notesSpinner?.selectedItemPosition?.let {
-            outState.putInt(EDIT_DIALOG_NOTE, getBirthNoteByPosition(it, resources))
+            outState.putInt(
+                EDIT_DIALOG_NOTE,
+                getBirthNoteByPosition(it, resources)
+            )
         }
     }
 

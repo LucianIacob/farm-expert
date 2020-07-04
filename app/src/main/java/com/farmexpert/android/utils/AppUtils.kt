@@ -17,87 +17,81 @@ import com.farmexpert.android.app.FarmExpertApplication
 import com.google.firebase.Timestamp
 import java.util.*
 
-class AppUtils {
+object AppUtils {
 
-    companion object {
+    const val NAIL_WITH_PROBLEM = "1"
+    const val NAIL_WITHOUT_PROBLEM = "0"
 
-        const val NAIL_WITH_PROBLEM = "1"
-        const val NAIL_WITHOUT_PROBLEM = "0"
-
-        fun getTime(year: Int, month: Int, day: Int): Date {
-            val calendar = Calendar.getInstance()
-            calendar.set(year, month, day)
-            return calendar.time
+    fun getTime(year: Int, month: Int, day: Int): Date =
+        with(Calendar.getInstance()) {
+            set(year, month, day)
+            time
         }
 
-        fun timestampFor(year: Int, month: Int, day: Int): Timestamp {
-            val calendar = Calendar.getInstance().apply { set(year, month, day) }
-            return Timestamp(calendar.time)
+    fun timestampFor(year: Int, month: Int, day: Int): Timestamp =
+        with(Calendar.getInstance()) {
+            set(year, month, day)
+            Timestamp(time)
         }
 
-        fun getExpectedBirthDate(breedingDate: Date): Date {
-            val breedingCalendar = Calendar.getInstance().apply { time = breedingDate }
+    fun getExpectedBirthDate(breedingDate: Date): Date {
+        val breedingCalendar = Calendar.getInstance().apply { time = breedingDate }
 
-            val resources = FarmExpertApplication.appContext.resources
-            val prefs = FarmExpertApplication.appContext.getSharedPreferences(
-                FARM_TIMELINE_PREFS,
-                Context.MODE_PRIVATE
+        val resources = FarmExpertApplication.appContext.resources
+        val prefs = FarmExpertApplication.appContext.getSharedPreferences(
+            FARM_TIMELINE_PREFS,
+            Context.MODE_PRIVATE
+        )
+
+        // todo check keys
+        val key = resources.getString(R.string.pref_gestation_length_key)
+        val gestationLength = prefs.getInt(
+            key,
+            ConfigPickerUtils.getDefaultValue(
+                resources.getString(R.string.pref_gestation_length_key),
+                resources
             )
+        )
 
-            // todo check keys
-            val key = resources.getString(R.string.pref_gestation_length_key)
-            val gestationLength = prefs.getInt(
-                key,
-                ConfigPickerUtils.getDefaultValue(
-                    resources.getString(R.string.pref_gestation_length_key),
-                    resources
-                )
-            )
-
-            breedingCalendar.add(Calendar.DATE, gestationLength)
-            return breedingCalendar.time
-        }
-
-        fun populateLeftNail(imageView: ImageView?, char: String?): Int {
-            return if (char == NAIL_WITH_PROBLEM) {
-                imageView?.setImageResource(R.drawable.left_nail_problem)
-                R.drawable.left_nail_problem
-            } else {
-                imageView?.setImageResource(R.drawable.left_nail_default)
-                R.drawable.left_nail_default
-            }
-        }
-
-        fun populateRightNail(imageView: ImageView?, char: String?): Int {
-            return if (char == NAIL_WITH_PROBLEM) {
-                imageView?.setImageResource(R.drawable.right_nail_problem)
-                R.drawable.right_nail_problem
-            } else {
-                imageView?.setImageResource(R.drawable.right_nail_default)
-                R.drawable.right_nail_default
-            }
-        }
-
-        fun getStartOfTheYear(selectedYear: String): Timestamp {
-            val calendar = Calendar.getInstance()
-            calendar.set(Calendar.YEAR, selectedYear.toInt())
-            calendar.set(Calendar.MONTH, calendar.getMinimum(Calendar.MONTH))
-            calendar.set(Calendar.DAY_OF_YEAR, calendar.getMinimum(Calendar.DAY_OF_YEAR))
-            calendar.set(Calendar.HOUR_OF_DAY, calendar.getMinimum(Calendar.HOUR_OF_DAY))
-            calendar.set(Calendar.MINUTE, calendar.getMinimum(Calendar.MINUTE))
-
-            return Timestamp(calendar.time)
-        }
-
-        fun getEndOfTheYear(selectedYear: String): Timestamp {
-            val calendar = Calendar.getInstance()
-            calendar.set(Calendar.YEAR, selectedYear.toInt())
-            calendar.set(Calendar.MONTH, calendar.getMaximum(Calendar.MONTH))
-            calendar.set(Calendar.DAY_OF_MONTH, calendar.getMaximum(Calendar.DAY_OF_MONTH))
-            calendar.set(Calendar.HOUR_OF_DAY, calendar.getMaximum(Calendar.HOUR_OF_DAY))
-            calendar.set(Calendar.MINUTE, calendar.getMaximum(Calendar.MINUTE))
-
-            return Timestamp(calendar.time)
-        }
+        breedingCalendar.add(Calendar.DATE, gestationLength)
+        return breedingCalendar.time
     }
+
+    fun populateLeftNail(imageView: ImageView?, char: String?) =
+        if (char == NAIL_WITH_PROBLEM) {
+            imageView?.setImageResource(R.drawable.left_nail_problem)
+            R.drawable.left_nail_problem
+        } else {
+            imageView?.setImageResource(R.drawable.left_nail_default)
+            R.drawable.left_nail_default
+        }
+
+    fun populateRightNail(imageView: ImageView?, char: String?) =
+        if (char == NAIL_WITH_PROBLEM) {
+            imageView?.setImageResource(R.drawable.right_nail_problem)
+            R.drawable.right_nail_problem
+        } else {
+            imageView?.setImageResource(R.drawable.right_nail_default)
+            R.drawable.right_nail_default
+        }
+
+    fun getStartOfTheYear(selectedYear: String): Timestamp =
+        with(Calendar.getInstance()) {
+            set(Calendar.YEAR, selectedYear.toInt())
+            set(Calendar.MONTH, getMinimum(Calendar.MONTH))
+            set(Calendar.DAY_OF_YEAR, getMinimum(Calendar.DAY_OF_YEAR))
+            set(Calendar.HOUR_OF_DAY, getMinimum(Calendar.HOUR_OF_DAY))
+            set(Calendar.MINUTE, getMinimum(Calendar.MINUTE))
+            Timestamp(time)
+        }
+
+    fun getEndOfTheYear(selectedYear: String): Timestamp =
+        with(Calendar.getInstance()) {
+            set(Calendar.YEAR, selectedYear.toInt())
+            set(Calendar.MONTH, getMaximum(Calendar.MONTH))
+            set(Calendar.DAY_OF_MONTH, getMaximum(Calendar.DAY_OF_MONTH))
+            set(Calendar.HOUR_OF_DAY, getMaximum(Calendar.HOUR_OF_DAY))
+            set(Calendar.MINUTE, getMaximum(Calendar.MINUTE))
+            Timestamp(time)
+        }
 }

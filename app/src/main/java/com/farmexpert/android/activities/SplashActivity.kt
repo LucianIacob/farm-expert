@@ -40,25 +40,29 @@ class SplashActivity : Activity() {
     }
 
     private fun gotoNextScreenAfterDelay() {
-        mHandler.postDelayed({
-            if (FirebaseAuth.getInstance().currentUser != null) {
-                if (userHasActiveFarm()) {
-                    startActivity<MainActivity>()
-                } else {
-                    startActivity<FarmSelectorActivity>()
-                }
-            } else {
-                startActivity<AuthenticationActivity>()
-            }
+        mHandler
+            .postDelayed(
+                {
+                    if (FirebaseAuth.getInstance().currentUser != null) {
+                        if (userHasActiveFarm()) {
+                            startActivity<MainActivity>()
+                        } else {
+                            startActivity<FarmSelectorActivity>()
+                        }
+                    } else {
+                        startActivity<AuthenticationActivity>()
+                    }
 
-            finish()
-        }, SPLASH_LENGTH)
+                    finish()
+                },
+                SPLASH_LENGTH
+            )
     }
 
-    private fun userHasActiveFarm(): Boolean {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        return prefs.getString(FarmSelectorActivity.KEY_CURRENT_FARM_ID, null) != null
-    }
+    private fun userHasActiveFarm() =
+        PreferenceManager
+            .getDefaultSharedPreferences(this)
+            .getString(FarmSelectorActivity.KEY_CURRENT_FARM_ID, null) != null
 
     override fun onPause() {
         super.onPause()

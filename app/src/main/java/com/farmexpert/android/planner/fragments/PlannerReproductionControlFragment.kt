@@ -34,9 +34,7 @@ class PlannerReproductionControlFragment : BasePlannerFragment() {
 
     override fun getPlannerContainer() = PlannerContainer.REPRODUCTION_CONTROL
 
-    override fun getHeaderText(): String {
-        return getString(R.string.planner_reprod_control_title)
-    }
+    override fun getHeaderText() = getString(R.string.planner_reprod_control_title)
 
     override fun retrieveDataForDate(date: Date) {
         gestationsArrived = false
@@ -65,9 +63,19 @@ class PlannerReproductionControlFragment : BasePlannerFragment() {
             .get()
             .addOnSuccessListener {
                 birthsArrived = true
-                val births = PlannerDataTransformer
-                    .transformPhysiologicalControl(it, daysOfPhysiologicalPeriod, resources)
-                dataRetrieved(births, PLANNER_DATA_BIRTHS_CONTROL, date)
+                if (this.isAdded) {
+                    val transformedData = PlannerDataTransformer.transformPhysiologicalControl(
+                        querySnapshot = it,
+                        physiologicalPeriod = daysOfPhysiologicalPeriod,
+                        resources = resources
+                    )
+
+                    dataRetrieved(
+                        data = transformedData,
+                        mapKey = PLANNER_DATA_BIRTHS_CONTROL,
+                        date = date
+                    )
+                }
             }
             .addOnFailureListener {
                 error { it }
@@ -93,9 +101,17 @@ class PlannerReproductionControlFragment : BasePlannerFragment() {
             .get()
             .addOnSuccessListener {
                 gestationsArrived = true
-                val gestations = PlannerDataTransformer
-                    .transformGestations(it, daysOfGestationPeriod, resources)
-                dataRetrieved(gestations, PLANNER_DATA_GESTATIONS_CONTROL, date)
+                if (this.isAdded) {
+                    dataRetrieved(
+                        data = PlannerDataTransformer.transformGestations(
+                            querySnapshot = it,
+                            gestationCtrlDays = daysOfGestationPeriod,
+                            res = resources
+                        ),
+                        mapKey = PLANNER_DATA_GESTATIONS_CONTROL,
+                        date = date
+                    )
+                }
             }
             .addOnFailureListener {
                 error { it }

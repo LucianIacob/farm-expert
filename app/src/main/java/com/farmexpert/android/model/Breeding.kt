@@ -38,5 +38,4 @@ data class Breeding(
             BaseEditRecordDialogFragment.EDIT_DIALOG_DETAILS to comments
         )
     }
-
 }

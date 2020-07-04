@@ -33,7 +33,10 @@ class UserFarmsActivity : AppCompatActivity(), AnkoLogger {
 
         setupToolbar()
 
-        FirebaseAuth.getInstance().currentUser?.uid?.run { initFarmList(this) }
+        FirebaseAuth.getInstance()
+            .currentUser
+            ?.uid
+            ?.run { initFarmList(userId = this) }
     }
 
     private fun initFarmList(userId: String) {
@@ -62,7 +65,8 @@ class UserFarmsActivity : AppCompatActivity(), AnkoLogger {
     }
 
     private fun unsubscribeFrom(farm: Farm) {
-        val isCurrentFarm = PreferenceManager.getDefaultSharedPreferences(this)
+        val isCurrentFarm = PreferenceManager
+            .getDefaultSharedPreferences(this)
             .getString(KEY_CURRENT_FARM_ID, null)
             .equals(farm.id)
 
@@ -97,9 +101,9 @@ class UserFarmsActivity : AppCompatActivity(), AnkoLogger {
                         finishAffinity()
                     }
                 }
-                .addOnFailureListener {
-                    it.message?.let { it1 -> alert(it1) }
-                    Crashlytics.logException(it)
+                .addOnFailureListener { exception ->
+                    exception.message?.let { message -> alert(message) }
+                    Crashlytics.logException(exception)
                 }
                 .addOnCompleteListener { loadingView.visibility = View.INVISIBLE }
         }

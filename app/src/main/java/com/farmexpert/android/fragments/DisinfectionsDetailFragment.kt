@@ -12,7 +12,6 @@ package com.farmexpert.android.fragments
 import androidx.navigation.fragment.navArgs
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.FirestorePath
-import com.google.firebase.firestore.CollectionReference
 
 class DisinfectionsDetailFragment : BaseAnimalActionDetailFragment() {
 
@@ -25,9 +24,8 @@ class DisinfectionsDetailFragment : BaseAnimalActionDetailFragment() {
 
     override fun getAddDialogTitle() = R.string.add_disinfection_title
 
-    override fun getCollectionReference(): CollectionReference {
-        return farmReference.collection(FirestorePath.Collections.DISINFECTIONS)
-    }
+    override fun getCollectionReference() =
+        farmReference.collection(FirestorePath.Collections.DISINFECTIONS)
 
     override fun getEditDialogTitle() = R.string.edit_disinfection_title
 }

@@ -32,10 +32,6 @@ import kotlinx.android.synthetic.main.dialog_add_animal.view.*
 
 class AddAnimalDialogFragment : BaseAddRecordDialogFragment() {
 
-    companion object {
-        val TAG: String = AddAnimalDialogFragment::class.java.simpleName
-    }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         mView = View.inflate(activity, R.layout.dialog_add_animal, null)
         mView.dialogDate.setOnClickListener { onChangeDateClick() }
@@ -81,4 +77,7 @@ class AddAnimalDialogFragment : BaseAddRecordDialogFragment() {
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
     }
 
+    companion object {
+        val TAG: String = AddAnimalDialogFragment::class.java.simpleName
+    }
 }

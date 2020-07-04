@@ -47,9 +47,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_animal_action_detail, container, false)
-    }
+    ) = inflater.inflate(R.layout.fragment_animal_action_detail, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -128,9 +126,9 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
         entity.id?.let {
             getCollectionReference().document(it)
                 .delete()
-                .addOnFailureListener {
+                .addOnFailureListener { exception ->
                     alert(message = R.string.err_deleting_item)
-                    Crashlytics.logException(it)
+                    Crashlytics.logException(exception)
                 }
                 .addOnCompleteListener { loadingHide() }
         }
@@ -157,7 +155,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
     }
 
     private fun addRecordClicked() {
-        fragmentManager?.run {
+        parentFragmentManager.run {
             val addDialog = getAddRecordDialog()
             addDialog.setTargetFragment(this@BaseDetailFragment, ADD_RECORD_RQ)
             if (findFragmentByTag(addDialog::class.java.simpleName) == null) {
@@ -167,7 +165,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
     }
 
     protected fun showUpdateDialog(entityToUpdate: ModelClass) {
-        fragmentManager?.run {
+        parentFragmentManager.run {
             val editDialog = getEditRecordDialog()
             editDialog.arguments?.putAll(entityToUpdate.getEditDialogArgs())
                 ?: run { editDialog.arguments = entityToUpdate.getEditDialogArgs() }

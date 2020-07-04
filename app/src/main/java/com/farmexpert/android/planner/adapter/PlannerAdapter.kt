@@ -27,14 +27,12 @@ class PlannerAdapter(
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlannerViewHolder {
-        return PlannerViewHolder(parent.inflate(R.layout.item_planner))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        PlannerViewHolder(parent.inflate(R.layout.item_planner))
 
     override fun getItemCount() = data.size
 
     override fun onBindViewHolder(plannerViewHolder: PlannerViewHolder, position: Int) {
         plannerViewHolder.bind(data[position], clickListener, longClickListener)
     }
-
 }

@@ -9,13 +9,13 @@
 
 package com.farmexpert.android.adapter
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.farmexpert.android.adapter.holder.BaseMasterHolder
 import com.farmexpert.android.model.BaseEntity
+import com.farmexpert.android.utils.inflate
 
 open class GraphAdapter<ModelClass : BaseEntity, HolderClass : BaseMasterHolder<ModelClass>>(
     @LayoutRes val layoutResId: Int,
@@ -33,10 +33,8 @@ open class GraphAdapter<ModelClass : BaseEntity, HolderClass : BaseMasterHolder<
 
     override fun getItemCount() = data.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderClass {
-        val view = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
-        return createHolderClass(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderClass =
+        createHolderClass(parent.inflate(layoutResId))
 
     override fun onBindViewHolder(holder: HolderClass, position: Int) {
         keys.elementAtOrNull(position)?.let { animalId ->
@@ -44,5 +42,4 @@ open class GraphAdapter<ModelClass : BaseEntity, HolderClass : BaseMasterHolder<
             value?.let { holder.bind(key = animalId, values = value) }
         }
     }
-
 }

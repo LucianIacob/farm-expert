@@ -9,25 +9,15 @@
 
 package com.farmexpert.android.fragments
 
-import android.os.Bundle
 import android.view.View
 import android.widget.NumberPicker
+import androidx.core.os.bundleOf
 import androidx.preference.PreferenceDialogFragmentCompat
 import com.farmexpert.android.R
 import com.farmexpert.android.preference.NumberPickerPreference
 import com.farmexpert.android.utils.ConfigPickerUtils
 
 class NumberPickerPreferenceDialogFragment : PreferenceDialogFragmentCompat() {
-
-    companion object {
-        fun newInstance(key: String): NumberPickerPreferenceDialogFragment {
-            val fragmentCompat = NumberPickerPreferenceDialogFragment()
-            val bundle = Bundle(1)
-            bundle.putString(ARG_KEY, key)
-            fragmentCompat.arguments = bundle
-            return fragmentCompat
-        }
-    }
 
     private lateinit var mNumberPicker: NumberPicker
 
@@ -55,4 +45,11 @@ class NumberPickerPreferenceDialogFragment : PreferenceDialogFragmentCompat() {
         }
     }
 
+    companion object {
+        fun newInstance(key: String): NumberPickerPreferenceDialogFragment {
+            val fragmentCompat = NumberPickerPreferenceDialogFragment()
+            fragmentCompat.arguments = bundleOf(ARG_KEY to key)
+            return fragmentCompat
+        }
+    }
 }

@@ -14,12 +14,6 @@ package com.farmexpert.android.utils
  * Cluj-Napoca, 05 January, 2018.
  */
 
-class FarmValidator {
-
-    companion object {
-
-        fun isValidAnimalId(id: String) = id.length >= 4
-
-    }
-
+object FarmValidator {
+    fun isValidAnimalId(id: String) = id.length >= 4
 }

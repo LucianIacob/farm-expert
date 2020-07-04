@@ -18,7 +18,6 @@ import com.farmexpert.android.model.Birth
 import com.farmexpert.android.utils.FirestorePath
 import com.farmexpert.android.utils.GraphDataTransformer
 import com.firebase.ui.firestore.SnapshotParser
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
 
@@ -37,37 +36,33 @@ class BirthsMasterFragment : BaseMasterFragment<Birth, GraphBirthViewHolder>() {
 
     private fun handleCalfClicked(calfId: String) {
         navigationListener.invoke()
-        val direction = NavGraphDirections.actionGlobalAnimalDetailFragment(animalId = calfId)
-        NavHostFragment.findNavController(this).navigate(direction)
+        NavHostFragment.findNavController(this)
+            .navigate(NavGraphDirections.actionGlobalAnimalDetailFragment(animalId = calfId))
     }
 
     private fun handleMotherClicked(motherId: String) {
         navigationListener.invoke()
-        val direction = NavGraphDirections.actionGlobalBirthsDetailFragment(animalId = motherId)
-        NavHostFragment.findNavController(this).navigate(direction)
+        NavHostFragment.findNavController(this)
+            .navigate(NavGraphDirections.actionGlobalBirthsDetailFragment(animalId = motherId))
     }
 
     override fun getHeaderLayoutRes() = R.layout.graph_births_header
 
     override fun getFilterField() = FirestorePath.Birth.DATE_OF_BIRTH
 
-    override fun getCollectionRef(): Query {
-        return farmReference.collection(FirestorePath.Collections.BIRTHS).let {
+    override fun getCollectionRef() =
+        farmReference.collection(FirestorePath.Collections.BIRTHS).let {
             return@let if (resources.getBoolean(R.bool.graph_latest_births_only)) {
                 it.whereEqualTo(FirestorePath.Birth.LATEST_BIRTH, true)
-            } else {
-                it
-            }
+            } else it
         }
-    }
 
     override val snapshotParser: SnapshotParser<Birth> = SnapshotParser {
         it.toObject<Birth>()!!.apply { id = it.id }
     }
 
-    override fun transformData(documents: QuerySnapshot?): Map<String, List<Birth>> {
-        return GraphDataTransformer.transformDocumentsForBirthsGraph(documents)
-    }
+    override fun transformData(documents: QuerySnapshot?): Map<String, List<Birth>> =
+        GraphDataTransformer.transformDocumentsForBirthsGraph(documents)
 
     override fun getTitle(): String = getString(R.string.dashboard_graph_births)
 }

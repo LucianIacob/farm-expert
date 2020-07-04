@@ -49,11 +49,9 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val host: NavHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = host.navController
-
-        setupNavigationDrawer(navController)
+        (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as? NavHostFragment)
+            ?.navController
+            ?.let { setupNavigationDrawer(it) }
     }
 
     override fun onStart() {
@@ -85,9 +83,9 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
         profileSettingsBtn.setOnClickListener { openUserProfileScreen() }
 
         PreferenceManager.getDefaultSharedPreferences(this)
-            .getString(KEY_CURRENT_FARM_NAME, null)?.takeIfNotBlank()?.let {
-                farmName.text = it
-            }
+            .getString(KEY_CURRENT_FARM_NAME, null)
+            ?.takeIfNotBlank()
+            ?.let { farmName.text = it }
     }
 
     private fun openUserProfileScreen() {
@@ -161,7 +159,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
             .addOnSuccessListener {
                 PreferenceManager.getDefaultSharedPreferences(this)
                     .edit { remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID) }
-                startActivity<FarmSelectorActivity>()
+                startActivity<AuthenticationActivity>()
                 finish()
             }
             .addOnFailureListener {
@@ -180,19 +178,17 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        NavigationUI.onNavDestinationSelected(
             item,
             Navigation.findNavController(this, R.id.nav_host_fragment)
         ) || super.onOptionsItemSelected(item)
-    }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(
+    override fun onSupportNavigateUp(): Boolean =
+        NavigationUI.navigateUp(
             Navigation.findNavController(this, R.id.nav_host_fragment),
             drawer_layout
         )
-    }
 
     fun setLoadingVisibility(visibility: Int) {
         runOnUiThread { loadingView.visibility = visibility }

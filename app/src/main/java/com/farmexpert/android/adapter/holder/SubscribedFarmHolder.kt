@@ -7,6 +7,7 @@ import com.farmexpert.android.R
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_ID
 import com.farmexpert.android.model.Farm
 import com.farmexpert.android.utils.asDisplayable
+import com.farmexpert.android.utils.takeIfTrue
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.item_user_farm.view.*
 
@@ -52,5 +53,3 @@ class SubscribedFarmHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         deleteBtn.setOnClickListener { deleteListener.invoke(farm) }
     }
 }
-
-private fun Boolean.takeIfTrue() = this.takeIf { it }

@@ -26,9 +26,8 @@ class PlannerDataTransformer {
         fun transformForHeatsContainer(
             querySnapshot: QuerySnapshot,
             resources: Resources
-        ): List<PlannerItem> {
-
-            return querySnapshot
+        ): List<PlannerItem> =
+            querySnapshot
                 .map { it.toObject<Breeding>() }
                 .map {
                     val digitsToShow = resources.getInteger(R.integer.animal_id_digits_to_show)
@@ -41,10 +40,9 @@ class PlannerDataTransformer {
                         )
                     )
                 }
-        }
 
-        fun transformReminders(querySnapshot: QuerySnapshot): List<PlannerItem> {
-            return querySnapshot
+        fun transformReminders(querySnapshot: QuerySnapshot): List<PlannerItem> =
+            querySnapshot
                 .map { it.toObject<Reminder>() }
                 .map {
                     PlannerItem(
@@ -52,15 +50,13 @@ class PlannerDataTransformer {
                         longClickId = it.id
                     )
                 }
-        }
 
         fun transformGestations(
             querySnapshot: QuerySnapshot,
             gestationCtrlDays: Int,
             res: Resources
-        ): List<PlannerItem> {
-
-            return querySnapshot
+        ): List<PlannerItem> =
+            querySnapshot
                 .map { it.toObject<Breeding>() }
                 .map {
                     val digitsToShow = res.getInteger(R.integer.animal_id_digits_to_show)
@@ -76,15 +72,13 @@ class PlannerDataTransformer {
                         )
                     )
                 }
-        }
 
         fun transformPhysiologicalControl(
             querySnapshot: QuerySnapshot,
             physiologicalPeriod: Int,
             resources: Resources
-        ): List<PlannerItem> {
-
-            return querySnapshot
+        ): List<PlannerItem> =
+            querySnapshot
                 .map { it.toObject<Birth>() }
                 .map {
                     val digitsToShow = resources.getInteger(R.integer.animal_id_digits_to_show)
@@ -100,15 +94,13 @@ class PlannerDataTransformer {
                         )
                     )
                 }
-        }
 
         fun transformVaccine1(
             querySnapshot: QuerySnapshot,
             daysOfFirstVaccine: Int,
             resources: Resources
-        ): List<PlannerItem> {
-
-            return querySnapshot
+        ): List<PlannerItem> =
+            querySnapshot
                 .map { it.toObject<Birth>() }
                 .map {
                     val digitsToShow = resources.getInteger(R.integer.animal_id_digits_to_show)
@@ -124,15 +116,13 @@ class PlannerDataTransformer {
                         )
                     )
                 }
-        }
 
         fun transformBeforeBirthItems(
             querySnapshot: QuerySnapshot,
             daysCount: Int,
             resources: Resources
-        ): List<PlannerItem> {
-
-            return querySnapshot.map { it.toObject<Breeding>() }
+        ): List<PlannerItem> =
+            querySnapshot.map { it.toObject<Breeding>() }
                 .map {
                     val digitsToShow = resources.getInteger(R.integer.animal_id_digits_to_show)
 
@@ -147,6 +137,5 @@ class PlannerDataTransformer {
                         )
                     )
                 }
-        }
     }
 }

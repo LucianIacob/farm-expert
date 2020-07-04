@@ -64,10 +64,9 @@ class AddPlannerItemDialogFragment : BaseAddRecordDialogFragment() {
         val TAG: String = AddPlannerItemDialogFragment::class.java.simpleName
         const val REMINDER_DIALOG_DETAILS = "com.farmexpert.android.Planner.ReminderItemDetails"
 
-        fun getInstance(date: Date?): AddPlannerItemDialogFragment {
-            return AddPlannerItemDialogFragment().apply {
+        fun getInstance(date: Date?) =
+            AddPlannerItemDialogFragment().apply {
                 arguments = bundleOf(ADD_DIALOG_DATE to date?.time)
             }
-        }
     }
 }

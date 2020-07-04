@@ -34,10 +34,10 @@ class EditBreedingDialogFragment : BaseEditRecordDialogFragment() {
     override fun extractAdditionalArgs(savedInstanceState: Bundle?, bundle: Bundle) {
         with(bundle) {
             selectedNote = savedInstanceState?.getInt(EDIT_DIALOG_NOTE, -1)
-                ?.takeIf { it != -1 }?.let { it }
+                ?.takeIf { it != -1 }
                 ?: getInt(EDIT_DIALOG_NOTE, selectedNote)
             breedingMale = getString(EDIT_DIALOG_MALE)
-            details = savedInstanceState?.getString(EDIT_DIALOG_DETAILS)?.let { it }
+            details = savedInstanceState?.getString(EDIT_DIALOG_DETAILS)
                 ?: getString(EDIT_DIALOG_DETAILS)
         }
     }

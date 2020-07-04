@@ -62,5 +62,4 @@ enum class DashboardItem(
         R.string.dashboard_graph_treatments,
         R.id.action_dashboardFragment_to_treatmentsGraphFragment
     )
-
 }

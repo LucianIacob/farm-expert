@@ -14,9 +14,9 @@ import com.farmexpert.android.model.BaseEntity
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
-abstract class BaseFirestoreRecyclerAdapter<ModelClass : BaseEntity, HolderClass : RecyclerView.ViewHolder>
-    (options: FirestoreRecyclerOptions<ModelClass>) :
-    FirestoreRecyclerAdapter<ModelClass, HolderClass>(options) {
+abstract class BaseFirestoreRecyclerAdapter<ModelClass : BaseEntity, HolderClass : RecyclerView.ViewHolder>(
+    options: FirestoreRecyclerOptions<ModelClass>
+) : FirestoreRecyclerAdapter<ModelClass, HolderClass>(options) {
 
     private var shouldListen: Boolean = false
 

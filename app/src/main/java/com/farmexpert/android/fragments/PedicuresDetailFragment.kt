@@ -46,17 +46,17 @@ class PedicuresDetailFragment : BaseDetailFragment<AnimalAction, PedicureViewHol
     override fun getCollectionReference() =
         farmReference.collection(FirestorePath.Collections.PEDICURES)
 
-    override fun createHolder(view: View): PedicureViewHolder {
-        return PedicureViewHolder(view,
-            { pedicureToUpdate -> showUpdateDialog(pedicureToUpdate) },
-            { pedicureToDelete -> showDeleteDialog(pedicureToDelete) })
-    }
+    override fun createHolder(view: View) =
+        PedicureViewHolder(
+            itemView = view,
+            updateListener = { pedicureToUpdate -> showUpdateDialog(pedicureToUpdate) },
+            deleteListener = { pedicureToDelete -> showDeleteDialog(pedicureToDelete) }
+        )
 
-    override fun getQuery(): Query {
-        return getCollectionReference()
+    override fun getQuery() =
+        getCollectionReference()
             .whereEqualTo(FirestorePath.AnimalAction.ANIMAL_ID, getAnimalId())
             .orderBy(FirestorePath.AnimalAction.ACTION_DATE, Query.Direction.DESCENDING)
-    }
 
     override fun constructEntityFromBundle(bundle: Bundle): Any {
         val details = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_DETAILS, "")

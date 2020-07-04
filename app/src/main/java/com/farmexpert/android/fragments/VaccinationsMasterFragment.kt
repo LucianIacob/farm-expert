@@ -9,24 +9,20 @@
 
 package com.farmexpert.android.fragments
 
-import androidx.navigation.NavDirections
 import com.farmexpert.android.NavGraphDirections
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.FirestorePath
-import com.google.firebase.firestore.CollectionReference
 
 /**
  * Created by Lucian Iacob on March 22, 2019.
  */
 class VaccinationsMasterFragment : BaseAnimalActionMasterFragment() {
 
-    override fun getCollectionRef(): CollectionReference {
-        return farmReference.collection(FirestorePath.Collections.VACCINATIONS)
-    }
+    override fun getCollectionRef() =
+        farmReference.collection(FirestorePath.Collections.VACCINATIONS)
 
     override fun getTitle(): String = getString(R.string.dashboard_graph_vaccinations)
 
-    override fun getAnimalClickDirection(animalId: String): NavDirections {
-        return NavGraphDirections.actionGlobalVaccinationsDetailFragment(animalId = animalId)
-    }
+    override fun getAnimalClickDirection(animalId: String) =
+        NavGraphDirections.actionGlobalVaccinationsDetailFragment(animalId = animalId)
 }

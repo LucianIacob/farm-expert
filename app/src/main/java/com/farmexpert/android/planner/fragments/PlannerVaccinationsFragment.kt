@@ -38,9 +38,7 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
 
     override fun getPlannerContainer() = PlannerContainer.VACCINATIONS
 
-    override fun getHeaderText(): String {
-        return getString(R.string.planner_vaccinations_title)
-    }
+    override fun getHeaderText() = getString(R.string.planner_vaccinations_title)
 
     override fun retrieveDataForDate(date: Date) {
         vaccine1Arrived = false
@@ -74,9 +72,17 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
             .get()
             .addOnSuccessListener {
                 vaccine1Arrived = true
-                val vaccine1 = PlannerDataTransformer
-                    .transformVaccine1(it, daysOfFirstVaccine, resources)
-                dataRetrieved(vaccine1, PLANNER_DATA_VACCINE_1, date)
+                if (this.isAdded) {
+                    dataRetrieved(
+                        items = PlannerDataTransformer.transformVaccine1(
+                            querySnapshot = it,
+                            daysOfFirstVaccine = daysOfFirstVaccine,
+                            resources = resources
+                        ),
+                        mapKey = PLANNER_DATA_VACCINE_1,
+                        date = date
+                    )
+                }
             }
             .addOnFailureListener {
                 error { it }
@@ -103,9 +109,18 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
             .get()
             .addOnSuccessListener {
                 vaccine2Arrived = true
-                val vaccine2 = PlannerDataTransformer
-                    .transformBeforeBirthItems(it, daysOfSecondVaccine, resources)
-                dataRetrieved(vaccine2, PLANNER_DATA_VACCINE_2, date)
+                if (this.isAdded) {
+                    dataRetrieved(
+                        items = PlannerDataTransformer
+                            .transformBeforeBirthItems(
+                                querySnapshot = it,
+                                daysCount = daysOfSecondVaccine,
+                                resources = resources
+                            ),
+                        mapKey = PLANNER_DATA_VACCINE_2,
+                        date = date
+                    )
+                }
             }
             .addOnFailureListener {
                 error { it }
@@ -132,9 +147,17 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
             .get()
             .addOnSuccessListener {
                 vaccine3Arrived = true
-                val vaccine3 = PlannerDataTransformer
-                    .transformBeforeBirthItems(it, daysOfThirdVaccine, resources)
-                dataRetrieved(vaccine3, PLANNER_DATA_VACCINE_3, date)
+                if (this.isAdded) {
+                    dataRetrieved(
+                        items = PlannerDataTransformer.transformBeforeBirthItems(
+                            querySnapshot = it,
+                            daysCount = daysOfThirdVaccine,
+                            resources = resources
+                        ),
+                        mapKey = PLANNER_DATA_VACCINE_3,
+                        date = date
+                    )
+                }
             }
             .addOnFailureListener {
                 error { it }
@@ -161,9 +184,17 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
             .get()
             .addOnSuccessListener {
                 vaccine4Arrived = true
-                val vaccine4 = PlannerDataTransformer
-                    .transformBeforeBirthItems(it, daysOfForthVaccine, resources)
-                dataRetrieved(vaccine4, PLANNER_DATA_VACCINE_4, date)
+                if (this.isAdded) {
+                    dataRetrieved(
+                        items = PlannerDataTransformer.transformBeforeBirthItems(
+                            querySnapshot = it,
+                            daysCount = daysOfForthVaccine,
+                            resources = resources
+                        ),
+                        mapKey = PLANNER_DATA_VACCINE_4,
+                        date = date
+                    )
+                }
             }
             .addOnFailureListener {
                 error { it }

@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.alert
+import com.farmexpert.android.utils.isValidInput
+import com.farmexpert.android.utils.takeIfTrue
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_change_email.*
@@ -72,7 +74,7 @@ class ChangeUserEmailActivity : AppCompatActivity(), AnkoLogger {
 
             updateEmail(userEmailBox.text.toString())
                 .addOnSuccessListener {
-                    sendUserEmailVerification(this)
+                    sendUserEmailVerification(firebaseUser = this)
                     alert(
                         message = getString(R.string.after_email_change_message),
                         isCancellable = false,
@@ -102,5 +104,3 @@ class ChangeUserEmailActivity : AppCompatActivity(), AnkoLogger {
         const val EMAIL_VERIFIED = "com.farmexpert.android.EmailVerified"
     }
 }
-
-private fun Boolean.takeIfTrue(): Boolean? = this.takeIf { it }

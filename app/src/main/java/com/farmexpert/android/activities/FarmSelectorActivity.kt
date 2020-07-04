@@ -45,18 +45,12 @@ import org.jetbrains.anko.startActivity
 
 class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
 
-    companion object {
-        const val KEY_CURRENT_FARM_ID = "com.farmexpert.android.FarmID"
-        const val KEY_CURRENT_FARM_NAME = "com.farmexpert.android.FarmName"
-    }
-
-    private lateinit var firestore: FirebaseFirestore
+    private var firestore: FirebaseFirestore = Firebase.firestore
     private lateinit var currentUser: FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_farm_selector)
-        firestore = Firebase.firestore
         FirebaseAuth.getInstance().currentUser?.let {
             currentUser = it
             initFarmsList()
@@ -114,31 +108,39 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
         val accessCode = accessCode.text.toString()
 
         if (validInputs(farmName, accessCode)) {
-            val farm = Farm(currentUser.uid, farmName, accessCode, users = arrayListOf(currentUser.uid))
+            val farm = Farm(
+                owner = currentUser.uid,
+                name = farmName,
+                accessCode = accessCode,
+                users = arrayListOf(currentUser.uid)
+            )
 
             loadingProgressBar.visible()
-            checkNameAlreadyExists(farmName,
-                { exists ->
+
+            checkNameAlreadyExists(
+                farmName = farmName,
+                successListener = { exists ->
                     if (exists) {
                         loadingProgressBar.invisible()
                         displayDialog("Farm name already exists", "Change name")
                     } else saveFarm(farm)
                 },
-                { ex ->
+                failureListener = { exception ->
                     loadingProgressBar.invisible()
-                    ex.message?.let { longToast(it) }
-                })
+                    exception.message?.let { longToast(it) }
+                }
+            )
         }
     }
 
     private fun displayDialog(
         title: String,
         okButton: String,
-        ok: (() -> Unit)? = null
+        okListener: (() -> Unit)? = null
     ) {
         AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
             .setTitle(title)
-            .setPositiveButton(okButton) { _, _ -> ok?.let { ok() } }
+            .setPositiveButton(okButton) { _, _ -> okListener?.let { okListener() } }
             .create()
             .run {
                 setOnShowListener {
@@ -164,13 +166,17 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             }
     }
 
-    private fun checkNameAlreadyExists(farmName: String, listener: (Boolean) -> Unit, failure: (Exception) -> Unit) {
+    private fun checkNameAlreadyExists(
+        farmName: String,
+        successListener: (Boolean) -> Unit,
+        failureListener: (Exception) -> Unit
+    ) {
         firestore.collection(FirestorePath.Collections.FARMS)
             .whereEqualTo(FirestorePath.Farm.NAME, farmName)
             .get()
-            .addOnSuccessListener { farms -> listener(!farms.isEmpty) }
+            .addOnSuccessListener { farms -> successListener(!farms.isEmpty) }
             .addOnFailureListener { exception ->
-                failure(exception)
+                failureListener(exception)
                 Crashlytics.logException(exception)
             }
     }
@@ -202,8 +208,10 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
 
         if (validInputs(farmName, accessCode)) {
             loadingProgressBar.visible()
-            checkFarmExists(farmName, accessCode,
-                { exists, farm ->
+            checkFarmExists(
+                farmName = farmName,
+                accessCode = accessCode,
+                successListener = { exists, farm ->
                     if (exists && farm != null) {
                         storeFarmDetails(farm)
                         updateFarm(farm)
@@ -215,7 +223,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
                         )
                     }
                 },
-                { ex ->
+                failureListener = { ex ->
                     loadingProgressBar.invisible()
                     Toast.makeText(this, ex.message, Toast.LENGTH_LONG).show()
                 })
@@ -223,19 +231,22 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
     }
 
     private fun storeFarmDetails(farm: Farm) {
-        val prefs = getSharedPreferences(ConfigurationActivity.FARM_TIMELINE_PREFS, Context.MODE_PRIVATE)
-        prefs.edit {
-            putInt(getString(R.string.pref_heating_start_key), farm.heatingStartsAt)
-            putInt(getString(R.string.pref_heating_end_key), farm.heatingEndsAt)
-            putInt(getString(R.string.pref_gestation_key), farm.gestationControl)
-            putInt(getString(R.string.pref_physiological_control_key), farm.physiologicalControl)
-            putInt(getString(R.string.pref_disinfection_key), farm.disinfectionBeforeBirth)
-            putInt(getString(R.string.pref_vaccin1_before_birth_key), farm.vaccin1BeforeBirth)
-            putInt(getString(R.string.pref_vaccin2_before_birth_key), farm.vaccin2BeforeBirth)
-            putInt(getString(R.string.pref_vaccin3_before_birth_key), farm.vaccin3BeforeBirth)
-            putInt(getString(R.string.pref_vaccin_after_birth_key), farm.vaccin3BeforeBirth)
-            putInt(getString(R.string.pref_gestation_length_key), farm.gestationLength)
-        }
+        getSharedPreferences(ConfigurationActivity.FARM_TIMELINE_PREFS, Context.MODE_PRIVATE)
+            .edit {
+                putInt(getString(R.string.pref_heating_start_key), farm.heatingStartsAt)
+                putInt(getString(R.string.pref_heating_end_key), farm.heatingEndsAt)
+                putInt(getString(R.string.pref_gestation_key), farm.gestationControl)
+                putInt(
+                    getString(R.string.pref_physiological_control_key),
+                    farm.physiologicalControl
+                )
+                putInt(getString(R.string.pref_disinfection_key), farm.disinfectionBeforeBirth)
+                putInt(getString(R.string.pref_vaccin1_before_birth_key), farm.vaccin1BeforeBirth)
+                putInt(getString(R.string.pref_vaccin2_before_birth_key), farm.vaccin2BeforeBirth)
+                putInt(getString(R.string.pref_vaccin3_before_birth_key), farm.vaccin3BeforeBirth)
+                putInt(getString(R.string.pref_vaccin_after_birth_key), farm.vaccin3BeforeBirth)
+                putInt(getString(R.string.pref_gestation_length_key), farm.gestationLength)
+            }
     }
 
     private fun updateFarm(farm: Farm) {
@@ -257,8 +268,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
     }
 
     private fun storeFarmId(farmId: String, name: String) {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        prefs.edit {
+        PreferenceManager.getDefaultSharedPreferences(this).edit {
             putString(KEY_CURRENT_FARM_ID, farmId)
             putString(KEY_CURRENT_FARM_NAME, name)
         }
@@ -277,8 +287,8 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
     private fun checkFarmExists(
         farmName: String,
         accessCode: String,
-        listener: (Boolean, Farm?) -> Unit,
-        failure: (Exception) -> Unit
+        successListener: (Boolean, Farm?) -> Unit,
+        failureListener: (Exception) -> Unit
     ) {
         firestore.collection(FirestorePath.Collections.FARMS)
             .whereEqualTo(FirestorePath.Farm.NAME, farmName)
@@ -287,23 +297,22 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             .addOnSuccessListener { snapshots ->
                 if (!snapshots.isEmpty) {
                     val document = snapshots.documents[0]
-                    document.toObject<Farm>()?.also {
-                        it.id = document.id
-                        listener(true, it)
-                    } ?: failure.invoke(Resources.NotFoundException())
+                    document.toObject<Farm>()?.also { farm ->
+                        farm.id = document.id
+                        successListener(true, farm)
+                    } ?: failureListener.invoke(Resources.NotFoundException())
                 } else {
-                    listener(false, null)
+                    successListener(false, null)
                 }
             }
             .addOnFailureListener { exception ->
-                failure(exception)
+                failureListener(exception)
                 Crashlytics.logException(exception)
             }
     }
 
-    override fun onPause() {
-        super.onPause()
-        createFarmButton.setOnClickListener(null)
+    companion object {
+        const val KEY_CURRENT_FARM_ID = "com.farmexpert.android.FarmID"
+        const val KEY_CURRENT_FARM_NAME = "com.farmexpert.android.FarmName"
     }
-
 }

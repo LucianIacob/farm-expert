@@ -18,7 +18,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.crashlytics.android.Crashlytics
@@ -66,9 +66,7 @@ abstract class BasePlannerFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_planner_section, container, false)
-    }
+    ): View = inflater.inflate(R.layout.fragment_planner_section, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         containerHeader.text = getHeaderText()
@@ -87,13 +85,12 @@ abstract class BasePlannerFragment : BaseFragment() {
     }
 
     private fun handleLongClick(reminderId: String) {
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         parentFragment?.let {
-            plannerDateViewModel = ViewModelProviders.of(it).get(PlannerDateViewModel::class.java)
+            plannerDateViewModel = ViewModelProvider(it).get(PlannerDateViewModel::class.java)
         }
     }
 

@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.trimmedLength
 import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.alert
+import com.farmexpert.android.utils.isValidInput
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.android.synthetic.main.activity_change_username.*
@@ -71,6 +71,3 @@ class ChangeUserNameActivity : AppCompatActivity(), AnkoLogger {
         const val USER_NAME = "com.farmexpert.android.UserName"
     }
 }
-
-internal fun CharSequence?.isValidInput(): CharSequence? =
-    this?.trimmedLength()?.takeIf { it > 0 }?.let { this }

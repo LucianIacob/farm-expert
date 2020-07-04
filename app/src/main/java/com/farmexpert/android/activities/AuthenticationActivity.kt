@@ -21,12 +21,6 @@ import org.jetbrains.anko.startActivity
 
 class AuthenticationActivity : Activity() {
 
-    companion object {
-        const val RC_SIGN_IN = 1234
-        const val termsOfServiceUrl = "http://lucianiacob.com/farmexpert/tos.html"
-        const val privacyPolicyUrl = "http://lucianiacob.com/farmexpert/privacypolicy.html"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authentication)
@@ -63,18 +57,20 @@ class AuthenticationActivity : Activity() {
                 startActivity<FarmSelectorActivity>()
                 finish()
             } else {
-                IdpResponse.fromResultIntent(data)?.error?.message?.let { showMessage(it) }
+                IdpResponse.fromResultIntent(data)?.error?.message?.let {
+                    Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+                }
                 return
             }
         }
     }
 
     private fun showMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
-    override fun onStop() {
-        super.onStop()
-        signInButton.setOnClickListener(null)
+    companion object {
+        const val RC_SIGN_IN = 1234
+        const val termsOfServiceUrl = "http://lucianiacob.com/farmexpert/tos.html"
+        const val privacyPolicyUrl = "http://lucianiacob.com/farmexpert/privacypolicy.html"
     }
 }

@@ -94,23 +94,23 @@ class AnimalDetailFragment : BaseFragment() {
 
     private fun deleteAnimalConfirmed() {
         loadingShow()
-        DeleteAnimalTransaction(farmReference,
-            { rootLayout?.snackbar(R.string.item_deleted) },
-            { exception -> error { exception } },
-            {
+        DeleteAnimalTransaction(
+            farmReference = farmReference,
+            successListener = { rootLayout?.snackbar(R.string.item_deleted) },
+            failureListener = { exception -> error { exception } },
+            complete = {
                 loadingHide()
                 NavHostFragment.findNavController(this@AnimalDetailFragment)
                     .navigateUp()
-            }).execute(args.animalId)
+            }
+        ).execute(args.animalId)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_animal_detail, container, false)
-    }
+    ) = inflater.inflate(R.layout.fragment_animal_detail, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         animalId.text = args.animalId
@@ -129,7 +129,7 @@ class AnimalDetailFragment : BaseFragment() {
 
     override fun onViewReady() {
         loadingShow()
-        animalRef.get(if (args.shouldGetFromCache) Source.CACHE else Source.DEFAULT)
+        animalRef.get(fromSource())
             .addOnFailureListener {
                 toast(R.string.unknown_error)
                 Crashlytics.logException(it)
@@ -150,6 +150,8 @@ class AnimalDetailFragment : BaseFragment() {
             }
     }
 
+    private fun fromSource() = if (args.shouldGetFromCache) Source.CACHE else Source.DEFAULT
+
     private fun populateUi(animal: Animal?) {
         currentAnimal = animal
         animal?.let {
@@ -167,25 +169,25 @@ class AnimalDetailFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        goToBirths.setOnClickListener {
+        goToBirths?.setOnClickListener {
             navigateWithDirections(NavGraphDirections.actionGlobalBirthsDetailFragment(args.animalId))
         }
-        goToBreedings.setOnClickListener {
+        goToBreedings?.setOnClickListener {
             navigateWithDirections(NavGraphDirections.actionGlobalBreedingsDetailFragment(args.animalId))
         }
-        goToDisinfections.setOnClickListener {
+        goToDisinfections?.setOnClickListener {
             navigateWithDirections(NavGraphDirections.actionGlobalDisinfectionsDetailFragment(args.animalId))
         }
-        goToPedicures.setOnClickListener {
+        goToPedicures?.setOnClickListener {
             navigateWithDirections(NavGraphDirections.actionGlobalPedicuresDetailFragment(args.animalId))
         }
-        goToTreatments.setOnClickListener {
+        goToTreatments?.setOnClickListener {
             navigateWithDirections(NavGraphDirections.actionGlobalTreatmentsDetailFragment(args.animalId))
         }
-        goToVaccinations.setOnClickListener {
+        goToVaccinations?.setOnClickListener {
             navigateWithDirections(NavGraphDirections.actionGlobalVaccinationsDetailFragment(args.animalId))
         }
-        goToVitaminizations.setOnClickListener {
+        goToVitaminizations?.setOnClickListener {
             navigateWithDirections(NavGraphDirections.actionGlobalVitaminizationsDetailFragment(args.animalId))
         }
     }
@@ -196,13 +198,13 @@ class AnimalDetailFragment : BaseFragment() {
 
     override fun onPause() {
         super.onPause()
-        goToBirths.setOnClickListener(null)
-        goToBreedings.setOnClickListener(null)
-        goToDisinfections.setOnClickListener(null)
-        goToPedicures.setOnClickListener(null)
-        goToTreatments.setOnClickListener(null)
-        goToVaccinations.setOnClickListener(null)
-        goToVitaminizations.setOnClickListener(null)
+        goToBirths?.setOnClickListener(null)
+        goToBreedings?.setOnClickListener(null)
+        goToDisinfections?.setOnClickListener(null)
+        goToPedicures?.setOnClickListener(null)
+        goToTreatments?.setOnClickListener(null)
+        goToVaccinations?.setOnClickListener(null)
+        goToVitaminizations?.setOnClickListener(null)
     }
 
     private fun editMotherMother() {
@@ -296,9 +298,9 @@ class AnimalDetailFragment : BaseFragment() {
 
     private fun editDateOfBirth() {
         currentAnimal?.run {
-            context?.let {
+            context?.let { context ->
                 DatePickerDialog(
-                    it,
+                    context,
                     DatePickerDialog.OnDateSetListener { _, year, month, day ->
                         val newTimestamp = AppUtils.timestampFor(year, month, day)
                         updateField(

@@ -36,5 +36,4 @@ data class Birth(
             BaseEditRecordDialogFragment.EDIT_DIALOG_DETAILS to comments
         )
     }
-
 }
