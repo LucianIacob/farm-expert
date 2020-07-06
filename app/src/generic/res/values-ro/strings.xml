@@ -176,6 +176,7 @@
     <string name="unsubscribe_current_farm_confirmation_message">Această fermă este ferma cu care sunteți înregistrat la acest moment. Dacă optați să vă dezabonați, veți fi redirecționat înapoi la ecranul unde vă puteți alege o alta fermă sau să creați una. Sunteți sigur că doriți să vă dezabonați?</string>
     <string name="animal_details_title">Detalii Animal</string>
     <string name="email_verification_success">Email de verificare trimis.</string>
+    <string name="app_version_header">Versiunea aplicației %s</string>
 
     <integer-array name="gender_types">
         <item>0</item>

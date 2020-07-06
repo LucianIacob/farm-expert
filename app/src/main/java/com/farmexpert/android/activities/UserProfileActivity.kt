@@ -14,6 +14,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.preference.PreferenceManager
 import com.crashlytics.android.Crashlytics
+import com.farmexpert.android.BuildConfig
 import com.farmexpert.android.R
 import com.farmexpert.android.model.Farm
 import com.farmexpert.android.utils.*
@@ -62,6 +63,8 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 okListener = { finish() }
             )
         }
+
+        setAppVersion()
     }
 
     private fun fillData(firebaseUser: FirebaseUser) = with(firebaseUser) {
@@ -110,6 +113,15 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
 
         fetchSubscribedFarms(firebaseUser = this)
         setClickListeners(this)
+    }
+
+    private fun setAppVersion() {
+        appVersionHeader.text = getString(R.string.app_version_header, getString(R.string.app_name))
+        val sb = StringBuilder()
+            .append(BuildConfig.BUILD_TYPE)
+            .append(" ")
+            .append(BuildConfig.VERSION_NAME)
+        appVersion.text = sb.toString()
     }
 
     private fun handlePasswordResetClick(emailAddress: String) {
