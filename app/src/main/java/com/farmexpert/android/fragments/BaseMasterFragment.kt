@@ -17,7 +17,6 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.GraphAdapter
 import com.farmexpert.android.adapter.holder.BaseMasterHolder
@@ -27,6 +26,7 @@ import com.farmexpert.android.utils.alert
 import com.farmexpert.android.utils.gone
 import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.SnapshotParser
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.gson.Gson
@@ -123,7 +123,7 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
             .addOnFailureListener {
                 alert(message = R.string.err_retrieving_items)
                 error { it }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnSuccessListener { documents ->
                 val adapterData = transformData(documents)

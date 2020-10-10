@@ -11,13 +11,11 @@ package com.farmexpert.android.app
 
 import android.content.Context
 import androidx.multidex.MultiDexApplication
-import com.crashlytics.android.Crashlytics
-import com.crashlytics.android.answers.Answers
 import com.facebook.stetho.Stetho
 import com.farmexpert.android.BuildConfig
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
-import io.fabric.sdk.android.Fabric
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 /**
  * Created by Lucian Iacob on March 10, 2019.
@@ -44,10 +42,10 @@ class FarmExpertApplication : MultiDexApplication() {
     }
 
     private fun setupFabric() {
-        Fabric.with(this, Crashlytics(), Answers())
-        Crashlytics.setUserEmail(FirebaseAuth.getInstance().currentUser?.email)
-        Crashlytics.setUserName(FirebaseAuth.getInstance().currentUser?.displayName)
-        Crashlytics.setUserIdentifier(FirebaseAuth.getInstance().currentUser?.uid)
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
+        FirebaseAuth.getInstance().currentUser?.email?.let {
+            FirebaseCrashlytics.getInstance().setUserId(it)
+        }
     }
 
     companion object {

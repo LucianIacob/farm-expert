@@ -25,7 +25,6 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.preference.PreferenceManager
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_NAME
 import com.farmexpert.android.utils.CircleTransform
@@ -34,6 +33,7 @@ import com.farmexpert.android.utils.applyFarmexpertStyle
 import com.farmexpert.android.utils.takeIfNotBlank
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
@@ -68,8 +68,8 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
                     .fit()
                     .centerCrop()
                     .into(userIcon, object : Callback.EmptyCallback() {
-                        override fun onError(e: Exception?) {
-                            Crashlytics.logException(e)
+                        override fun onError(e: Exception) {
+                            FirebaseCrashlytics.getInstance().recordException(e)
                             error { e }
                         }
                     })
@@ -165,7 +165,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
             .addOnFailureListener {
                 alert(R.string.err_logging_out)
                 error { it }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnCompleteListener { setLoadingVisibility(View.GONE) }
     }

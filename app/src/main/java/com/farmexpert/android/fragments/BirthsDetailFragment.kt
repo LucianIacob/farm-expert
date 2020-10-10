@@ -12,7 +12,6 @@ package com.farmexpert.android.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.BirthViewHolder
 import com.farmexpert.android.dialogs.AddBirthDialogFragment
@@ -26,6 +25,7 @@ import com.farmexpert.android.utils.alert
 import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.Timestamp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
@@ -54,7 +54,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
     }
 
     override fun onNewDataArrived(snapshots: ObservableSnapshotArray<Birth>) {
-        val latestBirth = snapshots.maxBy { it.dateOfBirth }
+        val latestBirth = snapshots.maxByOrNull { it.dateOfBirth }
 
         if (latestBirth?.latestBirth == false) {
             updateLatestBirthFlag(birthToAmend = latestBirth, flagValue = true)
@@ -73,7 +73,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
                 .update(FirestorePath.Birth.LATEST_BIRTH, flagValue)
                 .addOnFailureListener { exception ->
                     error { exception }
-                    Crashlytics.logException(exception)
+                    FirebaseCrashlytics.getInstance().recordException(exception)
                 }
         }
     }
@@ -119,7 +119,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
                 alert(R.string.err_validating_calf)
                 listener(false)
                 loadingHide()
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {
@@ -156,7 +156,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
                 .addOnFailureListener { exception ->
                     alert(R.string.err_adding_animal_from_birth)
                     error { exception }
-                    Crashlytics.logException(exception)
+                    FirebaseCrashlytics.getInstance().recordException(exception)
                 }
         }
     }

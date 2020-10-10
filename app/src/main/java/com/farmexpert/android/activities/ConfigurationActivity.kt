@@ -15,10 +15,10 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.ConfigPickerUtils
 import com.farmexpert.android.utils.FirestorePath
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_configuration.*
@@ -140,7 +140,7 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
             .addOnFailureListener {
                 longToast(R.string.unknown_error)
                 error { it }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
     }
 

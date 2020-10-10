@@ -13,12 +13,12 @@ import androidx.core.content.edit
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.preference.PreferenceManager
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.BuildConfig
 import com.farmexpert.android.R
 import com.farmexpert.android.model.Farm
 import com.farmexpert.android.utils.*
 import com.google.firebase.auth.*
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -53,7 +53,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 .addOnFailureListener {
                     alert(getString(R.string.profile_load_unsuccessful, it.message))
                     error { it }
-                    Crashlytics.logException(it)
+                    FirebaseCrashlytics.getInstance().recordException(it)
                 }
                 .addOnCompleteListener { loadingView.visibility = INVISIBLE }
         } ?: run {
@@ -133,7 +133,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 .addOnSuccessListener { alert(R.string.password_reset_success) }
                 .addOnFailureListener {
                     it.message?.let { message -> alert(message = message, isCancellable = true) }
-                    Crashlytics.logException(it)
+                    FirebaseCrashlytics.getInstance().recordException(it)
                 }
                 .addOnCompleteListener { loadingView.visibility = INVISIBLE }
         }
@@ -209,7 +209,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                         it.message?.let { message -> alert(message) }
                         loadingView.visibility = INVISIBLE
                         error { it }
-                        Crashlytics.logException(it)
+                        FirebaseCrashlytics.getInstance().recordException(it)
                     }
 
             }
@@ -217,7 +217,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 it.message?.let { message -> alert(message) }
                 loadingView.visibility = INVISIBLE
                 error { it }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
     }
 
@@ -237,7 +237,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
             }
             .addOnFailureListener {
                 it.message?.let { message -> alert(message) }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnCompleteListener { loadingView?.visibility = INVISIBLE }
     }
@@ -279,7 +279,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                     loadingView.visibility = INVISIBLE
                     alert(R.string.err_updating_record)
                     error { it }
-                    Crashlytics.logException(it)
+                    FirebaseCrashlytics.getInstance().recordException(it)
                 }
         }
     }
@@ -300,7 +300,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
             .addOnFailureListener { exception ->
                 exception.message?.let { toast(it) }
                 loadingView.visibility = INVISIBLE
-                Crashlytics.logException(exception)
+                FirebaseCrashlytics.getInstance().recordException(exception)
             }
     }
 
@@ -321,7 +321,7 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
             .addOnFailureListener {
                 farmsList.text = getString(R.string.err_retrieving_farms)
                 error { it }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
     }
 

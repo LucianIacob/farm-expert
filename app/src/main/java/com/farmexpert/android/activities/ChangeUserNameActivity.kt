@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.alert
 import com.farmexpert.android.utils.isValidInput
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.android.synthetic.main.activity_change_username.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.sdk27.coroutines.textChangedListener
@@ -62,7 +62,7 @@ class ChangeUserNameActivity : AppCompatActivity(), AnkoLogger {
             ?.addOnSuccessListener { finish() }
             ?.addOnFailureListener { exception ->
                 exception.message?.let { alert(it) }
-                Crashlytics.logException(exception)
+                FirebaseCrashlytics.getInstance().recordException(exception)
             }
             ?.addOnCompleteListener { loadingView.visibility = View.INVISIBLE }
     }

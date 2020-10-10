@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_ID
 import com.farmexpert.android.adapter.UserFarmsAdapter
@@ -15,6 +14,7 @@ import com.farmexpert.android.utils.FirestorePath
 import com.farmexpert.android.utils.alert
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
@@ -103,7 +103,7 @@ class UserFarmsActivity : AppCompatActivity(), AnkoLogger {
                 }
                 .addOnFailureListener { exception ->
                     exception.message?.let { message -> alert(message) }
-                    Crashlytics.logException(exception)
+                    FirebaseCrashlytics.getInstance().recordException(exception)
                 }
                 .addOnCompleteListener { loadingView.visibility = View.INVISIBLE }
         }

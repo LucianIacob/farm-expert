@@ -12,7 +12,6 @@ package com.farmexpert.android.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.BreedingViewHolder
 import com.farmexpert.android.dialogs.AddBreedingDialogFragment
@@ -25,6 +24,7 @@ import com.farmexpert.android.utils.FirestorePath
 import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.Timestamp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 import org.jetbrains.anko.error
@@ -63,7 +63,7 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
             .orderBy(FirestorePath.Breeding.ACTION_DATE, Query.Direction.DESCENDING)
 
     override fun onNewDataArrived(snapshots: ObservableSnapshotArray<Breeding>) {
-        val latestBreeding = snapshots.maxBy { it.actionDate }
+        val latestBreeding = snapshots.maxByOrNull { it.actionDate }
 
         if (latestBreeding?.latestBreeding == false) {
             updateLatestBreedingFlag(breedingToAmend = latestBreeding, flagValue = true)
@@ -100,7 +100,7 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
                 .update(FirestorePath.Breeding.LATEST_BREEDING, flagValue)
                 .addOnFailureListener { exception ->
                     error { exception }
-                    Crashlytics.logException(exception)
+                    FirebaseCrashlytics.getInstance().recordException(exception)
                 }
         }
     }

@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.FarmSelectorAdapter
 import com.farmexpert.android.model.Farm
@@ -31,6 +30,7 @@ import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -162,7 +162,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             .addOnFailureListener { exception ->
                 loadingProgressBar.invisible()
                 error { exception }
-                Crashlytics.logException(exception)
+                FirebaseCrashlytics.getInstance().recordException(exception)
             }
     }
 
@@ -177,7 +177,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             .addOnSuccessListener { farms -> successListener(!farms.isEmpty) }
             .addOnFailureListener { exception ->
                 failureListener(exception)
-                Crashlytics.logException(exception)
+                FirebaseCrashlytics.getInstance().recordException(exception)
             }
     }
 
@@ -262,7 +262,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
                 .addOnFailureListener { exception ->
                     loadingProgressBar.invisible()
                     exception.message?.let { longToast(it) }
-                    Crashlytics.logException(exception)
+                    FirebaseCrashlytics.getInstance().recordException(exception)
                 }
         }
     }
@@ -307,7 +307,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             }
             .addOnFailureListener { exception ->
                 failureListener(exception)
-                Crashlytics.logException(exception)
+                FirebaseCrashlytics.getInstance().recordException(exception)
             }
     }
 

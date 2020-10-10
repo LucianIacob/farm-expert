@@ -3,13 +3,13 @@ package com.farmexpert.android.activities
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.alert
 import com.farmexpert.android.utils.isValidInput
 import com.farmexpert.android.utils.takeIfTrue
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.android.synthetic.main.activity_change_email.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
@@ -84,7 +84,7 @@ class ChangeUserEmailActivity : AppCompatActivity(), AnkoLogger {
                 .addOnFailureListener { exception ->
                     exception.message?.let { alert(message = it, isCancellable = true) }
                     error { exception }
-                    Crashlytics.logException(exception)
+                    FirebaseCrashlytics.getInstance().recordException(exception)
                 }
                 .addOnCompleteListener { loadingView.visibility = View.INVISIBLE }
         }

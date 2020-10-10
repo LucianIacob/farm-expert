@@ -9,7 +9,6 @@
 
 package com.farmexpert.android.planner.fragments
 
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.planner.model.PlannerContainer
 import com.farmexpert.android.planner.model.PlannerItem
@@ -19,6 +18,7 @@ import com.farmexpert.android.utils.FirestorePath
 import com.farmexpert.android.utils.TimeOfTheDay
 import com.farmexpert.android.utils.shift
 import com.google.firebase.Timestamp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import org.jetbrains.anko.error
 import java.util.*
 
@@ -79,7 +79,7 @@ class PlannerReproductionControlFragment : BasePlannerFragment() {
             }
             .addOnFailureListener {
                 error { it }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
     }
 
@@ -115,7 +115,7 @@ class PlannerReproductionControlFragment : BasePlannerFragment() {
             }
             .addOnFailureListener {
                 error { it }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
     }
 

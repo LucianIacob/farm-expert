@@ -9,8 +9,8 @@
 
 package com.farmexpert.android.transactions
 
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.utils.FirestorePath
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -80,7 +80,7 @@ class DeleteAnimalTransaction(
             }
             .addOnFailureListener {
                 error { it }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnCompleteListener {
                 birthsRetrieved = true
@@ -93,7 +93,7 @@ class DeleteAnimalTransaction(
             }
             .addOnFailureListener {
                 error { it }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnCompleteListener {
                 breedingsRetrieved = true
@@ -106,7 +106,7 @@ class DeleteAnimalTransaction(
             }
             .addOnFailureListener {
                 error { it }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnCompleteListener {
                 pedicuresRetrieved = true
@@ -119,7 +119,7 @@ class DeleteAnimalTransaction(
             }
             .addOnFailureListener {
                 error { it }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnCompleteListener {
                 treatmentsRetrieved = true
@@ -132,7 +132,7 @@ class DeleteAnimalTransaction(
             }
             .addOnFailureListener {
                 error { it }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnCompleteListener {
                 vaccinationsRetrieved = true
@@ -145,7 +145,7 @@ class DeleteAnimalTransaction(
             }
             .addOnFailureListener {
                 error { it }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnCompleteListener {
                 disinfectionsRetrieved = true
@@ -158,7 +158,7 @@ class DeleteAnimalTransaction(
             }
             .addOnFailureListener {
                 error { it }
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnCompleteListener {
                 vitaminizationsRetrieved = true
@@ -191,7 +191,7 @@ class DeleteAnimalTransaction(
                 .addOnSuccessListener { successListener.invoke() }
                 .addOnFailureListener {
                     failureListener.invoke(it)
-                    Crashlytics.logException(it)
+                    FirebaseCrashlytics.getInstance().recordException(it)
                 }
                 .addOnCompleteListener { complete.invoke() }
         }

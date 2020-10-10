@@ -18,7 +18,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.NavGraphDirections
 import com.farmexpert.android.R
 import com.farmexpert.android.model.Animal
@@ -29,6 +28,7 @@ import com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.Timestamp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.toObject
@@ -116,15 +116,15 @@ class AnimalDetailFragment : BaseFragment() {
         animalId.text = args.animalId
         fatherIdView.setExpandListener(viewToExpand = fatherParentsContainer)
         motherIdView.setExpandListener(viewToExpand = motherParentsContainer)
-        raceView.setEditListener(View.OnClickListener { editRace() })
-        dateOfBirthView.setEditListener(View.OnClickListener { editDateOfBirth() })
-        genderView.setEditListener(View.OnClickListener { editGender() })
-        fatherIdView.setEditListener(View.OnClickListener { editFather() })
-        fatherFatherIdView.setEditListener(View.OnClickListener { editFatherFather() })
-        fatherMotherIdView.setEditListener(View.OnClickListener { editFatherMother() })
-        motherIdView.setEditListener(View.OnClickListener { editMother() })
-        motherFatherIdView.setEditListener(View.OnClickListener { editMotherFather() })
-        motherMotherIdView.setEditListener(View.OnClickListener { editMotherMother() })
+        raceView.setEditListener { editRace() }
+        dateOfBirthView.setEditListener { editDateOfBirth() }
+        genderView.setEditListener { editGender() }
+        fatherIdView.setEditListener { editFather() }
+        fatherFatherIdView.setEditListener { editFatherFather() }
+        fatherMotherIdView.setEditListener { editFatherMother() }
+        motherIdView.setEditListener { editMother() }
+        motherFatherIdView.setEditListener { editMotherFather() }
+        motherMotherIdView.setEditListener { editMotherMother() }
     }
 
     override fun onViewReady() {
@@ -132,7 +132,7 @@ class AnimalDetailFragment : BaseFragment() {
         animalRef.get(fromSource())
             .addOnFailureListener {
                 toast(R.string.unknown_error)
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnSuccessListener { populateUi(it.toObject<Animal>()) }
             .addOnCompleteListener {
@@ -301,7 +301,7 @@ class AnimalDetailFragment : BaseFragment() {
             context?.let { context ->
                 DatePickerDialog(
                     context,
-                    DatePickerDialog.OnDateSetListener { _, year, month, day ->
+                    { _, year, month, day ->
                         val newTimestamp = AppUtils.timestampFor(year, month, day)
                         updateField(
                             FirestorePath.Animal.DATE_OF_BIRTH,
@@ -375,7 +375,7 @@ class AnimalDetailFragment : BaseFragment() {
             }
             .addOnFailureListener {
                 rootLayout?.snackbar(R.string.err_updating_animal)
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnCompleteListener { loadingHide() }
     }

@@ -24,7 +24,6 @@ import androidx.core.content.edit
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.NavGraphDirections
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.AnimalsAdapter
@@ -35,6 +34,7 @@ import com.farmexpert.android.transactions.DeleteAnimalTransaction
 import com.farmexpert.android.utils.*
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.Timestamp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
@@ -63,29 +63,11 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
         setHasOptionsMenu(true)
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.menu_headcount, menu)
-//        val searchItem = menu.findItem(R.id.action_search)
-//        val searchView = searchItem?.actionView as SearchView
-//        with(searchView) {
-//            setOnQueryTextListener(this@AnimalMasterFragment)
-//            queryHint = getString(R.string.search_id)
-//        }
-//
-//        if (query.isNotEmpty()) {
-//            searchView.isIconified = false
-//            searchItem.expandActionView()
-//            searchView.setQuery(query, true)
-//            searchView.clearFocus()
-//        }
-//        super.onCreateOptionsMenu(menu, inflater)
-//    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_animal_master, container, false)
+    ): View = inflater.inflate(R.layout.fragment_animal_master, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -263,13 +245,13 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
                         .addOnFailureListener {
                             alert(message = R.string.err_adding_animal)
                             error { it }
-                            Crashlytics.logException(it)
+                            FirebaseCrashlytics.getInstance().recordException(it)
                         }
                 }
             }
             .addOnFailureListener {
                 alert(R.string.err_adding_animal)
-                Crashlytics.logException(it)
+                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnCompleteListener { loadingHide() }
     }

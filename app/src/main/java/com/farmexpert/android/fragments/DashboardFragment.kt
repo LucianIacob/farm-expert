@@ -18,8 +18,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
-import com.crashlytics.android.answers.Answers
-import com.crashlytics.android.answers.ContentViewEvent
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.DashboardAdapter
 import com.farmexpert.android.model.DashboardItem
@@ -43,7 +41,7 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_dashboard, container, false)
+    ): View = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,6 +65,5 @@ class DashboardFragment : Fragment() {
 
     private fun onItemClick(dashboardItem: DashboardItem) {
         NavHostFragment.findNavController(this).navigate(dashboardItem.actionDestination)
-        Answers.getInstance().logContentView(ContentViewEvent().putContentName(dashboardItem.name))
     }
 }

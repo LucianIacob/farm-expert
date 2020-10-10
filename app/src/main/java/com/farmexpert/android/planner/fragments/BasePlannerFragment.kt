@@ -17,11 +17,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.ConfigurationActivity
 import com.farmexpert.android.app.FarmExpertApplication
@@ -36,6 +34,7 @@ import com.farmexpert.android.planner.transformer.PlannerDataTransformer
 import com.farmexpert.android.utils.*
 import com.farmexpert.android.viewmodel.PlannerDateViewModel
 import com.google.firebase.Timestamp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.android.synthetic.main.fragment_planner.*
 import kotlinx.android.synthetic.main.fragment_planner_section.*
@@ -99,7 +98,10 @@ abstract class BasePlannerFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         plannerDateViewModel?.getDate()
-            ?.observe(this, Observer { date -> retrieveDataForDate(date) })
+            ?.observe(
+                this,
+                { date -> retrieveDataForDate(date) }
+            )
         add_reminder_btn.setOnClickListener { displayAddReminderDialog() }
     }
 
@@ -138,7 +140,7 @@ abstract class BasePlannerFragment : BaseFragment() {
             .addOnFailureListener { exception ->
                 alert(message = R.string.err_adding_record)
                 error { exception }
-                Crashlytics.logException(exception)
+                FirebaseCrashlytics.getInstance().recordException(exception)
             }
             .addOnCompleteListener { loadingHide() }
     }

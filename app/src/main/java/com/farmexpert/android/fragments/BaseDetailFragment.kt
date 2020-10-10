@@ -19,7 +19,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.crashlytics.android.Crashlytics
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.AnimalActionsAdapter
 import com.farmexpert.android.adapter.holder.BaseDetailHolder
@@ -32,6 +31,7 @@ import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.firebase.ui.firestore.SnapshotParser
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_animal_action_detail.*
@@ -128,7 +128,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
                 .delete()
                 .addOnFailureListener { exception ->
                     alert(message = R.string.err_deleting_item)
-                    Crashlytics.logException(exception)
+                    FirebaseCrashlytics.getInstance().recordException(exception)
                 }
                 .addOnCompleteListener { loadingHide() }
         }
@@ -195,7 +195,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
                 .addOnFailureListener { exception ->
                     alert(message = R.string.err_updating_record)
                     error { exception }
-                    Crashlytics.logException(exception)
+                    FirebaseCrashlytics.getInstance().recordException(exception)
                 }
                 .addOnCompleteListener { loadingHide() }
         }
@@ -212,7 +212,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
                     .addOnFailureListener {
                         alert(message = R.string.err_adding_record)
                         error { it }
-                        Crashlytics.logException(it)
+                        FirebaseCrashlytics.getInstance().recordException(it)
                     }
                     .addOnCompleteListener { loadingHide() }
                 addDependentData(entity)
