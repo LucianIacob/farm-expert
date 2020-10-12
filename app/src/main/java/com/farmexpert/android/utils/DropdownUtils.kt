@@ -21,7 +21,8 @@ object DropdownUtils {
     ): Int {
         val breedings = resources.getStringArray(R.array.breeding_notes_values)
         return breedings.indexOf(textView?.text.toString()).takeIf { it != -1 }
-            ?: breedings.size - 1
+            ?.let { it + 1 }
+            ?: breedings.size
     }
 
     fun getBirthNoteByPosition(
@@ -30,7 +31,8 @@ object DropdownUtils {
     ): Int {
         val births = resources.getStringArray(R.array.birth_notes_values)
         return births.indexOf(textView?.text.toString()).takeIf { it != -1 }
-            ?: births.size - 1
+            ?.let { it + 1 }
+            ?: births.size
     }
 
     fun getGenderByPosition(
@@ -38,15 +40,16 @@ object DropdownUtils {
         resources: Resources
     ): Int {
         val genders = resources.getStringArray(R.array.gender_types_values)
-        return genders.indexOf(selectedItemPosition.text.toString()).takeIf { it != -1 } ?: 0
+        return genders.indexOf(selectedItemPosition.text.toString()).takeIf { it != -1 }
+            ?.let { it + 1 } ?: 0
     }
 
     fun getBirthNoteValue(note: Int, resources: Resources): String =
-        resources.getStringArray(R.array.birth_notes_values)[note]
+        resources.getStringArray(R.array.birth_notes_values)[note - 1]
 
     fun getBreedingNoteValue(note: Int, resources: Resources): String =
-        resources.getStringArray(R.array.breeding_notes_values)[note]
+        resources.getStringArray(R.array.breeding_notes_values)[note - 1]
 
     fun getGenderByKey(genderId: Int, resources: Resources): String =
-        resources.getStringArray(R.array.gender_types_values)[genderId]
+        resources.getStringArray(R.array.gender_types_values)[genderId - 1]
 }

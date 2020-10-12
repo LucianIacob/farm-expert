@@ -188,14 +188,6 @@
         <item>Femela</item>
     </string-array>
 
-    <integer-array name="breeding_notes">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </integer-array>
-
     <string-array name="breeding_notes_values">
         <item name="breeding_note_1">1 - Călduri șterse cu probleme</item>
         <item name="breeding_note_2">2 - Călduri șterse fără probleme</item>
@@ -203,13 +195,6 @@
         <item name="breeding_note_4">4 - Călduri evidente cu probleme de sănătate</item>
         <item name="breeding_note_5">5 - Călduri normale</item>
     </string-array>
-
-    <integer-array name="birth_notes">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-    </integer-array>
 
     <string-array name="birth_notes_values">
         <item name="birth_note_1">1 - Retenții, paraplegii post partum</item>

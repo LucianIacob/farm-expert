@@ -44,7 +44,7 @@ class EditBreedingDialogFragment : BaseEditRecordDialogFragment() {
     override fun onUiElementsReady() {
         super.onUiElementsReady()
 
-        fillDropdownComponent(mView?.notesSpinner, R.array.breeding_notes_values, selectedNote)
+        fillDropdownComponent(mView?.notesSpinner, R.array.breeding_notes_values, selectedNote - 1)
         mView?.maleInput?.setText(breedingMale)
     }
 

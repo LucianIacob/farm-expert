@@ -80,7 +80,7 @@
     <string name="add_treatment_title">Add treatment</string>
     <string name="add_disinfection_title">Add disinfection</string>
     <string name="add_pedicure_title">Add pedicure</string>
-    <string name="estimated_birth">Estimated birth:</string>
+    <string name="estimated_birth">Estimated birth</string>
     <string name="delete_confirmation_request">Are you sure you want to delete this item?</string>
     <string name="err_deleting_item">An error occurred trying to delete the item</string>
     <string name="dialog_update_btn">Update</string>
@@ -188,14 +188,6 @@
         <item>Female</item>
     </string-array>
 
-    <integer-array name="breeding_notes">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </integer-array>
-
     <string-array name="breeding_notes_values">
         <item name="breeding_note_1">1 - Medium heat with problems</item>
         <item name="breeding_note_2">2 - Medium heat without problems</item>
@@ -203,13 +195,6 @@
         <item name="breeding_note_4">4 - Clear heat with health problems</item>
         <item name="breeding_note_5">5 - Normal heats</item>
     </string-array>
-
-    <integer-array name="birth_notes">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-    </integer-array>
 
     <string-array name="birth_notes_values">
         <item name="birth_note_1">1 - Retentions, postpartum paraplegia</item>

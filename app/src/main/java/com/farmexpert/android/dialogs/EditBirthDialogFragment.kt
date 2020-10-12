@@ -43,7 +43,7 @@ class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
         fillDropdownComponent(
             textView = mView?.dialogNote,
             stringArray = R.array.birth_notes_values,
-            selected = noteToSelect
+            selected = noteToSelect - 1
         )
     }
 

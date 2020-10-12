@@ -82,7 +82,7 @@
     <string name="add_treatment_title">Adaugre tratament</string>
     <string name="add_disinfection_title">Adaugre deparazitare</string>
     <string name="add_pedicure_title">Adaugre pedichiura</string>
-    <string name="estimated_birth">Fatare estimata:</string>
+    <string name="estimated_birth">Fatare estimată</string>
     <string name="delete_confirmation_request">Esti sigur ca doresti sa stergi acest element?</string>
     <string name="err_deleting_item">A aparut o eroare la stergerea elementului</string>
     <string name="dialog_update_btn">Actualizare</string>
@@ -191,14 +191,6 @@
         <item>Femela</item>
     </string-array>
 
-    <integer-array name="breeding_notes">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </integer-array>
-
     <string-array name="breeding_notes_values">
         <item name="breeding_note_1">1 - Călduri șterse cu probleme</item>
         <item name="breeding_note_2">2 - Călduri șterse fără probleme</item>
@@ -206,13 +198,6 @@
         <item name="breeding_note_4">4 - Călduri evidente cu probleme de sănătate</item>
         <item name="breeding_note_5">5 - Călduri normale</item>
     </string-array>
-
-    <integer-array name="birth_notes">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-    </integer-array>
 
     <string-array name="birth_notes_values">
         <item name="birth_note_1">1 - Retenții, paraplegii post partum</item>
