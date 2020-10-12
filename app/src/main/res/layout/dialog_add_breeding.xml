@@ -13,21 +13,21 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/maleInputLayout"
-            style="@style/TextInputLayoutStyle"
+            style="@style/FarmExpertInputLayoutStyle.CounterEnabled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/maleInputHint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/maleInput"
-                style="@style/TextInputEditTextStyle"
+                style="@style/FarmExpertEditTextStyle"
                 tools:text="@tools:sample/full_names" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/dialogDateHeader"
-            style="@style/TextInputLayoutStyle"
+            style="@style/FarmExpertInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/date_of_birth"
@@ -35,35 +35,34 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialogDate"
-                style="@style/TextInputNotEditableStyle"
+                style="@style/FarmExpertEditTextStyle.NotEditable"
                 tools:text="@tools:sample/us_zipcodes" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/dialogNoteHeader"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            style="@style/FarmExpertInputDropdownStype"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tiny_margin"
             android:hint="@string/note">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/breedingNotes"
-                style="@style/TextInputNotEditableStyle"
+                style="@style/FarmExpertEditTextStyle.NotEditable"
                 android:text="@string/gender_unknown" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/TextInputLayoutStyle"
+            style="@style/FarmExpertInputLayoutStyle.CounterEnabled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/details">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialogDetails"
-                style="@style/TextInputEditTextStyle" />
+                style="@style/FarmExpertEditTextStyle" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

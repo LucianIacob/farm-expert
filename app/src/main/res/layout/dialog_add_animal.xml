@@ -9,58 +9,70 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dialogIdHeader"
-        style="@style/TextInputLayoutStyle"
+        style="@style/FarmExpertInputLayoutStyle.CounterEnabled.AnimalId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/animal_id">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialogId"
-            style="@style/TextInputEditTextStyle"
+            style="@style/FarmExpertEditTextStyle.AnimalID"
             android:maxLength="@integer/animal_id_max_length"
             tools:text="@tools:sample/us_zipcodes" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dialogDateHeader"
-        style="@style/TextInputLayoutStyle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/date_of_birth"
-        app:startIconDrawable="@drawable/ic_date_range_black_24dp">
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dialogDate"
-            style="@style/TextInputNotEditableStyle"
-            tools:text="@tools:sample/us_zipcodes" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dialogDateHeader"
+            style="@style/FarmExpertInputLayoutStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/tiny_margin"
+            android:layout_weight="1"
+            android:hint="@string/date_of_birth"
+            app:startIconDrawable="@drawable/ic_date_range_black_24dp">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialogDate"
+                style="@style/FarmExpertEditTextStyle.NotEditable"
+                tools:text="@tools:sample/us_zipcodes" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dialogGenderHeader"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/gender">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/dialogGender"
-            style="@style/TextInputNotEditableStyle"
-            android:text="@string/gender_unknown" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dialogGenderHeader"
+            style="@style/FarmExpertInputDropdownStype"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tiny_margin"
+            android:layout_weight="1"
+            android:hint="@string/gender">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/dialogGender"
+                style="@style/FarmExpertEditTextStyle.NotEditable"
+                android:text="@string/gender_unknown" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dialogRaceHeader"
-        style="@style/TextInputLayoutStyle"
+        style="@style/FarmExpertInputLayoutStyle.CounterEnabled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/race">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialogRace"
-            style="@style/TextInputEditTextStyle"
+            style="@style/FarmExpertEditTextStyle"
             android:maxLength="@integer/animal_id_max_length"
             tools:text="@tools:sample/lorem[4]" />
 
@@ -68,29 +80,27 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dialogFatherHeader"
-        style="@style/TextInputLayoutStyle"
+        style="@style/FarmExpertInputLayoutStyle.CounterEnabled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/father_id">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialogFather"
-            style="@style/TextInputEditTextStyle"
-            android:maxLength="@integer/animal_id_max_length"
+            style="@style/FarmExpertEditTextStyle"
             tools:text="@tools:sample/last_names" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/TextInputLayoutStyle"
+        style="@style/FarmExpertInputLayoutStyle.CounterEnabled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/mother_id">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialogMother"
-            style="@style/TextInputEditTextStyle"
-            android:maxLength="@integer/animal_id_max_length"
+            style="@style/FarmExpertEditTextStyle"
             tools:text="@tools:sample/us_zipcodes" />
 
     </com.google.android.material.textfield.TextInputLayout>

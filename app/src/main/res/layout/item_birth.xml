@@ -125,7 +125,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/updateBtn"
-                style="@style/UpdateQuickActionButtonStyle"
+                style="@style/QuickActionButtonStyle.Update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -133,12 +133,11 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/deleteBtn"
-                style="@style/DeleteQuickActionButtonStyle"
+                style="@style/QuickActionButtonStyle.Delete"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:text="@string/delete" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 

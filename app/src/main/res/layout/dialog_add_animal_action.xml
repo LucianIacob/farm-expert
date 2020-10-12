@@ -13,21 +13,21 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/dialogCommentRoot"
-            style="@style/TextInputLayoutStyle"
+            style="@style/FarmExpertInputLayoutStyle.CounterEnabled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/details">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialogDetails"
-                style="@style/TextInputEditTextStyle"
+                style="@style/FarmExpertEditTextStyle"
                 tools:text="@tools:sample/lorem[24]" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/dialogDateHeader"
-            style="@style/TextInputLayoutStyle"
+            style="@style/FarmExpertInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/date_of_birth"
@@ -35,7 +35,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialogDate"
-                style="@style/TextInputNotEditableStyle"
+                style="@style/FarmExpertEditTextStyle.NotEditable"
                 tools:text="@tools:sample/us_zipcodes" />
 
         </com.google.android.material.textfield.TextInputLayout>

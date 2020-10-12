@@ -70,13 +70,25 @@
         <item name="android:fontFamily">@font/roboto</item>
     </style>
 
-    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="FarmExpertInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_marginTop">@dimen/tiny_margin</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
 
-    <!--    TODO ADD STYLE FOR MATRICOLS MAx LENGTH-->
-    <style name="TextInputEditTextStyle">
+    <style name="FarmExpertInputLayoutStyle.CounterEnabled">
+        <item name="counterEnabled">true</item>
+    </style>
+
+    <style name="FarmExpertInputLayoutStyle.CounterEnabled.AnimalId">
+        <item name="counterMaxLength">@integer/animal_id_max_length</item>
+    </style>
+
+    <style name="FarmExpertInputDropdownStype" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:layout_marginTop">@dimen/tiny_margin</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <style name="FarmExpertEditTextStyle">
         <item name="android:inputType">textMultiLine</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -86,27 +98,39 @@
         <item name="android:importantForAutofill" tools:ignore="NewApi">no</item>
     </style>
 
-    <style name="TextInputNotEditableStyle" parent="TextInputEditTextStyle">
+    <style name="FarmExpertEditTextStyle.AnimalID">
+        <item name="android:maxLength">@integer/animal_id_max_length</item>
+        <item name="android:inputType">text</item>
+        <item name="android:importantForAutofill" tools:ignore="NewApi">no</item>
+    </style>
+
+    <style name="FarmExpertEditTextStyle.NotEditable">
         <item name="android:focusable">false</item>
         <item name="android:focusableInTouchMode">false</item>
         <item name="android:inputType">none</item>
         <item name="android:longClickable">false</item>
     </style>
 
-    <style name="UpdateQuickActionButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
+    <style name="QuickActionButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
         <item name="textAllCaps">false</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
-        <item name="android:text">@string/update</item>
-        <item name="icon">@drawable/ic_edit_black_24dp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/text_16</item>
         <item name="fontFamily">@font/roboto_medium</item>
     </style>
 
-    <style name="DeleteQuickActionButtonStyle" parent="UpdateQuickActionButtonStyle">
+    <style name="QuickActionButtonStyle.Update">
+        <item name="iconTint">@color/colorPrimary</item>
+        <item name="android:text">@string/update</item>
+        <item name="rippleColor">@color/colorPrimaryDark</item>
+        <item name="icon">@drawable/ic_edit_black_24dp</item>
+    </style>
+
+    <style name="QuickActionButtonStyle.Delete">
         <item name="iconTint">@color/red</item>
-        <item name="rippleColor">@android:color/holo_red_light</item>
+        <item name="android:text">@string/delete</item>
+        <item name="rippleColor">@android:color/holo_red_dark</item>
         <item name="icon">@drawable/ic_delete_forever_black_24dp</item>
     </style>
 

@@ -7,7 +7,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edittext_header"
-        style="@style/TextInputLayoutStyle"
+        style="@style/FarmExpertInputLayoutStyle.CounterEnabled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/large_margin"
@@ -17,7 +17,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edittext"
-            style="@style/TextInputEditTextStyle"
+            style="@style/FarmExpertEditTextStyle"
             tools:text="@tools:sample/lorem[4]" />
 
     </com.google.android.material.textfield.TextInputLayout>
