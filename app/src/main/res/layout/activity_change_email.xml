@@ -9,18 +9,13 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextColor="@color/white"
             tools:title="@string/lorem_ipsum" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -36,34 +31,27 @@
         tools:visibility="visible" />
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        style="@style/TextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/medium_margin"
         android:layout_marginTop="@dimen/xxxl_margin"
         android:layout_marginEnd="@dimen/medium_margin"
-        android:fontFamily="@font/roboto"
         android:hint="@string/email_header"
+        app:counterEnabled="true"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/userEmailBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/telegroteskscreen_medium"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:textColor="#000080"
-            android:textSize="@dimen/large_text"
-            tools:ignore="LabelFor"
-            tools:targetApi="o" />
+            style="@style/TextInputEditTextStyle"
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/updateBtn"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        style="@style/Widget.MaterialComponents.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/medium_margin"
@@ -84,7 +72,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sendVerificationEmailBtn"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/medium_margin"

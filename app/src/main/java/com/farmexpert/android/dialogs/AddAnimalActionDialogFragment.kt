@@ -11,17 +11,12 @@ package com.farmexpert.android.dialogs
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.DialogInterface.BUTTON_NEGATIVE
-import android.content.DialogInterface.BUTTON_POSITIVE
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import androidx.annotation.StringRes
-import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import com.farmexpert.android.R
-import com.farmexpert.android.utils.applyFarmexpertStyle
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.dialog_add_animal_action.view.*
 
 /**
@@ -31,43 +26,28 @@ import kotlinx.android.synthetic.main.dialog_add_animal_action.view.*
 
 class AddAnimalActionDialogFragment : BaseAddRecordDialogFragment() {
 
-    @StringRes
-    var titleId: Int = R.string.empty_text
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.getInt(ADD_DIALOG_TITLE)?.let { titleId = it }
+    private val titleId: Int by lazy {
+        arguments?.getInt(ADD_DIALOG_TITLE)?.takeIf { it != 0 } ?: R.string.empty_text
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         activity?.let {
             mView = View.inflate(it, R.layout.dialog_add_animal_action, null)
-            mView.dialogDate.setOnClickListener { onChangeDateClick() }
-            setupDate()
-            return AlertDialog.Builder(it, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+            onUiElementsReady()
+            return MaterialAlertDialogBuilder(it)
                 .setView(mView)
                 .setTitle(titleId)
-                .setPositiveButton(R.string.dialog_add_positive_btn) { _, _ ->
-                    addRecord()
-                }
+                .setPositiveButton(R.string.dialog_add_positive_btn) { _, _ -> addRecord() }
                 .setNegativeButton(R.string.dialog_cancel_btn, null)
                 .setCancelable(false)
                 .create()
-                .apply {
-                    setOnShowListener {
-                        getButton(BUTTON_NEGATIVE).applyFarmexpertStyle(context)
-                        getButton(BUTTON_POSITIVE).applyFarmexpertStyle(context)
-                    }
-                }
         } ?: throw IllegalArgumentException()
     }
 
-    override fun getDateView(): TextView = mView.dialogDate
-
     private fun addRecord() {
         val bundle = bundleOf(
-            ADD_DIALOG_DETAILS to mView.dialogDetails.text.toString(),
-            ADD_DIALOG_DATE to mSetDate.time
+            ADD_DIALOG_DETAILS to mView?.dialogDetails?.text.toString(),
+            DIALOG_DATE to currentDate.time
         )
         val intent = Intent().apply { putExtras(bundle) }
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)

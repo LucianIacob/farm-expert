@@ -1,179 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/medium_margin">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialogIdHeader"
+        style="@style/TextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:padding="@dimen/medium_margin">
+        android:hint="@string/animal_id">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/dialogIdHeader"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:hint="@string/animal_id"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialogId"
+            style="@style/TextInputEditTextStyle"
+            android:maxLength="@integer/animal_id_max_length"
+            tools:text="@tools:sample/us_zipcodes" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dialogId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/telegroteskscreen_medium"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:maxLength="@integer/animal_id_max_length"
-                android:textColor="#000080"
-                android:textSize="@dimen/large_text"
-                tools:ignore="LabelFor"
-                tools:targetApi="o"
-                tools:text="@tools:sample/us_zipcodes" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialogDateHeader"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/date_of_birth"
+        app:startIconDrawable="@drawable/ic_date_range_black_24dp">
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialogDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/change_date_background"
-            android:drawableStart="@drawable/ic_date_range_black_24dp"
-            android:fontFamily="@font/telegroteskscreen_medium"
-            android:gravity="center_horizontal"
-            android:padding="10dp"
-            android:textColor="#000080"
-            android:textSize="@dimen/large_text"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dialogIdHeader"
-            tools:text="@tools:sample/date/ddmmyy" />
+            style="@style/TextInputNotEditableStyle"
+            tools:text="@tools:sample/us_zipcodes" />
 
-        <TextView
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialogGenderHeader"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/gender">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/dialogGender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="@dimen/small_margin"
-            android:fontFamily="@font/roboto"
-            android:text="@string/gender"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/large_text"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dialogDate" />
+            style="@style/TextInputNotEditableStyle"
+            android:text="@string/gender_unknown" />
 
-        <Spinner
-            android:id="@+id/dialogGenderSpinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:entries="@array/gender_types_values"
-            android:fontFamily="@font/telegroteskscreen_medium"
-            android:textAlignment="center"
-            android:textSize="@dimen/large_text"
-            app:layout_constraintBottom_toBottomOf="@id/dialogGender"
-            app:layout_constraintLeft_toRightOf="@id/dialogGender"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/dialogGender" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/dialogRaceHeader"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto"
-            android:hint="@string/race"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dialogGenderSpinner">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialogRaceHeader"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/race">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dialogRace"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/telegroteskscreen_medium"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:maxLength="@integer/animal_id_max_length"
-                android:textColor="#000080"
-                android:textSize="@dimen/large_text"
-                tools:ignore="LabelFor"
-                tools:targetApi="o"
-                tools:text="@tools:sample/lorem[4]" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialogRace"
+            style="@style/TextInputEditTextStyle"
+            android:maxLength="@integer/animal_id_max_length"
+            tools:text="@tools:sample/lorem[4]" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/dialogFatherHeader"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto"
-            android:hint="@string/father_id"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dialogRaceHeader">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialogFatherHeader"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/father_id">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dialogFather"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/telegroteskscreen_medium"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:maxLength="@integer/animal_id_max_length"
-                android:textColor="#000080"
-                android:textSize="@dimen/large_text"
-                tools:ignore="LabelFor"
-                tools:targetApi="o"
-                tools:text="@tools:sample/last_names" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialogFather"
+            style="@style/TextInputEditTextStyle"
+            android:maxLength="@integer/animal_id_max_length"
+            tools:text="@tools:sample/last_names" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto"
-            android:hint="@string/mother_id"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dialogFatherHeader">
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/mother_id">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dialogMother"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/telegroteskscreen_medium"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:maxLength="@integer/animal_id_max_length"
-                android:textColor="#000080"
-                android:textSize="@dimen/large_text"
-                tools:ignore="LabelFor"
-                tools:targetApi="o"
-                tools:text="@tools:sample/us_zipcodes" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialogMother"
+            style="@style/TextInputEditTextStyle"
+            android:maxLength="@integer/animal_id_max_length"
+            tools:text="@tools:sample/us_zipcodes" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+</LinearLayout>

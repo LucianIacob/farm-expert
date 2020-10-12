@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/default_radius"
-    app:cardElevation="@dimen/default_elevation"
-    app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,11 +18,11 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
             android:layout_weight="3"
-            android:drawableStart="@drawable/ic_date_range_black_24dp"
             android:drawablePadding="5dp"
             android:fontFamily="@font/telegroteskscreen_medium"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_date_range_black_24dp"
             tools:text="@tools:sample/date/ddmmyy[9]" />
 
         <LinearLayout
@@ -58,7 +54,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 tools:ignore="RtlSymmetry"
-                tools:text="@tools:sample/lorem/random" />
+                tools:text="@tools:sample/lorem[6]" />
 
         </LinearLayout>
 
@@ -66,60 +62,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/item_animal_action_update"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/updateBtn"
+                style="@style/UpdateQuickActionButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
-                android:layout_weight="4"
-                android:background="@drawable/simple_cell_background"
-                android:drawableStart="@drawable/ic_edit_black_24dp"
-                android:drawablePadding="5dp"
-                android:elevation="@dimen/small_elevation"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:lines="1"
-                android:maxLines="1"
-                android:padding="5dp"
-                android:text="@string/update"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="4"
-                app:layout_constraintLeft_toRightOf="@id/item_animal_action_detail"
-                app:layout_constraintRight_toLeftOf="@id/item_animal_action_delete"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:targetApi="lollipop" />
+                android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/item_animal_action_delete"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/deleteBtn"
+                style="@style/DeleteQuickActionButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
-                android:layout_weight="4"
-                android:background="@drawable/simple_cell_background"
-                android:drawableStart="@drawable/ic_delete_forever_black_24dp"
-                android:drawablePadding="5dp"
-                android:elevation="@dimen/small_elevation"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:lines="1"
-                android:maxLines="1"
-                android:padding="5dp"
-                android:text="@string/delete"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="4"
-                app:layout_constraintLeft_toRightOf="@id/item_animal_action_update"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:targetApi="lollipop" />
+                android:layout_weight="1"
+                android:text="@string/delete" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

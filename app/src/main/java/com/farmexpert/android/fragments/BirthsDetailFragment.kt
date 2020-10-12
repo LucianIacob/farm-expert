@@ -14,10 +14,7 @@ import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.BirthViewHolder
-import com.farmexpert.android.dialogs.AddBirthDialogFragment
-import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
-import com.farmexpert.android.dialogs.BaseEditRecordDialogFragment
-import com.farmexpert.android.dialogs.EditBirthDialogFragment
+import com.farmexpert.android.dialogs.*
 import com.farmexpert.android.model.Animal
 import com.farmexpert.android.model.Birth
 import com.farmexpert.android.utils.FirestorePath
@@ -80,7 +77,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
 
     override fun constructEntityFromBundle(bundle: Bundle): Birth {
         val calfId = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_CALF, "")
-        val dateOfBirth = Date(bundle.getLong(BaseAddRecordDialogFragment.ADD_DIALOG_DATE))
+        val dateOfBirth = Date(bundle.getLong(BaseDialogFragment.DIALOG_DATE))
         val note = bundle.getInt(BaseAddRecordDialogFragment.ADD_DIALOG_NOTE, 5)
         val details = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_DETAILS)
 
@@ -95,7 +92,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
     }
 
     override fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any?> {
-        val timestamp = args.getLong(BaseEditRecordDialogFragment.EDIT_DIALOG_DATE)
+        val timestamp = args.getLong(BaseDialogFragment.DIALOG_DATE)
         val newActionDate = Timestamp(Date(timestamp))
 
         val newNote = args.getInt(
@@ -103,7 +100,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
             4
         )
 
-        val newComments = args.getString(BaseEditRecordDialogFragment.EDIT_DIALOG_DETAILS)
+        val newComments = args.getString(BaseDialogFragment.DIALOG_DETAILS)
 
         return mutableMapOf(
             FirestorePath.Birth.DATE_OF_BIRTH to newActionDate,

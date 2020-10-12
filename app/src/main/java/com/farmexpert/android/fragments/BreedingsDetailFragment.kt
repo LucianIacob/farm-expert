@@ -14,10 +14,7 @@ import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.holder.BreedingViewHolder
-import com.farmexpert.android.dialogs.AddBreedingDialogFragment
-import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
-import com.farmexpert.android.dialogs.BaseEditRecordDialogFragment
-import com.farmexpert.android.dialogs.EditBreedingDialogFragment
+import com.farmexpert.android.dialogs.*
 import com.farmexpert.android.model.Breeding
 import com.farmexpert.android.utils.AppUtils
 import com.farmexpert.android.utils.FirestorePath
@@ -77,7 +74,7 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
     }
 
     override fun constructEntityFromBundle(bundle: Bundle): Any {
-        val breedingDate = Date(bundle.getLong(BaseAddRecordDialogFragment.ADD_DIALOG_DATE))
+        val breedingDate = Date(bundle.getLong(BaseDialogFragment.DIALOG_DATE))
         val male = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_MALE, "")
         val note = bundle.getInt(BaseAddRecordDialogFragment.ADD_DIALOG_NOTE, 5)
         val expectedBirthDate = AppUtils.getExpectedBirthDate(breedingDate)
@@ -106,7 +103,7 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
     }
 
     override fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any?> {
-        val timestamp = args.getLong(BaseEditRecordDialogFragment.EDIT_DIALOG_DATE)
+        val timestamp = args.getLong(BaseDialogFragment.DIALOG_DATE)
         val newActionDate = Timestamp(Date(timestamp))
 
         val newNote = args.getInt(
@@ -115,7 +112,7 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
         )
 
         val newMale = args.getString(BaseEditRecordDialogFragment.EDIT_DIALOG_MALE, "")
-        val newComments = args.getString(BaseEditRecordDialogFragment.EDIT_DIALOG_DETAILS)
+        val newComments = args.getString(BaseDialogFragment.DIALOG_DETAILS)
 
         return mutableMapOf(
             FirestorePath.Breeding.ACTION_DATE to newActionDate,

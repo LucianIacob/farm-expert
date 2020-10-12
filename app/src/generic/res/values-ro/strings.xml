@@ -82,7 +82,7 @@
     <string name="add_treatment_title">Adaugre tratament</string>
     <string name="add_disinfection_title">Adaugre deparazitare</string>
     <string name="add_pedicure_title">Adaugre pedichiura</string>
-    <string name="estimated_birth">Fatare estimata</string>
+    <string name="estimated_birth">Fatare estimata:</string>
     <string name="delete_confirmation_request">Esti sigur ca doresti sa stergi acest element?</string>
     <string name="err_deleting_item">A aparut o eroare la stergerea elementului</string>
     <string name="dialog_update_btn">Actualizare</string>
@@ -131,7 +131,7 @@
     <string name="planner_physiological_ctrl_reason">%d zile de la ultima fatare</string>
     <string name="planner_first_vaccine_reason">%d zile de la ultima fatare</string>
     <string name="planner_before_birth_vaccine_reason">%d zile inainte de data estimata a fatarii</string>
-    <string name="go_to">Mergi la:</string>
+    <string name="go_to">MERGI LA:</string>
     <string name="change_farm">Schimba ferma</string>
     <string name="logout">Iesi din cont</string>
     <string name="change_farm_confirmation_message">Vei fi directionat la ecranul pentru alegerea fermei. Acolo vei avea posibilitatea de a crea o noua ferma sau de a intra intr-o ferma deja existenta.</string>
@@ -177,12 +177,13 @@
     <string name="animal_details_title">Detalii Animal</string>
     <string name="email_verification_success">Email de verificare trimis.</string>
     <string name="app_version_header">Versiunea aplicației %s</string>
-
-    <integer-array name="gender_types">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </integer-array>
+    <string name="farm_already_exists">Numele fermei exista deja</string>
+    <string name="farm_does_not_exists">Farm \"%s\" nu exista sau codul de access este incorect</string>
+    <string name="change_farm_name">Schimba numele</string>
+    <string name="review_inputs">Revizuieste datele</string>
+    <string name="error">Eroare</string>
+    <string name="add_reminder">Reminder</string>
+    <string name="add">Adauga</string>
 
     <string-array name="gender_types_values">
         <item>Nespecificat</item>

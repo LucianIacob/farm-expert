@@ -67,18 +67,17 @@
         android:layout_weight="1"
         android:gravity="center_vertical">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/signInButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_marginStart="@dimen/xxxl_margin"
             android:layout_marginEnd="@dimen/xxxl_margin"
-            android:background="@drawable/ic_button_primary"
             android:fontFamily="@font/telegroteskscreen_medium"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
             android:text="@string/login"
             android:textAllCaps="false"
-            android:textColor="@color/white"
             android:textSize="@dimen/large_text" />
 
     </RelativeLayout>

@@ -11,6 +11,7 @@ package com.farmexpert.android.model
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import com.farmexpert.android.dialogs.BaseDialogFragment
 import com.farmexpert.android.dialogs.BaseEditRecordDialogFragment
 import com.farmexpert.android.utils.FirestorePath
 import com.google.firebase.Timestamp
@@ -29,8 +30,8 @@ data class AnimalAction(
     override fun getEditDialogArgs(): Bundle {
         return bundleOf(
             BaseEditRecordDialogFragment.EDIT_DIALOG_DOC_ID to id,
-            BaseEditRecordDialogFragment.EDIT_DIALOG_DATE to actionDate.toDate().time,
-            BaseEditRecordDialogFragment.EDIT_DIALOG_DETAILS to details
+            BaseDialogFragment.DIALOG_DATE to actionDate.toDate().time,
+            BaseDialogFragment.DIALOG_DETAILS to details
         )
     }
 }

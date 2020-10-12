@@ -23,7 +23,7 @@ class BreedingViewHolder(
     override fun bind(entity: Breeding) {
         with(itemView) {
             date.text = entity.actionDate.asDisplayable()
-            note.text = SpinnerUtils.getBreedingNoteValue(entity.note, itemView.resources)
+            note.text = DropdownUtils.getBreedingNoteValue(entity.note, itemView.resources)
             male.text = entity.male
             estimatedBirth.text = entity.birthExpectedAt.asDisplayable()
             entity.comments?.takeIfNotBlank()?.let {

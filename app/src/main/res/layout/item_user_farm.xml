@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardBackgroundColor="@android:color/white"
-    app:cardCornerRadius="3dp"
-    app:cardElevation="@dimen/default_elevation"
-    app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -96,6 +91,7 @@
             android:layout_marginStart="@dimen/tiny_margin"
             android:text="@string/delete"
             android:textColor="@color/red"
+            app:rippleColor="@android:color/holo_red_light"
             android:visibility="gone"
             app:layout_constraintLeft_toRightOf="@id/unsubscribeBtn"
             app:layout_constraintRight_toRightOf="parent"
@@ -104,4 +100,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

@@ -16,7 +16,7 @@ import com.farmexpert.android.adapter.holder.AnimalActionHolder
 import com.farmexpert.android.dialogs.AddAnimalActionDialogFragment
 import com.farmexpert.android.dialogs.AddAnimalActionDialogFragment.Companion.ADD_DIALOG_TITLE
 import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
-import com.farmexpert.android.dialogs.BaseEditRecordDialogFragment
+import com.farmexpert.android.dialogs.BaseDialogFragment
 import com.farmexpert.android.dialogs.EditAnimalActionDialogFragment
 import com.farmexpert.android.dialogs.EditAnimalActionDialogFragment.Companion.EDIT_DIALOG_TITLE
 import com.farmexpert.android.model.AnimalAction
@@ -43,7 +43,7 @@ abstract class BaseAnimalActionDetailFragment :
 
     override fun constructEntityFromBundle(bundle: Bundle): Any {
         val details = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_DETAILS, "")
-        val actionDate = Date(bundle.getLong(BaseAddRecordDialogFragment.ADD_DIALOG_DATE))
+        val actionDate = Date(bundle.getLong(BaseDialogFragment.DIALOG_DATE))
 
         return AnimalAction(
             animalId = getAnimalId(),
@@ -54,10 +54,10 @@ abstract class BaseAnimalActionDetailFragment :
     }
 
     override fun getPairsToUpdateFromBundle(args: Bundle): MutableMap<String, Any?> {
-        val timestamp = args.getLong(BaseEditRecordDialogFragment.EDIT_DIALOG_DATE)
+        val timestamp = args.getLong(BaseDialogFragment.DIALOG_DATE)
         val newActionDate = Timestamp(Date(timestamp))
 
-        val newDetails = args.getString(BaseEditRecordDialogFragment.EDIT_DIALOG_DETAILS, "")
+        val newDetails = args.getString(BaseDialogFragment.DIALOG_DETAILS, "")
 
         return mutableMapOf(
             FirestorePath.AnimalAction.ACTION_DATE to newActionDate,

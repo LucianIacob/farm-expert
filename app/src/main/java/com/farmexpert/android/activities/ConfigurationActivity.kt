@@ -11,9 +11,8 @@ package com.farmexpert.android.activities
 
 import android.content.Context
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.ConfigPickerUtils
@@ -32,20 +31,14 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_configuration)
-        setSupportActionBar(toolbar)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.config_activity_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.action_finish) {
-            updateFarmDetails()
-            true
-        } else {
-            super.onOptionsItemSelected(item)
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_finish -> {
+                    updateFarmDetails()
+                    true
+                }
+                else -> super.onOptionsItemSelected(it)
+            }
         }
     }
 
@@ -56,6 +49,7 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
 
         if (farmId.isNullOrEmpty()) {
             longToast(R.string.unknown_error)
+            startActivity<AuthenticationActivity>()
             return
         }
 
@@ -136,7 +130,12 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
                     )
                 )
             )
-            .addOnSuccessListener { startMainActivity() }
+            .addOnSuccessListener {
+                PreferenceManager
+                    .getDefaultSharedPreferences(this)
+                    .edit { putBoolean(KEY_CONFIGS_ACCEPTED, true) }
+                startMainActivity()
+            }
             .addOnFailureListener {
                 longToast(R.string.unknown_error)
                 error { it }
@@ -150,6 +149,7 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
     }
 
     companion object {
+        const val KEY_CONFIGS_ACCEPTED = "com.farmexpert.android.FarmConfigsAccepted"
         const val FARM_TIMELINE_PREFS = "com.farmexpert.android.farm_timeline_settings"
     }
 }

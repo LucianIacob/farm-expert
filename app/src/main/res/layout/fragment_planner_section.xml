@@ -17,7 +17,8 @@
         android:paddingTop="@dimen/tiny_margin"
         android:paddingBottom="@dimen/tiny_margin"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/medium_text" />
+        android:textSize="@dimen/medium_text"
+        tools:text="@string/planner_reprod_control_title" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -33,23 +34,21 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_reminder_btn"
+            style="@style/Widget.App.FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/medium_margin"
-            android:src="@android:drawable/ic_input_add"
-            android:tint="@android:color/white"
-            app:backgroundTint="@color/sea_green"
-            app:fabSize="mini" />
+            android:layout_margin="@dimen/small_margin"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_add_white_24dp"
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/emptyList"
+            style="@style/EmptyTextStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/roboto_light"
             android:gravity="center"
-            android:text="@string/empty_list"
-            android:textSize="@dimen/medium_text"
+            android:textSize="@dimen/text_16"
             android:visibility="gone"
             tools:visibility="visible" />
 

@@ -10,14 +10,12 @@
 package com.farmexpert.android.fragments
 
 import android.app.Activity
-import android.content.DialogInterface.BUTTON_NEGATIVE
 import android.content.DialogInterface.BUTTON_POSITIVE
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.AnimalActionsAdapter
@@ -31,6 +29,7 @@ import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.firebase.ui.firestore.SnapshotParser
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
@@ -47,7 +46,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_animal_action_detail, container, false)
+    ): View = inflater.inflate(R.layout.fragment_animal_action_detail, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -104,7 +103,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
 
     fun showDeleteDialog(entity: ModelClass) {
         context?.let { context ->
-            AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+            MaterialAlertDialogBuilder(context)
                 .setMessage(R.string.delete_confirmation_request)
                 .setPositiveButton(R.string.delete) { _, _ ->
                     deleteEntity(entity)
@@ -113,7 +112,6 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
                 .create()
                 .apply {
                     setOnShowListener {
-                        getButton(BUTTON_NEGATIVE).applyFarmexpertStyle(context)
                         getButton(BUTTON_POSITIVE).applyFarmexpertStyle(context, redButton = true)
                     }
                     show()
@@ -159,6 +157,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
             val addDialog = getAddRecordDialog()
             addDialog.setTargetFragment(this@BaseDetailFragment, ADD_RECORD_RQ)
             if (findFragmentByTag(addDialog::class.java.simpleName) == null) {
+                addDialog.isCancelable = false
                 addDialog.show(this, addDialog::class.java.simpleName)
             }
         }
@@ -171,6 +170,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
                 ?: run { editDialog.arguments = entityToUpdate.getEditDialogArgs() }
             editDialog.setTargetFragment(this@BaseDetailFragment, UPDATE_RECORD_RQ)
             if (findFragmentByTag(editDialog::class.java.simpleName) == null) {
+                editDialog.isCancelable = false
                 editDialog.show(this, editDialog::class.java.simpleName)
             }
         }

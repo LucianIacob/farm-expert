@@ -22,14 +22,14 @@
 
     <ImageView
         android:id="@+id/profileSettingsBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginEnd="@dimen/medium_margin"
         android:contentDescription="@null"
         android:padding="@dimen/small_margin"
         android:src="@drawable/ic_settings_black_24dp"
-        android:tint="@color/white"
+        app:tint="@color/white"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,7 +44,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/xl_text"
         app:layout_constraintTop_toBottomOf="@id/userIcon"
-        tools:text="@tools:sample/lorem[3]" />
+        tools:text="@tools:sample/lorem[2]" />
 
     <TextView
         android:id="@+id/userName"

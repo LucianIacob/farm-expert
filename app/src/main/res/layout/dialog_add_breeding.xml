@@ -5,105 +5,67 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
+        android:orientation="vertical"
         android:padding="@dimen/medium_margin">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/maleInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/TextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/maleInputHint"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            app:layout_constraintTop_toTopOf="parent">
+            android:hint="@string/maleInputHint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/maleInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/telegroteskscreen_medium"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:lines="1"
-                android:maxLength="30"
-                android:minWidth="150dp"
-                android:textColor="#000080"
-                android:textSize="20sp"
-                tools:ignore="LabelFor"
-                tools:targetApi="o"
+                style="@style/TextInputEditTextStyle"
                 tools:text="@tools:sample/full_names" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/dialogDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/change_date_background"
-            android:drawableStart="@drawable/ic_date_range_black_24dp"
-            android:fontFamily="@font/telegroteskscreen_medium"
-            android:gravity="center"
-            android:padding="10dp"
-            android:textColor="#000080"
-            android:textSize="@dimen/large_text"
-            app:layout_constraintTop_toBottomOf="@id/maleInputLayout"
-            tools:layout_editor_absoluteX="15dp"
-            tools:text="@tools:sample/date/ddmmyy" />
-
-
-        <TextView
-            android:id="@+id/noteHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/roboto"
-            android:text="@string/note"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/large_text"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dialogDate" />
-
-        <Spinner
-            android:id="@+id/breedingNotes"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:entries="@array/breeding_notes_values"
-            android:fontFamily="@font/telegroteskscreen_medium"
-            android:textSize="@dimen/large_text"
-            app:layout_constraintBottom_toBottomOf="@id/noteHeader"
-            app:layout_constraintLeft_toRightOf="@id/noteHeader"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/noteHeader" />
-
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:id="@+id/dialogDateHeader"
+            style="@style/TextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium_margin"
-            android:hint="@string/details"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            app:layout_constraintTop_toBottomOf="@id/noteHeader">
+            android:hint="@string/date_of_birth"
+            app:startIconDrawable="@drawable/ic_date_range_black_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/detailsBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:textColor="#000080"
-                android:textSize="@dimen/large_text"
-                tools:ignore="LabelFor"
-                tools:text="@string/lorem_ipsum" />
+                android:id="@+id/dialogDate"
+                style="@style/TextInputNotEditableStyle"
+                tools:text="@tools:sample/us_zipcodes" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dialogNoteHeader"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tiny_margin"
+            android:hint="@string/note">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/breedingNotes"
+                style="@style/TextInputNotEditableStyle"
+                android:text="@string/gender_unknown" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/details">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialogDetails"
+                style="@style/TextInputEditTextStyle" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 </ScrollView>

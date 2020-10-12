@@ -130,7 +130,7 @@
     <string name="planner_physiological_ctrl_reason">%d zile de la ultima fatare</string>
     <string name="planner_first_vaccine_reason">%d zile de la ultima fatare</string>
     <string name="planner_before_birth_vaccine_reason">%d zile inainte de data estimata a fatarii</string>
-    <string name="go_to">Mergi la:</string>
+    <string name="go_to">MERGI LA:</string>
     <string name="change_farm">Schimba ferma</string>
     <string name="logout">Iesi din cont</string>
     <string name="change_farm_confirmation_message">Vei fi directionat la ecranul pentru alegerea fermei. Acolo vei avea posibilitatea de a crea o noua ferma sau de a intra intr-o ferma deja existenta.</string>
@@ -175,12 +175,12 @@
     <string name="unsubscribe_current_farm_confirmation_message">Această fermă este ferma cu care sunteți înregistrat la acest moment. Dacă optați să vă dezabonați, veți fi redirecționat înapoi la ecranul unde vă puteți alege o alta fermă sau să creați una. Sunteți sigur că doriți să vă dezabonați?</string>
     <string name="animal_details_title">Detalii Animal</string>
     <string name="app_version_header">Versiunea aplicației %s</string>
-
-    <integer-array name="gender_types">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </integer-array>
+    <string name="farm_already_exists">Numele fermei exista deja in baza de date</string>
+    <string name="change_farm_name">Schimba numele</string>
+    <string name="farm_does_not_exists">Ferma \"%s\" nu exista sau codul de access este incorect</string>
+    <string name="review_inputs">Revizuieste datele</string>
+    <string name="error">Eroare</string>
+    <string name="add_reminder">Reminder</string>
 
     <string-array name="gender_types_values">
         <item>Nespecificat</item>

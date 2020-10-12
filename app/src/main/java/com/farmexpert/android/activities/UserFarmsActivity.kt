@@ -5,7 +5,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_ID
 import com.farmexpert.android.adapter.UserFarmsAdapter
@@ -50,14 +49,11 @@ class UserFarmsActivity : AppCompatActivity(), AnkoLogger {
             .setLifecycleOwner(this)
             .build()
 
-        with(subscribedFarms) {
-            layoutManager = LinearLayoutManager(this@UserFarmsActivity)
-            this.adapter = UserFarmsAdapter(
-                options = options,
-                unsubscribeListener = { farm -> unsubscribeFrom(farm) },
-                deleteListener = { farm -> deleteFarm(farm) }
-            )
-        }
+        subscribedFarms.adapter = UserFarmsAdapter(
+            options = options,
+            unsubscribeListener = { farm -> unsubscribeFrom(farm) },
+            deleteListener = { farm -> deleteFarm(farm) }
+        )
     }
 
     private fun deleteFarm(farm: Farm) {

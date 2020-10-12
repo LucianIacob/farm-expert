@@ -151,17 +151,14 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/goToBirths"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/tiny_margin"
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/dashboard_graph_births"
-                android:textColor="@color/colorPrimaryDark"
-                app:iconGravity="textStart"
-                app:iconPadding="@dimen/xl_margin"
-                app:iconSize="25dp"
+                android:textColor="@color/black"
                 app:strokeColor="@color/sea_green" />
 
             <com.google.android.material.button.MaterialButton
@@ -173,7 +170,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/dashboard_graph_breedings"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/black"
                 app:strokeColor="@color/sea_green" />
 
         </LinearLayout>
@@ -181,7 +178,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
@@ -193,7 +189,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/dashboard_graph_disinfections"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/black"
                 app:strokeColor="@color/sea_green" />
 
             <com.google.android.material.button.MaterialButton
@@ -205,7 +201,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/dashboard_graph_vitaminisations"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/black"
                 app:strokeColor="@color/sea_green" />
 
         </LinearLayout>
@@ -213,7 +209,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
@@ -225,7 +220,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/dashboard_graph_vaccinations"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/black"
                 app:strokeColor="@color/sea_green" />
 
             <com.google.android.material.button.MaterialButton
@@ -237,7 +232,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/dashboard_graph_pedicures"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/black"
                 app:strokeColor="@color/sea_green" />
 
         </LinearLayout>
@@ -247,10 +242,9 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/dashboard_graph_treatments"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/black"
             app:strokeColor="@color/sea_green" />
 
         <View

@@ -9,12 +9,10 @@
 
 package com.farmexpert.android.activities
 
-import android.content.DialogInterface.BUTTON_NEGATIVE
 import android.content.DialogInterface.BUTTON_POSITIVE
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.core.view.GravityCompat
@@ -32,6 +30,7 @@ import com.farmexpert.android.utils.alert
 import com.farmexpert.android.utils.applyFarmexpertStyle
 import com.farmexpert.android.utils.takeIfNotBlank
 import com.firebase.ui.auth.AuthUI
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.squareup.picasso.Callback
@@ -108,22 +107,23 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
     }
 
     private fun changeFarmRequested() {
-        AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+        MaterialAlertDialogBuilder(this)
             .setMessage(R.string.change_farm_confirmation_message)
             .setPositiveButton(R.string.confirm_button) { _, _ ->
                 PreferenceManager.getDefaultSharedPreferences(this)
-                    .edit { remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID) }
+                    .edit {
+                        remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID)
+                        remove(ConfigurationActivity.KEY_CONFIGS_ACCEPTED)
+                    }
                 startActivity<FarmSelectorActivity>()
                 finish()
             }
             .setNegativeButton(R.string.fui_cancel) { _, _ -> }
-            .setCancelable(false)
             .create()
             .run {
                 setOnShowListener {
-                    getButton(BUTTON_NEGATIVE).applyFarmexpertStyle(context)
                     getButton(BUTTON_POSITIVE).applyFarmexpertStyle(
-                        context,
+                        context = context,
                         redButton = true
                     )
                 }
@@ -132,19 +132,17 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
     }
 
     private fun logOutRequested() {
-        AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+        MaterialAlertDialogBuilder(this)
             .setMessage(R.string.logout_confirmation_message)
             .setPositiveButton(R.string.confirm_button) { _, _ ->
                 logOutConfirmed()
             }
             .setNegativeButton(R.string.fui_cancel) { _, _ -> }
-            .setCancelable(false)
             .create()
             .run {
                 setOnShowListener {
-                    getButton(BUTTON_NEGATIVE).applyFarmexpertStyle(context)
                     getButton(BUTTON_POSITIVE).applyFarmexpertStyle(
-                        context,
+                        context = context,
                         redButton = true
                     )
                 }
@@ -158,7 +156,10 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
             .signOut(this)
             .addOnSuccessListener {
                 PreferenceManager.getDefaultSharedPreferences(this)
-                    .edit { remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID) }
+                    .edit {
+                        remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID)
+                        remove(ConfigurationActivity.KEY_CONFIGS_ACCEPTED)
+                    }
                 startActivity<AuthenticationActivity>()
                 finish()
             }
@@ -167,7 +168,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
                 error { it }
                 FirebaseCrashlytics.getInstance().recordException(it)
             }
-            .addOnCompleteListener { setLoadingVisibility(View.GONE) }
+            .addOnCompleteListener { setLoadingVisibility(View.INVISIBLE) }
     }
 
     override fun onBackPressed() {

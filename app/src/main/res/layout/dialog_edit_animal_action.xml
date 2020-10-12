@@ -5,50 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
+        android:orientation="vertical"
         android:padding="@dimen/medium_margin">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/detailsHeader"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/TextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/details"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            app:layout_constraintTop_toTopOf="parent">
+            android:hint="@string/details">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/details"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/telegroteskscreen_medium"
-                android:importantForAutofill="no"
-                android:inputType="textMultiLine"
-                android:textColor="#000080"
-                android:textSize="@dimen/large_text"
-                tools:ignore="LabelFor"
-                tools:targetApi="o" />
+                android:id="@+id/dialogDetails"
+                style="@style/TextInputEditTextStyle" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/actionDate"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dialogDateHeader"
+            style="@style/TextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:background="@drawable/change_date_background"
-            android:drawableStart="@drawable/ic_date_range_black_24dp"
-            android:fontFamily="@font/telegroteskscreen_medium"
-            android:gravity="center"
-            android:padding="@dimen/small_margin"
-            android:textColor="#000080"
-            android:textSize="@dimen/large_text"
-            app:layout_constraintTop_toBottomOf="@id/detailsHeader" />
+            android:hint="@string/date_of_birth"
+            app:startIconDrawable="@drawable/ic_date_range_black_24dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialogDate"
+                style="@style/TextInputNotEditableStyle"
+                tools:text="@tools:sample/us_zipcodes" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
 </ScrollView>

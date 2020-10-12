@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/default_radius"
-    app:cardElevation="@dimen/default_elevation"
-    app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,11 +17,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
-            android:drawableStart="@drawable/ic_date_range_black_24dp"
             android:drawablePadding="5dp"
             android:fontFamily="@font/telegroteskscreen_medium"
             android:textColor="@android:color/black"
             android:textSize="@dimen/large_text"
+            app:drawableStartCompat="@drawable/ic_date_range_black_24dp"
             tools:text="@tools:sample/date/ddmmyy" />
 
         <LinearLayout
@@ -119,7 +115,7 @@
                 android:fontFamily="@font/telegroteskscreen_medium"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
-                tools:text="@tools:sample/lorem/random[4]" />
+                tools:text="@tools:sample/lorem[5]" />
 
         </LinearLayout>
 
@@ -127,48 +123,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/updateBtn"
+                style="@style/UpdateQuickActionButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/simple_cell_background"
-                android:drawableStart="@drawable/ic_edit_black_24dp"
-                android:drawablePadding="5dp"
-                android:elevation="@dimen/small_elevation"
-                android:ellipsize="end"
-                android:fontFamily="@font/roboto"
-                android:gravity="center"
-                android:lines="1"
-                android:maxLines="1"
-                android:padding="5dp"
-                android:text="@string/update"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                tools:targetApi="lollipop" />
+                android:layout_weight="1" />
 
-            <TextView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/deleteBtn"
+                style="@style/DeleteQuickActionButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/simple_cell_background"
-                android:drawableStart="@drawable/ic_delete_forever_black_24dp"
-                android:drawablePadding="5dp"
-                android:elevation="@dimen/small_elevation"
-                android:ellipsize="end"
-                android:fontFamily="@font/roboto"
-                android:gravity="center"
-                android:lines="1"
-                android:maxLines="1"
-                android:padding="5dp"
-                android:text="@string/delete"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                tools:targetApi="lollipop" />
+                android:text="@string/delete" />
+
         </LinearLayout>
+
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

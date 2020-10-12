@@ -21,41 +21,26 @@ import kotlinx.android.synthetic.main.dialog_edit_animal_action.view.*
  * Cluj-Napoca, 19 January, 2018.
  */
 
-open class EditAnimalActionDialogFragment : BaseEditRecordDialogFragment() {
+class EditAnimalActionDialogFragment : BaseEditRecordDialogFragment() {
 
-    private var mDefaultDetails: String? = null
-    private var mTitleRedId: Int = R.string.edit_animal_action_title
+    override var titleRes = R.string.edit_animal_action_title
 
-    override fun extractAdditionalArgs(savedInstanceState: Bundle?, bundle: Bundle) {
-        with(bundle) {
-            mDefaultDetails = savedInstanceState?.getString(EDIT_DIALOG_DETAILS)?.let { it }
-                ?: getString(EDIT_DIALOG_DETAILS)
-            mTitleRedId = getInt(EDIT_DIALOG_TITLE)
-        }
+    override val layoutRes = R.layout.dialog_edit_animal_action
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        titleRes = arguments?.getInt(EDIT_DIALOG_TITLE) ?: titleRes
     }
-
-    override fun populateFields() {
-        mView?.details?.setText(mDefaultDetails)
-    }
-
-    override fun getLayoutId() = R.layout.dialog_edit_animal_action
-
-    override fun getTitle() = mTitleRedId
 
     override fun sendNewRecord() {
         val bundle = bundleOf(
             EDIT_DIALOG_DOC_ID to documentId,
-            EDIT_DIALOG_DATE to mActionDate?.time,
-            EDIT_DIALOG_DETAILS to mView?.details?.text.toString()
+            DIALOG_DATE to currentDate.time,
+            DIALOG_DETAILS to mView?.dialogDetails?.text.toString()
         )
         val intent = Intent()
         intent.putExtras(bundle)
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(EDIT_DIALOG_DETAILS, mDefaultDetails)
     }
 
     companion object {

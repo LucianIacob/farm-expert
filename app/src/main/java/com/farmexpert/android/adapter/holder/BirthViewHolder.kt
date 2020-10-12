@@ -23,7 +23,7 @@ class BirthViewHolder(
     override fun bind(entity: Birth) {
         with(itemView) {
             birthDate.text = entity.dateOfBirth.asDisplayable()
-            note.text = SpinnerUtils.getBirthNoteValue(entity.note, itemView.resources)
+            note.text = DropdownUtils.getBirthNoteValue(entity.note, itemView.resources)
             calfId.text = entity.calfId
             entity.comments?.takeIfNotBlank()?.let {
                 commentsContainer?.visible()

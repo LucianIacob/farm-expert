@@ -8,50 +8,38 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:descendantFocusability="beforeDescendants"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
         android:padding="@dimen/medium_margin">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/detailsHeader"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/TextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/details"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/details"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/telegroteskscreen_medium"
-                android:importantForAutofill="no"
-                android:inputType="textMultiLine"
-                android:textColor="#000080"
-                android:textSize="@dimen/large_text"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="LabelFor"
-                tools:targetApi="o" />
+                android:id="@+id/dialogDetails"
+                style="@style/TextInputEditTextStyle" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/actionDate"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dialogDateHeader"
+            style="@style/TextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:background="@drawable/change_date_background"
-            android:drawableStart="@drawable/ic_date_range_black_24dp"
-            android:fontFamily="@font/telegroteskscreen_medium"
-            android:gravity="center"
-            android:padding="@dimen/medium_margin"
-            android:textColor="#000080"
-            android:textSize="@dimen/large_text"
-            app:layout_constraintTop_toBottomOf="@id/detailsHeader" />
+            android:hint="@string/date_of_birth"
+            app:layout_constraintTop_toBottomOf="@id/detailsHeader"
+            app:startIconDrawable="@drawable/ic_date_range_black_24dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialogDate"
+                style="@style/TextInputNotEditableStyle"
+                tools:text="@tools:sample/us_zipcodes" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <View
             android:id="@+id/middle_separator"
@@ -69,7 +57,7 @@
             android:contentDescription="@null"
             android:src="@drawable/right_nail_default"
             app:layout_constraintRight_toLeftOf="@id/middle_separator"
-            app:layout_constraintTop_toBottomOf="@id/actionDate" />
+            app:layout_constraintTop_toBottomOf="@id/dialogDateHeader" />
 
         <ImageView
             android:id="@+id/leftTopLeftNail"
@@ -80,7 +68,7 @@
             android:contentDescription="@null"
             android:src="@drawable/left_nail_default"
             app:layout_constraintRight_toLeftOf="@id/leftTopRightNail"
-            app:layout_constraintTop_toBottomOf="@id/actionDate" />
+            app:layout_constraintTop_toBottomOf="@id/dialogDateHeader" />
 
         <ImageView
             android:id="@+id/rightTopLeftNail"
@@ -91,7 +79,7 @@
             android:contentDescription="@null"
             android:src="@drawable/left_nail_default"
             app:layout_constraintLeft_toRightOf="@id/middle_separator"
-            app:layout_constraintTop_toBottomOf="@id/actionDate" />
+            app:layout_constraintTop_toBottomOf="@id/dialogDateHeader" />
 
         <ImageView
             android:id="@+id/rightTopRightNail"
@@ -102,7 +90,7 @@
             android:contentDescription="@null"
             android:src="@drawable/right_nail_default"
             app:layout_constraintLeft_toRightOf="@id/rightTopLeftNail"
-            app:layout_constraintTop_toBottomOf="@id/actionDate" />
+            app:layout_constraintTop_toBottomOf="@id/dialogDateHeader" />
 
         <View
             android:id="@+id/horizontal_separator"

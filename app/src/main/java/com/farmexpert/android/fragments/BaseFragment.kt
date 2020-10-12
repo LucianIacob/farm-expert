@@ -88,7 +88,7 @@ open class BaseFragment : Fragment(), AnkoLogger {
     }
 
     fun loadingHide() {
-        (activity as? MainActivity)?.setLoadingVisibility(View.GONE)
+        (activity as? MainActivity)?.setLoadingVisibility(View.INVISIBLE)
     }
 
     fun setTitle(title: String) {

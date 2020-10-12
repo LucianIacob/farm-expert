@@ -10,30 +10,26 @@
         android:id="@+id/headcountRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/activity_vertical_margin_half"
+        android:layout_marginStart="@dimen/activity_vertical_margin_half"
+        android:layout_marginEnd="@dimen/activity_vertical_margin_half"
+        android:layout_marginBottom="@dimen/activity_vertical_margin_half"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_animal" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addAnimalBtn"
+        style="@style/Widget.App.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:layout_gravity="bottom|end"
         android:layout_margin="30dp"
-        android:src="@android:drawable/ic_input_add"
-        android:tint="@android:color/white"
-        app:backgroundTint="@color/sea_green"
-        app:fabSize="auto" />
+        app:srcCompat="@drawable/ic_add_white_24dp"
+        app:tint="@android:color/white" />
 
     <TextView
         android:id="@+id/emptyView"
+        style="@style/EmptyTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/roboto_light"
-        android:text="@string/empty_list"
-        android:textSize="23sp"
         android:visibility="visible" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

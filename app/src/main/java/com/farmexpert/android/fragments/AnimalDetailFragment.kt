@@ -9,12 +9,10 @@
 
 package com.farmexpert.android.fragments
 
-import android.app.DatePickerDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
@@ -23,8 +21,10 @@ import com.farmexpert.android.R
 import com.farmexpert.android.model.Animal
 import com.farmexpert.android.transactions.DeleteAnimalTransaction
 import com.farmexpert.android.utils.*
-import com.farmexpert.android.utils.SpinnerUtils.getGenderByKey
+import com.farmexpert.android.utils.DropdownUtils.getGenderByKey
 import com.farmexpert.android.views.TextViewWithHeaderAndExpandAndEdit
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.Timestamp
@@ -35,8 +35,8 @@ import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.fragment_animal_detail.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.error
-import org.jetbrains.anko.support.v4.selector
 import org.jetbrains.anko.support.v4.toast
+import java.util.*
 
 class AnimalDetailFragment : BaseFragment() {
 
@@ -68,18 +68,16 @@ class AnimalDetailFragment : BaseFragment() {
 
     private fun displayDeleteDialog(): Boolean {
         context?.let { context ->
-            AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+            MaterialAlertDialogBuilder(context)
                 .setTitle(R.string.delete_animal)
                 .setMessage(getString(R.string.delete_animal_message, args.animalId))
                 .setPositiveButton(R.string.delete) { _, _ ->
                     deleteAnimalConfirmed()
                 }
                 .setNegativeButton(R.string.fui_cancel) { _, _ -> }
-                .setCancelable(false)
                 .create()
                 .run {
                     setOnShowListener {
-                        getButton(DialogInterface.BUTTON_NEGATIVE).applyFarmexpertStyle(context)
                         getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(
                             context,
                             redButton = true
@@ -110,7 +108,7 @@ class AnimalDetailFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_animal_detail, container, false)
+    ): View = inflater.inflate(R.layout.fragment_animal_detail, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         animalId.text = args.animalId
@@ -196,17 +194,6 @@ class AnimalDetailFragment : BaseFragment() {
         NavHostFragment.findNavController(this).navigate(navDirections)
     }
 
-    override fun onPause() {
-        super.onPause()
-        goToBirths?.setOnClickListener(null)
-        goToBreedings?.setOnClickListener(null)
-        goToDisinfections?.setOnClickListener(null)
-        goToPedicures?.setOnClickListener(null)
-        goToTreatments?.setOnClickListener(null)
-        goToVaccinations?.setOnClickListener(null)
-        goToVitaminizations?.setOnClickListener(null)
-    }
-
     private fun editMotherMother() {
         readTextInput(
             hintId = R.string.mother_mother_id,
@@ -286,34 +273,37 @@ class AnimalDetailFragment : BaseFragment() {
     }
 
     private fun editGender() {
-        val genderTypes = resources.getStringArray(R.array.gender_types_values)
-        selector(items = genderTypes.asList()) { _, position ->
-            updateField(
-                fieldToUpdate = FirestorePath.Animal.GENDER,
-                newValue = position,
-                viewToUpdate = genderView
-            )
+        context?.let {
+            val genderTypes = resources.getStringArray(R.array.gender_types_values)
+            MaterialAlertDialogBuilder(it)
+                .setItems(genderTypes) { _, position ->
+                    updateField(
+                        fieldToUpdate = FirestorePath.Animal.GENDER,
+                        newValue = position,
+                        viewToUpdate = genderView
+                    )
+                }
+                .show()
         }
     }
 
     private fun editDateOfBirth() {
         currentAnimal?.run {
-            context?.let { context ->
-                DatePickerDialog(
-                    context,
-                    { _, year, month, day ->
-                        val newTimestamp = AppUtils.timestampFor(year, month, day)
+            MaterialDatePicker.Builder
+                .datePicker()
+                .setSelection(dateOfBirth.toDate().time)
+                .build()
+                .apply {
+                    isCancelable = false
+                    addOnPositiveButtonClickListener {
                         updateField(
                             FirestorePath.Animal.DATE_OF_BIRTH,
-                            newTimestamp,
-                            dateOfBirthView
+                            Timestamp(Date(it)),
+                            this@AnimalDetailFragment.dateOfBirthView
                         )
-                    },
-                    yearOfBirth(),
-                    monthOfBirth(),
-                    dayOfBirth()
-                ).show()
-            }
+                    }
+                    showNow(this@AnimalDetailFragment.parentFragmentManager, "DatePicker")
+                }
         }
     }
 
@@ -340,7 +330,7 @@ class AnimalDetailFragment : BaseFragment() {
             view.findViewById<TextInputLayout>(R.id.edittext_header).hint = getString(hintId)
             view.findViewById<TextInputEditText>(R.id.edittext).setText(currentValue)
 
-            AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+            MaterialAlertDialogBuilder(context)
                 .setView(view)
                 .setPositiveButton(R.string.common_google_play_services_update_button) { _, _ ->
                     val edittext = view.findViewById<TextInputEditText>(R.id.edittext)
@@ -348,14 +338,7 @@ class AnimalDetailFragment : BaseFragment() {
                 }
                 .setNegativeButton(R.string.fui_cancel) { _, _ -> }
                 .setCancelable(false)
-                .create()
-                .apply {
-                    setOnShowListener {
-                        getButton(DialogInterface.BUTTON_NEGATIVE).applyFarmexpertStyle(context)
-                        getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(context)
-                    }
-                    show()
-                }
+                .show()
         }
     }
 

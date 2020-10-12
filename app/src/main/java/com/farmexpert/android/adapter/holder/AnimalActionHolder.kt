@@ -24,7 +24,7 @@ class AnimalActionHolder(
         with(itemView) {
             item_animal_action_date.text = entity.actionDate.asDisplayable()
             item_animal_action_detail.text = entity.details
-            item_animal_action_update.setOnClickListener { updateListener(entity) }
-            item_animal_action_delete.setOnClickListener { deleteListener(entity) }
+            updateBtn.setOnClickListener { updateListener(entity) }
+            deleteBtn.setOnClickListener { deleteListener(entity) }
         }
 }

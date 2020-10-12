@@ -14,11 +14,6 @@
                     android:checkable="false"
                     android:icon="@drawable/ic_event_note_black_24dp"
                     android:title="@string/planner" />
-                <!--<item-->
-                <!--android:id="@+id/statisticsFragment"-->
-                <!--android:checkable="false"-->
-                <!--android:icon="@drawable/ic_assessment_black_24dp"-->
-                <!--android:title="@string/nav_statistics" />-->
             </group>
         </menu>
     </item>

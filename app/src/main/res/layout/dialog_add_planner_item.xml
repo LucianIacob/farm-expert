@@ -1,56 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:focusable="true"
-	android:focusableInTouchMode="true"
-	android:padding="20dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
 
-	<com.google.android.material.textfield.TextInputLayout
-		android:id="@+id/dialog_add_planner_item_header"
-		android:layout_width="0dp"
-		android:layout_height="wrap_content"
-		android:fontFamily="@font/roboto"
-		android:hint="@string/planner_item_details_hint"
-		style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-		app:hintAnimationEnabled="true"
-		app:hintEnabled="true"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
-		app:layout_constraintTop_toTopOf="parent">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialog_add_planner_item_header"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/planner_item_details_hint">
 
-		<com.google.android.material.textfield.TextInputEditText
-			android:id="@+id/dialog_planner_details"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:fontFamily="@font/telegroteskscreen_medium"
-			android:importantForAutofill="no"
-			android:inputType="textMultiLine"
-			android:minWidth="250dp"
-			android:textColor="#000080"
-			android:textSize="@dimen/large_text"
-			tools:ignore="LabelFor"
-            tools:targetApi="o"
-            tools:text="@tools:sample/lorem/random[5]" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialogDetails"
+            style="@style/TextInputEditTextStyle"
+            tools:text="@tools:sample/lorem[7]" />
 
-	</com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-	<TextView
-		android:id="@+id/dialogDate"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="10dp"
-		android:background="@drawable/change_date_background"
-		android:drawableStart="@drawable/ic_date_range_black_24dp"
-		android:fontFamily="@font/telegroteskscreen_medium"
-		android:gravity="center"
-		android:padding="10dp"
-		android:textColor="#000080"
-		android:textSize="@dimen/text_18"
-        app:layout_constraintTop_toBottomOf="@id/dialog_add_planner_item_header"
-        tools:layout_editor_absoluteX="20dp"
-        tools:text="@tools:sample/date/ddmmyy" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialogDateHeader"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/date_of_birth"
+        app:startIconDrawable="@drawable/ic_date_range_black_24dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialogDate"
+            style="@style/TextInputNotEditableStyle"
+            tools:text="@tools:sample/us_zipcodes" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

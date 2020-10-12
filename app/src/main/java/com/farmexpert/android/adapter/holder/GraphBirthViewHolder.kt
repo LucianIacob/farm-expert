@@ -32,7 +32,7 @@ class GraphBirthViewHolder(
             setOnClickListener { motherIdClick(key) }
         }
 
-        values.maxBy { it.dateOfBirth }?.calfId?.let { calfId ->
+        values.maxByOrNull { it.dateOfBirth }?.calfId?.let { calfId ->
             calfCell.text = calfId.takeLast(digitsToShow)
             calfCell.setOnClickListener { calfIdClick(calfId) }
         }

@@ -11,13 +11,11 @@
         android:fullBackupContent="true"
         android:icon="@drawable/icon_launcher"
         android:label="@string/app_name"
-        android:testOnly="false"
         android:roundIcon="@drawable/icon_launcher"
         android:supportsRtl="true"
+        android:testOnly="false"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".activities.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBarCustom">
+        <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -26,44 +24,33 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".activities.AuthenticationActivity"
-            android:theme="@style/AppTheme.NoActionbar" />
+        <activity android:name=".activities.AuthenticationActivity" />
 
         <activity
             android:name=".activities.FarmSelectorActivity"
             android:label="Select Farm"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionbar"
             android:windowSoftInputMode="adjustPan" />
 
-        <activity
-            android:name=".activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionbar" />
+        <activity android:name=".activities.MainActivity" />
 
-        <activity
-            android:name=".activities.ConfigurationActivity"
-            android:theme="@style/AppTheme.NoActionbar" />
+        <activity android:name=".activities.ConfigurationActivity" />
 
         <activity
             android:name=".activities.UserProfileActivity"
-            android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionbar" />
+            android:parentActivityName=".activities.MainActivity" />
 
         <activity
             android:name=".activities.ChangeUserNameActivity"
-            android:parentActivityName=".activities.UserProfileActivity"
-            android:theme="@style/AppTheme.NoActionbar" />
+            android:parentActivityName=".activities.UserProfileActivity" />
 
         <activity
             android:name=".activities.ChangeUserEmailActivity"
-            android:parentActivityName=".activities.UserProfileActivity"
-            android:theme="@style/AppTheme.NoActionbar" />
+            android:parentActivityName=".activities.UserProfileActivity" />
 
         <activity
             android:name=".activities.UserFarmsActivity"
-            android:parentActivityName=".activities.UserProfileActivity"
-            android:theme="@style/AppTheme.NoActionbar" />
+            android:parentActivityName=".activities.UserProfileActivity" />
 
     </application>
 

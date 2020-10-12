@@ -1,54 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?><!--suppress AndroidElementNotAllowed -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.farmexpert.android.preference.NumberPickerPreference
         android:defaultValue="20"
         android:key="@string/pref_heating_start_key"
-        android:title="@string/pref_heating_start_title" />
+        android:title="@string/pref_heating_start_title"
+        app:allowDividerAbove="false"
+        app:allowDividerBelow="true" />
 
     <com.farmexpert.android.preference.NumberPickerPreference
         android:defaultValue="22"
         android:key="@string/pref_heating_end_key"
-        android:title="@string/pref_heating_end_title" />
+        android:title="@string/pref_heating_end_title"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true" />
 
     <com.farmexpert.android.preference.NumberPickerPreference
         android:defaultValue="60"
         android:key="@string/pref_gestation_key"
-        android:title="@string/pref_gestation_title" />
+        android:title="@string/pref_gestation_title"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true" />
 
     <com.farmexpert.android.preference.NumberPickerPreference
         android:defaultValue="30"
         android:key="@string/pref_physiological_control_key"
-        android:title="@string/pref_physiological_control_title" />
+        android:title="@string/pref_physiological_control_title"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true" />
 
     <com.farmexpert.android.preference.NumberPickerPreference
         android:defaultValue="60"
         android:key="@string/pref_disinfection_key"
-        android:title="@string/pref_disinfection_title" />
+        android:title="@string/pref_disinfection_title"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true" />
 
     <com.farmexpert.android.preference.NumberPickerPreference
         android:defaultValue="60"
         android:key="@string/pref_vaccin_after_birth_key"
-        android:title="@string/pref_after_birth_vaccin_title" />
+        android:title="@string/pref_after_birth_vaccin_title"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true" />
 
     <com.farmexpert.android.preference.NumberPickerPreference
         android:defaultValue="45"
         android:key="@string/pref_vaccin1_before_birth_key"
-        android:title="@string/pref_before_birth_vaccin1_title" />
+        android:title="@string/pref_before_birth_vaccin1_title"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true" />
 
     <com.farmexpert.android.preference.NumberPickerPreference
         android:defaultValue="20"
         android:key="@string/pref_vaccin2_before_birth_key"
-        android:title="@string/pref_before_birth_vaccin2_title" />
+        android:title="@string/pref_before_birth_vaccin2_title"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true" />
 
     <com.farmexpert.android.preference.NumberPickerPreference
         android:defaultValue="15"
         android:key="@string/pref_vaccin3_before_birth_key"
-        android:title="@string/pref_before_birth_vaccin3_title" />
+        android:title="@string/pref_before_birth_vaccin3_title"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true" />
 
     <com.farmexpert.android.preference.NumberPickerPreference
         android:defaultValue="285"
         android:key="@string/pref_gestation_length_key"
-        android:title="@string/pref_gestation_length_title" />
+        android:title="@string/pref_gestation_length_title"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true" />
 
 </PreferenceScreen>

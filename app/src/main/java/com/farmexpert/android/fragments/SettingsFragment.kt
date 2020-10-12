@@ -24,12 +24,12 @@ import com.farmexpert.android.preference.NumberPickerPreference
  */
 class SettingsFragment : PreferenceFragmentCompat() {
 
-    override fun onCreatePreferences(p0: Bundle?, p1: String?) {
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         preferenceManager.sharedPreferencesName = FARM_TIMELINE_PREFS
-        setPreferencesFromResource(R.xml.settings_prefs, p1)
+        setPreferencesFromResource(R.xml.settings_prefs, rootKey)
     }
 
-    override fun onDisplayPreferenceDialog(preference: Preference?) {
+    override fun onDisplayPreferenceDialog(preference: Preference) {
         if (preference is NumberPickerPreference) {
             val dialogFragment =
                 NumberPickerPreferenceDialogFragment.newInstance(preference.getKey())
@@ -46,12 +46,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun initPreferenceSummaries() {
-        val prefScreen = preferenceScreen
-
-        for (current in 0 until prefScreen.preferenceCount) {
-            val preference = prefScreen.getPreference(current)
+        for (current in 0 until preferenceScreen.preferenceCount) {
+            val preference = preferenceScreen.getPreference(current)
             preferenceChangeListener.onSharedPreferenceChanged(
-                prefScreen.sharedPreferences,
+                preferenceScreen.sharedPreferences,
                 preference.key
             )
         }

@@ -10,12 +10,9 @@
 package com.farmexpert.android.activities
 
 import android.content.Context
-import android.content.DialogInterface.BUTTON_NEGATIVE
-import android.content.DialogInterface.BUTTON_POSITIVE
 import android.content.res.Resources
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
@@ -24,10 +21,10 @@ import com.farmexpert.android.R
 import com.farmexpert.android.adapter.FarmSelectorAdapter
 import com.farmexpert.android.model.Farm
 import com.farmexpert.android.utils.FirestorePath
-import com.farmexpert.android.utils.applyFarmexpertStyle
 import com.farmexpert.android.utils.invisible
 import com.farmexpert.android.utils.visible
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.crashlytics.FirebaseCrashlytics
@@ -122,7 +119,10 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
                 successListener = { exists ->
                     if (exists) {
                         loadingProgressBar.invisible()
-                        displayDialog("Farm name already exists", "Change name")
+                        displayDialog(
+                            getString(R.string.farm_already_exists),
+                            R.string.change_farm_name
+                        )
                     } else saveFarm(farm)
                 },
                 failureListener = { exception ->
@@ -134,21 +134,15 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
     }
 
     private fun displayDialog(
-        title: String,
-        okButton: String,
+        message: String,
+        okButton: Int,
         okListener: (() -> Unit)? = null
     ) {
-        AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
-            .setTitle(title)
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.error)
+            .setMessage(message)
             .setPositiveButton(okButton) { _, _ -> okListener?.let { okListener() } }
-            .create()
-            .run {
-                setOnShowListener {
-                    getButton(BUTTON_NEGATIVE).applyFarmexpertStyle(context)
-                    getButton(BUTTON_POSITIVE).applyFarmexpertStyle(context)
-                }
-                show()
-            }
+            .show()
     }
 
     private fun saveFarm(farm: Farm) {
@@ -218,8 +212,8 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
                     } else {
                         loadingProgressBar.invisible()
                         displayDialog(
-                            "Farm '$farmName' does not exists or the access code is incorrect",
-                            "Review inputs"
+                            getString(R.string.farm_does_not_exists, farmName),
+                            R.string.review_inputs
                         )
                     }
                 },
@@ -247,6 +241,10 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
                 putInt(getString(R.string.pref_vaccin_after_birth_key), farm.vaccin3BeforeBirth)
                 putInt(getString(R.string.pref_gestation_length_key), farm.gestationLength)
             }
+
+        PreferenceManager
+            .getDefaultSharedPreferences(this)
+            .edit { putBoolean(ConfigurationActivity.KEY_CONFIGS_ACCEPTED, true) }
     }
 
     private fun updateFarm(farm: Farm) {

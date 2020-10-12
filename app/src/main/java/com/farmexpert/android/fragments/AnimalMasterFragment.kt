@@ -18,7 +18,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.navigation.fragment.NavHostFragment
@@ -29,10 +28,12 @@ import com.farmexpert.android.R
 import com.farmexpert.android.adapter.AnimalsAdapter
 import com.farmexpert.android.dialogs.AddAnimalDialogFragment
 import com.farmexpert.android.dialogs.BaseAddRecordDialogFragment
+import com.farmexpert.android.dialogs.BaseDialogFragment
 import com.farmexpert.android.model.Animal
 import com.farmexpert.android.transactions.DeleteAnimalTransaction
 import com.farmexpert.android.utils.*
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.Timestamp
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.CollectionReference
@@ -57,11 +58,6 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
 
     private var layoutState: Parcelable? = null
     private var query: String = ""
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -120,8 +116,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
             }
         }
 
-        layoutManager = LinearLayoutManager(activity)
-        headcountRecyclerView.layoutManager = layoutManager
+        layoutManager = headcountRecyclerView.layoutManager as LinearLayoutManager
         headcountRecyclerView.adapter = adapter
     }
 
@@ -151,7 +146,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
 
     private fun animalLongClick(animalId: String) {
         context?.let { context ->
-            AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+            MaterialAlertDialogBuilder(context)
                 .setTitle(R.string.delete_animal)
                 .setMessage(getString(R.string.delete_animal_message, animalId))
                 .setPositiveButton(R.string.delete) { _, _ ->
@@ -164,11 +159,9 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
                     ).execute(animalId)
                 }
                 .setNegativeButton(R.string.fui_cancel) { _, _ -> }
-                .setCancelable(false)
                 .create()
                 .run {
                     setOnShowListener {
-                        getButton(DialogInterface.BUTTON_NEGATIVE).applyFarmexpertStyle(context)
                         getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(
                             context,
                             redButton = true
@@ -209,12 +202,13 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
 
     private fun insertAnimal(extras: Bundle) {
         val id = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_ANIMAL, "")
-        val dateOfBirth = Date(extras.getLong(BaseAddRecordDialogFragment.ADD_DIALOG_DATE))
+        val dateOfBirth = Date(extras.getLong(BaseDialogFragment.DIALOG_DATE))
         val gender = extras.getInt(BaseAddRecordDialogFragment.ADD_DIALOG_GENDER, 0)
         val race = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_RACE, "")
         val fatherId = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_FATHER, "")
         val motherId = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_MOTHER, "")
 
+        // TODO MOVE ADD LOGIC TO THE FRAGMENT
         if (!FarmValidator.isValidAnimalId(id)) {
             alert(message = R.string.err_adding_animal_message)
             return
@@ -246,6 +240,15 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
                             alert(message = R.string.err_adding_animal)
                             error { it }
                             FirebaseCrashlytics.getInstance().recordException(it)
+                        }
+                        .addOnCompleteListener {
+                            parentFragmentManager.findFragmentByTag(AddAnimalDialogFragment.TAG)
+                                ?.let {
+                                    parentFragmentManager
+                                        .beginTransaction()
+                                        .remove(it)
+                                        .commit()
+                                }
                         }
                 }
             }

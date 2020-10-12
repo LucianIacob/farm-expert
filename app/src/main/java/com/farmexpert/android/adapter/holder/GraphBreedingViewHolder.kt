@@ -31,7 +31,7 @@ class GraphBreedingViewHolder(
             text = key.takeLast(digitsToShow)
             setOnClickListener { femaleIdClick(key) }
         }
-        values.maxBy { it.actionDate }?.let { breeding ->
+        values.maxByOrNull { it.actionDate }?.let { breeding ->
             maleCell.text = breeding.male
             estimatedBirth.text = breeding.birthExpectedAt.asDisplayable()
             maleCell.setOnClickListener { maleIdClick(breeding.male) }

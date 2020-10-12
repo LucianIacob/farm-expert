@@ -21,7 +21,7 @@
         android:layout_gravity="center_vertical"
         android:fontFamily="@font/roboto"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/medium_text"
+        android:textSize="@dimen/text_16"
         tools:text="@tools:sample/lorem[1]" />
 
     <TextView

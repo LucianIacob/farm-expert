@@ -1,46 +1,118 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="windowActionBar">true</item>
-        <item name="windowNoTitle">false</item>
-        <item name="android:windowBackground">@color/white</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent
+        </item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
+        <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
+        <item name="floatingActionButtonStyle">@style/Widget.App.FloatingActionButton</item>
     </style>
 
-    <style name="AppTheme.NoActionBarCustom">
-        <item name="windowActionBar">false</item>
-        <item name="android:windowBackground">@drawable/splash_background</item>
-        <item name="windowNoTitle">true</item>
-        <item name="colorPrimaryDark">#FFFFFF</item>
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
     </style>
 
-    <style name="AppTheme.NoActionbar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="materialAlertDialogTitleTextStyle">@style/DialogTitleTextStyle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/DialogBodyTextStyle</item>
+    </style>
+
+    <style name="DialogTitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/allerta</item>
+    </style>
+
+    <style name="DialogBodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardPreventCornerOverlap">true</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="cardElevation">@dimen/default_elevation</item>
+        <item name="rippleColor">@color/sea_green</item>
+    </style>
+
+    <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:layout_gravity">bottom|end</item>>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="ToolbarTitleAppearance" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+    <style name="ToolbarTitleAppearance" parent="@style/MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@android:color/white</item>
         <item name="android:fontFamily">@font/telegroteskscreen_medium</item>
     </style>
 
-    <style name="ToolbarSubtitleAppearance" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
-        <item name="android:textSize">21sp</item>
-        <item name="android:textColor">@android:color/white</item>
+    <style name="ToolbarSubtitleAppearance" parent="@style/TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textSize">20sp</item>
         <item name="android:fontFamily">@font/telegroteskscreen_medium</item>
     </style>
 
-    <style name="EmptyTextStyle">
+    <style name="EmptyTextStyle" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/large_text</item>
-        <item name="android:textColor">@android:color/darker_gray</item>
-        <item name="android:fontFamily">@font/josefin_sans</item>
+        <item name="android:text">@string/empty_list</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_marginTop">@dimen/tiny_margin</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <!--    TODO ADD STYLE FOR MATRICOLS MAx LENGTH-->
+    <style name="TextInputEditTextStyle">
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/telegroteskscreen_medium</item>
+        <item name="android:textColor">#000080</item>
+        <item name="android:textSize">@dimen/large_text</item>
+        <item name="android:importantForAutofill" tools:ignore="NewApi">no</item>
+    </style>
+
+    <style name="TextInputNotEditableStyle" parent="TextInputEditTextStyle">
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:inputType">none</item>
+        <item name="android:longClickable">false</item>
+    </style>
+
+    <style name="UpdateQuickActionButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
+        <item name="textAllCaps">false</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:text">@string/update</item>
+        <item name="icon">@drawable/ic_edit_black_24dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_16</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="DeleteQuickActionButtonStyle" parent="UpdateQuickActionButtonStyle">
+        <item name="iconTint">@color/red</item>
+        <item name="rippleColor">@android:color/holo_red_light</item>
+        <item name="icon">@drawable/ic_delete_forever_black_24dp</item>
+    </style>
+
+    <style name="AppTheme.Slide">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
     </style>
 
 </resources>

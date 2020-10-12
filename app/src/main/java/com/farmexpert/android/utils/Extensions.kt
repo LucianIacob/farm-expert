@@ -18,12 +18,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.text.trimmedLength
 import androidx.fragment.app.Fragment
 import com.farmexpert.android.R
 import com.farmexpert.android.model.Animal
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
@@ -122,18 +122,16 @@ fun Date.day(): Int {
 fun Button.applyFarmexpertStyle(context: Context, redButton: Boolean = false) {
     setBackgroundResource(0)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        setTextColor(resources.getColor(
-            redButton.takeIf { it }?.let {
-                R.color.red
-            } ?: R.color.sea_green,
-            null)
+        setTextColor(
+            resources.getColor(
+                redButton.takeIf { it }?.let { R.color.red } ?: R.color.sea_green,
+                null
+            )
         )
     } else {
         setTextColor(ContextCompat.getColor(
             context,
-            redButton.takeIf { it }?.let {
-                R.color.red
-            } ?: R.color.sea_green)
+            redButton.takeIf { it }?.let { R.color.red } ?: R.color.sea_green)
         )
     }
 }
@@ -144,19 +142,13 @@ fun Fragment.alert(
     okListener: (() -> Unit)? = null
 ) {
     context?.let { context ->
-        AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+        MaterialAlertDialogBuilder(context)
             .setMessage(message)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 okListener?.invoke()
             }
             .setCancelable(isCancellable)
-            .create()
-            .run {
-                setOnShowListener {
-                    getButton(DialogInterface.BUTTON_POSITIVE)?.applyFarmexpertStyle(context)
-                }
-                show()
-            }
+            .show()
     }
 }
 
@@ -167,7 +159,7 @@ fun Activity.alert(
     okListener: (() -> Unit)? = null,
     redButton: Boolean = false
 ) {
-    val builder = AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+    val builder = MaterialAlertDialogBuilder(this)
         .setMessage(message)
         .setPositiveButton(android.R.string.ok) { _, _ ->
             okListener?.invoke()
@@ -183,7 +175,6 @@ fun Activity.alert(
         .run {
             setOnShowListener {
                 getButton(DialogInterface.BUTTON_POSITIVE)?.applyFarmexpertStyle(context, redButton)
-                getButton(DialogInterface.BUTTON_NEGATIVE)?.applyFarmexpertStyle(context)
             }
             show()
         }
@@ -194,19 +185,13 @@ fun Activity.alert(
     isCancellable: Boolean = true,
     okListener: (() -> Unit)? = null
 ) {
-    AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
+    MaterialAlertDialogBuilder(this)
         .setMessage(message)
         .setPositiveButton(android.R.string.ok) { _, _ ->
             okListener?.invoke()
         }
         .setCancelable(isCancellable)
-        .create()
-        .run {
-            setOnShowListener {
-                getButton(DialogInterface.BUTTON_POSITIVE)?.applyFarmexpertStyle(context)
-            }
-            show()
-        }
+        .show()
 }
 
 fun Int.encode(): String =

@@ -10,7 +10,9 @@
         android:id="@+id/actionsRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/tiny_margin"
+        android:layout_marginStart="@dimen/tiny_margin"
+        android:layout_marginEnd="@dimen/tiny_margin"
+        android:layout_marginBottom="@dimen/tiny_margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_breeding" />
 
@@ -19,21 +21,16 @@
         style="@style/EmptyTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:gravity="center"
-        android:text="@string/empty_list"
-        android:textAlignment="center"
         android:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addButton"
+        style="@style/Widget.App.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
         android:layout_margin="30dp"
-        android:src="@android:drawable/ic_input_add"
-        android:tint="@android:color/white"
-        app:backgroundTint="@color/sea_green"
-        app:fabSize="auto" />
+        app:srcCompat="@drawable/ic_add_white_24dp"
+        app:tint="@android:color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

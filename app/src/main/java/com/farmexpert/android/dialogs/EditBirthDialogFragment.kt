@@ -14,8 +14,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import com.farmexpert.android.R
-import com.farmexpert.android.utils.SpinnerUtils
-import com.farmexpert.android.utils.SpinnerUtils.getBirthNoteByPosition
+import com.farmexpert.android.utils.DropdownUtils.getBirthNoteByPosition
 import kotlinx.android.synthetic.main.dialog_edit_birth.view.*
 
 /**
@@ -25,50 +24,43 @@ import kotlinx.android.synthetic.main.dialog_edit_birth.view.*
 
 class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
 
-    private var details: String? = null
     private var noteToSelect: Int = 4
 
-    override fun getTitle() = R.string.edit_birth_title
+    override var titleRes = R.string.edit_birth_title
 
-    override fun extractAdditionalArgs(savedInstanceState: Bundle?, bundle: Bundle) {
+    override val layoutRes = R.layout.dialog_edit_birth
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         noteToSelect = savedInstanceState?.getInt(EDIT_DIALOG_NOTE, -1)
             ?.takeIf { it != -1 }
-            ?: run { bundle.getInt(EDIT_DIALOG_NOTE, noteToSelect) }
-        details = savedInstanceState?.getString(EDIT_DIALOG_DETAILS)
-            ?: bundle.getString(EDIT_DIALOG_DETAILS)
+            ?: run { arguments?.getInt(EDIT_DIALOG_NOTE, noteToSelect) ?: noteToSelect }
     }
 
-    override fun getLayoutId() = R.layout.dialog_edit_birth
+    override fun onUiElementsReady() {
+        super.onUiElementsReady()
 
-    override fun populateFields() {
-        mView?.detailsBox?.setText(details)
-        mView?.notesSpinner?.let { spinner ->
-            SpinnerUtils.configureSpinner(
-                spinner = spinner,
-                values = resources.getStringArray(R.array.birth_notes_values),
-                selected = noteToSelect
-            )
-        }
+        fillDropdownComponent(
+            textView = mView?.dialogNote,
+            stringArray = R.array.birth_notes_values,
+            selected = noteToSelect
+        )
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mView?.notesSpinner?.selectedItemPosition?.let {
-            outState.putInt(
-                EDIT_DIALOG_NOTE,
-                getBirthNoteByPosition(it, resources)
-            )
-        }
+        outState.putInt(
+            EDIT_DIALOG_NOTE,
+            getBirthNoteByPosition(mView?.dialogNote, resources)
+        )
     }
 
     override fun sendNewRecord() {
         val args = bundleOf(
             EDIT_DIALOG_DOC_ID to documentId,
-            EDIT_DIALOG_DATE to mActionDate?.time,
-            EDIT_DIALOG_NOTE to mView?.notesSpinner?.selectedItemPosition?.let {
-                getBirthNoteByPosition(it, resources)
-            },
-            EDIT_DIALOG_DETAILS to mView?.detailsBox?.text?.toString()
+            DIALOG_DATE to currentDate.time,
+            EDIT_DIALOG_NOTE to getBirthNoteByPosition(mView?.dialogNote, resources),
+            DIALOG_DETAILS to mView?.dialogDetails?.text?.toString()
         )
         val intent = Intent().putExtras(args)
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)

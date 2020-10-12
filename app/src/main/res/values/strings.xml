@@ -80,7 +80,7 @@
     <string name="add_treatment_title">Add treatment</string>
     <string name="add_disinfection_title">Add disinfection</string>
     <string name="add_pedicure_title">Add pedicure</string>
-    <string name="estimated_birth">Estimated birth</string>
+    <string name="estimated_birth">Estimated birth:</string>
     <string name="delete_confirmation_request">Are you sure you want to delete this item?</string>
     <string name="err_deleting_item">An error occurred trying to delete the item</string>
     <string name="dialog_update_btn">Update</string>
@@ -129,7 +129,7 @@
     <string name="planner_physiological_ctrl_reason">%d days since the last birth</string>
     <string name="planner_first_vaccine_reason">%d days since the last birth</string>
     <string name="planner_before_birth_vaccine_reason">%d days before the estimated day of birth</string>
-    <string name="go_to">Go to:</string>
+    <string name="go_to">GO TO:</string>
     <string name="change_farm">Change farm</string>
     <string name="logout">Logout</string>
     <string name="change_farm_confirmation_message">You are about to sign out from this farm and return to farm selector screen. You will see there all your subscriptions.</string>
@@ -174,12 +174,13 @@
     <string name="email_verification_success">Email verification sent</string>
     <string name="animal_details_title">Animal Details</string>
     <string name="app_version_header">%s app version</string>
-
-    <integer-array name="gender_types">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </integer-array>
+    <string name="farm_already_exists">Farm name already exists in the database</string>
+    <string name="change_farm_name">Change name</string>
+    <string name="farm_does_not_exists">Farm \"%s\" doesn\'t or the access code is incorrect</string>
+    <string name="review_inputs">Review inputs</string>
+    <string name="error">Error</string>
+    <string name="add_reminder">Reminder</string>
+    <string name="add">Add</string>
 
     <string-array name="gender_types_values">
         <item>Unknown</item>

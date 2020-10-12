@@ -24,6 +24,7 @@ class NumberPickerPreferenceDialogFragment : PreferenceDialogFragmentCompat() {
     override fun onBindDialogView(view: View) {
         super.onBindDialogView(view)
 
+        isCancelable = false
         mNumberPicker = view.findViewById(R.id.number_picker)
         mNumberPicker.maxValue = ConfigPickerUtils.getMaxValueByKey(preference.key, resources)
         mNumberPicker.minValue = ConfigPickerUtils.getMinValueByKey(preference.key, resources)

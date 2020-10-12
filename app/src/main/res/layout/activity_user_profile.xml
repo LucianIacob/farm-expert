@@ -10,19 +10,14 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/user_profile"
-            app:titleTextColor="@color/white" />
+            app:title="@string/user_profile" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -63,16 +58,13 @@
             android:id="@+id/editAccountPicture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/medium_margin"
-            android:layout_marginBottom="@dimen/medium_margin"
             android:contentDescription="@null"
             android:padding="@dimen/tiny_margin"
             android:src="@drawable/baseline_camera_alt_black_24"
-            android:tint="@color/link_color"
-            app:layout_constraintBottom_toBottomOf="@id/iconBarrier"
+            app:layout_constraintBottom_toBottomOf="@id/icon"
             app:layout_constraintLeft_toLeftOf="@id/iconBarrier"
             app:layout_constraintRight_toRightOf="@id/iconBarrier"
-            app:layout_constraintTop_toTopOf="@id/iconBarrier"
+            app:tint="@color/link_color"
             tools:ignore="UnusedAttribute" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -104,7 +96,7 @@
     <View
         android:id="@+id/separator"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_height="3dp"
         android:layout_marginTop="@dimen/xl_margin"
         android:background="@drawable/user_header_separator"
         app:layout_constraintTop_toBottomOf="@id/provider" />
@@ -140,7 +132,7 @@
                     android:layout_height="40dp"
                     android:contentDescription="@null"
                     android:src="@drawable/baseline_navigate_next_black_48"
-                    android:tint="@color/arrow_navigation_tint"
+                    app:tint="@color/arrow_navigation_tint"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -203,7 +195,7 @@
                     android:layout_height="40dp"
                     android:contentDescription="@null"
                     android:src="@drawable/baseline_navigate_next_black_48"
-                    android:tint="@color/arrow_navigation_tint"
+                    app:tint="@color/arrow_navigation_tint"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -325,7 +317,7 @@
                     android:layout_height="40dp"
                     android:contentDescription="@null"
                     android:src="@drawable/baseline_navigate_next_black_48"
-                    android:tint="@color/arrow_navigation_tint"
+                    app:tint="@color/arrow_navigation_tint"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -430,7 +422,7 @@
                     android:layout_height="30dp"
                     android:contentDescription="@null"
                     android:src="@drawable/outline_delete_forever_black_36"
-                    android:tint="@android:color/holo_red_dark"
+                    app:tint="@android:color/holo_red_dark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -482,8 +474,8 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:contentDescription="@null"
-                    android:src="@drawable/ic_settings_black_24dp"
-                    android:tint="@android:color/darker_gray"
+                    app:srcCompat="@drawable/ic_settings_black_24dp"
+                    app:tint="@android:color/darker_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

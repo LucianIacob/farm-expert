@@ -27,52 +27,52 @@ import java.util.*
  */
 class EditPedicureDialogFragment : BaseEditRecordDialogFragment() {
 
-    private var mDefaultDetails: String? = null
     private lateinit var mNailsMap: HashMap<View, Int>
 
-    override fun extractAdditionalArgs(savedInstanceState: Bundle?, bundle: Bundle) {
-        mDefaultDetails = savedInstanceState?.getString(EDIT_DIALOG_DETAILS)
-            ?: run { bundle.getString(EDIT_DIALOG_DETAILS) }
+    override var titleRes = R.string.edit_pedicure_title
+
+    override val layoutRes = R.layout.dialog_edit_pedicure
+
+    override fun setupDetails() {
+        mView?.dialogDetails?.setText(details?.drop(8))
     }
 
-    override fun getTitle() = R.string.edit_pedicure_title
-
-    override fun populateFields() {
-        mView?.details?.setText(mDefaultDetails?.drop(8))
+    override fun onUiElementsReady() {
+        super.onUiElementsReady()
 
         mView?.run {
             mNailsMap = hashMapOf(
                 leftTopLeftNail to AppUtils.populateLeftNail(
                     leftTopLeftNail,
-                    mDefaultDetails?.substring(0, 1)
+                    details?.substring(0, 1)
                 ),
                 leftTopRightNail to AppUtils.populateRightNail(
                     leftTopRightNail,
-                    mDefaultDetails?.substring(1, 2)
+                    details?.substring(1, 2)
                 ),
                 rightTopLeftNail to AppUtils.populateLeftNail(
                     rightTopLeftNail,
-                    mDefaultDetails?.substring(2, 3)
+                    details?.substring(2, 3)
                 ),
                 rightTopRightNail to AppUtils.populateRightNail(
                     rightTopRightNail,
-                    mDefaultDetails?.substring(3, 4)
+                    details?.substring(3, 4)
                 ),
                 leftBottomLeftNail to AppUtils.populateLeftNail(
                     leftBottomLeftNail,
-                    mDefaultDetails?.substring(4, 5)
+                    details?.substring(4, 5)
                 ),
                 leftBottomRightNail to AppUtils.populateRightNail(
                     leftBottomRightNail,
-                    mDefaultDetails?.substring(5, 6)
+                    details?.substring(5, 6)
                 ),
                 rightBottomLeftNail to AppUtils.populateLeftNail(
                     rightBottomLeftNail,
-                    mDefaultDetails?.substring(6, 7)
+                    details?.substring(6, 7)
                 ),
                 rightBottomRightNail to AppUtils.populateRightNail(
                     rightBottomRightNail,
-                    mDefaultDetails?.substring(7, 8)
+                    details?.substring(7, 8)
                 )
             )
         }
@@ -82,18 +82,19 @@ class EditPedicureDialogFragment : BaseEditRecordDialogFragment() {
     override fun sendNewRecord() {
         val bundle = bundleOf(
             EDIT_DIALOG_DOC_ID to documentId,
-            EDIT_DIALOG_DATE to mActionDate?.time,
-            EDIT_DIALOG_DETAILS to getEncodedHoofs() + mView?.details?.text.toString()
+            DIALOG_DATE to currentDate.time,
+            DIALOG_DETAILS to getEncodedHoofs() + mView?.dialogDetails?.text.toString()
         )
         val intent = Intent().putExtras(bundle)
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
     }
 
-    override fun getLayoutId() = R.layout.dialog_edit_pedicure
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(EDIT_DIALOG_DETAILS, getEncodedHoofs() + mView?.details?.text.toString())
+        outState.putString(
+            DIALOG_DETAILS,
+            getEncodedHoofs() + mView?.dialogDetails?.text.toString()
+        )
     }
 
     private fun setupHoofs() {

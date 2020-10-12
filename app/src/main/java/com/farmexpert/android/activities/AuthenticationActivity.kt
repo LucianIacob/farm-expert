@@ -9,17 +9,17 @@
 
 package com.farmexpert.android.activities
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.farmexpert.android.R
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import kotlinx.android.synthetic.main.activity_authentication.*
 import org.jetbrains.anko.startActivity
 
-class AuthenticationActivity : Activity() {
+class AuthenticationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,12 +65,9 @@ class AuthenticationActivity : Activity() {
         }
     }
 
-    private fun showMessage(message: String) {
-    }
-
     companion object {
         const val RC_SIGN_IN = 1234
-        const val termsOfServiceUrl = "http://lucianiacob.com/farmexpert/tos.html"
-        const val privacyPolicyUrl = "http://lucianiacob.com/farmexpert/privacypolicy.html"
+        const val termsOfServiceUrl = "https://lucianiacob.com/farmexpert/tos.html"
+        const val privacyPolicyUrl = "https://lucianiacob.com/farmexpert/privacypolicy.html"
     }
 }
