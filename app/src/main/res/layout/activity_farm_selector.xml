@@ -14,13 +14,10 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            style="@style/FarmExpertAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            app:title="@string/select_farm"
-            app:titleTextColor="@color/white" />
+            app:title="@string/select_farm" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

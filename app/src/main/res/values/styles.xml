@@ -53,6 +53,11 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="FarmExpertAppBar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="subtitleTextAppearance">@style/ToolbarSubtitleAppearance</item>
+        <item name="titleTextAppearance">@style/ToolbarTitleAppearance</item>
+    </style>
+
     <style name="ToolbarTitleAppearance" parent="@style/MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textSize">22sp</item>
         <item name="android:fontFamily">@font/telegroteskscreen_medium</item>

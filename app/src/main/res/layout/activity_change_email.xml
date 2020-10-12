@@ -13,7 +13,7 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            style="@style/FarmExpertAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:title="@string/lorem_ipsum" />
@@ -31,16 +31,13 @@
         tools:visibility="visible" />
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/FarmExpertInputLayoutStyle"
+        style="@style/FarmExpertInputLayoutStyle.CounterEnabled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/medium_margin"
         android:layout_marginTop="@dimen/xxxl_margin"
         android:layout_marginEnd="@dimen/medium_margin"
-        android:hint="@string/email_header"
-        app:counterEnabled="true"
-        app:hintAnimationEnabled="true"
-        app:hintEnabled="true">
+        android:hint="@string/email_header">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/userEmailBox"
