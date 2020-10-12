@@ -111,10 +111,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
             .setMessage(R.string.change_farm_confirmation_message)
             .setPositiveButton(R.string.confirm_button) { _, _ ->
                 PreferenceManager.getDefaultSharedPreferences(this)
-                    .edit {
-                        remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID)
-                        remove(ConfigurationActivity.KEY_CONFIGS_ACCEPTED)
-                    }
+                    .edit { remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID) }
                 startActivity<FarmSelectorActivity>()
                 finish()
             }
@@ -156,10 +153,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
             .signOut(this)
             .addOnSuccessListener {
                 PreferenceManager.getDefaultSharedPreferences(this)
-                    .edit {
-                        remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID)
-                        remove(ConfigurationActivity.KEY_CONFIGS_ACCEPTED)
-                    }
+                    .edit { remove(FarmSelectorActivity.KEY_CURRENT_FARM_ID) }
                 startActivity<AuthenticationActivity>()
                 finish()
             }

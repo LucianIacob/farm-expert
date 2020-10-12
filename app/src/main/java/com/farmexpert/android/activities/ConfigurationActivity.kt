@@ -12,7 +12,6 @@ package com.farmexpert.android.activities
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.ConfigPickerUtils
@@ -131,9 +130,6 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
                 )
             )
             .addOnSuccessListener {
-                PreferenceManager
-                    .getDefaultSharedPreferences(this)
-                    .edit { putBoolean(KEY_CONFIGS_ACCEPTED, true) }
                 startMainActivity()
             }
             .addOnFailureListener {
@@ -149,7 +145,6 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
     }
 
     companion object {
-        const val KEY_CONFIGS_ACCEPTED = "com.farmexpert.android.FarmConfigsAccepted"
         const val FARM_TIMELINE_PREFS = "com.farmexpert.android.farm_timeline_settings"
     }
 }

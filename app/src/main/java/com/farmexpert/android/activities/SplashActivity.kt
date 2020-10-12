@@ -40,11 +40,7 @@ class SplashActivity : AppCompatActivity() {
     private fun gotoNextScreen() {
         if (FirebaseAuth.getInstance().currentUser != null) {
             if (userHasActiveFarm()) {
-                if (userHasReviewedFarmConfigs()) { // TODO  SAVE THIS  FLAG On THE BACKEND
-                    startActivity<MainActivity>()
-                } else {
-                    startActivity<ConfigurationActivity>()
-                }
+                startActivity<MainActivity>()
             } else {
                 startActivity<FarmSelectorActivity>()
             }
@@ -59,11 +55,6 @@ class SplashActivity : AppCompatActivity() {
         PreferenceManager
             .getDefaultSharedPreferences(this)
             .getString(FarmSelectorActivity.KEY_CURRENT_FARM_ID, null) != null
-
-    private fun userHasReviewedFarmConfigs() =
-        PreferenceManager
-            .getDefaultSharedPreferences(this)
-            .getBoolean(ConfigurationActivity.KEY_CONFIGS_ACCEPTED, false)
 
     companion object {
         const val SPLASH_LENGTH: Long = 2 * 1000

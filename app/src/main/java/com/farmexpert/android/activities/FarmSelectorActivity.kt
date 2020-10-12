@@ -21,8 +21,10 @@ import com.farmexpert.android.R
 import com.farmexpert.android.adapter.FarmSelectorAdapter
 import com.farmexpert.android.model.Farm
 import com.farmexpert.android.utils.FirestorePath
+import com.farmexpert.android.utils.alert
 import com.farmexpert.android.utils.invisible
 import com.farmexpert.android.utils.visible
+import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
@@ -55,6 +57,29 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             startActivity<AuthenticationActivity>()
             finish()
         }
+
+        toolbar.setOnMenuItemClickListener {
+            if (it.itemId == R.id.action_logout) {
+                logout()
+                true
+            } else false
+        }
+    }
+
+    private fun logout() {
+        AuthUI.getInstance()
+            .signOut(this)
+            .addOnSuccessListener {
+                PreferenceManager.getDefaultSharedPreferences(this)
+                    .edit { remove(KEY_CURRENT_FARM_ID) }
+                startActivity<AuthenticationActivity>()
+                finish()
+            }
+            .addOnFailureListener {
+                alert(R.string.err_logging_out)
+                error { it }
+                FirebaseCrashlytics.getInstance().recordException(it)
+            }
     }
 
     private fun initFarmsList() {
@@ -241,10 +266,6 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
                 putInt(getString(R.string.pref_vaccin_after_birth_key), farm.vaccin3BeforeBirth)
                 putInt(getString(R.string.pref_gestation_length_key), farm.gestationLength)
             }
-
-        PreferenceManager
-            .getDefaultSharedPreferences(this)
-            .edit { putBoolean(ConfigurationActivity.KEY_CONFIGS_ACCEPTED, true) }
     }
 
     private fun updateFarm(farm: Farm) {

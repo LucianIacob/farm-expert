@@ -16,6 +16,7 @@
             android:id="@+id/toolbar"
             style="@style/FarmExpertAppBar"
             android:layout_width="match_parent"
+            app:menu="@menu/menu_logout"
             android:layout_height="wrap_content"
             app:title="@string/select_farm" />
 
