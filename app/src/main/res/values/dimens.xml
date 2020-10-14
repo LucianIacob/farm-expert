@@ -60,6 +60,7 @@
 
     <dimen name="graph_cell_general_margin">@dimen/margin_3dp</dimen>
     <dimen name="graph_outer_margin">@dimen/tiny_margin</dimen>
+    <dimen name="planner_outer_margin">@dimen/tiny_margin</dimen>
 
     <item name="graph_breeding_female_cell_weight" format="float" type="dimen">0</item>
     <item name="graph_breeding_male_cell_weight" format="float" type="dimen">0</item>

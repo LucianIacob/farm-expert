@@ -40,9 +40,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:indeterminate="true"
+            android:indeterminateTint="@color/progress_bar_color"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@id/barLayout"
+            tools:targetApi="lollipop"
             tools:visibility="visible" />
 
         <androidx.fragment.app.FragmentContainerView
