@@ -10,9 +10,10 @@
         android:id="@+id/headcountRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/activity_vertical_margin_half"
-        android:layout_marginEnd="@dimen/activity_vertical_margin_half"
+        android:layout_marginStart="@dimen/tiny_margin"
+        android:layout_marginTop="@dimen/tiny_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin_half"
+        android:layout_marginEnd="@dimen/tiny_margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_animal" />
 
@@ -22,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:contentDescription="@null"
         app:srcCompat="@drawable/ic_add_white_24dp"
         app:tint="@android:color/white" />
 
