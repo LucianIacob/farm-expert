@@ -29,7 +29,7 @@
     <dimen name="default_elevation">4dp</dimen>
     <dimen name="small_elevation">2dp</dimen>
 
-    <dimen name="item_dashboard_title_size">24sp</dimen>
+    <dimen name="item_dashboard_title_size">20sp</dimen>
     <dimen name="item_dashboard_text_margin">10dp</dimen>
     <dimen name="item_dashboard_card_margin">5dp</dimen>
     <dimen name="item_dashboard_icon_height">70dp</dimen>
