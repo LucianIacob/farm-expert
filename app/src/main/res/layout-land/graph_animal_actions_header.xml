@@ -1,127 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/GraphHeaderStyle"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/graph_header_border">
+    android:layout_height="wrap_content">
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider.Header" />
 
     <TextView style="@style/FarmExpertTextStyle.Graph.Header.AnimalActions" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider.Header" />
 
     <TextView
         style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
         android:text="@string/jan" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider.Header" />
 
     <TextView
         style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
         android:text="@string/feb" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider.Header" />
 
     <TextView
         style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
         android:text="@string/mar" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider.Header" />
 
     <TextView
         style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
         android:text="@string/apr" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider.Header" />
 
     <TextView
         style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
         android:text="@string/may" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider.Header" />
 
     <TextView
         style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
         android:text="@string/jun" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider.Header" />
 
     <TextView
         style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
         android:text="@string/jul" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider.Header" />
 
     <TextView
         style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
         android:text="@string/aug" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider.Header" />
 
     <TextView
         style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
         android:text="@string/sep" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider.Header" />
 
     <TextView
         style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
         android:text="@string/oct" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider.Header" />
 
     <TextView
         style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
         android:text="@string/nov" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider.Header" />
 
     <TextView
         style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
         android:text="@string/dec" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider.Header" />
 
 </LinearLayout>

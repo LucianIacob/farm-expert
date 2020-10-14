@@ -67,7 +67,7 @@
             android:elevation="@dimen/small_elevation"
             android:paddingStart="@dimen/small_margin"
             android:paddingEnd="@dimen/small_margin"
-            android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+            app:srcCompat="@drawable/ic_keyboard_arrow_left_black_24dp"
             tools:targetApi="lollipop" />
 
         <TextView
@@ -96,7 +96,7 @@
             android:elevation="@dimen/small_elevation"
             android:paddingStart="@dimen/small_margin"
             android:paddingEnd="@dimen/small_margin"
-            android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+            app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp"
             tools:targetApi="lollipop" />
 
     </LinearLayout>

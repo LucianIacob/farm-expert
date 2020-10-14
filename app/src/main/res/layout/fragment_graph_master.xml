@@ -3,15 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/graph_outer_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/small_margin"
-        android:paddingEnd="@dimen/large_margin"
-        tools:ignore="RtlSymmetry"
-        tools:minWidth="450dp">
+        android:layout_height="match_parent">
 
         <ViewStub
             android:id="@+id/graphHeader"

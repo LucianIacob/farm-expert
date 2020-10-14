@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="action_bar_size">40dp</dimen>
+    <dimen name="progress_bar_bottom_constraint">44dp</dimen>
+
     <dimen name="graph_birth_female_cell_width">0dp</dimen>
     <dimen name="graph_birth_calf_cell_width">0dp</dimen>
     <dimen name="graph_birth_month_cell_width">0dp</dimen>

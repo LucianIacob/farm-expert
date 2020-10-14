@@ -16,7 +16,7 @@
             android:id="@+id/toolbar"
             style="@style/FarmExpertAppBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/action_bar_size"
             app:title="@string/user_profile" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -132,10 +132,10 @@
                     android:layout_height="40dp"
                     android:contentDescription="@null"
                     android:src="@drawable/baseline_navigate_next_black_48"
-                    app:tint="@color/arrow_navigation_tint"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/arrow_navigation_tint" />
 
                 <TextView
                     android:id="@+id/nameHeader"
@@ -195,10 +195,10 @@
                     android:layout_height="40dp"
                     android:contentDescription="@null"
                     android:src="@drawable/baseline_navigate_next_black_48"
-                    app:tint="@color/arrow_navigation_tint"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/arrow_navigation_tint" />
 
                 <TextView
                     android:id="@+id/emailHeader"
@@ -317,10 +317,10 @@
                     android:layout_height="40dp"
                     android:contentDescription="@null"
                     android:src="@drawable/baseline_navigate_next_black_48"
-                    app:tint="@color/arrow_navigation_tint"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/arrow_navigation_tint" />
 
                 <TextView
                     android:id="@+id/farmsHeader"
@@ -422,10 +422,10 @@
                     android:layout_height="30dp"
                     android:contentDescription="@null"
                     android:src="@drawable/outline_delete_forever_black_36"
-                    app:tint="@android:color/holo_red_dark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@android:color/holo_red_dark" />
 
                 <TextView
                     android:id="@+id/deleteAccountHeader"
@@ -474,11 +474,11 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:contentDescription="@null"
-                    app:srcCompat="@drawable/ic_settings_black_24dp"
-                    app:tint="@android:color/darker_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_settings_black_24dp"
+                    app:tint="@android:color/darker_gray" />
 
                 <TextView
                     android:id="@+id/appVersionHeader"

@@ -16,8 +16,8 @@
             android:id="@+id/toolbar"
             style="@style/FarmExpertAppBar"
             android:layout_width="match_parent"
+            android:layout_height="@dimen/action_bar_size"
             app:menu="@menu/menu_logout"
-            android:layout_height="wrap_content"
             app:title="@string/select_farm" />
 
     </com.google.android.material.appbar.AppBarLayout>

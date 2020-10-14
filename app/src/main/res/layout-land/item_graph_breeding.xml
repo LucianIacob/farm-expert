@@ -6,159 +6,111 @@
     android:background="@drawable/item_graph_row_border"
     android:orientation="horizontal">
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/femaleCell"
         style="@style/FarmExpertTextStyle.Graph.AnimalIdBox.Breedings.Female"
         tools:text="@tools:sample/us_zipcodes" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/maleCell"
         style="@style/FarmExpertTextStyle.Graph.AnimalIdBox.Breedings.Male"
         tools:text="@tools:sample/first_names" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <TextView
         android:id="@+id/janCell"
         style="@style/FarmExpertTextStyle.Graph.Month.Breedings"
         tools:text="5\n29" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <TextView
         android:id="@+id/febCell"
         style="@style/FarmExpertTextStyle.Graph.Month.Breedings"
         tools:text="5\n29" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <TextView
         android:id="@+id/marCell"
         style="@style/FarmExpertTextStyle.Graph.Month.Breedings"
         tools:text="5\n29" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <TextView
         android:id="@+id/aprCell"
         style="@style/FarmExpertTextStyle.Graph.Month.Breedings"
         tools:text="5\n29" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <TextView
         android:id="@+id/mayCell"
         style="@style/FarmExpertTextStyle.Graph.Month.Breedings"
         tools:text="5\n29" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <TextView
         android:id="@+id/junCell"
         style="@style/FarmExpertTextStyle.Graph.Month.Breedings"
         tools:text="5\n29" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <TextView
         android:id="@+id/julCell"
         style="@style/FarmExpertTextStyle.Graph.Month.Breedings"
         tools:text="5\n29" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <TextView
         android:id="@+id/augCell"
         style="@style/FarmExpertTextStyle.Graph.Month.Breedings"
         tools:text="5\n29" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <TextView
         android:id="@+id/sepCell"
         style="@style/FarmExpertTextStyle.Graph.Month.Breedings"
         tools:text="5\n29" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <TextView
         android:id="@+id/octCell"
         style="@style/FarmExpertTextStyle.Graph.Month.Breedings"
         tools:text="5\n29" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <TextView
         android:id="@+id/novCell"
         style="@style/FarmExpertTextStyle.Graph.Month.Breedings"
         tools:text="5\n29" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <TextView
         android:id="@+id/decCell"
         style="@style/FarmExpertTextStyle.Graph.Month.Breedings"
         tools:text="5\n29" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
     <TextView
         android:id="@+id/estimatedBirth"
         style="@style/FarmExpertTextStyle.Graph.EstimatedBirth"
         tools:text="@tools:sample/date/ddmmyy" />
 
-    <View
-        android:layout_width="@dimen/separator_height_1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+    <View style="@style/GraphVerticalDivider" />
 
 </LinearLayout>

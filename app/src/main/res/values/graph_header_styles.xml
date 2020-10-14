@@ -4,8 +4,14 @@
     <style name="FarmExpertTextStyle.Graph.Header">
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">@dimen/graph_header_text_size</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="GraphVerticalDivider.Header"></style>
+
+    <style name="GraphHeaderStyle">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
 
     <!--    MONTH HEADER STYLES-->
     <style name="FarmExpertTextStyle.Graph.Header.Month">

@@ -5,10 +5,15 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_margin">@dimen/graph_general_margin</item>
+        <item name="android:layout_margin">@dimen/graph_cell_general_margin</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
 
+    <style name="GraphVerticalDivider">
+        <item name="android:layout_width">@dimen/separator_width_1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@android:color/darker_gray</item>
+    </style>
 
     <!--    MONTH CELLS STYLES-->
     <style name="FarmExpertTextStyle.Graph.Month">
