@@ -30,6 +30,7 @@
         android:indeterminateTint="@color/progress_bar_color"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/barLayout"
+        tools:targetApi="lollipop"
         tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
