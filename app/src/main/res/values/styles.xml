@@ -8,7 +8,7 @@
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent
         </item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
-        <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
+        <item name="materialCardViewStyle">@style/FarmExpertCardView</item>
         <item name="floatingActionButtonStyle">@style/Widget.App.FloatingActionButton</item>
     </style>
 
@@ -37,11 +37,18 @@
         <item name="android:textSize">17sp</item>
     </style>
 
-    <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
+    <style name="FarmExpertCardView" parent="Widget.MaterialComponents.CardView">
         <item name="cardPreventCornerOverlap">true</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="cardElevation">@dimen/default_elevation</item>
         <item name="rippleColor">@color/sea_green</item>
+    </style>
+
+    <style name="FarmExpertCardView.DetailScreens">
+        <item name="strokeWidth">0.8dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="cardUseCompatPadding">false</item>
+        <item name="strokeColor">@android:color/darker_gray</item>
     </style>
 
     <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
@@ -72,7 +79,7 @@
         <item name="android:textSize">@dimen/large_text</item>
         <item name="android:text">@string/empty_list</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:fontFamily">@font/allerta</item>
     </style>
 
     <style name="FarmExpertInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -128,12 +135,14 @@
     <style name="QuickActionButtonStyle.Update">
         <item name="iconTint">@color/colorPrimary</item>
         <item name="android:text">@string/update</item>
+        <item name="strokeColor">@color/quick_action_button_update_stroke_color</item>
         <item name="rippleColor">@color/colorPrimaryDark</item>
         <item name="icon">@drawable/ic_edit_black_24dp</item>
     </style>
 
     <style name="QuickActionButtonStyle.Delete">
         <item name="iconTint">@color/red</item>
+        <item name="strokeColor">@color/quick_action_button_delete_stroke_color</item>
         <item name="android:text">@string/delete</item>
         <item name="rippleColor">@android:color/holo_red_dark</item>
         <item name="icon">@drawable/ic_delete_forever_black_24dp</item>

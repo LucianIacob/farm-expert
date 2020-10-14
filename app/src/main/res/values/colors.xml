@@ -11,6 +11,8 @@
     <color name="red">#FFF44336</color>
 
     <color name="progress_bar_color">@color/colorPrimaryDark</color>
+    <color name="quick_action_button_update_stroke_color">#8800574B</color>
+    <color name="quick_action_button_delete_stroke_color">#88cc0000</color>
 
     <color name="material_green_50">#E8F5E9</color>
     <color name="material_green_500">#4CAF50</color>
