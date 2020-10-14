@@ -36,8 +36,9 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
     return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 }
 
-fun Timestamp.asDisplayable(): String {
-    val format = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+fun Timestamp.asDisplayable(onTwoLines: Boolean = false): String {
+    val pattern = onTwoLines.takeIfTrue()?.let { "dd.MM\nyyyy" } ?: "dd.MM.yyyy"
+    val format = SimpleDateFormat(pattern, Locale.getDefault())
     return format.format(this.toDate())
 }
 

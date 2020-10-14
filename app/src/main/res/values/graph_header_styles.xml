@@ -2,7 +2,7 @@
 <resources>
 
     <style name="FarmExpertTextStyle.Graph.Header">
-        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">@dimen/graph_header_text_size</item>
     </style>
 
