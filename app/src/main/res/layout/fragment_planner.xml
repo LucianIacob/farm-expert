@@ -66,14 +66,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/margin_3dp"
             android:layout_marginEnd="@dimen/small_margin"
             android:background="@drawable/simple_cell_background"
             android:contentDescription="@null"
-            android:layout_margin="@dimen/margin_3dp"
             android:elevation="@dimen/small_elevation"
             android:paddingStart="@dimen/small_margin"
             android:paddingEnd="@dimen/small_margin"
-            android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+            app:srcCompat="@drawable/ic_keyboard_arrow_left_black_24dp"
             tools:targetApi="lollipop" />
 
         <TextView
@@ -94,14 +94,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/margin_3dp"
             android:layout_marginStart="@dimen/small_margin"
             android:background="@drawable/simple_cell_background"
             android:contentDescription="@null"
-            android:layout_margin="@dimen/margin_3dp"
-            android:paddingStart="@dimen/small_margin"
             android:elevation="@dimen/small_elevation"
+            android:paddingStart="@dimen/small_margin"
             android:paddingEnd="@dimen/small_margin"
-            android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+            app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp"
             tools:targetApi="lollipop" />
 
     </LinearLayout>

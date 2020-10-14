@@ -93,6 +93,10 @@
     <string name="edit_treatment_title">Edit treatment</string>
     <string name="edit_disinfection_title">Edit disinfection</string>
 
+    <string name="maleInputHeader">Male ID / Name</string>
+    <string name="calfInputHeader">Calf ID</string>
+    <string name="select_farm">Select farm</string>
+
     <string name="default_birth_note">4 - No problems</string>
     <string name="default_breeding_note">5 - Normal heats</string>
     <string name="err_updating_record">An error occurred updating the item. Please try again later.</string>

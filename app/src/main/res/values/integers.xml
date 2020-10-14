@@ -5,4 +5,13 @@
     <integer name="statistics_items_scroll_direction">0</integer>
     <integer name="animal_id_max_length">30</integer>
     <integer name="grafic_year_count">6</integer>
+    <integer name="animal_id_digits_to_show">31</integer>
+
+    <integer name="text_lines_2">2</integer>
+    <integer name="text_lines_1">1</integer>
+
+    <integer name="graph_data_animal_id_max_lines">@integer/text_lines_1</integer>
+    <integer name="graph_data_births_animal_id_max_lines">@integer/text_lines_1</integer>
+    <integer name="graph_data_breedings_animal_id_max_lines">@integer/text_lines_1</integer>
+
 </resources>

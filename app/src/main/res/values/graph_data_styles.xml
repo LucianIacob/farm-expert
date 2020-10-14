@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="FarmExpertTextStyle.Graph">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">@dimen/graph_general_margin</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+
+    <!--    MONTH CELLS STYLES-->
+    <style name="FarmExpertTextStyle.Graph.Month">
+        <item name="android:textSize">@dimen/text_18</item>
+        <item name="android:fontFamily">@font/telegroteskscreen_medium</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.Month.Births">
+        <item name="android:layout_width">@dimen/graph_birth_month_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_birth_month_cell_weight</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.Month.Breedings">
+        <item name="android:layout_width">@dimen/graph_breeding_month_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_breeding_month_cell_weight</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.Month.AnimalActions">
+        <item name="android:layout_width">@dimen/graph_actions_month_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_actions_month_cell_weight</item>
+    </style>
+
+
+    <!--    ESTIMATED BIRTH CELL STYLE-->
+    <style name="FarmExpertTextStyle.Graph.EstimatedBirth">
+        <item name="android:textSize">@dimen/text_18</item>
+        <item name="android:fontFamily">@font/telegroteskscreen_medium</item>
+        <item name="android:layout_width">@dimen/graph_breeding_estimated_birth_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_breeding_estimated_birth_cell_weight</item>
+    </style>
+
+
+    <!--    CLICKABLE BOXES STYLES-->
+    <style name="FarmExpertTextStyle.Graph.AnimalIdBox" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textScaleX">.8</item>
+        <item name="maxLines">@integer/graph_data_animal_id_max_lines</item>
+        <item name="android:maxLines">@integer/graph_data_animal_id_max_lines</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/margin_3dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginStart">@dimen/margin_3dp</item>
+        <item name="rippleColor">@color/colorPrimaryDark</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizePresetSizes">@array/autosize_text_sizes</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:text">@string/animal_id</item>
+        <item name="android:paddingStart">@dimen/tiny_margin</item>
+        <item name="android:paddingEnd">@dimen/tiny_margin</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.AnimalIdBox.Births">
+        <item name="maxLines">@integer/graph_data_births_animal_id_max_lines</item>
+        <item name="android:maxLines">@integer/graph_data_births_animal_id_max_lines</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.AnimalIdBox.Births.Female">
+        <item name="android:layout_width">@dimen/graph_birth_female_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_birth_female_cell_weight</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.AnimalIdBox.Births.Calf">
+        <item name="android:layout_width">@dimen/graph_birth_calf_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_birth_calf_cell_weight</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.AnimalIdBox.Breedings">
+        <item name="maxLines">@integer/graph_data_breedings_animal_id_max_lines</item>
+        <item name="android:maxLines">@integer/graph_data_breedings_animal_id_max_lines</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.AnimalIdBox.Breedings.Female">
+        <item name="android:layout_width">@dimen/graph_breeding_female_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_breeding_female_cell_weight</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.AnimalIdBox.Breedings.Male">
+        <item name="android:layout_width">@dimen/graph_breeding_male_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_breeding_male_cell_weight</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.AnimalIdBox.AnimaActions">
+        <item name="android:layout_width">@dimen/graph_actions_animal_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_actions_animal_cell_weight</item>
+    </style>
+
+</resources>

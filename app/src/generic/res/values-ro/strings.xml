@@ -32,11 +32,11 @@
     </plurals>
 
     <string name="dashboard_headcount">Efectiv animale</string>
-    <string name="dashboard_graph_births">Fatari</string>
+    <string name="dashboard_graph_births">Fătări</string>
     <string name="dashboard_graph_breedings">Monte</string>
-    <string name="dashboard_graph_disinfections">Deparazitari</string>
-    <string name="dashboard_graph_vitaminisations">Vitaminizari</string>
-    <string name="dashboard_graph_vaccinations">Vaccinari</string>
+    <string name="dashboard_graph_disinfections">Deparazitări</string>
+    <string name="dashboard_graph_vitaminisations">Vitaminizări</string>
+    <string name="dashboard_graph_vaccinations">Vaccinări</string>
     <string name="dashboard_graph_pedicures">Pedichiuri</string>
     <string name="dashboard_graph_treatments">Tratamente</string>
     <string name="animal_id">Numar matricol</string>
@@ -50,14 +50,14 @@
     <string name="err_adding_animal">Eroare la adaugarea animalului</string>
     <string name="err_adding_animal_message">Numar matricol invalid. Animalul nu a fost salvat.</string>
     <string name="err_adding_animal_constraint">Eroare la adaugarea animalului, acest matricol deja exista in baza de date.</string>
-    <string name="empty_list">Nici un element in lista</string>
+    <string name="empty_list">Nici un element în listă</string>
     <string name="item_added">Elementul a fost adaugat cu success</string>
     <string name="item_deleted">Elementul a fost sters cu success</string>
     <string name="empty_text" />
     <string name="lorem_ipsum">Lorem ipsum</string>
     <string name="date_of_birth">Data nasterii</string>
     <string name="delete_animal">Sunteti sigur ca doriti sa stergeti acest animal?</string>
-    <string name="delete_animal_message">Toate actiunile animalului vor fi sterse de asemenea (fatari, monte, deparazitari, vaccinari, pedichiuri, tratamente, vitaminizari).\nAnimal ID: %s</string>
+    <string name="delete_animal_message">Toate actiunile animalului vor fi sterse de asemenea (fătări, monte, deparazitări, vaccinări, pedichiuri, tratamente, vitaminizări).\nAnimal ID: %s</string>
     <string name="headcount_title">Efectiv, %d animale</string>
     <string name="father_father_id">Matricol Tata-Tata</string>
     <string name="father_mother_id">Matricol Tata-Mama</string>
@@ -126,11 +126,11 @@
     <string name="planner_reprod_control_title">Control Reproductie</string>
     <string name="planner_disinfections_title">Deparazitari</string>
     <string name="planner_vaccinations_title">Vaccinuri</string>
-    <string name="planner_heats_reason">Animalul este in perioada caldurilor.</string>
-    <string name="planner_gest_ctrl_reason">%d zile de la ultima monta</string>
-    <string name="planner_physiological_ctrl_reason">%d zile de la ultima fatare</string>
-    <string name="planner_first_vaccine_reason">%d zile de la ultima fatare</string>
-    <string name="planner_before_birth_vaccine_reason">%d zile inainte de data estimata a fatarii</string>
+    <string name="planner_heats_reason">Animalul este în perioada căldurilor.</string>
+    <string name="planner_gest_ctrl_reason">%d zile de la ultima montă</string>
+    <string name="planner_physiological_ctrl_reason">%d zile de la ultima fătare</string>
+    <string name="planner_first_vaccine_reason">%d zile de la ultima fătare</string>
+    <string name="planner_before_birth_vaccine_reason">%d zile inainte de data estimata a fătării</string>
     <string name="go_to">MERGI LA:</string>
     <string name="change_farm">Schimba ferma</string>
     <string name="logout">Iesi din cont</string>

@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="graph_birth_female_cell_width">0dp</dimen>
+    <dimen name="graph_birth_calf_cell_width">0dp</dimen>
+    <dimen name="graph_birth_month_cell_width">0dp</dimen>
+    <dimen name="graph_breeding_female_cell_width">0dp</dimen>
+    <dimen name="graph_breeding_male_cell_width">0dp</dimen>
+    <dimen name="graph_breeding_estimated_birth_cell_width">0dp</dimen>
+    <dimen name="graph_breeding_month_cell_width">0dp</dimen>
+    <dimen name="graph_actions_animal_cell_width">0dp</dimen>
+    <dimen name="graph_actions_month_cell_width">0dp</dimen>
+
+    <item name="graph_breeding_female_cell_weight" format="float" type="dimen">2</item>
+    <item name="graph_breeding_male_cell_weight" format="float" type="dimen">2</item>
+    <item name="graph_breeding_estimated_birth_cell_weight" format="float" type="dimen">2</item>
+    <item name="graph_breeding_month_cell_weight" format="float" type="dimen">0.8</item>
+    <item name="graph_birth_female_cell_weight" format="float" type="dimen">2</item>
+    <item name="graph_birth_calf_cell_weight" format="float" type="dimen">2</item>
+    <item name="graph_birth_month_cell_weight" format="float" type="dimen">0.9</item>
+    <item name="graph_actions_month_cell_weight" format="float" type="dimen">1</item>
+    <item name="graph_actions_animal_cell_weight" format="float" type="dimen">4</item>
+
 </resources>

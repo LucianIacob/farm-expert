@@ -26,10 +26,10 @@
             android:id="@+id/graphRecycler"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            tools:listitem="@layout/item_graph_animal_action"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/graphHeader" />
+            app:layout_constraintTop_toBottomOf="@id/graphHeader"
+            tools:listitem="@layout/item_graph_animal_action" />
 
         <TextView
             android:id="@+id/empty_list"
@@ -37,7 +37,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text="@string/empty_list"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

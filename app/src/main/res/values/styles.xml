@@ -144,4 +144,9 @@
         <item name="android:windowExitAnimation">@anim/slide_down</item>
     </style>
 
+
+    <style name="FarmExpertTextStyle" parent="Widget.MaterialComponents.TextView">
+
+    </style>
+
 </resources>

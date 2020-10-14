@@ -9,17 +9,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/darker_gray" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="3dp"
-        android:layout_weight="3"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:text="@string/animal_id"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+    <TextView style="@style/FarmExpertTextStyle.Graph.Header.AnimalActions" />
 
     <View
         android:layout_width="@dimen/separator_height_1dp"
@@ -27,16 +17,8 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:text="@string/jan"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
+        android:text="@string/jan" />
 
     <View
         android:layout_width="@dimen/separator_height_1dp"
@@ -44,16 +26,8 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:text="@string/feb"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
+        android:text="@string/feb" />
 
     <View
         android:layout_width="@dimen/separator_height_1dp"
@@ -61,16 +35,8 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:text="@string/mar"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
+        android:text="@string/mar" />
 
     <View
         android:layout_width="@dimen/separator_height_1dp"
@@ -78,16 +44,8 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:text="@string/apr"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
+        android:text="@string/apr" />
 
     <View
         android:layout_width="@dimen/separator_height_1dp"
@@ -95,16 +53,8 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:text="@string/may"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
+        android:text="@string/may" />
 
     <View
         android:layout_width="@dimen/separator_height_1dp"
@@ -112,16 +62,8 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:text="@string/jun"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
+        android:text="@string/jun" />
 
     <View
         android:layout_width="@dimen/separator_height_1dp"
@@ -129,16 +71,8 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:text="@string/jul"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
+        android:text="@string/jul" />
 
     <View
         android:layout_width="@dimen/separator_height_1dp"
@@ -146,16 +80,8 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:text="@string/aug"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
+        android:text="@string/aug" />
 
     <View
         android:layout_width="@dimen/separator_height_1dp"
@@ -163,16 +89,8 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:text="@string/sep"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
+        android:text="@string/sep" />
 
     <View
         android:layout_width="@dimen/separator_height_1dp"
@@ -180,16 +98,8 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:text="@string/oct"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
+        android:text="@string/oct" />
 
     <View
         android:layout_width="@dimen/separator_height_1dp"
@@ -197,16 +107,8 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:text="@string/nov"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
+        android:text="@string/nov" />
 
     <View
         android:layout_width="@dimen/separator_height_1dp"
@@ -214,16 +116,8 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
-        android:text="@string/dec"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        style="@style/FarmExpertTextStyle.Graph.Header.Month.AnimalActions"
+        android:text="@string/dec" />
 
     <View
         android:layout_width="@dimen/separator_height_1dp"

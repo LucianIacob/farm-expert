@@ -16,6 +16,7 @@ import com.farmexpert.android.model.Breeding
 import com.farmexpert.android.utils.asDisplayable
 import com.farmexpert.android.utils.day
 import com.farmexpert.android.utils.month
+import com.farmexpert.android.utils.takeIfNotBlank
 import kotlinx.android.synthetic.main.item_graph_breeding.view.*
 import java.util.*
 
@@ -34,7 +35,9 @@ class GraphBreedingViewHolder(
         values.maxByOrNull { it.actionDate }?.let { breeding ->
             maleCell.text = breeding.male
             estimatedBirth.text = breeding.birthExpectedAt.asDisplayable()
-            maleCell.setOnClickListener { maleIdClick(breeding.male) }
+            breeding.male.takeIfNotBlank()?.let {
+                maleCell.setOnClickListener { maleIdClick(breeding.male) }
+            } ?: run { maleCell.isClickable = false }
         }
 
         val graphViews: Map<Int, TextView> = hashMapOf(

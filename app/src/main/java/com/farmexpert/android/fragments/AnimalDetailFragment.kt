@@ -332,7 +332,7 @@ class AnimalDetailFragment : BaseFragment() {
 
             MaterialAlertDialogBuilder(context)
                 .setView(view)
-                .setPositiveButton(R.string.common_google_play_services_update_button) { _, _ ->
+                .setPositiveButton(R.string.update) { _, _ ->
                     val edittext = view.findViewById<TextInputEditText>(R.id.edittext)
                     update(edittext.text.toString())
                 }

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="FarmExpertTextStyle.Graph.Header">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/graph_header_text_size</item>
+    </style>
+
+
+    <!--    MONTH HEADER STYLES-->
+    <style name="FarmExpertTextStyle.Graph.Header.Month">
+        <item name="maxLines">@integer/text_lines_1</item>
+        <item name="android:maxLines">@integer/text_lines_1</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizePresetSizes">@array/autosize_text_sizes</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.Header.Month.Births">
+        <item name="android:layout_width">@dimen/graph_birth_month_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_birth_month_cell_weight</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.Header.Month.Breedings">
+        <item name="android:layout_width">@dimen/graph_breeding_month_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_breeding_month_cell_weight</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.Header.Month.AnimalActions">
+        <item name="android:layout_width">@dimen/graph_actions_month_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_actions_month_cell_weight</item>
+    </style>
+
+
+    <!--    ESTIMATED BIRTH HEADER STYLE-->
+    <style name="FarmExpertTextStyle.Graph.Header.EstimatedBirth">
+        <item name="android:text">@string/estimated_birth</item>
+        <item name="android:layout_width">@dimen/graph_breeding_estimated_birth_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_breeding_estimated_birth_cell_weight</item>
+    </style>
+
+
+    <!--    ANIMAL ID HEADER STYLES-->
+    <style name="FarmExpertTextStyle.Graph.Header.Births">
+
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.Header.Births.Female">
+        <item name="android:text">@string/mother_id</item>
+        <item name="android:layout_width">@dimen/graph_birth_female_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_birth_female_cell_weight</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.Header.Births.Calf">
+        <item name="android:layout_width">@dimen/graph_birth_calf_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_birth_calf_cell_weight</item>
+        <item name="android:text">@string/calfInputHeader</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.Header.Breedings">
+
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.Header.Breedings.Female">
+        <item name="android:text">@string/mother_id</item>
+        <item name="android:layout_width">@dimen/graph_breeding_female_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_breeding_female_cell_weight</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.Header.Breedings.Male">
+        <item name="android:text">@string/maleInputHeader</item>
+        <item name="android:layout_width">@dimen/graph_breeding_male_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_breeding_male_cell_weight</item>
+    </style>
+
+    <style name="FarmExpertTextStyle.Graph.Header.AnimalActions">
+        <item name="android:text">@string/animal_id</item>
+        <item name="android:layout_width">@dimen/graph_actions_animal_cell_width</item>
+        <item name="android:layout_weight">@dimen/graph_actions_animal_cell_weight</item>
+    </style>
+
+</resources>
