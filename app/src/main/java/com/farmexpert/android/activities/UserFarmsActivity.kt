@@ -9,22 +9,17 @@ import com.farmexpert.android.R
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_ID
 import com.farmexpert.android.adapter.UserFarmsAdapter
 import com.farmexpert.android.model.Farm
-import com.farmexpert.android.utils.FirestorePath
-import com.farmexpert.android.utils.alert
+import com.farmexpert.android.utils.*
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_list_user_farms.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
-class UserFarmsActivity : AppCompatActivity(), AnkoLogger {
+class UserFarmsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,9 +92,8 @@ class UserFarmsActivity : AppCompatActivity(), AnkoLogger {
                         finishAffinity()
                     }
                 }
-                .addOnFailureListener { exception ->
+                .addLoggableFailureListener { exception ->
                     exception.message?.let { message -> alert(message) }
-                    FirebaseCrashlytics.getInstance().recordException(exception)
                 }
                 .addOnCompleteListener { loadingView.visibility = View.INVISIBLE }
         }

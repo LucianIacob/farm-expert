@@ -14,18 +14,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.farmexpert.android.R
-import com.farmexpert.android.utils.ConfigPickerUtils
-import com.farmexpert.android.utils.FirestorePath
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.farmexpert.android.utils.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_configuration.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.error
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.startActivity
 
-class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
+class ConfigurationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,10 +126,8 @@ class ConfigurationActivity : AppCompatActivity(), AnkoLogger {
             .addOnSuccessListener {
                 startMainActivity()
             }
-            .addOnFailureListener {
+            .addLoggableFailureListener {
                 longToast(R.string.unknown_error)
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
             }
     }
 

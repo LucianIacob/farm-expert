@@ -25,23 +25,16 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.preference.PreferenceManager
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_NAME
-import com.farmexpert.android.utils.CircleTransform
-import com.farmexpert.android.utils.alert
-import com.farmexpert.android.utils.applyFarmexpertStyle
-import com.farmexpert.android.utils.takeIfNotBlank
+import com.farmexpert.android.utils.*
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_header_dashboard.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.error
-import org.jetbrains.anko.startActivity
 
-class MainActivity : AppCompatActivity(), AnkoLogger {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,8 +61,7 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
                     .centerCrop()
                     .into(userIcon, object : Callback.EmptyCallback() {
                         override fun onError(e: Exception) {
-                            FirebaseCrashlytics.getInstance().recordException(e)
-                            error { e }
+                            error(e)
                         }
                     })
             }
@@ -157,10 +149,8 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
                 startActivity<AuthenticationActivity>()
                 finish()
             }
-            .addOnFailureListener {
+            .addLoggableFailureListener {
                 alert(R.string.err_logging_out)
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnCompleteListener { setLoadingVisibility(View.INVISIBLE) }
     }

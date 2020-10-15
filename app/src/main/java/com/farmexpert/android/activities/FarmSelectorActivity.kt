@@ -20,16 +20,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.FarmSelectorAdapter
 import com.farmexpert.android.model.Farm
-import com.farmexpert.android.utils.FirestorePath
-import com.farmexpert.android.utils.alert
-import com.farmexpert.android.utils.invisible
-import com.farmexpert.android.utils.visible
+import com.farmexpert.android.utils.*
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -37,12 +33,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_farm_selector.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.error
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.startActivity
 
-class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
+class FarmSelectorActivity : AppCompatActivity() {
 
     private var firestore: FirebaseFirestore = Firebase.firestore
     private lateinit var currentUser: FirebaseUser
@@ -75,10 +67,8 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
                 startActivity<AuthenticationActivity>()
                 finish()
             }
-            .addOnFailureListener {
+            .addLoggableFailureListener {
                 alert(R.string.err_logging_out)
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
             }
     }
 
@@ -173,15 +163,11 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
     private fun saveFarm(farm: Farm) {
         firestore.collection(FirestorePath.Collections.FARMS)
             .add(farm)
+            .addLoggableFailureListener { loadingProgressBar.invisible() }
             .addOnSuccessListener { documentReference ->
                 loadingProgressBar.invisible()
                 storeFarmId(documentReference.id, farm.name)
                 openFarmConfigurationsActivity()
-            }
-            .addOnFailureListener { exception ->
-                loadingProgressBar.invisible()
-                error { exception }
-                FirebaseCrashlytics.getInstance().recordException(exception)
             }
     }
 
@@ -194,9 +180,8 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             .whereEqualTo(FirestorePath.Farm.NAME, farmName)
             .get()
             .addOnSuccessListener { farms -> successListener(!farms.isEmpty) }
-            .addOnFailureListener { exception ->
+            .addLoggableFailureListener { exception ->
                 failureListener(exception)
-                FirebaseCrashlytics.getInstance().recordException(exception)
             }
     }
 
@@ -278,10 +263,9 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
                     storeFarmId(farmId, farm.name)
                     openMainActivity()
                 }
-                .addOnFailureListener { exception ->
+                .addLoggableFailureListener { exception ->
                     loadingProgressBar.invisible()
                     exception.message?.let { longToast(it) }
-                    FirebaseCrashlytics.getInstance().recordException(exception)
                 }
         }
     }
@@ -313,6 +297,7 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
             .whereEqualTo(FirestorePath.Farm.NAME, farmName)
             .whereEqualTo(FirestorePath.Farm.ACCESS_CODE, accessCode)
             .get()
+            .addLoggableFailureListener { failureListener(it) }
             .addOnSuccessListener { snapshots ->
                 if (!snapshots.isEmpty) {
                     val document = snapshots.documents[0]
@@ -323,10 +308,6 @@ class FarmSelectorActivity : AppCompatActivity(), AnkoLogger {
                 } else {
                     successListener(false, null)
                 }
-            }
-            .addOnFailureListener { exception ->
-                failureListener(exception)
-                FirebaseCrashlytics.getInstance().recordException(exception)
             }
     }
 

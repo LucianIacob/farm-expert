@@ -5,17 +5,16 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import com.farmexpert.android.R
+import com.farmexpert.android.utils.addLoggableFailureListener
 import com.farmexpert.android.utils.alert
 import com.farmexpert.android.utils.isValidInput
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.android.synthetic.main.activity_change_username.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.sdk27.coroutines.textChangedListener
 
-class ChangeUserNameActivity : AppCompatActivity(), AnkoLogger {
+class ChangeUserNameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +41,8 @@ class ChangeUserNameActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onResume() {
         super.onResume()
-        userNameBox.textChangedListener {
-            onTextChanged { charSequence, _, _, _ ->
-                updateBtn.isEnabled = charSequence?.isValidInput()?.let { true } ?: false
-            }
+        userNameBox.doOnTextChanged { text, _, _, _ ->
+            updateBtn.isEnabled = text?.isValidInput()?.let { true } ?: false
         }
 
         updateBtn.setOnClickListener { updateUserName() }
@@ -60,9 +57,8 @@ class ChangeUserNameActivity : AppCompatActivity(), AnkoLogger {
         FirebaseAuth.getInstance().currentUser
             ?.updateProfile(changeRequest)
             ?.addOnSuccessListener { finish() }
-            ?.addOnFailureListener { exception ->
+            ?.addLoggableFailureListener { exception ->
                 exception.message?.let { alert(it) }
-                FirebaseCrashlytics.getInstance().recordException(exception)
             }
             ?.addOnCompleteListener { loadingView.visibility = View.INVISIBLE }
     }

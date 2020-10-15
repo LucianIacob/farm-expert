@@ -18,15 +18,14 @@ import com.farmexpert.android.dialogs.*
 import com.farmexpert.android.model.Animal
 import com.farmexpert.android.model.Birth
 import com.farmexpert.android.utils.FirestorePath
+import com.farmexpert.android.utils.addLoggableFailureListener
 import com.farmexpert.android.utils.alert
 import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.Timestamp
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
-import org.jetbrains.anko.error
 import java.util.*
 
 class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
@@ -68,10 +67,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
         birthToAmend?.id?.let { birthId ->
             getCollectionReference().document(birthId)
                 .update(FirestorePath.Birth.LATEST_BIRTH, flagValue)
-                .addOnFailureListener { exception ->
-                    error { exception }
-                    FirebaseCrashlytics.getInstance().recordException(exception)
-                }
+                .addLoggableFailureListener()
         }
     }
 
@@ -112,11 +108,10 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
     override fun validateEntity(entity: Any, listener: (Boolean) -> Unit) {
         animalsCollections.document((entity as Birth).calfId)
             .get()
-            .addOnFailureListener {
+            .addLoggableFailureListener {
                 alert(R.string.err_validating_calf)
                 listener(false)
                 loadingHide()
-                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {
@@ -150,11 +145,7 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
 
             animalsCollections.document(it.calfId)
                 .set(animal)
-                .addOnFailureListener { exception ->
-                    alert(R.string.err_adding_animal_from_birth)
-                    error { exception }
-                    FirebaseCrashlytics.getInstance().recordException(exception)
-                }
+                .addLoggableFailureListener { alert(R.string.err_adding_animal_from_birth) }
         }
     }
 

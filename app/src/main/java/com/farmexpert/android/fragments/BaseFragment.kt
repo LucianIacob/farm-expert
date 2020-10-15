@@ -22,16 +22,15 @@ import com.farmexpert.android.activities.FarmSelectorActivity
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_ID
 import com.farmexpert.android.activities.MainActivity
 import com.farmexpert.android.utils.FirestorePath
+import com.farmexpert.android.utils.longToast
+import com.farmexpert.android.utils.startActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.support.v4.longToast
-import org.jetbrains.anko.support.v4.startActivity
 
-open class BaseFragment : Fragment(), AnkoLogger {
+open class BaseFragment : Fragment() {
 
     protected var currentUser: FirebaseUser? = null
     protected lateinit var farmReference: DocumentReference

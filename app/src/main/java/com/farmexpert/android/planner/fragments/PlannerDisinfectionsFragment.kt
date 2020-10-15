@@ -12,13 +12,8 @@ package com.farmexpert.android.planner.fragments
 import com.farmexpert.android.R
 import com.farmexpert.android.planner.model.PlannerContainer
 import com.farmexpert.android.planner.transformer.PlannerDataTransformer
-import com.farmexpert.android.utils.ConfigPickerUtils
-import com.farmexpert.android.utils.FirestorePath
-import com.farmexpert.android.utils.TimeOfTheDay
-import com.farmexpert.android.utils.shift
+import com.farmexpert.android.utils.*
 import com.google.firebase.Timestamp
-import com.google.firebase.crashlytics.FirebaseCrashlytics
-import org.jetbrains.anko.error
 import java.util.*
 
 class PlannerDisinfectionsFragment : BasePlannerFragment() {
@@ -56,10 +51,7 @@ class PlannerDisinfectionsFragment : BasePlannerFragment() {
                     )
                 }
             }
-            .addOnFailureListener {
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
-            }
+            .addLoggableFailureListener()
             .addOnCompleteListener { super.retrieveDataForDate(date) }
     }
 }

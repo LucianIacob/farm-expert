@@ -35,21 +35,17 @@ import com.farmexpert.android.utils.*
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.Timestamp
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_animal_master.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.design.snackbar
-import org.jetbrains.anko.error
 import java.util.*
 
 /**
  * Created by Lucian Iacob on March 22, 2019.
  */
-class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextListener {
+class AnimalMasterFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var animalsCollections: CollectionReference
@@ -236,11 +232,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
                     animalsCollections.document(id)
                         .set(animal)
                         .addOnSuccessListener { rootLayout?.snackbar(R.string.item_added) }
-                        .addOnFailureListener {
-                            alert(message = R.string.err_adding_animal)
-                            error { it }
-                            FirebaseCrashlytics.getInstance().recordException(it)
-                        }
+                        .addLoggableFailureListener { alert(message = R.string.err_adding_animal) }
                         .addOnCompleteListener {
                             parentFragmentManager.findFragmentByTag(AddAnimalDialogFragment.TAG)
                                 ?.let {
@@ -252,10 +244,7 @@ class AnimalMasterFragment : BaseFragment(), AnkoLogger, SearchView.OnQueryTextL
                         }
                 }
             }
-            .addOnFailureListener {
-                alert(R.string.err_adding_animal)
-                FirebaseCrashlytics.getInstance().recordException(it)
-            }
+            .addLoggableFailureListener { alert(R.string.err_adding_animal) }
             .addOnCompleteListener { loadingHide() }
     }
 

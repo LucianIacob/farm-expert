@@ -13,11 +13,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.farmexpert.android.BuildConfig
 import com.farmexpert.android.R
+import com.farmexpert.android.utils.error
+import com.farmexpert.android.utils.startActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import kotlinx.android.synthetic.main.activity_authentication.*
-import org.jetbrains.anko.startActivity
 
 class AuthenticationActivity : AppCompatActivity() {
 
@@ -34,8 +36,7 @@ class AuthenticationActivity : AppCompatActivity() {
     private fun startSignIn() {
         val intent = AuthUI.getInstance().createSignInIntentBuilder()
             .setTheme(R.style.AppTheme)
-            .setIsSmartLockEnabled(true, true)
-            .setAlwaysShowSignInMethodScreen(true)
+            .setIsSmartLockEnabled(!BuildConfig.DEBUG, true)
             .setTosAndPrivacyPolicyUrls(termsOfServiceUrl, privacyPolicyUrl)
             .setAvailableProviders(
                 listOf(
@@ -58,6 +59,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 finish()
             } else {
                 IdpResponse.fromResultIntent(data)?.error?.message?.let {
+                    error(IdpResponse.fromResultIntent(data)?.error)
                     Toast.makeText(this, it, Toast.LENGTH_LONG).show()
                 }
                 return

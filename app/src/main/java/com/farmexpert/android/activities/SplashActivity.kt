@@ -14,10 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import com.farmexpert.android.R
+import com.farmexpert.android.utils.startActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.startActivity
 
 /**
  * Created by Lucian Iacob on March 09, 2019.

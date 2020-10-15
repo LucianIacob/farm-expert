@@ -22,20 +22,14 @@ import com.farmexpert.android.adapter.AnimalActionsAdapter
 import com.farmexpert.android.adapter.holder.BaseDetailHolder
 import com.farmexpert.android.dialogs.BaseEditRecordDialogFragment
 import com.farmexpert.android.model.BaseEntity
-import com.farmexpert.android.utils.alert
-import com.farmexpert.android.utils.applyFarmexpertStyle
-import com.farmexpert.android.utils.gone
-import com.farmexpert.android.utils.visible
+import com.farmexpert.android.utils.*
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_animal_action_detail.*
-import org.jetbrains.anko.design.snackbar
-import org.jetbrains.anko.error
 
 abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDetailHolder<ModelClass>> :
     BaseFragment() {
@@ -124,9 +118,8 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
         entity.id?.let {
             getCollectionReference().document(it)
                 .delete()
-                .addOnFailureListener { exception ->
+                .addLoggableFailureListener {
                     alert(message = R.string.err_deleting_item)
-                    FirebaseCrashlytics.getInstance().recordException(exception)
                 }
                 .addOnCompleteListener { loadingHide() }
         }
@@ -192,10 +185,8 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
             getCollectionReference().document(it)
                 .update(getPairsToUpdateFromBundle(args))
                 .addOnSuccessListener { rootLayout?.snackbar(R.string.item_updated) }
-                .addOnFailureListener { exception ->
+                .addLoggableFailureListener {
                     alert(message = R.string.err_updating_record)
-                    error { exception }
-                    FirebaseCrashlytics.getInstance().recordException(exception)
                 }
                 .addOnCompleteListener { loadingHide() }
         }
@@ -209,10 +200,8 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
                 getCollectionReference()
                     .add(entity)
                     .addOnSuccessListener { rootLayout?.snackbar(R.string.item_added) }
-                    .addOnFailureListener {
+                    .addLoggableFailureListener {
                         alert(message = R.string.err_adding_record)
-                        error { it }
-                        FirebaseCrashlytics.getInstance().recordException(it)
                     }
                     .addOnCompleteListener { loadingHide() }
                 addDependentData(entity)

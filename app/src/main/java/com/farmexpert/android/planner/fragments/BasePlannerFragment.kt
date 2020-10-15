@@ -34,13 +34,9 @@ import com.farmexpert.android.planner.transformer.PlannerDataTransformer
 import com.farmexpert.android.utils.*
 import com.farmexpert.android.viewmodel.PlannerDateViewModel
 import com.google.firebase.Timestamp
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.android.synthetic.main.fragment_planner.*
 import kotlinx.android.synthetic.main.fragment_planner_section.*
-import org.jetbrains.anko.design.snackbar
-import org.jetbrains.anko.error
-import org.jetbrains.anko.toast
 import java.util.*
 
 abstract class BasePlannerFragment : BaseFragment() {
@@ -71,7 +67,7 @@ abstract class BasePlannerFragment : BaseFragment() {
         containerHeader.text = getHeaderText()
         PlannerAdapter(
             clickListener = { handleClick(it) },
-            longClickListener = { handleLongClick(it) }
+            longClickListener = { handleLongClick() }
         ).run {
             adapter = this
             plannerRecycler.adapter = this
@@ -83,7 +79,7 @@ abstract class BasePlannerFragment : BaseFragment() {
         parentFragment?.findNavController()?.navigate(clickDirections)
     }
 
-    private fun handleLongClick(reminderId: String) {
+    private fun handleLongClick() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -138,10 +134,8 @@ abstract class BasePlannerFragment : BaseFragment() {
         farmReference.collection(FirestorePath.Collections.REMINDERS)
             .add(reminder)
             .addOnSuccessListener { parentFragment?.rootLayout?.snackbar(R.string.item_added) }
-            .addOnFailureListener { exception ->
+            .addLoggableFailureListener {
                 alert(message = R.string.err_adding_record)
-                error { exception }
-                FirebaseCrashlytics.getInstance().recordException(exception)
             }
             .addOnCompleteListener { loadingHide() }
     }

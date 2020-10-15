@@ -28,7 +28,7 @@ class FarmExpertApplication : MultiDexApplication() {
         sInstance = this
         initFirebaseApp()
         initStetho()
-        setupFabric()
+        setupCrashlytics()
     }
 
     private fun initFirebaseApp() {
@@ -41,10 +41,25 @@ class FarmExpertApplication : MultiDexApplication() {
         }
     }
 
-    private fun setupFabric() {
+    private fun setupCrashlytics() {
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
-        FirebaseAuth.getInstance().currentUser?.email?.let {
+        FirebaseAuth.getInstance().currentUser?.uid?.let {
             FirebaseCrashlytics.getInstance().setUserId(it)
+        }
+        FirebaseAuth.getInstance().currentUser?.email?.let {
+            FirebaseCrashlytics.getInstance().setCustomKey("user_email", it)
+        }
+        FirebaseAuth.getInstance().currentUser?.phoneNumber?.let {
+            FirebaseCrashlytics.getInstance().setCustomKey("phone_number", it)
+        }
+        FirebaseAuth.getInstance().currentUser?.displayName?.let {
+            FirebaseCrashlytics.getInstance().setCustomKey("user_name", it)
+        }
+        FirebaseAuth.getInstance().currentUser?.providerId?.let {
+            FirebaseCrashlytics.getInstance().setCustomKey("provider_id", it)
+        }
+        FirebaseAuth.getInstance().currentUser?.tenantId?.let {
+            FirebaseCrashlytics.getInstance().setCustomKey("tenant_id", it)
         }
     }
 

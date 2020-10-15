@@ -28,14 +28,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.Timestamp
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.fragment_animal_detail.*
-import org.jetbrains.anko.design.snackbar
-import org.jetbrains.anko.error
-import org.jetbrains.anko.support.v4.toast
 import java.util.*
 
 class AnimalDetailFragment : BaseFragment() {
@@ -128,10 +124,7 @@ class AnimalDetailFragment : BaseFragment() {
     override fun onViewReady() {
         loadingShow()
         animalRef.get(fromSource())
-            .addOnFailureListener {
-                toast(R.string.unknown_error)
-                FirebaseCrashlytics.getInstance().recordException(it)
-            }
+            .addLoggableFailureListener { toast(R.string.unknown_error) }
             .addOnSuccessListener { populateUi(it.toObject<Animal>()) }
             .addOnCompleteListener {
                 loadingHide()
@@ -356,9 +349,8 @@ class AnimalDetailFragment : BaseFragment() {
                     is Timestamp -> viewToUpdate.value = newValue.asDisplayable()
                 }
             }
-            .addOnFailureListener {
+            .addLoggableFailureListener {
                 rootLayout?.snackbar(R.string.err_updating_animal)
-                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnCompleteListener { loadingHide() }
     }

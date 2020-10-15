@@ -13,24 +13,104 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.text.trimmedLength
 import androidx.fragment.app.Fragment
+import com.farmexpert.android.BuildConfig
 import com.farmexpert.android.R
 import com.farmexpert.android.model.Animal
+import com.google.android.gms.tasks.Task
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import java.text.SimpleDateFormat
 import java.util.*
 
 /**
  * Created by Lucian Iacob on March 11, 2019.
  */
+
+fun Context.toast(@StringRes message: Int) = Toast
+    .makeText(this, message, Toast.LENGTH_SHORT)
+    .show()
+
+fun Context.toast(message: String) = Toast
+    .makeText(this, message, Toast.LENGTH_SHORT)
+    .show()
+
+fun Context.longToast(@StringRes message: Int) = Toast
+    .makeText(this, message, Toast.LENGTH_LONG)
+    .show()
+
+fun Context.longToast(message: String) = Toast
+    .makeText(this, message, Toast.LENGTH_LONG)
+    .show()
+
+fun Fragment.toast(@StringRes message: Int) {
+    context?.let {
+        Toast
+            .makeText(it, message, Toast.LENGTH_SHORT)
+            .show()
+    }
+}
+
+fun Fragment.longToast(@StringRes message: Int) {
+    context?.let {
+        Toast
+            .makeText(it, message, Toast.LENGTH_LONG)
+            .show()
+    }
+}
+
+fun Context.info(loggingMessage: () -> String) {
+    if (BuildConfig.DEBUG) {
+        Log.i(this::javaClass.name, loggingMessage())
+    }
+}
+
+fun Fragment.info(loggingMessage: () -> String) {
+    if (BuildConfig.DEBUG) {
+        Log.i(this::javaClass.name, loggingMessage())
+    }
+}
+
+fun View.snackbar(@StringRes message: Int) = Snackbar
+    .make(this, message, Snackbar.LENGTH_SHORT)
+    .show()
+
+fun Any.error(error: Throwable?) {
+    error?.let {
+        if (BuildConfig.DEBUG) {
+            Log.e(this::javaClass.name, "", error)
+        } else {
+            FirebaseCrashlytics.getInstance().recordException(error)
+        }
+    }
+}
+
+inline fun <reified T : Activity> Context.startActivity(vararg params: Pair<String, Any?>) =
+    IntentUtils.internalStartActivity(this, T::class.java, params)
+
+inline fun <reified T : Activity> Fragment.startActivity(vararg params: Pair<String, Any?>) {
+    IntentUtils.internalStartActivity(requireActivity(), T::class.java, params)
+}
+
+fun <TResult> Task<TResult>.addLoggableFailureListener(block: ((Exception) -> Unit)? = null): Task<TResult> {
+    addOnFailureListener {
+        error(it)
+        block?.invoke(it)
+    }
+    return this
+}
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)

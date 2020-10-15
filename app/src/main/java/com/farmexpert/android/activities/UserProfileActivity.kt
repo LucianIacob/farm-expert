@@ -17,8 +17,8 @@ import com.farmexpert.android.BuildConfig
 import com.farmexpert.android.R
 import com.farmexpert.android.model.Farm
 import com.farmexpert.android.utils.*
+import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.*
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -28,10 +28,9 @@ import com.google.firebase.storage.ktx.storage
 import com.google.firebase.storage.ktx.storageMetadata
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_user_profile.*
-import org.jetbrains.anko.*
 import java.util.*
 
-class UserProfileActivity : AppCompatActivity(), AnkoLogger {
+class UserProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,10 +49,8 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
             loadingView.visibility = VISIBLE
             reload()
                 .addOnSuccessListener { fillData(firebaseUser = this) }
-                .addOnFailureListener {
+                .addLoggableFailureListener {
                     alert(getString(R.string.profile_load_unsuccessful, it.message))
-                    error { it }
-                    FirebaseCrashlytics.getInstance().recordException(it)
                 }
                 .addOnCompleteListener { loadingView.visibility = INVISIBLE }
         } ?: run {
@@ -131,9 +128,8 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
             FirebaseAuth.getInstance()
                 .sendPasswordResetEmail(emailAddress)
                 .addOnSuccessListener { alert(R.string.password_reset_success) }
-                .addOnFailureListener {
+                .addLoggableFailureListener {
                     it.message?.let { message -> alert(message = message, isCancellable = true) }
-                    FirebaseCrashlytics.getInstance().recordException(it)
                 }
                 .addOnCompleteListener { loadingView.visibility = INVISIBLE }
         }
@@ -203,27 +199,23 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                     }
                     .addOnSuccessListener {
                         info { "batch success" }
-                        deleteUser(firebaseUser = firebaseUser)
+                        finallyDeleteUser()
                     }
-                    .addOnFailureListener {
+                    .addLoggableFailureListener {
                         it.message?.let { message -> alert(message) }
                         loadingView.visibility = INVISIBLE
-                        error { it }
-                        FirebaseCrashlytics.getInstance().recordException(it)
                     }
 
             }
-            .addOnFailureListener {
+            .addLoggableFailureListener {
                 it.message?.let { message -> alert(message) }
                 loadingView.visibility = INVISIBLE
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
             }
     }
 
-    private fun deleteUser(firebaseUser: FirebaseUser) {
-        firebaseUser
-            .delete()
+    private fun finallyDeleteUser() {
+        AuthUI.getInstance()
+            .delete(this)
             .addOnSuccessListener {
                 info { "delete user success" }
                 PreferenceManager
@@ -235,9 +227,8 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 startActivity<AuthenticationActivity>()
                 finishAffinity()
             }
-            .addOnFailureListener {
+            .addLoggableFailureListener {
                 it.message?.let { message -> alert(message) }
-                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnCompleteListener { loadingView?.visibility = INVISIBLE }
     }
@@ -275,11 +266,9 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                         imageUri = uri
                     )
                 }
-                .addOnFailureListener {
+                .addLoggableFailureListener {
                     loadingView.visibility = INVISIBLE
                     alert(R.string.err_updating_record)
-                    error { it }
-                    FirebaseCrashlytics.getInstance().recordException(it)
                 }
         }
     }
@@ -297,10 +286,9 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                     loadingView.visibility = INVISIBLE
                 }
             }
-            .addOnFailureListener { exception ->
+            .addLoggableFailureListener { exception ->
                 exception.message?.let { toast(it) }
                 loadingView.visibility = INVISIBLE
-                FirebaseCrashlytics.getInstance().recordException(exception)
             }
     }
 
@@ -318,10 +306,8 @@ class UserProfileActivity : AppCompatActivity(), AnkoLogger {
                 )
                 farmsInfoGroup.setOnClickListener { startActivity<UserFarmsActivity>() }
             }
-            .addOnFailureListener {
+            .addLoggableFailureListener {
                 farmsList.text = getString(R.string.err_retrieving_farms)
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
             }
     }
 

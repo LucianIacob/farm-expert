@@ -13,13 +13,8 @@ import com.farmexpert.android.R
 import com.farmexpert.android.planner.model.PlannerContainer
 import com.farmexpert.android.planner.model.PlannerItem
 import com.farmexpert.android.planner.transformer.PlannerDataTransformer
-import com.farmexpert.android.utils.ConfigPickerUtils
-import com.farmexpert.android.utils.FirestorePath
-import com.farmexpert.android.utils.TimeOfTheDay
-import com.farmexpert.android.utils.shift
+import com.farmexpert.android.utils.*
 import com.google.firebase.Timestamp
-import com.google.firebase.crashlytics.FirebaseCrashlytics
-import org.jetbrains.anko.error
 import java.util.*
 
 class PlannerReproductionControlFragment : BasePlannerFragment() {
@@ -77,10 +72,7 @@ class PlannerReproductionControlFragment : BasePlannerFragment() {
                     )
                 }
             }
-            .addOnFailureListener {
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
-            }
+            .addLoggableFailureListener()
     }
 
     private fun triggerGestationsFetch(date: Date) {
@@ -99,6 +91,7 @@ class PlannerReproductionControlFragment : BasePlannerFragment() {
             .whereLessThanOrEqualTo(FirestorePath.Breeding.ACTION_DATE, Timestamp(endDate))
             .whereEqualTo(FirestorePath.Breeding.LATEST_BREEDING, true)
             .get()
+            .addLoggableFailureListener()
             .addOnSuccessListener {
                 gestationsArrived = true
                 if (this.isAdded) {
@@ -112,10 +105,6 @@ class PlannerReproductionControlFragment : BasePlannerFragment() {
                         date = date
                     )
                 }
-            }
-            .addOnFailureListener {
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
             }
     }
 

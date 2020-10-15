@@ -21,17 +21,12 @@ import com.farmexpert.android.R
 import com.farmexpert.android.adapter.GraphAdapter
 import com.farmexpert.android.adapter.holder.BaseMasterHolder
 import com.farmexpert.android.model.BaseEntity
-import com.farmexpert.android.utils.AppUtils
-import com.farmexpert.android.utils.alert
-import com.farmexpert.android.utils.gone
-import com.farmexpert.android.utils.visible
+import com.farmexpert.android.utils.*
 import com.firebase.ui.firestore.SnapshotParser
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_graph_master.*
-import org.jetbrains.anko.error
 import java.util.*
 
 
@@ -120,10 +115,8 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
             .whereGreaterThanOrEqualTo(getFilterField(), queryRangeStart)
             .whereLessThanOrEqualTo(getFilterField(), queryRangeEnd)
             .get()
-            .addOnFailureListener {
+            .addLoggableFailureListener {
                 alert(message = R.string.err_retrieving_items)
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
             }
             .addOnSuccessListener { documents ->
                 val adapterData = transformData(documents)

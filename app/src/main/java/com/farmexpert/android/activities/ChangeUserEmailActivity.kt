@@ -3,21 +3,14 @@ package com.farmexpert.android.activities
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import com.farmexpert.android.R
-import com.farmexpert.android.utils.alert
-import com.farmexpert.android.utils.isValidInput
-import com.farmexpert.android.utils.takeIfTrue
+import com.farmexpert.android.utils.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.android.synthetic.main.activity_change_email.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.error
-import org.jetbrains.anko.info
-import org.jetbrains.anko.sdk27.coroutines.textChangedListener
-import org.jetbrains.anko.toast
 
-class ChangeUserEmailActivity : AppCompatActivity(), AnkoLogger {
+class ChangeUserEmailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,10 +48,8 @@ class ChangeUserEmailActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onResume() {
         super.onResume()
-        userEmailBox.textChangedListener {
-            onTextChanged { charSequence, _, _, _ ->
-                updateBtn.isEnabled = charSequence?.isValidInput()?.let { true } ?: false
-            }
+        userEmailBox.doOnTextChanged { text, _, _, _ ->
+            updateBtn.isEnabled = text?.isValidInput()?.let { true } ?: false
         }
 
         updateBtn.setOnClickListener { updateUserEmail() }
@@ -81,10 +72,8 @@ class ChangeUserEmailActivity : AppCompatActivity(), AnkoLogger {
                         okListener = { finish() }
                     )
                 }
-                .addOnFailureListener { exception ->
+                .addLoggableFailureListener { exception ->
                     exception.message?.let { alert(message = it, isCancellable = true) }
-                    error { exception }
-                    FirebaseCrashlytics.getInstance().recordException(exception)
                 }
                 .addOnCompleteListener { loadingView.visibility = View.INVISIBLE }
         }
@@ -94,6 +83,7 @@ class ChangeUserEmailActivity : AppCompatActivity(), AnkoLogger {
         firebaseUser
             .sendEmailVerification()
             .addOnSuccessListener { toast(R.string.email_verification_success) }
+            .addLoggableFailureListener()
             .addOnCompleteListener {
                 info { "email verification link sent to ${userEmailBox.text.toString()}" }
             }

@@ -13,13 +13,8 @@ import com.farmexpert.android.R
 import com.farmexpert.android.planner.model.PlannerContainer
 import com.farmexpert.android.planner.model.PlannerItem
 import com.farmexpert.android.planner.transformer.PlannerDataTransformer
-import com.farmexpert.android.utils.ConfigPickerUtils
-import com.farmexpert.android.utils.FirestorePath
-import com.farmexpert.android.utils.TimeOfTheDay
-import com.farmexpert.android.utils.shift
+import com.farmexpert.android.utils.*
 import com.google.firebase.Timestamp
-import com.google.firebase.crashlytics.FirebaseCrashlytics
-import org.jetbrains.anko.error
 import java.util.*
 
 class PlannerVaccinationsFragment : BasePlannerFragment() {
@@ -70,6 +65,7 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
             .whereLessThanOrEqualTo(FirestorePath.Birth.DATE_OF_BIRTH, Timestamp(endDate))
             .whereEqualTo(FirestorePath.Birth.LATEST_BIRTH, true)
             .get()
+            .addLoggableFailureListener()
             .addOnSuccessListener {
                 vaccine1Arrived = true
                 if (this.isAdded) {
@@ -83,10 +79,6 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
                         date = date
                     )
                 }
-            }
-            .addOnFailureListener {
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
             }
     }
 
@@ -107,6 +99,7 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
             .whereLessThanOrEqualTo(FirestorePath.Breeding.EXPECTED_BIRTH, Timestamp(endDate))
             .whereEqualTo(FirestorePath.Breeding.LATEST_BREEDING, true)
             .get()
+            .addLoggableFailureListener()
             .addOnSuccessListener {
                 vaccine2Arrived = true
                 if (this.isAdded) {
@@ -121,10 +114,6 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
                         date = date
                     )
                 }
-            }
-            .addOnFailureListener {
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
             }
     }
 
@@ -145,6 +134,7 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
             .whereLessThanOrEqualTo(FirestorePath.Breeding.EXPECTED_BIRTH, Timestamp(endDate))
             .whereEqualTo(FirestorePath.Breeding.LATEST_BREEDING, true)
             .get()
+            .addLoggableFailureListener()
             .addOnSuccessListener {
                 vaccine3Arrived = true
                 if (this.isAdded) {
@@ -158,10 +148,6 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
                         date = date
                     )
                 }
-            }
-            .addOnFailureListener {
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
             }
     }
 
@@ -182,6 +168,7 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
             .whereLessThanOrEqualTo(FirestorePath.Breeding.EXPECTED_BIRTH, Timestamp(endDate))
             .whereEqualTo(FirestorePath.Breeding.LATEST_BREEDING, true)
             .get()
+            .addLoggableFailureListener()
             .addOnSuccessListener {
                 vaccine4Arrived = true
                 if (this.isAdded) {
@@ -195,10 +182,6 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
                         date = date
                     )
                 }
-            }
-            .addOnFailureListener {
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
             }
     }
 

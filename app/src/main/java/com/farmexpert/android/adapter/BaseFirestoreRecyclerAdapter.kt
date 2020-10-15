@@ -25,6 +25,7 @@ abstract class BaseFirestoreRecyclerAdapter<ModelClass : BaseEntity, HolderClass
         startListening()
     }
 
+    // TODO maybe use lifecycle owner to start and stop listening/
     override fun startListening() {
         if (shouldListen) {
             super.startListening()

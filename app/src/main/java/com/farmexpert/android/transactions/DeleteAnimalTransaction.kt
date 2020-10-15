@@ -10,19 +10,17 @@
 package com.farmexpert.android.transactions
 
 import com.farmexpert.android.utils.FirestorePath
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.farmexpert.android.utils.addLoggableFailureListener
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.error
 
 class DeleteAnimalTransaction(
     val farmReference: DocumentReference,
     val successListener: () -> Unit,
     val failureListener: (Exception) -> Unit,
     val complete: () -> Unit
-) : AnkoLogger {
+) {
 
     private var birthsToDelete = listOf<DocumentReference>()
     private var breedingsToDelete = listOf<DocumentReference>()
@@ -78,10 +76,7 @@ class DeleteAnimalTransaction(
             .addOnSuccessListener {
                 birthsToDelete = it.documents.map { snapshot -> snapshot.reference }
             }
-            .addOnFailureListener {
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
-            }
+            .addLoggableFailureListener()
             .addOnCompleteListener {
                 birthsRetrieved = true
                 checkRetrieveFinished()
@@ -91,10 +86,7 @@ class DeleteAnimalTransaction(
             .addOnSuccessListener {
                 breedingsToDelete = it.documents.map { snapshot -> snapshot.reference }
             }
-            .addOnFailureListener {
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
-            }
+            .addLoggableFailureListener()
             .addOnCompleteListener {
                 breedingsRetrieved = true
                 checkRetrieveFinished()
@@ -104,10 +96,7 @@ class DeleteAnimalTransaction(
             .addOnSuccessListener {
                 pedicuresToDelete = it.documents.map { snapshot -> snapshot.reference }
             }
-            .addOnFailureListener {
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
-            }
+            .addLoggableFailureListener()
             .addOnCompleteListener {
                 pedicuresRetrieved = true
                 checkRetrieveFinished()
@@ -117,10 +106,7 @@ class DeleteAnimalTransaction(
             .addOnSuccessListener {
                 treatmentsToDelete = it.documents.map { snapshot -> snapshot.reference }
             }
-            .addOnFailureListener {
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
-            }
+            .addLoggableFailureListener()
             .addOnCompleteListener {
                 treatmentsRetrieved = true
                 checkRetrieveFinished()
@@ -130,10 +116,7 @@ class DeleteAnimalTransaction(
             .addOnSuccessListener {
                 vaccinationsToDelete = it.documents.map { snapshot -> snapshot.reference }
             }
-            .addOnFailureListener {
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
-            }
+            .addLoggableFailureListener()
             .addOnCompleteListener {
                 vaccinationsRetrieved = true
                 checkRetrieveFinished()
@@ -143,10 +126,7 @@ class DeleteAnimalTransaction(
             .addOnSuccessListener {
                 disinfectionsToDelete = it.documents.map { snapshot -> snapshot.reference }
             }
-            .addOnFailureListener {
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
-            }
+            .addLoggableFailureListener()
             .addOnCompleteListener {
                 disinfectionsRetrieved = true
                 checkRetrieveFinished()
@@ -156,10 +136,7 @@ class DeleteAnimalTransaction(
             .addOnSuccessListener {
                 vitaminizationsToDelete = it.documents.map { snapshot -> snapshot.reference }
             }
-            .addOnFailureListener {
-                error { it }
-                FirebaseCrashlytics.getInstance().recordException(it)
-            }
+            .addLoggableFailureListener()
             .addOnCompleteListener {
                 vitaminizationsRetrieved = true
                 checkRetrieveFinished()
@@ -189,9 +166,8 @@ class DeleteAnimalTransaction(
 
             batch.commit()
                 .addOnSuccessListener { successListener.invoke() }
-                .addOnFailureListener {
+                .addLoggableFailureListener {
                     failureListener.invoke(it)
-                    FirebaseCrashlytics.getInstance().recordException(it)
                 }
                 .addOnCompleteListener { complete.invoke() }
         }

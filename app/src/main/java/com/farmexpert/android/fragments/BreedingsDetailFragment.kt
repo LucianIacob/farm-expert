@@ -18,13 +18,12 @@ import com.farmexpert.android.dialogs.*
 import com.farmexpert.android.model.Breeding
 import com.farmexpert.android.utils.AppUtils
 import com.farmexpert.android.utils.FirestorePath
+import com.farmexpert.android.utils.addLoggableFailureListener
 import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.Timestamp
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
-import org.jetbrains.anko.error
 import java.util.*
 
 class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>() {
@@ -95,10 +94,7 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
         breedingToAmend?.id?.let {
             getCollectionReference().document(it)
                 .update(FirestorePath.Breeding.LATEST_BREEDING, flagValue)
-                .addOnFailureListener { exception ->
-                    error { exception }
-                    FirebaseCrashlytics.getInstance().recordException(exception)
-                }
+                .addLoggableFailureListener()
         }
     }
 
