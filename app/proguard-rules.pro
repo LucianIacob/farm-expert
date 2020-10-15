@@ -20,6 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keepattributes *Annotation*                      // Keep Crashlytics annotations
--keepattributes SourceFile,LineNumberTable        // Keep file names/line numbers
--keep public class * extends java.lang.Exception  // Keep custom exceptions (opt)
+-keepattributes *Annotation*
+-keepattributes SourceFile,LineNumberTable
+-keep public class * extends java.lang.Exception

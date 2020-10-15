@@ -86,7 +86,7 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         val now = Calendar.getInstance()
-        val yearRange = resources.getInteger(R.integer.grafic_year_count)
+        val yearRange = resources.getInteger(R.integer.graph_year_count)
         for (i in yearRange downTo 1) {
             menu.add(
                 Menu.NONE,

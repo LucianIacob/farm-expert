@@ -84,13 +84,13 @@
     <string name="delete_confirmation_request">Ești sigur ca dorești să ștergi acest element?</string>
     <string name="err_deleting_item">A apărut o eroare la ștergerea elementului</string>
     <string name="dialog_update_btn">Actualizare</string>
-    <string name="edit_birth_title">Actualizează fatare</string>
+    <string name="edit_birth_title">Actualizează fătarea</string>
     <string name="edit_breeding_title">Actualizează monta</string>
     <string name="edit_pedicure_title">Actualizează pedichiura</string>
     <string name="edit_animal_action_title">Actualizează acțiunea animalului</string>
     <string name="edit_vitaminization_title">Actualizează vitaminizarea</string>
     <string name="edit_vaccination_title">Actualizează vaccinarea</string>
-    <string name="edit_treatment_title">Actualizează tratament</string>
+    <string name="edit_treatment_title">Actualizează tratamentul</string>
     <string name="edit_disinfection_title">Actualizează deparazitarea</string>
 
     <string name="default_birth_note">4 - Fără probleme</string>
@@ -205,16 +205,16 @@
     </string-array>
 
 
-    <string name="pref_heating_start_title">Numarul de zile pentru inceputul căldurilor</string>
-    <string name="pref_heating_end_title">Numarul de zile pentru sfarsitul căldurilor</string>
-    <string name="pref_gestation_title">Control pentru gestatie dupa</string>
-    <string name="pref_physiological_control_title">Controlul fiziologic dupa fatare</string>
-    <string name="pref_disinfection_title">Deparazitarea înainte de fatare</string>
-    <string name="pref_after_birth_vaccin_title">Vaccin dupa fatare</string>
-    <string name="pref_before_birth_vaccin1_title">Primul vaccin înainte de fatare</string>
-    <string name="pref_before_birth_vaccin2_title">Al doilea vaccin înainte de fatare</string>
-    <string name="pref_before_birth_vaccin3_title">Al treilea vaccin înainte de fatare</string>
-    <string name="pref_gestation_length_title">Numarul de zile pentru gestatie</string>
+    <string name="pref_heating_start_title">Numărul de zile pentru începutul căldurilor</string>
+    <string name="pref_heating_end_title">Numărul de zile pentru sfârșitul căldurilor</string>
+    <string name="pref_gestation_title">Control pentru gestație după</string>
+    <string name="pref_physiological_control_title">Controlul fiziologic după fătare</string>
+    <string name="pref_disinfection_title">Deparazitarea înainte de fătare</string>
+    <string name="pref_after_birth_vaccin_title">Vaccin după fătare</string>
+    <string name="pref_before_birth_vaccin1_title">Primul vaccin înainte de fătare</string>
+    <string name="pref_before_birth_vaccin2_title">Al doilea vaccin înainte de fătare</string>
+    <string name="pref_before_birth_vaccin3_title">Al treilea vaccin înainte de fătare</string>
+    <string name="pref_gestation_length_title">Numărul de zile pentru gestație</string>
 
     <string name="maleInputHeader">Matricol/Nume taur</string>
     <string name="calfInputHeader">Matricol vițel</string>

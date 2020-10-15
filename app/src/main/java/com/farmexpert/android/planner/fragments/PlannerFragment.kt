@@ -15,7 +15,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.farmexpert.android.R
 import com.farmexpert.android.fragments.BaseFragment
@@ -70,7 +69,7 @@ class PlannerFragment : BaseFragment() {
         prevDayBtn.setOnClickListener { plannerDateViewModel.prevDay() }
         nextDayBtn.setOnClickListener { plannerDateViewModel.nextDay() }
         plannerDateViewModel.getDate()
-            .observe(this, Observer { date -> currentDay.text = date.getShort() })
+            .observe(this, { date -> currentDay.text = date.getShort() })
     }
 
     override fun onPause() {

@@ -29,7 +29,7 @@
 
     <style name="DialogTitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textSize">20sp</item>
-        <item name="fontFamily">@font/allerta</item>
+        <item name="fontFamily">@font/telegroteskscreen_medium</item>
     </style>
 
     <style name="DialogBodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
@@ -56,10 +56,6 @@
         <item name="android:layout_gravity">bottom|end</item>>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <style name="FarmExpertAppBar" parent="Widget.MaterialComponents.Toolbar.Primary">
         <item name="subtitleTextAppearance">@style/ToolbarSubtitleAppearance</item>
         <item name="titleTextAppearance">@style/ToolbarTitleAppearance</item>
@@ -79,7 +75,7 @@
         <item name="android:textSize">@dimen/large_text</item>
         <item name="android:text">@string/empty_list</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:fontFamily">@font/allerta</item>
+        <item name="android:fontFamily">@font/cabin_semibold</item>
     </style>
 
     <style name="FarmExpertInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

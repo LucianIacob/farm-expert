@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="dashboard_columns_count">4</integer>
-    <integer name="statistics_items_scroll_direction">1</integer>
 
     <integer name="graph_data_births_animal_id_max_lines">@integer/text_lines_2</integer>
     <integer name="graph_data_breedings_animal_id_max_lines">@integer/text_lines_2</integer>

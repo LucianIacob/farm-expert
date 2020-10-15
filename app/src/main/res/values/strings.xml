@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Farm Expert</string>
+    <string name="app_name" translatable="false">Farm Expert</string>
     <string name="login">Login</string>
     <string name="auth_welcome">Log in with your Farm Expert account or register in order to start using the app
     </string>

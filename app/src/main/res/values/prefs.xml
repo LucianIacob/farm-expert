@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="pref_heating_start_key">heatingStart</string>
-    <string name="pref_heating_end_key">heatingEnd</string>
-    <string name="pref_gestation_key">gestationControl</string>
-    <string name="pref_physiological_control_key">physiologicalControl</string>
-    <string name="pref_disinfection_key">beforeBirthDisinfection</string>
-    <string name="pref_vaccin_after_birth_key">afterBirthVaccin</string>
-    <string name="pref_vaccin1_before_birth_key">beforeBirthVaccin1</string>
-    <string name="pref_vaccin2_before_birth_key">beforeBirthVaccin2</string>
-    <string name="pref_vaccin3_before_birth_key">beforeBirthVaccin3</string>
-    <string name="pref_gestation_length_key">gestationPeriod</string>
+    <string name="pref_heating_start_key" translatable="false">heatingStart</string>
+    <string name="pref_heating_end_key" translatable="false">heatingEnd</string>
+    <string name="pref_gestation_key" translatable="false">gestationControl</string>
+    <string name="pref_physiological_control_key" translatable="false">physiologicalControl</string>
+    <string name="pref_disinfection_key" translatable="false">beforeBirthDisinfection</string>
+    <string name="pref_vaccin_after_birth_key" translatable="false">afterBirthVaccin</string>
+    <string name="pref_vaccin1_before_birth_key" translatable="false">beforeBirthVaccin1</string>
+    <string name="pref_vaccin2_before_birth_key" translatable="false">beforeBirthVaccin2</string>
+    <string name="pref_vaccin3_before_birth_key" translatable="false">beforeBirthVaccin3</string>
+    <string name="pref_gestation_length_key" translatable="false">gestationPeriod</string>
 
     <string name="pref_heating_start_title">Starting day of the heat cycle of a female</string>
     <string name="pref_heating_end_title">Ending day of the heat cycle of a female</string>
