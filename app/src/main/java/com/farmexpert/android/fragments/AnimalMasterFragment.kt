@@ -20,6 +20,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,6 +41,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_animal_master.*
+import kotlinx.coroutines.delay
 import java.util.*
 
 /**
@@ -73,6 +75,11 @@ class AnimalMasterFragment : BaseFragment(), SearchView.OnQueryTextListener {
             }
 
         initAnimalList()
+        lifecycleScope.launchWhenStarted {
+            loadingShow()
+            delay(250)
+            adapter.startListening()
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -83,13 +90,7 @@ class AnimalMasterFragment : BaseFragment(), SearchView.OnQueryTextListener {
         }
     }
 
-    override fun onViewReady() {
-        super.onViewReady()
-        adapter.readyForListening()
-    }
-
     private fun initAnimalList() {
-        loadingShow()
         val options = FirestoreRecyclerOptions.Builder<Animal>()
             .setQuery(getAnimalsQuery()) { it.toObject<Animal>()!!.apply { id = it.id } }
             .build()
@@ -114,6 +115,11 @@ class AnimalMasterFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
         layoutManager = headcountRecyclerView.layoutManager as LinearLayoutManager
         headcountRecyclerView.adapter = adapter
+    }
+
+    override fun onStop() {
+        super.onStop()
+        adapter.stopListening()
     }
 
     private fun getAnimalsQuery(): Query = with(animalsCollections) {
@@ -168,14 +174,14 @@ class AnimalMasterFragment : BaseFragment(), SearchView.OnQueryTextListener {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        adapter.startListening()
-    }
-
     override fun onResume() {
         super.onResume()
         addAnimalBtn.setOnClickListener { addAnimalClicked() }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        addAnimalBtn.setOnClickListener(null)
     }
 
     private fun addAnimalClicked() {
@@ -258,22 +264,12 @@ class AnimalMasterFragment : BaseFragment(), SearchView.OnQueryTextListener {
         return true
     }
 
-    override fun onPause() {
-        super.onPause()
-        addAnimalBtn.setOnClickListener(null)
-    }
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(KEY_QUERY, query)
         if (::layoutManager.isInitialized) {
             outState.putParcelable(KEY_LAYOUT_STATE, layoutManager.onSaveInstanceState())
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        adapter.stopListening()
     }
 
     companion object {

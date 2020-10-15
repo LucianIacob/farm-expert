@@ -121,7 +121,8 @@ class AnimalDetailFragment : BaseFragment() {
         motherMotherIdView.setEditListener { editMotherMother() }
     }
 
-    override fun onViewReady() {
+    override fun onStart() {
+        super.onStart()
         loadingShow()
         animalRef.get(fromSource())
             .addLoggableFailureListener { toast(R.string.unknown_error) }

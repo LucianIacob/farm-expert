@@ -101,7 +101,8 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
         return true
     }
 
-    override fun onViewReady() {
+    override fun onStart() {
+        super.onStart()
         retrieveData()
     }
 

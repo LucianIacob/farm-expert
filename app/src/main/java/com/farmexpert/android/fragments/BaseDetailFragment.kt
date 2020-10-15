@@ -51,6 +51,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
     private fun prepareComponents() {
         loadingShow()
         val options = FirestoreRecyclerOptions.Builder<ModelClass>()
+            .setLifecycleOwner(this)
             .setQuery(getQuery(), snapshotParser)
             .build()
 
@@ -77,11 +78,6 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
     }
 
     abstract fun getQuery(): Query
-
-    override fun onViewReady() {
-        super.onViewReady()
-        adapter.readyForListening()
-    }
 
     abstract val snapshotParser: SnapshotParser<ModelClass>
 
@@ -134,11 +130,6 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
     abstract fun getAddRecordDialog(): DialogFragment
 
     abstract fun getEditRecordDialog(): DialogFragment
-
-    override fun onStart() {
-        super.onStart()
-        adapter.startListening()
-    }
 
     override fun onResume() {
         super.onResume()

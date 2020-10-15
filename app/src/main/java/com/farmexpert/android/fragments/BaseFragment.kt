@@ -11,8 +11,6 @@ package com.farmexpert.android.fragments
 
 import android.os.Bundle
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
@@ -55,36 +53,9 @@ open class BaseFragment : Fragment() {
             }
     }
 
-    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
-        if (nextAnim == 0) {
-            onViewReady()
-            return null
-        }
-
-        return AnimationUtils.loadAnimation(activity, nextAnim).apply {
-            setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationRepeat(animation: Animation?) {
-                    // not used
-                }
-
-                override fun onAnimationEnd(animation: Animation?) {
-                    if (enter) onViewReady()
-                }
-
-                override fun onAnimationStart(animation: Animation?) {
-                    // not used
-                }
-            })
-        }
-    }
-
-    protected open fun onViewReady() {
-        // may be overridden by followers
-    }
-
-    fun loadingShow() {
-        (activity as? MainActivity)?.setLoadingVisibility(View.VISIBLE)
-    }
+   fun loadingShow() {
+       (activity as? MainActivity)?.setLoadingVisibility(View.VISIBLE)
+   }
 
     fun loadingHide() {
         (activity as? MainActivity)?.setLoadingVisibility(View.INVISIBLE)

@@ -16,20 +16,4 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
 abstract class BaseFirestoreRecyclerAdapter<ModelClass : BaseEntity, HolderClass : RecyclerView.ViewHolder>(
     options: FirestoreRecyclerOptions<ModelClass>
-) : FirestoreRecyclerAdapter<ModelClass, HolderClass>(options) {
-
-    private var shouldListen: Boolean = false
-
-    fun readyForListening() {
-        shouldListen = true
-        startListening()
-    }
-
-    // TODO maybe use lifecycle owner to start and stop listening/
-    override fun startListening() {
-        if (shouldListen) {
-            super.startListening()
-        }
-    }
-
-}
+) : FirestoreRecyclerAdapter<ModelClass, HolderClass>(options)

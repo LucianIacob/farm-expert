@@ -9,8 +9,8 @@
 
 package com.farmexpert.android.app
 
+import android.app.Application
 import android.content.Context
-import androidx.multidex.MultiDexApplication
 import com.facebook.stetho.Stetho
 import com.farmexpert.android.BuildConfig
 import com.google.firebase.FirebaseApp
@@ -20,7 +20,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 /**
  * Created by Lucian Iacob on March 10, 2019.
  */
-class FarmExpertApplication : MultiDexApplication() {
+class FarmExpertApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

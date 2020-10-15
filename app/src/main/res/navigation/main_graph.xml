@@ -285,6 +285,10 @@
         android:id="@+id/plannerFragment"
         android:name="com.farmexpert.android.planner.fragments.PlannerFragment"
         android:label="@string/planner"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
         tools:layout="@layout/fragment_planner" />
 
     <!--<fragment-->
