@@ -47,18 +47,18 @@ class ConfigPickerUtils {
             }
         }
 
-        fun getDefaultValue(key: String?, resources: Resources): Int {
+        fun getDefaultValue(key: String?, resources: Resources?): Int {
             return when (key) {
-                resources.getString(R.string.pref_heating_start_key) -> 20
-                resources.getString(R.string.pref_heating_end_key) -> 22
-                resources.getString(R.string.pref_gestation_key) -> 60
-                resources.getString(R.string.pref_physiological_control_key) -> 30
-                resources.getString(R.string.pref_disinfection_key) -> 60
-                resources.getString(R.string.pref_vaccin_after_birth_key) -> 60
-                resources.getString(R.string.pref_vaccin1_before_birth_key) -> 45
-                resources.getString(R.string.pref_vaccin2_before_birth_key) -> 20
-                resources.getString(R.string.pref_vaccin3_before_birth_key) -> 15
-                resources.getString(R.string.pref_gestation_length_key) -> 285
+                resources?.getString(R.string.pref_heating_start_key) -> 20
+                resources?.getString(R.string.pref_heating_end_key) -> 22
+                resources?.getString(R.string.pref_gestation_key) -> 60
+                resources?.getString(R.string.pref_physiological_control_key) -> 30
+                resources?.getString(R.string.pref_disinfection_key) -> 60
+                resources?.getString(R.string.pref_vaccin_after_birth_key) -> 60
+                resources?.getString(R.string.pref_vaccin1_before_birth_key) -> 45
+                resources?.getString(R.string.pref_vaccin2_before_birth_key) -> 20
+                resources?.getString(R.string.pref_vaccin3_before_birth_key) -> 15
+                resources?.getString(R.string.pref_gestation_length_key) -> 285
                 else -> 0
             }
         }
