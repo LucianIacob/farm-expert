@@ -14,15 +14,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.ConfigurationActivity
-import com.farmexpert.android.app.FarmExpertApplication
 import com.farmexpert.android.dialogs.AddPlannerItemDialogFragment
 import com.farmexpert.android.dialogs.BaseDialogFragment
 import com.farmexpert.android.fragments.BaseFragment
@@ -39,12 +36,11 @@ import kotlinx.android.synthetic.main.fragment_planner.*
 import kotlinx.android.synthetic.main.fragment_planner_section.*
 import java.util.*
 
-abstract class BasePlannerFragment : BaseFragment() {
+abstract class BasePlannerFragment : BaseFragment(R.layout.fragment_planner_section) {
 
+    private val plannerDateViewModel: PlannerDateViewModel by viewModels()
     private var snapshotListener: ListenerRegistration? = null
     protected lateinit var adapter: PlannerAdapter
-
-    private var plannerDateViewModel: PlannerDateViewModel? = null
 
     private var plannerData = mutableMapOf(
         PLANNER_DATA_REMINDERS to emptyList<PlannerItem>(),
@@ -52,16 +48,10 @@ abstract class BasePlannerFragment : BaseFragment() {
     )
 
     protected val farmTimelinePrefs: SharedPreferences =
-        FarmExpertApplication.appContext.getSharedPreferences(
+        activity?.getSharedPreferences(
             ConfigurationActivity.FARM_TIMELINE_PREFS,
             Context.MODE_PRIVATE
-        )
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_planner_section, container, false)
+        ) ?: throw IllegalStateException()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         containerHeader.text = getHeaderText()
@@ -82,19 +72,13 @@ abstract class BasePlannerFragment : BaseFragment() {
     private fun handleLongClick() {
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        parentFragment?.let {
-            plannerDateViewModel = ViewModelProvider(it).get(PlannerDateViewModel::class.java)
-        }
-    }
-
     abstract fun getHeaderText(): String
 
     override fun onResume() {
         super.onResume()
-        plannerDateViewModel?.getDate()
-            ?.observe(
+        plannerDateViewModel
+            .getDate()
+            .observe(
                 this,
                 { date -> retrieveDataForDate(date) }
             )
@@ -103,7 +87,7 @@ abstract class BasePlannerFragment : BaseFragment() {
 
     private fun displayAddReminderDialog() {
         parentFragment?.childFragmentManager?.let { fragmentManager ->
-            AddPlannerItemDialogFragment.getInstance(plannerDateViewModel?.getDate()?.value).also {
+            AddPlannerItemDialogFragment.getInstance(plannerDateViewModel.getDate().value).also {
                 it.setTargetFragment(this, ADD_PLANNER_ITEM_RQ)
                 it.isCancelable = false
                 it.show(fragmentManager, AddPlannerItemDialogFragment.TAG)
@@ -159,7 +143,7 @@ abstract class BasePlannerFragment : BaseFragment() {
             .addSnapshotListener { querySnapshot, exception ->
                 loadingHide()
                 if (exception != null) {
-                    error { exception }
+                    error(exception)
                     activity?.toast(R.string.err_retrieving_reminders)
                 } else if (querySnapshot != null) {
                     val reminders = PlannerDataTransformer.transformReminders(querySnapshot)
@@ -184,7 +168,7 @@ abstract class BasePlannerFragment : BaseFragment() {
 
     override fun onPause() {
         super.onPause()
-        plannerDateViewModel?.getDate()?.removeObservers(this)
+        plannerDateViewModel.getDate().removeObservers(this)
         add_reminder_btn.setOnClickListener(null)
     }
 
