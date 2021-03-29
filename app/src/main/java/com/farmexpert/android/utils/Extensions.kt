@@ -12,7 +12,6 @@ package com.farmexpert.android.utils
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
-import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +25,6 @@ import androidx.core.text.trimmedLength
 import androidx.fragment.app.Fragment
 import com.farmexpert.android.BuildConfig
 import com.farmexpert.android.R
-import com.farmexpert.android.model.Animal
 import com.google.android.gms.tasks.Task
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -184,13 +182,8 @@ fun Date.shift(days: Int = 0, jumpTo: TimeOfTheDay = TimeOfTheDay.DEFAULT): Date
     return calendar.time
 }
 
-fun Calendar.year() = this.get(Calendar.YEAR)
 fun Calendar.month() = this.get(Calendar.MONTH)
 fun Calendar.day() = this.get(Calendar.DAY_OF_MONTH)
-
-fun Animal.yearOfBirth(): Int = Calendar.getInstance().apply { time = dateOfBirth.toDate() }.year()
-fun Animal.monthOfBirth() = dateOfBirth.toDate().month()
-fun Animal.dayOfBirth() = dateOfBirth.toDate().day()
 
 fun Date.month(): Int {
     return Calendar.getInstance().apply { time = this@month }.month()
@@ -202,19 +195,12 @@ fun Date.day(): Int {
 
 fun Button.applyFarmexpertStyle(context: Context, redButton: Boolean = false) {
     setBackgroundResource(0)
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        setTextColor(
-            resources.getColor(
-                redButton.takeIf { it }?.let { R.color.red } ?: R.color.sea_green,
-                null
-            )
-        )
-    } else {
-        setTextColor(ContextCompat.getColor(
+    setTextColor(
+        ContextCompat.getColor(
             context,
-            redButton.takeIf { it }?.let { R.color.red } ?: R.color.sea_green)
+            redButton.takeIf { it }?.let { R.color.red } ?: R.color.sea_green
         )
-    }
+    )
 }
 
 fun Fragment.alert(
@@ -222,26 +208,26 @@ fun Fragment.alert(
     isCancellable: Boolean = true,
     okListener: (() -> Unit)? = null
 ) {
-    context?.let { context ->
-        MaterialAlertDialogBuilder(context)
-            .setMessage(message)
-            .setPositiveButton(android.R.string.ok) { _, _ ->
-                okListener?.invoke()
-            }
-            .setCancelable(isCancellable)
-            .show()
-    }
+    activity?.alert(
+        message = message,
+        isCancellable = isCancellable,
+        okListener = okListener
+    )
 }
 
 fun Activity.alert(
-    message: Int,
+    message: Any,
     isCancellable: Boolean = true,
     negativeButton: Boolean = false,
     okListener: (() -> Unit)? = null,
     redButton: Boolean = false
 ) {
+    val stringMessage = (message as? Int)?.let { getString(it) }
+        ?: message as? String
+        ?: return
+
     val builder = MaterialAlertDialogBuilder(this)
-        .setMessage(message)
+        .setMessage(stringMessage)
         .setPositiveButton(android.R.string.ok) { _, _ ->
             okListener?.invoke()
         }
@@ -260,27 +246,6 @@ fun Activity.alert(
             show()
         }
 }
-
-fun Activity.alert(
-    message: String,
-    isCancellable: Boolean = true,
-    okListener: (() -> Unit)? = null
-) {
-    MaterialAlertDialogBuilder(this)
-        .setMessage(message)
-        .setPositiveButton(android.R.string.ok) { _, _ ->
-            okListener?.invoke()
-        }
-        .setCancelable(isCancellable)
-        .show()
-}
-
-fun Int.encode(): String =
-    if (this == R.drawable.left_nail_problem || this == R.drawable.right_nail_problem) {
-        AppUtils.NAIL_WITH_PROBLEM
-    } else {
-        AppUtils.NAIL_WITHOUT_PROBLEM
-    }
 
 fun String?.takeIfNotBlank(): String? = this.takeUnless { this.isNullOrBlank() }
 

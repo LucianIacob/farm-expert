@@ -17,7 +17,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.core.os.bundleOf
 import com.farmexpert.android.R
-import com.farmexpert.android.utils.encode
+import com.farmexpert.android.utils.AppUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.dialog_add_pedicure.view.*
 
@@ -153,3 +153,10 @@ class AddPedicureDialogFragment : BaseAddRecordDialogFragment() {
         const val rightNailProblem = R.drawable.right_nail_problem
     }
 }
+
+fun Int.encode(): String =
+    if (this == R.drawable.left_nail_problem || this == R.drawable.right_nail_problem) {
+        AppUtils.NAIL_WITH_PROBLEM
+    } else {
+        AppUtils.NAIL_WITHOUT_PROBLEM
+    }

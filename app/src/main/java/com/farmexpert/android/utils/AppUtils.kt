@@ -13,7 +13,6 @@ import android.content.Context
 import android.widget.ImageView
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.ConfigurationActivity.Companion.FARM_TIMELINE_PREFS
-import com.farmexpert.android.app.FarmExpertApplication
 import com.google.firebase.Timestamp
 import java.util.*
 
@@ -34,26 +33,25 @@ object AppUtils {
             Timestamp(time)
         }
 
-    fun getExpectedBirthDate(breedingDate: Date): Date {
+    fun getExpectedBirthDate(breedingDate: Date, context: Context?): Date {
         val breedingCalendar = Calendar.getInstance().apply { time = breedingDate }
 
-        val resources = FarmExpertApplication.appContext.resources
-        val prefs = FarmExpertApplication.appContext.getSharedPreferences(
+        val prefs = context?.getSharedPreferences(
             FARM_TIMELINE_PREFS,
             Context.MODE_PRIVATE
         )
 
         // todo check keys
-        val key = resources.getString(R.string.pref_gestation_length_key)
-        val gestationLength = prefs.getInt(
+        val key = context?.getString(R.string.pref_gestation_length_key)
+        val gestationLength = prefs?.getInt(
             key,
             ConfigPickerUtils.getDefaultValue(
-                resources.getString(R.string.pref_gestation_length_key),
-                resources
+                context.getString(R.string.pref_gestation_length_key),
+                context.resources
             )
         )
 
-        breedingCalendar.add(Calendar.DATE, gestationLength)
+        gestationLength?.let { breedingCalendar.add(Calendar.DATE, it) }
         return breedingCalendar.time
     }
 

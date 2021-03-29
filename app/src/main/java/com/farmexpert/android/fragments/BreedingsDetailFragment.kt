@@ -76,7 +76,7 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
         val breedingDate = Date(bundle.getLong(BaseDialogFragment.DIALOG_DATE))
         val male = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_MALE, "")
         val note = bundle.getInt(BaseAddRecordDialogFragment.ADD_DIALOG_NOTE, 5)
-        val expectedBirthDate = AppUtils.getExpectedBirthDate(breedingDate)
+        val expectedBirthDate = AppUtils.getExpectedBirthDate(breedingDate, context)
         val details = bundle.getString(BaseAddRecordDialogFragment.ADD_DIALOG_DETAILS)
 
         return Breeding(
