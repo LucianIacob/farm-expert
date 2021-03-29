@@ -38,7 +38,7 @@ import java.util.*
 
 abstract class BasePlannerFragment : BaseFragment(R.layout.fragment_planner_section) {
 
-    private val plannerDateViewModel: PlannerDateViewModel by viewModels()
+    private val plannerDateViewModel: PlannerDateViewModel by viewModels({ requireParentFragment() })
     private var snapshotListener: ListenerRegistration? = null
     protected lateinit var adapter: PlannerAdapter
 
@@ -47,11 +47,12 @@ abstract class BasePlannerFragment : BaseFragment(R.layout.fragment_planner_sect
         PLANNER_DATA_ANIMALS to emptyList()
     )
 
-    protected val farmTimelinePrefs: SharedPreferences =
+    protected val farmTimelinePrefs: SharedPreferences by lazy {
         activity?.getSharedPreferences(
             ConfigurationActivity.FARM_TIMELINE_PREFS,
             Context.MODE_PRIVATE
         ) ?: throw IllegalStateException()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         containerHeader.text = getHeaderText()
