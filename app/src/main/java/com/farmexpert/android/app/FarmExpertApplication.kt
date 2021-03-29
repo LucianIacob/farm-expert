@@ -10,7 +10,6 @@
 package com.farmexpert.android.app
 
 import android.app.Application
-import android.content.Context
 import com.facebook.stetho.Stetho
 import com.farmexpert.android.BuildConfig
 import com.google.firebase.FirebaseApp
@@ -25,7 +24,6 @@ class FarmExpertApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        sInstance = this
         initFirebaseApp()
         initStetho()
         setupCrashlytics()
@@ -61,12 +59,5 @@ class FarmExpertApplication : Application() {
         FirebaseAuth.getInstance().currentUser?.tenantId?.let {
             FirebaseCrashlytics.getInstance().setCustomKey("tenant_id", it)
         }
-    }
-
-    companion object {
-        private lateinit var sInstance: FarmExpertApplication
-
-        val appContext: Context
-            get() = sInstance.applicationContext
     }
 }

@@ -17,7 +17,6 @@ import android.widget.ImageView
 import androidx.core.os.bundleOf
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.AppUtils
-import com.farmexpert.android.utils.encode
 import kotlinx.android.synthetic.main.dialog_edit_pedicure.view.*
 import java.util.*
 
