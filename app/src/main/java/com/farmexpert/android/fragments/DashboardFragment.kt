@@ -10,9 +10,7 @@
 package com.farmexpert.android.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
@@ -26,16 +24,10 @@ import kotlinx.android.synthetic.main.fragment_dashboard.*
  * Created by Lucian Iacob.
  * Cluj-Napoca, February 19, 2018.
  */
-class DashboardFragment : Fragment() {
+class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
     private val clickListener: (DashboardItem) -> Unit =
         { dashboardItem -> onItemClick(dashboardItem) }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

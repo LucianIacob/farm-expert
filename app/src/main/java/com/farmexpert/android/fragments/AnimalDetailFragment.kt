@@ -34,7 +34,7 @@ import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.fragment_animal_detail.*
 import java.util.*
 
-class AnimalDetailFragment : BaseFragment() {
+class AnimalDetailFragment : BaseFragment(R.layout.fragment_animal_detail) {
 
     private val args: AnimalDetailFragmentArgs by navArgs()
 
@@ -99,12 +99,6 @@ class AnimalDetailFragment : BaseFragment() {
             }
         ).execute(args.animalId)
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_animal_detail, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         animalId.text = args.animalId

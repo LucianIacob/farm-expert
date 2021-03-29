@@ -13,9 +13,7 @@ import android.app.Activity
 import android.content.DialogInterface.BUTTON_POSITIVE
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.farmexpert.android.R
@@ -33,15 +31,9 @@ import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_animal_action_detail.*
 
 abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDetailHolder<ModelClass>> :
-    BaseFragment() {
+    BaseFragment(R.layout.fragment_animal_action_detail) {
 
     private lateinit var adapter: AnimalActionsAdapter<ModelClass, ModelHolder>
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_animal_action_detail, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

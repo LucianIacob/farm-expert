@@ -32,7 +32,7 @@ import java.util.*
 
 
 abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMasterHolder<ModelClass>> :
-    BaseFragment() {
+    BaseFragment(R.layout.fragment_graph_master) {
 
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var adapter: GraphAdapter<ModelClass, ModelHolder>
@@ -44,12 +44,6 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_graph_master, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

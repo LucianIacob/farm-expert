@@ -10,9 +10,6 @@
 package com.farmexpert.android.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
@@ -30,7 +27,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-open class BaseFragment(private val layoutId: Int? = null) : Fragment() {
+open class BaseFragment(layoutId: Int) : Fragment(layoutId) {
 
     protected var currentUser: FirebaseUser? = null
     protected lateinit var farmReference: DocumentReference
@@ -54,12 +51,6 @@ open class BaseFragment(private val layoutId: Int? = null) : Fragment() {
                 }
             }
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = layoutId?.let { inflater.inflate(it, container, false) }
 
     fun loadingShow() {
         (activity as? MainActivity)?.setLoadingVisibility(true)

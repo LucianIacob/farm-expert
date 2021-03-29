@@ -14,9 +14,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
@@ -48,7 +46,8 @@ import java.util.*
 /**
  * Created by Lucian Iacob on March 22, 2019.
  */
-class AnimalMasterFragment : BaseFragment(), SearchView.OnQueryTextListener {
+class AnimalMasterFragment : BaseFragment(R.layout.fragment_animal_master),
+    SearchView.OnQueryTextListener {
 
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var animalsCollections: CollectionReference
@@ -57,12 +56,6 @@ class AnimalMasterFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     private var layoutState: Parcelable? = null
     private var query: String = ""
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_animal_master, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
