@@ -10,8 +10,11 @@
 package com.farmexpert.android.adapter.holder
 
 import android.view.View
+import androidx.core.view.isVisible
 import com.farmexpert.android.model.Birth
-import com.farmexpert.android.utils.*
+import com.farmexpert.android.utils.DropdownUtils
+import com.farmexpert.android.utils.asDisplayable
+import com.farmexpert.android.utils.takeIfNotBlank
 import kotlinx.android.synthetic.main.item_birth.view.*
 
 class BirthViewHolder(
@@ -25,10 +28,10 @@ class BirthViewHolder(
             birthDate.text = entity.dateOfBirth.asDisplayable()
             note.text = DropdownUtils.getBirthNoteValue(entity.note, itemView.resources)
             calfId.text = entity.calfId
+            commentsContainer?.isVisible = entity.comments?.isNotBlank() ?: false
             entity.comments?.takeIfNotBlank()?.let {
-                commentsContainer?.visible()
                 commentsDetails?.text = it
-            } ?: run { commentsContainer?.gone() }
+            }
             updateBtn.setOnClickListener { updateListener(entity) }
             deleteBtn.setOnClickListener { deleteListener(entity) }
         }

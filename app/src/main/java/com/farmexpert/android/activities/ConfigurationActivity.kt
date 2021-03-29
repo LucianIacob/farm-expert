@@ -19,11 +19,10 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_configuration.*
 
-class ConfigurationActivity : AppCompatActivity() {
+class ConfigurationActivity : AppCompatActivity(R.layout.activity_configuration) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_configuration)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_finish -> {
@@ -43,6 +42,7 @@ class ConfigurationActivity : AppCompatActivity() {
         if (farmId.isNullOrEmpty()) {
             longToast(R.string.unknown_error)
             startActivity<AuthenticationActivity>()
+            finish()
             return
         }
 

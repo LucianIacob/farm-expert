@@ -16,6 +16,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.AnimalActionsAdapter
@@ -63,11 +64,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
             override fun onDataChanged() {
                 onNewDataArrived(snapshots)
                 loadingHide()
-                if (itemCount != 0) {
-                    placeholderText?.gone()
-                } else {
-                    placeholderText?.visible()
-                }
+                placeholderText?.isVisible = snapshots.isEmpty()
             }
         }
 

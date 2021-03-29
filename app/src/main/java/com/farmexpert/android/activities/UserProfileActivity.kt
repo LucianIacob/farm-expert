@@ -31,11 +31,10 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.util.*
 
-class UserProfileActivity : AppCompatActivity() {
+class UserProfileActivity : AppCompatActivity(R.layout.activity_user_profile) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_profile)
         setupToolbar()
     }
 

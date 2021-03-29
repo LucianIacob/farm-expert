@@ -10,7 +10,6 @@
 package com.farmexpert.android.activities
 
 import android.content.Intent
-import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.farmexpert.android.BuildConfig
@@ -21,12 +20,7 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import kotlinx.android.synthetic.main.activity_authentication.*
 
-class AuthenticationActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_authentication)
-    }
+class AuthenticationActivity : AppCompatActivity(R.layout.activity_authentication) {
 
     override fun onStart() {
         super.onStart()

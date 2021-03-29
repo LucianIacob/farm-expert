@@ -130,18 +130,6 @@ fun Timestamp.day(): Int {
     return date.day()
 }
 
-fun View.visible() {
-    visibility = View.VISIBLE
-}
-
-fun View.invisible() {
-    visibility = View.INVISIBLE
-}
-
-fun View.gone() {
-    visibility = View.GONE
-}
-
 fun Date.getShort(): String {
     val format = "dd.MM.yyyy"
     val simpleDateFormat = SimpleDateFormat(format, Locale.getDefault())

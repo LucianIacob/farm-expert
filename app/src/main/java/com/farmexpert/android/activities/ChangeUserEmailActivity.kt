@@ -11,12 +11,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_change_email.*
 
-class ChangeUserEmailActivity : AppCompatActivity() {
+class ChangeUserEmailActivity : AppCompatActivity(R.layout.activity_change_email) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_email)
-
         setupToolbar()
 
         intent.extras?.apply {
@@ -30,10 +28,8 @@ class ChangeUserEmailActivity : AppCompatActivity() {
                 sendVerificationEmailBtn.isVisible = false
             }
 
-            getBoolean(EMAIL_VERIFIED).takeIfTrue()?.let {
-                emailVerifiedSeparator.isVisible = false
-                sendVerificationEmailBtn.isVisible = false
-            }
+            emailVerifiedSeparator.isVisible = getBoolean(EMAIL_VERIFIED, false)
+            sendVerificationEmailBtn.isVisible = getBoolean(EMAIL_VERIFIED, false)
         }
 
     }

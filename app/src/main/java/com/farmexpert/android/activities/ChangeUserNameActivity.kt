@@ -14,11 +14,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.android.synthetic.main.activity_change_username.*
 
-class ChangeUserNameActivity : AppCompatActivity() {
+class ChangeUserNameActivity : AppCompatActivity(R.layout.activity_change_username) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_username)
 
         setupToolbar()
         intent.extras?.getString(USER_NAME)?.let {

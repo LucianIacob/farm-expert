@@ -20,6 +20,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
@@ -103,11 +104,11 @@ class AnimalMasterFragment : BaseFragment(), SearchView.OnQueryTextListener {
             override fun onDataChanged() {
                 loadingHide()
                 (activity as? AppCompatActivity)?.supportActionBar?.title = if (itemCount != 0) {
-                    emptyView.gone()
+                    emptyView.isVisible = false
                     layoutState?.let { layoutManager.onRestoreInstanceState(it) }
                     getString(R.string.headcount_title, itemCount)
                 } else {
-                    emptyView.visible()
+                    emptyView.isVisible = true
                     getString(R.string.dashboard_headcount)
                 }
             }

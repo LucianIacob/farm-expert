@@ -9,7 +9,6 @@
 
 package com.farmexpert.android.activities
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
@@ -22,12 +21,7 @@ import kotlinx.coroutines.launch
 /**
  * Created by Lucian Iacob on March 09, 2019.
  */
-class SplashActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
-    }
+class SplashActivity : AppCompatActivity(R.layout.activity_splash) {
 
     override fun onResume() {
         super.onResume()

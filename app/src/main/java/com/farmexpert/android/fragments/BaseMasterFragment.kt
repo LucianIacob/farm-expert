@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.view.*
 import androidx.core.content.edit
+import androidx.core.view.isVisible
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -122,12 +123,9 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
             .addOnSuccessListener { documents ->
                 val adapterData = transformData(documents)
                 adapter.data = adapterData
-
+                empty_list?.isVisible = adapterData.isEmpty()
                 if (adapterData.isNotEmpty()) {
-                    empty_list?.gone()
                     layoutState?.let { layoutManager.onRestoreInstanceState(it) }
-                } else {
-                    empty_list?.visible()
                 }
             }
             .addOnCompleteListener { loadingHide() }

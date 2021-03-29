@@ -19,12 +19,10 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_list_user_farms.*
 
-class UserFarmsActivity : AppCompatActivity() {
+class UserFarmsActivity : AppCompatActivity(R.layout.activity_list_user_farms) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_list_user_farms)
-
         setupToolbar()
 
         FirebaseAuth.getInstance()
