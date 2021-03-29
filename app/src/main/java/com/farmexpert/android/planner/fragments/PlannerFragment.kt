@@ -12,7 +12,8 @@ package com.farmexpert.android.planner.fragments
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.commit
+import androidx.fragment.app.viewModels
 import com.farmexpert.android.R
 import com.farmexpert.android.fragments.BaseFragment
 import com.farmexpert.android.utils.NavigationConstants
@@ -23,12 +24,11 @@ import java.util.*
 
 class PlannerFragment : BaseFragment(R.layout.fragment_planner) {
 
-    private lateinit var plannerDateViewModel: PlannerDateViewModel
+    private val plannerDateViewModel by viewModels<PlannerDateViewModel>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         inflateFragments()
-        plannerDateViewModel = ViewModelProvider(this).get(PlannerDateViewModel::class.java)
 
         (savedInstanceState?.getSerializable(KEY_SELECTED_DATE) as? Date)?.let {
             plannerDateViewModel.setDate(it)
@@ -49,16 +49,16 @@ class PlannerFragment : BaseFragment(R.layout.fragment_planner) {
     }
 
     private fun inflateFragment(fragment: Fragment, layoutId: Int) {
-        childFragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            .replace(layoutId, fragment)
-            .commit()
+        childFragmentManager.commit {
+            setTransition(FragmentTransaction.TRANSIT_NONE)
+            replace(layoutId, fragment)
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        prevDayBtn.setOnClickListener { plannerDateViewModel.prevDay() }
-        nextDayBtn.setOnClickListener { plannerDateViewModel.nextDay() }
+        prevDayBtn.setOnClickListener { plannerDateViewModel.prevDaySelected() }
+        nextDayBtn.setOnClickListener { plannerDateViewModel.nextDaySelected() }
         plannerDateViewModel.getDate()
             .observe(this, { date -> currentDay.text = date.getShort() })
     }

@@ -30,6 +30,9 @@ import java.util.*
 abstract class BaseAnimalActionDetailFragment :
     BaseDetailFragment<AnimalAction, AnimalActionHolder>() {
 
+    abstract val getAddDialogTitle: Int
+    abstract val getEditDialogTitle: Int
+
     override val snapshotParser: SnapshotParser<AnimalAction> = SnapshotParser {
         it.toObject<AnimalAction>()!!.apply { id = it.id }
     }
@@ -66,11 +69,11 @@ abstract class BaseAnimalActionDetailFragment :
     }
 
     override fun getAddRecordDialog() = AddAnimalActionDialogFragment().apply {
-        arguments = bundleOf(ADD_DIALOG_TITLE to getAddDialogTitle())
+        arguments = bundleOf(ADD_DIALOG_TITLE to getAddDialogTitle)
     }
 
     override fun getEditRecordDialog() = EditAnimalActionDialogFragment().apply {
-        arguments = bundleOf(EDIT_DIALOG_TITLE to getEditDialogTitle())
+        arguments = bundleOf(EDIT_DIALOG_TITLE to getEditDialogTitle)
     }
 
     override fun getQuery(): Query {
@@ -78,8 +81,4 @@ abstract class BaseAnimalActionDetailFragment :
             .whereEqualTo(FirestorePath.AnimalAction.ANIMAL_ID, getAnimalId())
             .orderBy(FirestorePath.AnimalAction.ACTION_DATE, Query.Direction.DESCENDING)
     }
-
-    abstract fun getAddDialogTitle(): Int
-
-    abstract fun getEditDialogTitle(): Int
 }

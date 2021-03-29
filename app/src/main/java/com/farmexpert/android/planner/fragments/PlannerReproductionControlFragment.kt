@@ -19,6 +19,9 @@ import java.util.*
 
 class PlannerReproductionControlFragment : BasePlannerFragment() {
 
+    override val getPlannerContainer = PlannerContainer.REPRODUCTION_CONTROL
+    override val getHeaderResId = R.string.planner_reprod_control_title
+
     private var gestationsArrived = false
     private var birthsArrived = false
 
@@ -26,10 +29,6 @@ class PlannerReproductionControlFragment : BasePlannerFragment() {
         PLANNER_DATA_GESTATIONS_CONTROL to emptyList<PlannerItem>(),
         PLANNER_DATA_BIRTHS_CONTROL to emptyList()
     )
-
-    override fun getPlannerContainer() = PlannerContainer.REPRODUCTION_CONTROL
-
-    override fun getHeaderText() = getString(R.string.planner_reprod_control_title)
 
     override fun retrieveDataForDate(date: Date) {
         gestationsArrived = false

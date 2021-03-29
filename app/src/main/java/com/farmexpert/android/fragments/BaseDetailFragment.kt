@@ -33,11 +33,14 @@ import kotlinx.android.synthetic.main.fragment_animal_action_detail.*
 abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDetailHolder<ModelClass>> :
     BaseFragment(R.layout.fragment_animal_action_detail) {
 
+    abstract val getTitleAndHolderLayout: Pair<String, Int>
+    abstract val snapshotParser: SnapshotParser<ModelClass>
+
     private lateinit var adapter: AnimalActionsAdapter<ModelClass, ModelHolder>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setTitle(getTitleAndHolderLayout().first + " " + getAnimalId())
+        setTitle(getTitleAndHolderLayout.first + " " + getAnimalId())
         prepareComponents()
     }
 
@@ -50,7 +53,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
 
         adapter = object : AnimalActionsAdapter<ModelClass, ModelHolder>(
             options = options,
-            layoutResId = getTitleAndHolderLayout().second,
+            layoutResId = getTitleAndHolderLayout.second,
             createHolderClass = ::createHolder
         ) {
             override fun onDataChanged() {
@@ -68,11 +71,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
 
     abstract fun getQuery(): Query
 
-    abstract val snapshotParser: SnapshotParser<ModelClass>
-
     abstract fun createHolder(view: View): ModelHolder
-
-    abstract fun getTitleAndHolderLayout(): Pair<String, Int>
 
     abstract fun getAnimalId(): String
 

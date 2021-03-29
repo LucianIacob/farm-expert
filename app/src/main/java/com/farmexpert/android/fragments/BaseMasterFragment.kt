@@ -12,6 +12,7 @@ package com.farmexpert.android.fragments
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.*
+import androidx.annotation.StringRes
 import androidx.core.content.edit
 import androidx.core.view.isVisible
 import androidx.preference.PreferenceManager
@@ -31,8 +32,14 @@ import kotlinx.android.synthetic.main.fragment_graph_master.*
 import java.util.*
 
 
-abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMasterHolder<ModelClass>> :
-    BaseFragment(R.layout.fragment_graph_master) {
+abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMasterHolder<ModelClass>>(
+    @StringRes private val titleRes: Int
+) : BaseFragment(R.layout.fragment_graph_master) {
+
+    abstract val holderLayoutRes: Int
+    abstract val snapshotParser: SnapshotParser<ModelClass>
+    abstract val headerLayoutRes: Int
+    abstract val filterField: String
 
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var adapter: GraphAdapter<ModelClass, ModelHolder>
@@ -47,7 +54,7 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        graphHeader.layoutResource = getHeaderLayoutRes()
+        graphHeader.layoutResource = headerLayoutRes
         graphHeader.inflate()
 
         PreferenceManager.getDefaultSharedPreferences(context)
@@ -58,7 +65,7 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
             }
 
         layoutManager = LinearLayoutManager(context)
-        adapter = GraphAdapter(getHolderLayoutRes(), ::createHolder)
+        adapter = GraphAdapter(holderLayoutRes, ::createHolder)
         with(graphRecycler) {
             layoutManager = this@BaseMasterFragment.layoutManager
             adapter = this@BaseMasterFragment.adapter
@@ -108,8 +115,8 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
         val queryRangeEnd = AppUtils.getEndOfTheYear(selectedYear)
 
         getCollectionRef()
-            .whereGreaterThanOrEqualTo(getFilterField(), queryRangeStart)
-            .whereLessThanOrEqualTo(getFilterField(), queryRangeEnd)
+            .whereGreaterThanOrEqualTo(filterField, queryRangeStart)
+            .whereLessThanOrEqualTo(filterField, queryRangeEnd)
             .get()
             .addLoggableFailureListener {
                 alert(message = R.string.err_retrieving_items)
@@ -126,7 +133,7 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
     }
 
     private fun updateTitle() {
-        val stringBuilder = StringBuilder(getTitle())
+        val stringBuilder = StringBuilder(getString(titleRes))
             .append(" ")
             .append(selectedYear)
         setTitle(stringBuilder.toString())
@@ -141,19 +148,9 @@ abstract class BaseMasterFragment<ModelClass : BaseEntity, ModelHolder : BaseMas
             }
     }
 
-    abstract fun getTitle(): String
-
     abstract fun transformData(documents: QuerySnapshot?): Map<String, List<ModelClass>>
 
-    abstract fun getHolderLayoutRes(): Int
-
-    abstract val snapshotParser: SnapshotParser<ModelClass>
-
-    abstract fun getFilterField(): String
-
     abstract fun getCollectionRef(): Query
-
-    abstract fun getHeaderLayoutRes(): Int
 
     abstract fun createHolder(view: View): ModelHolder
 

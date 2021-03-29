@@ -18,9 +18,9 @@ import java.util.*
 
 class PlannerDisinfectionsFragment : BasePlannerFragment() {
 
-    override fun getPlannerContainer() = PlannerContainer.DISINFECTION
+    override val getPlannerContainer = PlannerContainer.DISINFECTION
 
-    override fun getHeaderText() = getString(R.string.planner_disinfections_title)
+    override val getHeaderResId = R.string.planner_disinfections_title
 
     override fun retrieveDataForDate(date: Date) {
         val daysOfDisinfection = farmTimelinePrefs.getInt(

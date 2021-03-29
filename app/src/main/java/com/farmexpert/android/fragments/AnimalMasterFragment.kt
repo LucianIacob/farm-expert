@@ -204,8 +204,7 @@ class AnimalMasterFragment : BaseFragment(R.layout.fragment_animal_master),
         val fatherId = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_FATHER, "")
         val motherId = extras.getString(BaseAddRecordDialogFragment.ADD_DIALOG_MOTHER, "")
 
-        // TODO MOVE ADD LOGIC TO THE FRAGMENT
-        if (!FarmValidator.isValidAnimalId(id)) {
+        if (!isValidAnimalId(id)) {
             alert(message = R.string.err_adding_animal_message)
             return
         }

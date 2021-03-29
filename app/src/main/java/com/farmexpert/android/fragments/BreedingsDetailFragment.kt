@@ -30,14 +30,14 @@ class BreedingsDetailFragment : BaseDetailFragment<Breeding, BreedingViewHolder>
 
     private val args: BreedingsDetailFragmentArgs by navArgs()
 
+    override val getTitleAndHolderLayout: Pair<String, Int> =
+        Pair(getString(R.string.dashboard_graph_breedings), R.layout.item_breeding)
+
     override val snapshotParser: SnapshotParser<Breeding> = SnapshotParser {
         it.toObject<Breeding>()!!.apply { id = it.id }
     }
 
     override fun getAnimalId() = args.animalId
-
-    override fun getTitleAndHolderLayout(): Pair<String, Int> =
-        Pair(getString(R.string.dashboard_graph_breedings), R.layout.item_breeding)
 
     override fun getAddRecordDialog() = AddBreedingDialogFragment()
 

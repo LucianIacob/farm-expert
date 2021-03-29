@@ -21,18 +21,18 @@ import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
 
-abstract class BaseAnimalActionMasterFragment :
-    BaseMasterFragment<AnimalAction, GraphAnimalActionHolder>() {
+abstract class BaseAnimalActionMasterFragment(title: Int) :
+    BaseMasterFragment<AnimalAction, GraphAnimalActionHolder>(title) {
 
-    override fun getHolderLayoutRes() = R.layout.item_graph_animal_action
+    override val holderLayoutRes = R.layout.item_graph_animal_action
 
     override val snapshotParser: SnapshotParser<AnimalAction> = SnapshotParser {
         it.toObject<AnimalAction>()!!.apply { id = it.id }
     }
 
-    override fun getFilterField() = FirestorePath.AnimalAction.ACTION_DATE
+    override val filterField = FirestorePath.AnimalAction.ACTION_DATE
 
-    override fun getHeaderLayoutRes() = R.layout.graph_animal_actions_header
+    override val headerLayoutRes = R.layout.graph_animal_actions_header
 
     override fun createHolder(view: View) = GraphAnimalActionHolder(
         view = view,

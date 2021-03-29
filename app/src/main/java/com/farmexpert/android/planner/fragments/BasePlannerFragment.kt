@@ -39,8 +39,12 @@ import java.util.*
 
 abstract class BasePlannerFragment : BaseFragment(R.layout.fragment_planner_section) {
 
+    abstract val getHeaderResId: Int
+    abstract val getPlannerContainer: PlannerContainer
     private val plannerDateViewModel: PlannerDateViewModel by viewModels({ requireParentFragment() })
+
     private var snapshotListener: ListenerRegistration? = null
+
     protected lateinit var adapter: PlannerAdapter
 
     private var plannerData = mutableMapOf(
@@ -56,7 +60,7 @@ abstract class BasePlannerFragment : BaseFragment(R.layout.fragment_planner_sect
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        containerHeader.text = getHeaderText()
+        containerHeader.text = getString(getHeaderResId)
         PlannerAdapter(
             clickListener = { handleClick(it) },
             longClickListener = { handleLongClick() }
@@ -73,8 +77,6 @@ abstract class BasePlannerFragment : BaseFragment(R.layout.fragment_planner_sect
 
     private fun handleLongClick() {
     }
-
-    abstract fun getHeaderText(): String
 
     override fun onResume() {
         super.onResume()
@@ -113,7 +115,7 @@ abstract class BasePlannerFragment : BaseFragment(R.layout.fragment_planner_sect
             reminderDate = Timestamp(date),
             details = details,
             createdBy = currentUser?.uid,
-            holderParent = getPlannerContainer().name
+            holderParent = getPlannerContainer.name
         )
 
         loadingShow()
@@ -125,8 +127,6 @@ abstract class BasePlannerFragment : BaseFragment(R.layout.fragment_planner_sect
             }
             .addOnCompleteListener { loadingHide() }
     }
-
-    abstract fun getPlannerContainer(): PlannerContainer
 
     open fun retrieveDataForDate(date: Date) {
         snapshotListener?.remove()
@@ -141,7 +141,7 @@ abstract class BasePlannerFragment : BaseFragment(R.layout.fragment_planner_sect
         snapshotListener = farmReference.collection(FirestorePath.Collections.REMINDERS)
             .whereGreaterThanOrEqualTo(FirestorePath.Reminder.REMINDER_DATE, Timestamp(startDate))
             .whereLessThanOrEqualTo(FirestorePath.Reminder.REMINDER_DATE, Timestamp(endDate))
-            .whereEqualTo(FirestorePath.Reminder.HOLDER_PARENT, getPlannerContainer().name)
+            .whereEqualTo(FirestorePath.Reminder.HOLDER_PARENT, getPlannerContainer.name)
             .addSnapshotListener { querySnapshot, exception ->
                 loadingHide()
                 if (exception != null) {

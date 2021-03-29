@@ -19,6 +19,9 @@ import java.util.*
 
 class PlannerVaccinationsFragment : BasePlannerFragment() {
 
+    override val getPlannerContainer = PlannerContainer.VACCINATIONS
+    override val getHeaderResId = R.string.planner_vaccinations_title
+
     private var vaccine1Arrived = false
     private var vaccine2Arrived = false
     private var vaccine3Arrived = false
@@ -30,10 +33,6 @@ class PlannerVaccinationsFragment : BasePlannerFragment() {
         PLANNER_DATA_VACCINE_3 to emptyList(),
         PLANNER_DATA_VACCINE_4 to emptyList()
     )
-
-    override fun getPlannerContainer() = PlannerContainer.VACCINATIONS
-
-    override fun getHeaderText() = getString(R.string.planner_vaccinations_title)
 
     override fun retrieveDataForDate(date: Date) {
         vaccine1Arrived = false

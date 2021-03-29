@@ -21,18 +21,6 @@ object AppUtils {
     const val NAIL_WITH_PROBLEM = "1"
     const val NAIL_WITHOUT_PROBLEM = "0"
 
-    fun getTime(year: Int, month: Int, day: Int): Date =
-        with(Calendar.getInstance()) {
-            set(year, month, day)
-            time
-        }
-
-    fun timestampFor(year: Int, month: Int, day: Int): Timestamp =
-        with(Calendar.getInstance()) {
-            set(year, month, day)
-            Timestamp(time)
-        }
-
     fun getExpectedBirthDate(breedingDate: Date, context: Context?): Date {
         val breedingCalendar = Calendar.getInstance().apply { time = breedingDate }
 

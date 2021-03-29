@@ -28,11 +28,11 @@ class PlannerDateViewModel : ViewModel() {
         date.value = newDate
     }
 
-    fun prevDay() {
+    fun prevDaySelected() {
         date.value?.run { this@PlannerDateViewModel.setDate(getPrevDay()) }
     }
 
-    fun nextDay() {
+    fun nextDaySelected() {
         date.value?.run { this@PlannerDateViewModel.setDate(getNextDay()) }
     }
 

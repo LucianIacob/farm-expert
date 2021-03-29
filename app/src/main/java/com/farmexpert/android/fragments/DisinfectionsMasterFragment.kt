@@ -16,12 +16,11 @@ import com.farmexpert.android.utils.FirestorePath
 /**
  * Created by Lucian Iacob on March 22, 2019.
  */
-class DisinfectionsMasterFragment : BaseAnimalActionMasterFragment() {
+class DisinfectionsMasterFragment :
+    BaseAnimalActionMasterFragment(R.string.dashboard_graph_disinfections) {
 
     override fun getCollectionRef() =
         farmReference.collection(FirestorePath.Collections.DISINFECTIONS)
-
-    override fun getTitle(): String = getString(R.string.dashboard_graph_disinfections)
 
     override fun getAnimalClickDirection(animalId: String) =
         NavGraphDirections.actionGlobalDisinfectionsDetailFragment(animalId = animalId)

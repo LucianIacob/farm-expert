@@ -24,9 +24,16 @@ import com.google.firebase.firestore.ktx.toObject
 /**
  * Created by Lucian Iacob on March 22, 2019.
  */
-class BirthsMasterFragment : BaseMasterFragment<Birth, GraphBirthViewHolder>() {
+class BirthsMasterFragment :
+    BaseMasterFragment<Birth, GraphBirthViewHolder>(R.string.dashboard_graph_births) {
 
-    override fun getHolderLayoutRes() = R.layout.item_graph_birth
+    override val headerLayoutRes = R.layout.graph_births_header
+    override val filterField = FirestorePath.Birth.DATE_OF_BIRTH
+    override val holderLayoutRes = R.layout.item_graph_birth
+
+    override val snapshotParser: SnapshotParser<Birth> = SnapshotParser {
+        it.toObject<Birth>()!!.apply { id = it.id }
+    }
 
     override fun createHolder(view: View) = GraphBirthViewHolder(
         itemView = view,
@@ -46,10 +53,6 @@ class BirthsMasterFragment : BaseMasterFragment<Birth, GraphBirthViewHolder>() {
             .navigate(NavGraphDirections.actionGlobalBirthsDetailFragment(animalId = motherId))
     }
 
-    override fun getHeaderLayoutRes() = R.layout.graph_births_header
-
-    override fun getFilterField() = FirestorePath.Birth.DATE_OF_BIRTH
-
     override fun getCollectionRef() =
         farmReference.collection(FirestorePath.Collections.BIRTHS).let {
             return@let if (resources.getBoolean(R.bool.graph_latest_births_only)) {
@@ -57,12 +60,6 @@ class BirthsMasterFragment : BaseMasterFragment<Birth, GraphBirthViewHolder>() {
             } else it
         }
 
-    override val snapshotParser: SnapshotParser<Birth> = SnapshotParser {
-        it.toObject<Birth>()!!.apply { id = it.id }
-    }
-
     override fun transformData(documents: QuerySnapshot?): Map<String, List<Birth>> =
         GraphDataTransformer.transformDocumentsForBirthsGraph(documents)
-
-    override fun getTitle(): String = getString(R.string.dashboard_graph_births)
 }

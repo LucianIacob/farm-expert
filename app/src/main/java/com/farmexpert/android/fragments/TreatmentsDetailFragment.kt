@@ -15,7 +15,11 @@ import com.farmexpert.android.utils.FirestorePath
 
 class TreatmentsDetailFragment : BaseAnimalActionDetailFragment() {
 
-    override fun getTitleAndHolderLayout(): Pair<String, Int> =
+    override val getEditDialogTitle = R.string.edit_treatment_title
+
+    override val getAddDialogTitle = R.string.add_treatment_title
+
+    override val getTitleAndHolderLayout: Pair<String, Int> =
         Pair(getString(R.string.dashboard_graph_treatments), R.layout.item_animal_action)
 
     private val args: TreatmentsDetailFragmentArgs by navArgs()
@@ -24,8 +28,4 @@ class TreatmentsDetailFragment : BaseAnimalActionDetailFragment() {
 
     override fun getCollectionReference() =
         farmReference.collection(FirestorePath.Collections.TREATMENTS)
-
-    override fun getAddDialogTitle() = R.string.add_treatment_title
-
-    override fun getEditDialogTitle() = R.string.edit_treatment_title
 }

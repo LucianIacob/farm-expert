@@ -16,12 +16,11 @@ import com.farmexpert.android.utils.FirestorePath
 /**
  * Created by Lucian Iacob on March 22, 2019.
  */
-class TreatmentsMasterFragment : BaseAnimalActionMasterFragment() {
+class TreatmentsMasterFragment :
+    BaseAnimalActionMasterFragment(R.string.dashboard_graph_treatments) {
 
     override fun getCollectionRef() =
         farmReference.collection(FirestorePath.Collections.TREATMENTS)
-
-    override fun getTitle(): String = getString(R.string.dashboard_graph_treatments)
 
     override fun getAnimalClickDirection(animalId: String) =
         NavGraphDirections.actionGlobalTreatmentsDetailFragment(animalId = animalId)

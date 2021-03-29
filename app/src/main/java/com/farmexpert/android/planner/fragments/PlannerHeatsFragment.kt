@@ -18,9 +18,9 @@ import java.util.*
 
 class PlannerHeatsFragment : BasePlannerFragment() {
 
-    override fun getHeaderText() = getString(R.string.planner_heats_title)
+    override val getHeaderResId = R.string.planner_heats_title
 
-    override fun getPlannerContainer() = PlannerContainer.HEAT_CYCLE
+    override val getPlannerContainer = PlannerContainer.HEAT_CYCLE
 
     override fun retrieveDataForDate(date: Date) {
         val heatCycleStart = farmTimelinePrefs.getInt(

@@ -10,6 +10,7 @@
 package com.farmexpert.android.fragments
 
 import android.os.Bundle
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
@@ -27,7 +28,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-open class BaseFragment(layoutId: Int) : Fragment(layoutId) {
+open class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
     protected var currentUser: FirebaseUser? = null
     protected lateinit var farmReference: DocumentReference

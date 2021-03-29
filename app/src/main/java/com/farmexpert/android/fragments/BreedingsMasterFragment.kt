@@ -25,13 +25,17 @@ import com.google.firebase.firestore.ktx.toObject
 /**
  * Created by Lucian Iacob on March 22, 2019.
  */
-class BreedingsMasterFragment : BaseMasterFragment<Breeding, GraphBreedingViewHolder>() {
+class BreedingsMasterFragment :
+    BaseMasterFragment<Breeding, GraphBreedingViewHolder>(R.string.dashboard_graph_breedings) {
+
+    override val holderLayoutRes = R.layout.item_graph_breeding
+    override val headerLayoutRes = R.layout.graph_breedings_header
 
     override val snapshotParser: SnapshotParser<Breeding> = SnapshotParser {
         it.toObject<Breeding>()!!.apply { id = it.id }
     }
 
-    override fun getFilterField() = FirestorePath.Breeding.ACTION_DATE
+    override val filterField = FirestorePath.Breeding.ACTION_DATE
 
     override fun getCollectionRef() =
         farmReference.collection(FirestorePath.Collections.BREEDINGS).let {
@@ -39,10 +43,6 @@ class BreedingsMasterFragment : BaseMasterFragment<Breeding, GraphBreedingViewHo
                 it.whereEqualTo(FirestorePath.Breeding.LATEST_BREEDING, true)
             } else it
         }
-
-    override fun getHolderLayoutRes() = R.layout.item_graph_breeding
-
-    override fun getHeaderLayoutRes() = R.layout.graph_breedings_header
 
     override fun createHolder(view: View) =
         GraphBreedingViewHolder(
@@ -68,6 +68,4 @@ class BreedingsMasterFragment : BaseMasterFragment<Breeding, GraphBreedingViewHo
 
     override fun transformData(documents: QuerySnapshot?): Map<String, List<Breeding>> =
         GraphDataTransformer.transformDocumentsForBreedingsGraph(documents)
-
-    override fun getTitle(): String = getString(R.string.dashboard_graph_breedings)
 }

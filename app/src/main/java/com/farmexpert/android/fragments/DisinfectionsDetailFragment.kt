@@ -15,17 +15,17 @@ import com.farmexpert.android.utils.FirestorePath
 
 class DisinfectionsDetailFragment : BaseAnimalActionDetailFragment() {
 
-    override fun getTitleAndHolderLayout(): Pair<String, Int> =
+    override val getTitleAndHolderLayout: Pair<String, Int> =
         Pair(getString(R.string.dashboard_graph_disinfections), R.layout.item_animal_action)
+
+    override val getAddDialogTitle = R.string.add_disinfection_title
+
+    override val getEditDialogTitle = R.string.edit_disinfection_title
 
     private val args: DisinfectionsDetailFragmentArgs by navArgs()
 
     override fun getAnimalId() = args.animalId
 
-    override fun getAddDialogTitle() = R.string.add_disinfection_title
-
     override fun getCollectionReference() =
         farmReference.collection(FirestorePath.Collections.DISINFECTIONS)
-
-    override fun getEditDialogTitle() = R.string.edit_disinfection_title
 }
