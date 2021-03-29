@@ -1,8 +1,9 @@
 package com.farmexpert.android.activities
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.*
@@ -25,13 +26,13 @@ class ChangeUserEmailActivity : AppCompatActivity() {
                 it.isValidInput()?.let { updateBtn.isEnabled = true }
             } ?: run {
                 updateBtn.text = getString(R.string.set)
-                emailVerifiedSeparator.visibility = View.GONE
-                sendVerificationEmailBtn.visibility = View.GONE
+                emailVerifiedSeparator.isVisible = false
+                sendVerificationEmailBtn.isVisible = false
             }
 
             getBoolean(EMAIL_VERIFIED).takeIfTrue()?.let {
-                emailVerifiedSeparator.visibility = View.GONE
-                sendVerificationEmailBtn.visibility = View.GONE
+                emailVerifiedSeparator.isVisible = false
+                sendVerificationEmailBtn.isVisible = false
             }
         }
 
@@ -61,7 +62,7 @@ class ChangeUserEmailActivity : AppCompatActivity() {
     private fun updateUserEmail() {
         FirebaseAuth.getInstance().useAppLanguage()
         FirebaseAuth.getInstance().currentUser?.apply {
-            loadingView.visibility = View.VISIBLE
+            loadingView.isInvisible = false
 
             updateEmail(userEmailBox.text.toString())
                 .addOnSuccessListener {
@@ -75,7 +76,7 @@ class ChangeUserEmailActivity : AppCompatActivity() {
                 .addLoggableFailureListener { exception ->
                     exception.message?.let { alert(message = it, isCancellable = true) }
                 }
-                .addOnCompleteListener { loadingView.visibility = View.INVISIBLE }
+                .addOnCompleteListener { loadingView.isInvisible = true }
         }
     }
 

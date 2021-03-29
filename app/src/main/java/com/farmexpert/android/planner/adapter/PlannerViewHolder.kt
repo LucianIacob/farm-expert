@@ -10,6 +10,7 @@
 package com.farmexpert.android.planner.adapter
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.navigation.NavDirections
 import androidx.recyclerview.widget.RecyclerView
 import com.farmexpert.android.planner.model.PlannerItem
@@ -25,8 +26,8 @@ class PlannerViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         headline.text = plannerItem.headline
         plannerItem.reason?.let {
             reason.text = it
-            reason.visibility = View.VISIBLE
-        } ?: run { reason.visibility = View.GONE }
+            reason.isVisible = true
+        } ?: run { reason.isVisible = false }
 
         view.setOnClickListener { _ -> plannerItem.onClickAction?.let { clickHandler(it) } }
         view.setOnLongClickListener { _ ->

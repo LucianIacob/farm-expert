@@ -5,13 +5,14 @@ import android.content.Intent
 import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
-import android.view.View.*
 import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.preference.PreferenceManager
 import com.farmexpert.android.BuildConfig
 import com.farmexpert.android.R
@@ -46,13 +47,13 @@ class UserProfileActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         FirebaseAuth.getInstance().currentUser?.run {
-            loadingView.visibility = VISIBLE
+            loadingView.isInvisible = false
             reload()
                 .addOnSuccessListener { fillData(firebaseUser = this) }
                 .addLoggableFailureListener {
                     alert(getString(R.string.profile_load_unsuccessful, it.message))
                 }
-                .addOnCompleteListener { loadingView.visibility = INVISIBLE }
+                .addOnCompleteListener { loadingView.isInvisible = true }
         } ?: run {
             alert(
                 message = R.string.user_not_available,
@@ -76,12 +77,12 @@ class UserProfileActivity : AppCompatActivity() {
 
         metadata?.creationTimestamp?.let {
             createdOn.text = getString(R.string.user_creation_date, Date(it).getShort())
-        } ?: run { createdOn.visibility = GONE }
+        } ?: run { createdOn.isVisible = false }
 
         providerData.lastOrNull()?.providerId?.takeIfNotBlank()?.let {
             val providerText = it.mapProviderId(resources)
             provider.text = getString(R.string.profile_created_with_provider, providerText)
-        } ?: run { provider.visibility = GONE }
+        } ?: run { provider.isVisible = false }
 
         displayName?.takeIfNotBlank()?.let {
             name.setTextColor(getTextColor(R.color.black))
@@ -92,8 +93,8 @@ class UserProfileActivity : AppCompatActivity() {
         }
 
         phoneNumber?.takeIfNotBlank()?.let { phone.text = it } ?: run {
-            phoneInfoGroup.visibility = GONE
-            phoneSeparator.visibility = GONE
+            phoneInfoGroup.isVisible = false
+            phoneSeparator.isVisible = false
         }
 
         email?.takeIfNotBlank()?.let {
@@ -104,8 +105,8 @@ class UserProfileActivity : AppCompatActivity() {
         } ?: run {
             userEmail.text = getString(R.string.add_email)
             userEmail.setTextColor(getTextColor(R.color.link_color))
-            passResetGroup.visibility = GONE
-            passResetSeparator.visibility = GONE
+            passResetGroup.isVisible = false
+            passResetSeparator.isVisible = false
         }
 
         fetchSubscribedFarms(firebaseUser = this)
@@ -124,14 +125,14 @@ class UserProfileActivity : AppCompatActivity() {
     private fun handlePasswordResetClick(emailAddress: String) {
         passReset.setText(R.string.pass_reset_message)
         passResetGroup.setOnClickListener {
-            loadingView.visibility = VISIBLE
+            loadingView.isInvisible = false
             FirebaseAuth.getInstance()
                 .sendPasswordResetEmail(emailAddress)
                 .addOnSuccessListener { alert(R.string.password_reset_success) }
                 .addLoggableFailureListener {
                     it.message?.let { message -> alert(message = message, isCancellable = true) }
                 }
-                .addOnCompleteListener { loadingView.visibility = INVISIBLE }
+                .addOnCompleteListener { loadingView.isInvisible = true }
         }
     }
 
@@ -172,7 +173,7 @@ class UserProfileActivity : AppCompatActivity() {
     }
 
     private fun deleteUserAccount(firebaseUser: FirebaseUser) {
-        loadingView.visibility = VISIBLE
+        loadingView.isInvisible = false
 
         Firebase.firestore
             .collection(FirestorePath.Collections.FARMS)
@@ -203,13 +204,13 @@ class UserProfileActivity : AppCompatActivity() {
                     }
                     .addLoggableFailureListener {
                         it.message?.let { message -> alert(message) }
-                        loadingView.visibility = INVISIBLE
+                        loadingView.isInvisible = true
                     }
 
             }
             .addLoggableFailureListener {
                 it.message?.let { message -> alert(message) }
-                loadingView.visibility = INVISIBLE
+                loadingView.isInvisible = true
             }
     }
 
@@ -230,7 +231,7 @@ class UserProfileActivity : AppCompatActivity() {
             .addLoggableFailureListener {
                 it.message?.let { message -> alert(message) }
             }
-            .addOnCompleteListener { loadingView?.visibility = INVISIBLE }
+            .addOnCompleteListener { loadingView?.isInvisible = true }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -248,7 +249,7 @@ class UserProfileActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().currentUser?.let { user ->
             val metadata = storageMetadata { contentType = "image/jpg" }
 
-            loadingView.visibility = VISIBLE
+            loadingView.isInvisible = false
             val fileRef = Firebase.storage
                 .getReference("profilepictures")
                 .child(user.uid)
@@ -267,7 +268,7 @@ class UserProfileActivity : AppCompatActivity() {
                     )
                 }
                 .addLoggableFailureListener {
-                    loadingView.visibility = INVISIBLE
+                    loadingView.isInvisible = true
                     alert(R.string.err_updating_record)
                 }
         }
@@ -283,12 +284,12 @@ class UserProfileActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 firebaseUser.reload().addOnSuccessListener {
                     fillData(firebaseUser = firebaseUser)
-                    loadingView.visibility = INVISIBLE
+                    loadingView.isInvisible = true
                 }
             }
             .addLoggableFailureListener { exception ->
                 exception.message?.let { toast(it) }
-                loadingView.visibility = INVISIBLE
+                loadingView.isInvisible = true
             }
     }
 

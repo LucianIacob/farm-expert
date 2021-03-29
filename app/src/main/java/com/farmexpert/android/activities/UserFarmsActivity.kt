@@ -1,9 +1,9 @@
 package com.farmexpert.android.activities
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import androidx.core.view.isInvisible
 import androidx.preference.PreferenceManager
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_ID
@@ -75,7 +75,7 @@ class UserFarmsActivity : AppCompatActivity() {
 
     private fun unsubscribeConfirmed(farm: Farm, isCurrentFarm: Boolean) {
         farm.id?.let { farmId ->
-            loadingView.visibility = View.VISIBLE
+            loadingView.isInvisible = false
 
             Firebase.firestore
                 .collection(FirestorePath.Collections.FARMS)
@@ -95,7 +95,7 @@ class UserFarmsActivity : AppCompatActivity() {
                 .addLoggableFailureListener { exception ->
                     exception.message?.let { message -> alert(message) }
                 }
-                .addOnCompleteListener { loadingView.visibility = View.INVISIBLE }
+                .addOnCompleteListener { loadingView.isInvisible = true }
         }
     }
 

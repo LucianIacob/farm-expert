@@ -1,6 +1,7 @@
 package com.farmexpert.android.adapter.holder
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.farmexpert.android.R
@@ -22,8 +23,8 @@ class SubscribedFarmHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .getString(KEY_CURRENT_FARM_ID, null)
             ?.equals(farm.id)
             ?.takeIfTrue()
-            ?.let { currentFarm.visibility = View.VISIBLE }
-            ?: run { currentFarm.visibility = View.GONE }
+            ?.let { currentFarm.isVisible = true }
+            ?: run { currentFarm.isVisible = false }
 
         FirebaseAuth.getInstance()
             .currentUser
@@ -31,11 +32,11 @@ class SubscribedFarmHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .equals(farm.owner)
             .takeIfTrue()
             ?.let {
-                ownerStatus.visibility = View.VISIBLE
+                ownerStatus.isVisible = true
 //                deleteBtn.visibility = View.VISIBLE
             }
             ?: run {
-                ownerStatus.visibility = View.GONE
+                ownerStatus.isVisible = false
 //                deleteBtn.visibility = View.GONE
             }
 

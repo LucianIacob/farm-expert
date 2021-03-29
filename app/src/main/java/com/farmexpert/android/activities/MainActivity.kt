@@ -12,10 +12,10 @@ package com.farmexpert.android.activities
 import android.content.DialogInterface.BUTTON_POSITIVE
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.core.view.GravityCompat
+import androidx.core.view.isInvisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun logOutConfirmed() {
-        setLoadingVisibility(View.VISIBLE)
+        setLoadingVisibility(true)
         AuthUI.getInstance()
             .signOut(this)
             .addOnSuccessListener {
@@ -152,7 +152,7 @@ class MainActivity : AppCompatActivity() {
             .addLoggableFailureListener {
                 alert(R.string.err_logging_out)
             }
-            .addOnCompleteListener { setLoadingVisibility(View.INVISIBLE) }
+            .addOnCompleteListener { setLoadingVisibility(false) }
     }
 
     override fun onBackPressed() {
@@ -175,7 +175,7 @@ class MainActivity : AppCompatActivity() {
             drawer_layout
         )
 
-    fun setLoadingVisibility(visibility: Int) {
-        runOnUiThread { loadingView.visibility = visibility }
+    fun setLoadingVisibility(visible: Boolean) {
+        runOnUiThread { loadingView.isInvisible = !visible }
     }
 }

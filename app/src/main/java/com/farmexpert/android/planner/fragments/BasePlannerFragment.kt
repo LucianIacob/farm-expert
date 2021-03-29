@@ -15,6 +15,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
@@ -160,11 +161,7 @@ abstract class BasePlannerFragment : BaseFragment(R.layout.fragment_planner_sect
             .plus((plannerData[PLANNER_DATA_REMINDERS] as List<PlannerItem>))
 
         adapter.data = adapterData
-        adapterData.takeIf { it.isNotEmpty() }?.let {
-            emptyList?.visibility = View.GONE
-        } ?: run {
-            emptyList?.visibility = View.VISIBLE
-        }
+        emptyList?.isVisible = adapterData.isEmpty()
     }
 
     override fun onPause() {

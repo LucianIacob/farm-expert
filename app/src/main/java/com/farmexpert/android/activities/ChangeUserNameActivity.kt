@@ -2,9 +2,9 @@ package com.farmexpert.android.activities
 
 import android.content.Context
 import android.os.Bundle
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isInvisible
 import androidx.core.widget.doOnTextChanged
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.addLoggableFailureListener
@@ -53,14 +53,14 @@ class ChangeUserNameActivity : AppCompatActivity() {
             .setDisplayName(userNameBox.text.toString())
             .build()
 
-        loadingView.visibility = View.VISIBLE
+        loadingView.isInvisible = false
         FirebaseAuth.getInstance().currentUser
             ?.updateProfile(changeRequest)
             ?.addOnSuccessListener { finish() }
             ?.addLoggableFailureListener { exception ->
                 exception.message?.let { alert(it) }
             }
-            ?.addOnCompleteListener { loadingView.visibility = View.INVISIBLE }
+            ?.addOnCompleteListener { loadingView.isInvisible = true }
     }
 
     companion object {

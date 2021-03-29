@@ -62,11 +62,11 @@ open class BaseFragment(private val layoutId: Int? = null) : Fragment() {
     ): View? = layoutId?.let { inflater.inflate(it, container, false) }
 
     fun loadingShow() {
-        (activity as? MainActivity)?.setLoadingVisibility(View.VISIBLE)
+        (activity as? MainActivity)?.setLoadingVisibility(true)
     }
 
     fun loadingHide() {
-        (activity as? MainActivity)?.setLoadingVisibility(View.INVISIBLE)
+        (activity as? MainActivity)?.setLoadingVisibility(false)
     }
 
     fun setTitle(title: String) {
