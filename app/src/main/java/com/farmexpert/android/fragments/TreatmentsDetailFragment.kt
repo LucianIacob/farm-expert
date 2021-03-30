@@ -19,8 +19,8 @@ class TreatmentsDetailFragment : BaseAnimalActionDetailFragment() {
 
     override val getAddDialogTitle = R.string.add_treatment_title
 
-    override val getTitleAndHolderLayout: Pair<String, Int> =
-        Pair(getString(R.string.dashboard_graph_treatments), R.layout.item_animal_action)
+    override val getTitleAndHolderLayout: Pair<Int, Int> =
+        Pair(R.string.dashboard_graph_treatments, R.layout.item_animal_action)
 
     private val args: TreatmentsDetailFragmentArgs by navArgs()
 

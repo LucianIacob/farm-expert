@@ -33,5 +33,4 @@ open class AnimalsAdapter(
             true
         }
     }
-
 }

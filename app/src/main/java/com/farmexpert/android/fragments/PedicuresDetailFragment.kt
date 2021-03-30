@@ -32,8 +32,8 @@ class PedicuresDetailFragment : BaseDetailFragment<AnimalAction, PedicureViewHol
         it.toObject<AnimalAction>()!!.apply { id = it.id }
     }
 
-    override val getTitleAndHolderLayout: Pair<String, Int> =
-        Pair(getString(R.string.dashboard_graph_pedicures), R.layout.item_animal_action)
+    override val getTitleAndHolderLayout: Pair<Int, Int> =
+        Pair(R.string.dashboard_graph_pedicures, R.layout.item_animal_action)
 
     private val args: PedicuresDetailFragmentArgs by navArgs()
 

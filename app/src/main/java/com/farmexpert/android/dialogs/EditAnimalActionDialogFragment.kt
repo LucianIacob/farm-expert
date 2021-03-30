@@ -21,11 +21,10 @@ import kotlinx.android.synthetic.main.dialog_edit_animal_action.view.*
  * Cluj-Napoca, 19 January, 2018.
  */
 
-class EditAnimalActionDialogFragment : BaseEditRecordDialogFragment() {
+class EditAnimalActionDialogFragment :
+    BaseEditRecordDialogFragment(R.layout.dialog_edit_animal_action) {
 
     override var titleRes = R.string.edit_animal_action_title
-
-    override val layoutRes = R.layout.dialog_edit_animal_action
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

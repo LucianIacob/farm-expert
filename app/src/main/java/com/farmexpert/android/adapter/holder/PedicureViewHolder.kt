@@ -28,5 +28,4 @@ class PedicureViewHolder(
             deleteBtn.setOnClickListener { deleteListener(entity) }
         }
     }
-
 }

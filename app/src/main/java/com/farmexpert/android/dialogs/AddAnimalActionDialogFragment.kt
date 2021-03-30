@@ -26,17 +26,16 @@ import kotlinx.android.synthetic.main.dialog_add_animal_action.view.*
 
 class AddAnimalActionDialogFragment : BaseAddRecordDialogFragment() {
 
-    private val titleId: Int by lazy {
-        arguments?.getInt(ADD_DIALOG_TITLE)?.takeIf { it != 0 } ?: R.string.empty_text
-    }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        activity?.let {
-            mView = View.inflate(it, R.layout.dialog_add_animal_action, null)
+        context?.let { context ->
+            val title = arguments?.getInt(ADD_DIALOG_TITLE)?.takeIf { it != 0 }
+                ?: R.string.empty_text
+
+            mView = View.inflate(context, R.layout.dialog_add_animal_action, null)
             onUiElementsReady()
-            return MaterialAlertDialogBuilder(it)
+            return MaterialAlertDialogBuilder(context)
                 .setView(mView)
-                .setTitle(titleId)
+                .setTitle(title)
                 .setPositiveButton(R.string.dialog_add_positive_btn) { _, _ -> addRecord() }
                 .setNegativeButton(R.string.dialog_cancel_btn, null)
                 .setCancelable(false)

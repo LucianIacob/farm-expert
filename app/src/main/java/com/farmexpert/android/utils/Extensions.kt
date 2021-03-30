@@ -237,9 +237,9 @@ fun Activity.alert(
 
 fun String?.takeIfNotBlank(): String? = this.takeUnless { this.isNullOrBlank() }
 
-fun Long.takeIfExists() = this.takeIf { it != 0L }
+fun Long.takeIfExists() = takeIf { it != 0L }
 
-fun Boolean.takeIfTrue(): Boolean? = this.takeIf { it }
+fun Boolean.takeIfTrue(): Boolean? = takeIf { it }
 
 fun CharSequence?.isValidInput(): CharSequence? =
     this?.trimmedLength()?.takeIf { it > 0 }?.let { this }

@@ -25,7 +25,12 @@ class AddBreedingDialogFragment : BaseAddRecordDialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         mView = View.inflate(activity, R.layout.dialog_add_breeding, null)
         onUiElementsReady()
-        fillDropdownComponent(mView?.breedingNotes, R.array.breeding_notes_values, 4)
+
+        fillDropdownComponent(
+            textView = mView?.breedingNotes,
+            stringArray = R.array.breeding_notes_values,
+            selected = resources.getStringArray(R.array.breeding_notes_values).size - 1
+        )
 
         context?.let { context ->
             return MaterialAlertDialogBuilder(context)

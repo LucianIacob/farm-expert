@@ -24,13 +24,11 @@ import java.util.*
  * Created by Lucian Iacob.
  * Cluj-Napoca, March 16, 2018.
  */
-class EditPedicureDialogFragment : BaseEditRecordDialogFragment() {
-
-    private lateinit var mNailsMap: HashMap<View, Int>
+class EditPedicureDialogFragment : BaseEditRecordDialogFragment(R.layout.dialog_edit_pedicure) {
 
     override var titleRes = R.string.edit_pedicure_title
 
-    override val layoutRes = R.layout.dialog_edit_pedicure
+    private lateinit var mNailsMap: HashMap<View, Int>
 
     override fun setupDetails() {
         mView?.dialogDetails?.setText(details?.drop(8))
@@ -99,65 +97,65 @@ class EditPedicureDialogFragment : BaseEditRecordDialogFragment() {
     private fun setupHoofs() {
         mView?.run {
             leftTopLeftNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == leftNailDefault) {
-                    leftNailProblem
-                } else leftNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == leftNailDefault) leftNailProblem
+                    else leftNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
             leftTopRightNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == rightNailDefault) {
-                    rightNailProblem
-                } else rightNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == rightNailDefault) rightNailProblem
+                    else rightNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
             rightTopLeftNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == leftNailDefault) {
-                    leftNailProblem
-                } else leftNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == leftNailDefault) leftNailProblem
+                    else leftNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
             rightTopRightNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == rightNailDefault) {
-                    rightNailProblem
-                } else rightNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == rightNailDefault) rightNailProblem
+                    else rightNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
             leftBottomLeftNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == leftNailDefault) {
-                    leftNailProblem
-                } else leftNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == leftNailDefault) leftNailProblem
+                    else leftNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
             leftBottomRightNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == rightNailDefault) {
-                    rightNailProblem
-                } else rightNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == rightNailDefault) rightNailProblem
+                    else rightNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
             rightBottomLeftNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == leftNailDefault) {
-                    leftNailProblem
-                } else leftNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == leftNailDefault) leftNailProblem
+                    else leftNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
             rightBottomRightNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == rightNailDefault) {
-                    rightNailProblem
-                } else rightNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == rightNailDefault) rightNailProblem
+                    else rightNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }

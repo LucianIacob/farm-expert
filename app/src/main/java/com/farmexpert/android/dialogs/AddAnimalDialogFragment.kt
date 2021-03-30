@@ -21,9 +21,7 @@ import kotlinx.android.synthetic.main.dialog_add_animal.*
  * Cluj-Napoca, 05 January, 2018.
  */
 
-class AddAnimalDialogFragment : FullScreenAddRecordDialogFragment() {
-
-    override val dialogTitle: Int = R.string.add_animal_title
+class AddAnimalDialogFragment : FullScreenAddRecordDialogFragment(R.string.add_animal_title) {
 
     override val dialogContent: Int = R.layout.dialog_add_animal
 

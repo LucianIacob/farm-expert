@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.StringRes
 import com.farmexpert.android.R
 import kotlinx.android.synthetic.main.fullscreen_dialog.*
 
-abstract class FullScreenAddRecordDialogFragment : BaseAddRecordDialogFragment() {
-
-    abstract val dialogTitle: Int
+abstract class FullScreenAddRecordDialogFragment(@StringRes private val dialogTitleRes: Int) :
+    BaseAddRecordDialogFragment() {
 
     abstract val dialogContent: Int
 
@@ -22,7 +22,7 @@ abstract class FullScreenAddRecordDialogFragment : BaseAddRecordDialogFragment()
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = View.inflate(activity, R.layout.fullscreen_dialog, null)
+    ): View = inflater.inflate(R.layout.fullscreen_dialog, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,7 +46,7 @@ abstract class FullScreenAddRecordDialogFragment : BaseAddRecordDialogFragment()
 
     private fun setupToolbar() {
         toolbar.setNavigationOnClickListener { dismiss() }
-        toolbar.title = getString(dialogTitle)
+        toolbar.title = getString(dialogTitleRes)
         toolbar.setOnMenuItemClickListener {
             addRecordClicked()
             true

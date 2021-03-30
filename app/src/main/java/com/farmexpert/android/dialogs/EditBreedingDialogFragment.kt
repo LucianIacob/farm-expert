@@ -23,34 +23,36 @@ import kotlinx.android.synthetic.main.dialog_edit_breeding.view.*
  * Cluj-Napoca, 19 January, 2018.
  */
 
-class EditBreedingDialogFragment : BaseEditRecordDialogFragment() {
+class EditBreedingDialogFragment : BaseEditRecordDialogFragment(R.layout.dialog_edit_breeding) {
 
-    private var selectedNote: Int = 5
+    private var selectedNote: Int? = null
     private var breedingMale: String? = null
 
     override var titleRes = R.string.edit_breeding_title
 
-    override val layoutRes = R.layout.dialog_edit_breeding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        selectedNote = savedInstanceState?.getInt(EDIT_DIALOG_NOTE, -1)
-            ?.takeIf { it != -1 }
-            ?: arguments?.getInt(EDIT_DIALOG_NOTE, selectedNote) ?: selectedNote
+        selectedNote = savedInstanceState?.getInt(EDIT_DIALOG_NOTE, -1)?.takeIf { it != -1 }
+            ?: arguments?.getInt(EDIT_DIALOG_NOTE, -1)?.takeIf { it != -1 }
+
         breedingMale = arguments?.getString(EDIT_DIALOG_MALE)
     }
 
     override fun onUiElementsReady() {
         super.onUiElementsReady()
 
-        fillDropdownComponent(mView?.notesSpinner, R.array.breeding_notes_values, selectedNote - 1)
+        fillDropdownComponent(
+            textView = mView?.notesSpinner,
+            stringArray = R.array.breeding_notes_values,
+            selected = resources.getStringArray(R.array.breeding_notes_values).size - 1
+        )
         mView?.maleInput?.setText(breedingMale)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt(EDIT_DIALOG_NOTE, selectedNote)
+        outState.putInt(EDIT_DIALOG_NOTE, selectedNote ?: -1)
     }
 
     override fun sendNewRecord() {

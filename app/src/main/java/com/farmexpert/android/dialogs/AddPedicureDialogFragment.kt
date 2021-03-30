@@ -56,65 +56,65 @@ class AddPedicureDialogFragment : BaseAddRecordDialogFragment() {
             )
 
             leftTopLeftNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == leftNailDefault) {
-                    leftNailProblem
-                } else leftNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == leftNailDefault) leftNailProblem
+                    else leftNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
             leftTopRightNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == rightNailDefault) {
-                    rightNailProblem
-                } else rightNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == rightNailDefault) rightNailProblem
+                    else rightNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
             rightTopLeftNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == leftNailDefault) {
-                    leftNailProblem
-                } else leftNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == leftNailDefault) leftNailProblem
+                    else leftNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
             rightTopRightNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == rightNailDefault) {
-                    rightNailProblem
-                } else rightNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == rightNailDefault) rightNailProblem
+                    else rightNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
             leftBottomLeftNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == leftNailDefault) {
-                    leftNailProblem
-                } else leftNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == leftNailDefault) leftNailProblem
+                    else leftNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
             leftBottomRightNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == rightNailDefault) {
-                    rightNailProblem
-                } else rightNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == rightNailDefault) rightNailProblem
+                    else rightNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
             rightBottomLeftNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == leftNailDefault) {
-                    leftNailProblem
-                } else leftNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == leftNailDefault) leftNailProblem
+                    else leftNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
 
             rightBottomRightNail.setOnClickListener { nail ->
-                mNailsMap[nail] = if (mNailsMap[nail] == rightNailDefault) {
-                    rightNailProblem
-                } else rightNailDefault
+                mNailsMap[nail] =
+                    if (mNailsMap[nail] == rightNailDefault) rightNailProblem
+                    else rightNailDefault
 
                 mNailsMap[nail]?.let { (nail as? ImageView)?.setImageResource(it) }
             }
@@ -155,8 +155,5 @@ class AddPedicureDialogFragment : BaseAddRecordDialogFragment() {
 }
 
 fun Int.encode(): String =
-    if (this == R.drawable.left_nail_problem || this == R.drawable.right_nail_problem) {
-        AppUtils.NAIL_WITH_PROBLEM
-    } else {
-        AppUtils.NAIL_WITHOUT_PROBLEM
-    }
+    if (this == R.drawable.left_nail_problem || this == R.drawable.right_nail_problem) AppUtils.NAIL_WITH_PROBLEM
+    else AppUtils.NAIL_WITHOUT_PROBLEM

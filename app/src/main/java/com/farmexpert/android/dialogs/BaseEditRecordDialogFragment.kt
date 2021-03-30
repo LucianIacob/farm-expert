@@ -11,6 +11,7 @@ package com.farmexpert.android.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
+import androidx.annotation.LayoutRes
 import com.farmexpert.android.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -18,13 +19,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
  * Created by Lucian Iacob.
  * Cluj-Napoca, February 21, 2018.
  */
-abstract class BaseEditRecordDialogFragment : BaseDialogFragment() {
-
-    protected var documentId: String? = null
+abstract class BaseEditRecordDialogFragment(@LayoutRes private val layoutRes: Int) :
+    BaseDialogFragment() {
 
     abstract var titleRes: Int
 
-    abstract val layoutRes: Int
+    protected var documentId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

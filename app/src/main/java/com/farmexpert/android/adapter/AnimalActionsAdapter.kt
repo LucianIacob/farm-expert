@@ -33,5 +33,4 @@ open class AnimalActionsAdapter<ModelClass : BaseEntity, HolderClass : BaseDetai
     ) {
         holderClass.bind(modelClass)
     }
-
 }

@@ -53,5 +53,4 @@ class AddBirthDialogFragment : BaseAddRecordDialogFragment() {
         val intent = Intent().putExtras(bundle)
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
     }
-
 }

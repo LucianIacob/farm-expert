@@ -37,8 +37,8 @@ class BirthsDetailFragment : BaseDetailFragment<Birth, BirthViewHolder>() {
 
     override fun getAnimalId() = args.animalId
 
-    override val getTitleAndHolderLayout =
-        Pair(getString(R.string.dashboard_graph_births), R.layout.item_birth)
+    override val getTitleAndHolderLayout: Pair<Int, Int> =
+        Pair(R.string.dashboard_graph_births, R.layout.item_birth)
 
     override fun getAddRecordDialog() = AddBirthDialogFragment()
 

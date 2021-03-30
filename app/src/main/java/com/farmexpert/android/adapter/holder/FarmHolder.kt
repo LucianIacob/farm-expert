@@ -23,6 +23,4 @@ class FarmHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.createdAt.text =
             itemView.resources.getString(R.string.farm_creation_date, farm.createdOn.asDisplayable())
     }
-
 }
-

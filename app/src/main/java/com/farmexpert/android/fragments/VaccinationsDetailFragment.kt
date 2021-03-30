@@ -15,8 +15,8 @@ import com.farmexpert.android.utils.FirestorePath
 
 class VaccinationsDetailFragment : BaseAnimalActionDetailFragment() {
 
-    override val getTitleAndHolderLayout: Pair<String, Int> =
-        Pair(getString(R.string.dashboard_graph_vaccinations), R.layout.item_animal_action)
+    override val getTitleAndHolderLayout: Pair<Int, Int> =
+        Pair(R.string.dashboard_graph_vaccinations, R.layout.item_animal_action)
 
     override val getAddDialogTitle = R.string.add_vaccination_title
 

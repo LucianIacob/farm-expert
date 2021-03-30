@@ -17,8 +17,7 @@ abstract class BaseDetailHolder<ModelClass : BaseEntity>(
     itemView: View,
     val updateListener: (ModelClass) -> Unit,
     val deleteListener: (ModelClass) -> Unit
-) :
-    RecyclerView.ViewHolder(itemView) {
+) : RecyclerView.ViewHolder(itemView) {
 
     abstract fun bind(entity: ModelClass)
 

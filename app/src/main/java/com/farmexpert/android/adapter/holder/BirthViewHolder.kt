@@ -36,5 +36,4 @@ class BirthViewHolder(
             deleteBtn.setOnClickListener { deleteListener(entity) }
         }
     }
-
 }

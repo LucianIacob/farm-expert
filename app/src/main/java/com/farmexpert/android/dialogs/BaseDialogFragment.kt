@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.annotation.ArrayRes
 import androidx.fragment.app.DialogFragment
 import com.farmexpert.android.R
 import com.farmexpert.android.utils.getShort
@@ -15,27 +16,19 @@ import java.util.*
 abstract class BaseDialogFragment : DialogFragment() {
 
     protected var mView: View? = null
+    protected var currentDate: Date = Date()
+    protected var details: String? = null
 
     private val dateTextView: TextView? by lazy { mView?.findViewById(R.id.dialogDate) }
-
     private val detailsTextView: TextView? by lazy { mView?.findViewById(R.id.dialogDetails) }
-
-    internal var currentDate: Date = Date()
-
-    internal var details: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currentDate = savedInstanceState?.getLong(DIALOG_DATE)
-            ?.takeIfExists()
-            ?.let { Date(it) }
-            ?: run {
-                arguments?.getLong(DIALOG_DATE)
-                    ?.takeIfExists()
-                    ?.let { Date(it) }
-                    ?: Date()
-            }
 
+        val selectedDate = savedInstanceState?.getLong(DIALOG_DATE)?.takeIfExists()
+            ?: arguments?.getLong(DIALOG_DATE)?.takeIfExists()
+
+        currentDate = selectedDate?.let { Date(it) } ?: Date()
         details = savedInstanceState?.getString(DIALOG_DETAILS)
             ?: arguments?.getString(DIALOG_DETAILS)
     }
@@ -52,20 +45,20 @@ abstract class BaseDialogFragment : DialogFragment() {
 
     fun fillDropdownComponent(
         textView: MaterialAutoCompleteTextView?,
-        stringArray: Int,
+        @ArrayRes stringArray: Int,
         selected: Int? = null
     ) {
         textView?.let {
             val values = resources.getStringArray(stringArray)
             textView.setText(selected?.let { values[selected] } ?: values[0])
 
-            val adapter = ArrayAdapter(
-                textView.context,
-                R.layout.spinner_item_layout,
-                values
+            textView.setAdapter(
+                ArrayAdapter(
+                    textView.context,
+                    R.layout.spinner_item_layout,
+                    values
+                )
             )
-
-            textView.setAdapter(adapter)
         }
     }
 

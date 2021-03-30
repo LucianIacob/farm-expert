@@ -22,19 +22,16 @@ import kotlinx.android.synthetic.main.dialog_edit_birth.view.*
  * Cluj-Napoca, 19 January, 2018.
  */
 
-class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
+class EditBirthDialogFragment : BaseEditRecordDialogFragment(R.layout.dialog_edit_birth) {
 
-    private var noteToSelect: Int = 4
+    private var noteToSelect: Int? = null
 
     override var titleRes = R.string.edit_birth_title
 
-    override val layoutRes = R.layout.dialog_edit_birth
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        noteToSelect = savedInstanceState?.getInt(EDIT_DIALOG_NOTE, -1)
-            ?.takeIf { it != -1 }
-            ?: run { arguments?.getInt(EDIT_DIALOG_NOTE, noteToSelect) ?: noteToSelect }
+        noteToSelect = savedInstanceState?.getInt(EDIT_DIALOG_NOTE, -1)?.takeIf { it != -1 }
+            ?: arguments?.getInt(EDIT_DIALOG_NOTE, -1)?.takeIf { it != -1 }
     }
 
     override fun onUiElementsReady() {
@@ -43,7 +40,7 @@ class EditBirthDialogFragment : BaseEditRecordDialogFragment() {
         fillDropdownComponent(
             textView = mView?.dialogNote,
             stringArray = R.array.birth_notes_values,
-            selected = noteToSelect - 1
+            selected = noteToSelect ?: resources.getStringArray(R.array.birth_notes_values).size - 1
         )
     }
 
