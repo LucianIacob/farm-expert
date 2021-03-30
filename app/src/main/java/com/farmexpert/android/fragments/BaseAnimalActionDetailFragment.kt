@@ -76,9 +76,8 @@ abstract class BaseAnimalActionDetailFragment :
         arguments = bundleOf(EDIT_DIALOG_TITLE to getEditDialogTitle)
     }
 
-    override fun getQuery(): Query {
-        return getCollectionReference()
+    override fun getQuery(): Query =
+        getCollectionReference()
             .whereEqualTo(FirestorePath.AnimalAction.ANIMAL_ID, getAnimalId())
             .orderBy(FirestorePath.AnimalAction.ACTION_DATE, Query.Direction.DESCENDING)
-    }
 }

@@ -15,6 +15,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
@@ -37,9 +38,9 @@ import kotlinx.android.synthetic.main.fragment_planner.*
 import kotlinx.android.synthetic.main.fragment_planner_section.*
 import java.util.*
 
-abstract class BasePlannerFragment : BaseFragment(R.layout.fragment_planner_section) {
+abstract class BasePlannerFragment(@StringRes private val headerResId: Int) :
+    BaseFragment(R.layout.fragment_planner_section) {
 
-    abstract val getHeaderResId: Int
     abstract val getPlannerContainer: PlannerContainer
     private val plannerDateViewModel: PlannerDateViewModel by viewModels({ requireParentFragment() })
 
@@ -60,7 +61,7 @@ abstract class BasePlannerFragment : BaseFragment(R.layout.fragment_planner_sect
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        containerHeader.text = getString(getHeaderResId)
+        containerHeader.text = getString(headerResId)
         PlannerAdapter(
             clickListener = { handleClick(it) },
             longClickListener = { handleLongClick() }

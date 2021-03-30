@@ -17,10 +17,9 @@ import com.farmexpert.android.utils.*
 import com.google.firebase.Timestamp
 import java.util.*
 
-class PlannerVaccinationsFragment : BasePlannerFragment() {
+class PlannerVaccinationsFragment : BasePlannerFragment(R.string.planner_vaccinations_title) {
 
     override val getPlannerContainer = PlannerContainer.VACCINATIONS
-    override val getHeaderResId = R.string.planner_vaccinations_title
 
     private var vaccine1Arrived = false
     private var vaccine2Arrived = false

@@ -83,9 +83,7 @@ abstract class BaseDetailFragment<ModelClass : BaseEntity, ModelHolder : BaseDet
         context?.let { context ->
             MaterialAlertDialogBuilder(context)
                 .setMessage(R.string.delete_confirmation_request)
-                .setPositiveButton(R.string.delete) { _, _ ->
-                    deleteEntity(entity)
-                }
+                .setPositiveButton(R.string.delete) { _, _ -> deleteEntity(entity) }
                 .setNegativeButton(R.string.fui_cancel) { _, _ -> }
                 .create()
                 .apply {

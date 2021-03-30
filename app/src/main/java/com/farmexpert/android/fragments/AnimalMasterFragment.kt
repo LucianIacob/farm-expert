@@ -19,6 +19,7 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.core.view.isVisible
+import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
@@ -96,12 +97,11 @@ class AnimalMasterFragment : BaseFragment(R.layout.fragment_animal_master),
         ) {
             override fun onDataChanged() {
                 loadingHide()
+                emptyView.isVisible = itemCount == 0
                 (activity as? AppCompatActivity)?.supportActionBar?.title = if (itemCount != 0) {
-                    emptyView.isVisible = false
                     layoutState?.let { layoutManager.onRestoreInstanceState(it) }
                     getString(R.string.headcount_title, itemCount)
                 } else {
-                    emptyView.isVisible = true
                     getString(R.string.dashboard_headcount)
                 }
             }
@@ -116,11 +116,10 @@ class AnimalMasterFragment : BaseFragment(R.layout.fragment_animal_master),
         adapter.stopListening()
     }
 
-    private fun getAnimalsQuery(): Query = with(animalsCollections) {
-        return if (resources.getBoolean(R.bool.sort_by_last_digits)) {
-            this.orderBy(FirestorePath.Animal.LAST_DIGITS)
-        } else this
-    }
+    private fun getAnimalsQuery(): Query =
+        if (resources.getBoolean(R.bool.sort_by_last_digits))
+            animalsCollections.orderBy(FirestorePath.Animal.LAST_DIGITS)
+        else animalsCollections
 
     private fun animalClick(animal: Animal) {
         animal.id?.let {
@@ -171,11 +170,6 @@ class AnimalMasterFragment : BaseFragment(R.layout.fragment_animal_master),
     override fun onResume() {
         super.onResume()
         addAnimalBtn.setOnClickListener { addAnimalClicked() }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        addAnimalBtn.setOnClickListener(null)
     }
 
     private fun addAnimalClicked() {
@@ -234,12 +228,7 @@ class AnimalMasterFragment : BaseFragment(R.layout.fragment_animal_master),
                         .addLoggableFailureListener { alert(message = R.string.err_adding_animal) }
                         .addOnCompleteListener {
                             parentFragmentManager.findFragmentByTag(AddAnimalDialogFragment.TAG)
-                                ?.let {
-                                    parentFragmentManager
-                                        .beginTransaction()
-                                        .remove(it)
-                                        .commit()
-                                }
+                                ?.let { parentFragmentManager.commit { remove(it) } }
                         }
                 }
             }

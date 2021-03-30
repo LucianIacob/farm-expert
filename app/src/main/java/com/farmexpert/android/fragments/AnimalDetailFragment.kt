@@ -67,16 +67,14 @@ class AnimalDetailFragment : BaseFragment(R.layout.fragment_animal_detail) {
             MaterialAlertDialogBuilder(context)
                 .setTitle(R.string.delete_animal)
                 .setMessage(getString(R.string.delete_animal_message, args.animalId))
-                .setPositiveButton(R.string.delete) { _, _ ->
-                    deleteAnimalConfirmed()
-                }
+                .setPositiveButton(R.string.delete) { _, _ -> deleteAnimalConfirmed() }
                 .setNegativeButton(R.string.fui_cancel) { _, _ -> }
                 .create()
                 .run {
                     setOnShowListener {
                         getButton(DialogInterface.BUTTON_POSITIVE).applyFarmexpertStyle(
                             context,
-                            redButton = true
+                            redButton = true,
                         )
                     }
                     show()
@@ -91,7 +89,7 @@ class AnimalDetailFragment : BaseFragment(R.layout.fragment_animal_detail) {
         DeleteAnimalTransaction(
             farmReference = farmReference,
             successListener = { rootLayout?.snackbar(R.string.item_deleted) },
-            failureListener = { exception -> error { exception } },
+            failureListener = { error { it } },
             complete = {
                 loadingHide()
                 NavHostFragment.findNavController(this@AnimalDetailFragment)
@@ -311,7 +309,7 @@ class AnimalDetailFragment : BaseFragment(R.layout.fragment_animal_detail) {
     private fun readTextInput(
         @StringRes hintId: Int,
         currentValue: String = "",
-        update: (String) -> Unit
+        update: (String) -> Unit,
     ) {
         context?.let { context ->
             val view = layoutInflater.inflate(R.layout.dialog_simple_edit, null)

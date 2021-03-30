@@ -16,11 +16,9 @@ import com.farmexpert.android.utils.*
 import com.google.firebase.Timestamp
 import java.util.*
 
-class PlannerDisinfectionsFragment : BasePlannerFragment() {
+class PlannerDisinfectionsFragment : BasePlannerFragment(R.string.planner_disinfections_title) {
 
     override val getPlannerContainer = PlannerContainer.DISINFECTION
-
-    override val getHeaderResId = R.string.planner_disinfections_title
 
     override fun retrieveDataForDate(date: Date) {
         val daysOfDisinfection = farmTimelinePrefs.getInt(
@@ -40,7 +38,7 @@ class PlannerDisinfectionsFragment : BasePlannerFragment() {
             .whereEqualTo(FirestorePath.Breeding.LATEST_BREEDING, true)
             .get()
             .addOnSuccessListener {
-                if (this.isAdded) {
+                if (isAdded) {
                     dataRetrievedSuccessfully(
                         plannerList = PlannerDataTransformer.transformBeforeBirthItems(
                             querySnapshot = it,

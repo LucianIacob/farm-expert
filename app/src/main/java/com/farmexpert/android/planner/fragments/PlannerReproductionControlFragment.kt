@@ -17,10 +17,10 @@ import com.farmexpert.android.utils.*
 import com.google.firebase.Timestamp
 import java.util.*
 
-class PlannerReproductionControlFragment : BasePlannerFragment() {
+class PlannerReproductionControlFragment :
+    BasePlannerFragment(R.string.planner_reprod_control_title) {
 
     override val getPlannerContainer = PlannerContainer.REPRODUCTION_CONTROL
-    override val getHeaderResId = R.string.planner_reprod_control_title
 
     private var gestationsArrived = false
     private var birthsArrived = false

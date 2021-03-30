@@ -16,9 +16,7 @@ import com.farmexpert.android.utils.*
 import com.google.firebase.Timestamp
 import java.util.*
 
-class PlannerHeatsFragment : BasePlannerFragment() {
-
-    override val getHeaderResId = R.string.planner_heats_title
+class PlannerHeatsFragment : BasePlannerFragment(R.string.planner_heats_title) {
 
     override val getPlannerContainer = PlannerContainer.HEAT_CYCLE
 
