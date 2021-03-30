@@ -79,10 +79,13 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
     implementation 'androidx.preference:preference-ktx:1.1.1'
 
+    // LOTTIE
     implementation 'com.airbnb.android:lottie:3.4.4'
 
+    // STETHO
     implementation 'com.facebook.stetho:stetho:1.5.1'
 
+    // PICASSO
     implementation 'com.squareup.picasso:picasso:2.71828'
 
     // FIREBASE
