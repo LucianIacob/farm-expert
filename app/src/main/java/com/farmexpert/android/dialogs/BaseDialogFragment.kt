@@ -50,7 +50,7 @@ abstract class BaseDialogFragment : DialogFragment() {
     ) {
         textView?.let {
             val values = resources.getStringArray(stringArray)
-            textView.setText(selected?.let { values[selected] } ?: values[0])
+            textView.setText(selected?.let { values.getOrNull(selected) } ?: values[0])
 
             textView.setAdapter(
                 ArrayAdapter(
