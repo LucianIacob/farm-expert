@@ -1,9 +1,9 @@
 /*
  * Developed by Lucian Iacob.
- * Cluj-Napoca, 2019.
+ * Cluj-Napoca, 2023.
  * Project: FarmExpert
- * Email: contact@lucianiacob.com
- * Last modified 3/12/19 10:02 AM.
+ * Email: lucian@iacob.email
+ * Last modified 4/4/23, 1:13 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
