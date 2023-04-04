@@ -1,14 +1,15 @@
 /*
  * Developed by Lucian Iacob.
- * Cluj-Napoca, 2023.
+ * Romania, 2023.
  * Project: FarmExpert
  * Email: lucian@iacob.email
- * Last modified 4/4/23, 1:13 PM.
+ * Last modified 4/4/23, 1:35 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
 package com.farmexpert.android.fragments
 
+import android.app.ProgressDialog.show
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
@@ -50,11 +51,13 @@ class AnimalDetailFragment : BaseFragment(R.layout.fragment_animal_detail) {
             .document(args.animalId)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.delete_animal_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_delete -> displayDeleteDialog()

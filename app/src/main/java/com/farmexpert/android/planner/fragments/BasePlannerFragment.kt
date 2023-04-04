@@ -1,9 +1,9 @@
 /*
  * Developed by Lucian Iacob.
- * Cluj-Napoca, 2023.
+ * Romania, 2023.
  * Project: FarmExpert
  * Email: lucian@iacob.email
- * Last modified 4/4/23, 1:13 PM.
+ * Last modified 4/4/23, 1:35 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -100,6 +100,7 @@ abstract class BasePlannerFragment(@StringRes private val headerResId: Int) :
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode != Activity.RESULT_OK || data?.extras == null) return
         when (requestCode) {

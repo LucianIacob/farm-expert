@@ -1,9 +1,9 @@
 /*
  * Developed by Lucian Iacob.
- * Cluj-Napoca, 2023.
+ * Romania, 2023.
  * Project: FarmExpert
  * Email: lucian@iacob.email
- * Last modified 4/4/23, 1:13 PM.
+ * Last modified 4/4/23, 1:35 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -26,6 +26,7 @@ class PlannerFragment : BaseFragment(R.layout.fragment_planner) {
 
     private val plannerDateViewModel by viewModels<PlannerDateViewModel>()
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         inflateFragments()
