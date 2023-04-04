@@ -1,3 +1,12 @@
+/*
+ * Developed by Lucian Iacob.
+ * Romania, 2023.
+ * Project: FarmExpert
+ * Email: lucian@iacob.email
+ * Last modified 4/4/23, 1:49 PM.
+ * Copyright (c) Lucian Iacob. All rights reserved.
+ */
+
 package com.farmexpert.android.activities
 
 import android.os.Bundle
@@ -8,6 +17,7 @@ import androidx.preference.PreferenceManager
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_ID
 import com.farmexpert.android.adapter.UserFarmsAdapter
+import com.farmexpert.android.databinding.ActivityListUserFarmsBinding
 import com.farmexpert.android.model.Farm
 import com.farmexpert.android.utils.*
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -17,12 +27,16 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_list_user_farms.*
 
-class UserFarmsActivity : AppCompatActivity(R.layout.activity_list_user_farms) {
+class UserFarmsActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityListUserFarmsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityListUserFarmsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         setupToolbar()
 
         FirebaseAuth.getInstance()
@@ -42,7 +56,7 @@ class UserFarmsActivity : AppCompatActivity(R.layout.activity_list_user_farms) {
             .setLifecycleOwner(this)
             .build()
 
-        subscribedFarms.adapter = UserFarmsAdapter(
+        binding.subscribedFarms.adapter = UserFarmsAdapter(
             options = options,
             unsubscribeListener = { farm -> unsubscribeFrom(farm) },
             deleteListener = { farm -> deleteFarm(farm) }
@@ -73,7 +87,7 @@ class UserFarmsActivity : AppCompatActivity(R.layout.activity_list_user_farms) {
 
     private fun unsubscribeConfirmed(farm: Farm, isCurrentFarm: Boolean) {
         farm.id?.let { farmId ->
-            loadingView.isInvisible = false
+            binding.loadingView.isInvisible = false
 
             Firebase.firestore
                 .collection(FirestorePath.Collections.FARMS)
@@ -93,12 +107,12 @@ class UserFarmsActivity : AppCompatActivity(R.layout.activity_list_user_farms) {
                 .addLoggableFailureListener { exception ->
                     exception.message?.let { message -> alert(message) }
                 }
-                .addOnCompleteListener { loadingView.isInvisible = true }
+                .addOnCompleteListener { binding.loadingView.isInvisible = true }
         }
     }
 
     private fun setupToolbar() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

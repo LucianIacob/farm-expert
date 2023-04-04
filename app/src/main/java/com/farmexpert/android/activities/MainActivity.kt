@@ -1,9 +1,9 @@
 /*
  * Developed by Lucian Iacob.
- * Cluj-Napoca, 2023.
+ * Romania, 2023.
  * Project: FarmExpert
  * Email: lucian@iacob.email
- * Last modified 4/4/23, 1:13 PM.
+ * Last modified 4/4/23, 1:49 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -25,20 +25,24 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.preference.PreferenceManager
 import com.farmexpert.android.R
 import com.farmexpert.android.activities.FarmSelectorActivity.Companion.KEY_CURRENT_FARM_NAME
+import com.farmexpert.android.databinding.ActivityMainBinding
 import com.farmexpert.android.utils.*
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.nav_header_dashboard.*
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSupportActionBar(toolbar)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
 
         (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as? NavHostFragment)
             ?.navController
@@ -58,41 +62,41 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     .transform(CircleTransform())
                     .fit()
                     .centerCrop()
-                    .into(userIcon, object : Callback.EmptyCallback() {
+                    .into(binding.navHeader.userIcon, object : Callback.EmptyCallback() {
                         override fun onError(e: Exception) {
                             error(e)
                         }
                     })
             }
-            user.phoneNumber?.takeIfNotBlank()?.let { userName.text = it }
-            user.displayName?.takeIfNotBlank()?.let { userName.text = it }
-            user.email?.takeIfNotBlank()?.let { userEmail.text = it }
+            user.phoneNumber?.takeIfNotBlank()?.let { binding.navHeader.userName.text = it }
+            user.displayName?.takeIfNotBlank()?.let { binding.navHeader.userName.text = it }
+            user.email?.takeIfNotBlank()?.let { binding.navHeader.userEmail.text = it }
         }
 
-        userIcon.setOnClickListener { openUserProfileScreen() }
-        profileSettingsBtn.setOnClickListener { openUserProfileScreen() }
+        binding.navHeader.userIcon.setOnClickListener { openUserProfileScreen() }
+        binding.navHeader.profileSettingsBtn.setOnClickListener { openUserProfileScreen() }
 
         PreferenceManager.getDefaultSharedPreferences(this)
             .getString(KEY_CURRENT_FARM_NAME, null)
             ?.takeIfNotBlank()
-            ?.let { farmName.text = it }
+            ?.let { binding.navHeader.farmName.text = it }
     }
 
     private fun openUserProfileScreen() {
-        drawer_layout.closeDrawer(nav_view, true)
+        binding.root.closeDrawer(binding.navView, true)
         startActivity<UserProfileActivity>()
     }
 
     private fun setupNavigationDrawer(navController: NavController) {
-        setupActionBarWithNavController(navController, drawer_layout)
-        nav_view.setNavigationItemSelectedListener {
+        setupActionBarWithNavController(navController, binding.root)
+        binding.navView.setNavigationItemSelectedListener {
             val handled = it.onNavDestinationSelected(navController)
             when (it.itemId) {
                 R.id.logOut -> logOutRequested()
                 R.id.changeFarm -> changeFarmRequested()
             }
 
-            drawer_layout.closeDrawer(nav_view, true)
+            binding.root.closeDrawer(binding.navView, true)
             return@setNavigationItemSelectedListener handled
         }
     }
@@ -106,7 +110,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 startActivity<FarmSelectorActivity>()
                 finish()
             }
-            .setNegativeButton(R.string.fui_cancel) { _, _ -> }
+            .setNegativeButton(R.string.dialog_cancel_btn) { _, _ -> }
             .create()
             .run {
                 setOnShowListener {
@@ -125,7 +129,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             .setPositiveButton(R.string.confirm_button) { _, _ ->
                 logOutConfirmed()
             }
-            .setNegativeButton(R.string.fui_cancel) { _, _ -> }
+            .setNegativeButton(R.string.dialog_cancel_btn) { _, _ -> }
             .create()
             .run {
                 setOnShowListener {
@@ -155,8 +159,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if (binding.root.isDrawerOpen(GravityCompat.START)) {
+            binding.root.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
@@ -171,10 +175,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onSupportNavigateUp(): Boolean =
         NavigationUI.navigateUp(
             Navigation.findNavController(this, R.id.nav_host_fragment),
-            drawer_layout
+            binding.root
         )
 
     fun setLoadingVisibility(visible: Boolean) {
-        runOnUiThread { loadingView.isInvisible = !visible }
+        runOnUiThread { binding.loadingView.isInvisible = !visible }
     }
 }

@@ -1,3 +1,12 @@
+/*
+ * Developed by Lucian Iacob.
+ * Romania, 2023.
+ * Project: FarmExpert
+ * Email: lucian@iacob.email
+ * Last modified 4/4/23, 1:38 PM.
+ * Copyright (c) Lucian Iacob. All rights reserved.
+ */
+
 package com.farmexpert.android.activities
 
 import android.os.Bundle
@@ -6,36 +15,40 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.farmexpert.android.R
+import com.farmexpert.android.databinding.ActivityChangeEmailBinding
 import com.farmexpert.android.utils.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.android.synthetic.main.activity_change_email.*
 
-class ChangeUserEmailActivity : AppCompatActivity(R.layout.activity_change_email) {
+class ChangeUserEmailActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityChangeEmailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityChangeEmailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupToolbar()
 
         intent.extras?.apply {
             getString(USER_EMAIL)?.let {
-                updateBtn.text = getString(R.string.update)
-                userEmailBox.setText(it)
-                it.isValidInput()?.let { updateBtn.isEnabled = true }
+                binding.updateBtn.text = getString(R.string.update)
+                binding.userEmailBox.setText(it)
+                it.isValidInput()?.let { binding.updateBtn.isEnabled = true }
             } ?: run {
-                updateBtn.text = getString(R.string.set)
-                emailVerifiedSeparator.isVisible = false
-                sendVerificationEmailBtn.isVisible = false
+                binding.updateBtn.text = getString(R.string.set)
+                binding.emailVerifiedSeparator.isVisible = false
+                binding.sendVerificationEmailBtn.isVisible = false
             }
 
-            emailVerifiedSeparator.isVisible = getBoolean(EMAIL_VERIFIED, false)
-            sendVerificationEmailBtn.isVisible = getBoolean(EMAIL_VERIFIED, false)
+            binding.emailVerifiedSeparator.isVisible = getBoolean(EMAIL_VERIFIED, false)
+            binding.sendVerificationEmailBtn.isVisible = getBoolean(EMAIL_VERIFIED, false)
         }
 
     }
 
     private fun setupToolbar() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(
             intent.extras?.getString(USER_EMAIL)?.let { R.string.update_email_title }
@@ -45,12 +58,12 @@ class ChangeUserEmailActivity : AppCompatActivity(R.layout.activity_change_email
 
     override fun onResume() {
         super.onResume()
-        userEmailBox.doOnTextChanged { text, _, _, _ ->
-            updateBtn.isEnabled = text?.isValidInput()?.let { true } ?: false
+        binding.userEmailBox.doOnTextChanged { text, _, _, _ ->
+            binding.updateBtn.isEnabled = text?.isValidInput()?.let { true } ?: false
         }
 
-        updateBtn.setOnClickListener { updateUserEmail() }
-        sendVerificationEmailBtn.setOnClickListener { _ ->
+        binding.updateBtn.setOnClickListener { updateUserEmail() }
+        binding.sendVerificationEmailBtn.setOnClickListener { _ ->
             FirebaseAuth.getInstance().currentUser?.let { it -> sendUserEmailVerification(it) }
         }
     }
@@ -58,9 +71,9 @@ class ChangeUserEmailActivity : AppCompatActivity(R.layout.activity_change_email
     private fun updateUserEmail() {
         FirebaseAuth.getInstance().useAppLanguage()
         FirebaseAuth.getInstance().currentUser?.apply {
-            loadingView.isInvisible = false
+            binding.loadingView.isInvisible = false
 
-            updateEmail(userEmailBox.text.toString())
+            updateEmail(binding.userEmailBox.text.toString())
                 .addOnSuccessListener {
                     sendUserEmailVerification(firebaseUser = this)
                     alert(
@@ -72,7 +85,7 @@ class ChangeUserEmailActivity : AppCompatActivity(R.layout.activity_change_email
                 .addLoggableFailureListener { exception ->
                     exception.message?.let { alert(message = it, isCancellable = true) }
                 }
-                .addOnCompleteListener { loadingView.isInvisible = true }
+                .addOnCompleteListener { binding.loadingView.isInvisible = true }
         }
     }
 
@@ -82,7 +95,7 @@ class ChangeUserEmailActivity : AppCompatActivity(R.layout.activity_change_email
             .addOnSuccessListener { toast(R.string.email_verification_success) }
             .addLoggableFailureListener()
             .addOnCompleteListener {
-                info { "email verification link sent to ${userEmailBox.text.toString()}" }
+                info { "email verification link sent to ${binding.userEmailBox.text.toString()}" }
             }
     }
 

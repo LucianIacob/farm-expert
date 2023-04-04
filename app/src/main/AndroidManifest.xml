@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.farmexpert.android">
+<!--
+  ~ Developed by Lucian Iacob.
+  ~ Romania, 2023.
+  ~ Project: FarmExpert
+  ~ Email: lucian@iacob.email
+  ~ Last modified 4/4/23, 1:23 PM.
+  ~ Copyright (c) Lucian Iacob. All rights reserved.
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

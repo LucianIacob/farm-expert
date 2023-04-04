@@ -1,9 +1,9 @@
 /*
  * Developed by Lucian Iacob.
- * Cluj-Napoca, 2023.
+ * Romania, 2023.
  * Project: FarmExpert
  * Email: lucian@iacob.email
- * Last modified 4/4/23, 1:13 PM.
+ * Last modified 4/4/23, 1:42 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -14,16 +14,21 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.farmexpert.android.R
+import com.farmexpert.android.databinding.ActivityConfigurationBinding
 import com.farmexpert.android.utils.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_configuration.*
 
-class ConfigurationActivity : AppCompatActivity(R.layout.activity_configuration) {
+class ConfigurationActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityConfigurationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        toolbar.setOnMenuItemClickListener {
+        binding = ActivityConfigurationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_finish -> {
                     updateFarmDetails()

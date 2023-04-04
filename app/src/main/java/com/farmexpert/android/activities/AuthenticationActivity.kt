@@ -3,7 +3,7 @@
  * Romania, 2023.
  * Project: FarmExpert
  * Email: lucian@iacob.email
- * Last modified 4/4/23, 1:22 PM.
+ * Last modified 4/4/23, 1:38 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -14,17 +14,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.farmexpert.android.BuildConfig
 import com.farmexpert.android.R
+import com.farmexpert.android.databinding.ActivityAuthenticationBinding
 import com.farmexpert.android.utils.error
 import com.farmexpert.android.utils.startActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import kotlinx.android.synthetic.main.activity_authentication.*
 
-class AuthenticationActivity : AppCompatActivity(R.layout.activity_authentication) {
+class AuthenticationActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityAuthenticationBinding
 
     override fun onStart() {
         super.onStart()
-        signInButton.setOnClickListener { startSignIn() }
+        binding = ActivityAuthenticationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.signInButton.setOnClickListener { startSignIn() }
     }
 
     private fun startSignIn() {
@@ -45,6 +49,7 @@ class AuthenticationActivity : AppCompatActivity(R.layout.activity_authenticatio
         startActivityForResult(intent, RC_SIGN_IN)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {

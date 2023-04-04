@@ -1,9 +1,9 @@
 /*
  * Developed by Lucian Iacob.
- * Cluj-Napoca, 2023.
+ * Romania, 2023.
  * Project: FarmExpert
  * Email: lucian@iacob.email
- * Last modified 4/4/23, 1:13 PM.
+ * Last modified 4/4/23, 1:42 PM.
  * Copyright (c) Lucian Iacob. All rights reserved.
  */
 
@@ -21,6 +21,7 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.farmexpert.android.R
 import com.farmexpert.android.adapter.FarmSelectorAdapter
+import com.farmexpert.android.databinding.ActivityFarmSelectorBinding
 import com.farmexpert.android.model.Farm
 import com.farmexpert.android.utils.*
 import com.firebase.ui.auth.AuthUI
@@ -34,15 +35,18 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_farm_selector.*
 
-class FarmSelectorActivity : AppCompatActivity(R.layout.activity_farm_selector) {
+class FarmSelectorActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityFarmSelectorBinding
     private var firestore: FirebaseFirestore = Firebase.firestore
     private lateinit var currentUser: FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityFarmSelectorBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         FirebaseAuth.getInstance().currentUser?.let {
             currentUser = it
             initFarmsList()
@@ -51,7 +55,7 @@ class FarmSelectorActivity : AppCompatActivity(R.layout.activity_farm_selector) 
             finish()
         }
 
-        toolbar.setOnMenuItemClickListener {
+        binding.toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.action_logout) {
                 logout()
                 true
@@ -86,13 +90,13 @@ class FarmSelectorActivity : AppCompatActivity(R.layout.activity_farm_selector) 
 
         val adapter = object : FarmSelectorAdapter(options, { farm -> farmClicked(farm) }) {
             override fun onDataChanged() {
-                recyclerViewFarms?.isVisible = itemCount != 0
-                subscribedFarms?.isVisible = itemCount != 0
+                binding.recyclerViewFarms.isVisible = itemCount != 0
+                binding.subscribedFarms.isVisible = itemCount != 0
             }
         }
 
-        subscribedFarms.layoutManager = LinearLayoutManager(this)
-        subscribedFarms.adapter = adapter
+        binding.subscribedFarms.layoutManager = LinearLayoutManager(this)
+        binding.subscribedFarms.adapter = adapter
     }
 
     private fun farmClicked(farm: Farm) {
@@ -105,15 +109,15 @@ class FarmSelectorActivity : AppCompatActivity(R.layout.activity_farm_selector) 
 
     override fun onStart() {
         super.onStart()
-        createFarmButton.setOnClickListener { createFarm() }
-        joinFarmButton.setOnClickListener { joinFarm() }
+        binding.createFarmButton.setOnClickListener { createFarm() }
+        binding.joinFarmButton.setOnClickListener { joinFarm() }
     }
 
     private fun createFarm() {
         clearViewErrors()
 
-        val farmName = farmName.text.toString()
-        val accessCode = accessCode.text.toString()
+        val farmName = binding.farmName.text.toString()
+        val accessCode = binding.accessCode.text.toString()
 
         if (validInputs(farmName, accessCode)) {
             val farm = Farm(
@@ -123,13 +127,13 @@ class FarmSelectorActivity : AppCompatActivity(R.layout.activity_farm_selector) 
                 users = arrayListOf(currentUser.uid)
             )
 
-            loadingProgressBar.isInvisible = false
+            binding.loadingProgressBar.isInvisible = false
 
             checkNameAlreadyExists(
                 farmName = farmName,
                 successListener = { exists ->
                     if (exists) {
-                        loadingProgressBar.isInvisible = true
+                        binding.loadingProgressBar.isInvisible = true
                         displayDialog(
                             getString(R.string.farm_already_exists),
                             R.string.change_farm_name
@@ -137,7 +141,7 @@ class FarmSelectorActivity : AppCompatActivity(R.layout.activity_farm_selector) 
                     } else saveFarm(farm)
                 },
                 failureListener = { exception ->
-                    loadingProgressBar.isInvisible = true
+                    binding.loadingProgressBar.isInvisible = true
                     exception.message?.let { longToast(it) }
                 }
             )
@@ -159,9 +163,9 @@ class FarmSelectorActivity : AppCompatActivity(R.layout.activity_farm_selector) 
     private fun saveFarm(farm: Farm) {
         firestore.collection(FirestorePath.Collections.FARMS)
             .add(farm)
-            .addLoggableFailureListener { loadingProgressBar.isInvisible = true }
+            .addLoggableFailureListener { binding.loadingProgressBar.isInvisible = true }
             .addOnSuccessListener { documentReference ->
-                loadingProgressBar.isInvisible = true
+                binding.loadingProgressBar.isInvisible = true
                 storeFarmId(documentReference.id, farm.name)
                 openFarmConfigurationsActivity()
             }
@@ -184,11 +188,11 @@ class FarmSelectorActivity : AppCompatActivity(R.layout.activity_farm_selector) 
     private fun validInputs(farmName: String, accessCode: String): Boolean {
         var valid = true
         if (farmName.trim().isEmpty()) {
-            farmNameHolder.error = getString(R.string.err_empty_farm_name)
+            binding.farmNameHolder.error = getString(R.string.err_empty_farm_name)
             valid = false
         }
         if (accessCode.trim().length < 4) {
-            accessCodeHolder.error = getString(R.string.err_access_code_invalid)
+            binding.accessCodeHolder.error = getString(R.string.err_access_code_invalid)
             valid = false
         }
 
@@ -196,18 +200,18 @@ class FarmSelectorActivity : AppCompatActivity(R.layout.activity_farm_selector) 
     }
 
     private fun clearViewErrors() {
-        farmNameHolder.error = null
-        accessCodeHolder.error = null
+        binding.farmNameHolder.error = null
+        binding.accessCodeHolder.error = null
     }
 
     private fun joinFarm() {
         clearViewErrors()
 
-        val farmName = farmName.text.toString()
-        val accessCode = accessCode.text.toString()
+        val farmName = binding.farmName.text.toString()
+        val accessCode = binding.accessCode.text.toString()
 
         if (validInputs(farmName, accessCode)) {
-            loadingProgressBar.isInvisible = false
+            binding.loadingProgressBar.isInvisible = false
             checkFarmExists(
                 farmName = farmName,
                 accessCode = accessCode,
@@ -216,7 +220,7 @@ class FarmSelectorActivity : AppCompatActivity(R.layout.activity_farm_selector) 
                         storeFarmDetails(farm)
                         updateFarm(farm)
                     } else {
-                        loadingProgressBar.isInvisible = true
+                        binding.loadingProgressBar.isInvisible = true
                         displayDialog(
                             getString(R.string.farm_does_not_exists, farmName),
                             R.string.review_inputs
@@ -224,7 +228,7 @@ class FarmSelectorActivity : AppCompatActivity(R.layout.activity_farm_selector) 
                     }
                 },
                 failureListener = { ex ->
-                    loadingProgressBar.isInvisible = true
+                    binding.loadingProgressBar.isInvisible = true
                     Toast.makeText(this, ex.message, Toast.LENGTH_LONG).show()
                 })
         }
@@ -255,12 +259,12 @@ class FarmSelectorActivity : AppCompatActivity(R.layout.activity_farm_selector) 
                 .document(farmId)
                 .update(FirestorePath.Farm.USERS, FieldValue.arrayUnion(currentUser.uid))
                 .addOnSuccessListener {
-                    loadingProgressBar.isInvisible = true
+                    binding.loadingProgressBar.isInvisible = true
                     storeFarmId(farmId, farm.name)
                     openMainActivity()
                 }
                 .addLoggableFailureListener { exception ->
-                    loadingProgressBar.isInvisible = true
+                    binding.loadingProgressBar.isInvisible = true
                     exception.message?.let { longToast(it) }
                 }
         }
