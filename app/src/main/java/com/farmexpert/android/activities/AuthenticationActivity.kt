@@ -63,7 +63,7 @@ class AuthenticationActivity : AppCompatActivity(R.layout.activity_authenticatio
 
     companion object {
         const val RC_SIGN_IN = 1234
-        const val termsOfServiceUrl = "https://lucianiacob.com/farmexpert/tos.html"
-        const val privacyPolicyUrl = "https://lucianiacob.com/farmexpert/privacypolicy.html"
+        const val termsOfServiceUrl = "https://doc-hosting.flycricket.io/farmexpert-terms-of-use/6acdfcce-619f-4a24-add4-7bbcb8526070/terms"
+        const val privacyPolicyUrl = "https://doc-hosting.flycricket.io/farmexpert-privacy-policy/4eb4e5b6-8d73-4bf0-b4ae-03a7e90b9415/privacy"
     }
 }
